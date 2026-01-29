@@ -1,0 +1,171 @@
+import { completionColor, completionBg } from '../../utils/helpers';
+import WeeklyProgressChart from '../charts/WeeklyProgressChart';
+import VolumeChart from '../charts/VolumeChart';
+import RecentWorkouts from './RecentWorkouts';
+
+export default function ClientDetails({ client, details, loading, onClose }) {
+  if (loading) {
+    return (
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 text-lg transition-colors"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div className="flex flex-col items-center justify-center py-16 gap-3">
+          <div className="w-10 h-10 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+          <p className="text-gray-500 text-sm">Loading client details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!details) return null;
+
+  const {
+    total_logged = 0,
+    expected_workouts = 0,
+    completion_rate = 0,
+    weekly_progress = [],
+    exercise_volume = {},
+    recent_workouts = [],
+    days_per_week,
+  } = details;
+
+  const daysPerWeek = days_per_week || client?.days_per_week || 5;
+  const pct = Math.min(Math.round(completion_rate), 100);
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 relative">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 text-lg transition-colors z-10"
+        aria-label="Close"
+      >
+        &times;
+      </button>
+
+      {/* Client header */}
+      <div className="mb-5 pr-10">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">
+              {client?.user_name || client?.user_email || 'Client'}
+            </h2>
+            <p className="text-sm text-gray-500 mt-0.5">{client?.program_name}</p>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Week {client?.current_week} &middot; {daysPerWeek} days/week
+            </p>
+          </div>
+          {client?.access_code && (
+            <button
+              onClick={() => {
+                const isLocal = window.location.hostname === 'localhost';
+                const base = isLocal
+                  ? 'http://localhost:5173'
+                  : (window.tdConfig?.builderUrl || '/workout-builder');
+                const url = `${base}/?accessCode=${encodeURIComponent(client.access_code)}&email=${encodeURIComponent(client.user_email)}&mode=override`;
+                window.open(url, '_blank');
+              }}
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap flex-shrink-0"
+            >
+              Edit Program
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Grid layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+        {/* Stats Summary Card */}
+        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-5 border border-purple-100 flex items-center gap-5">
+          {/* Circular progress indicator */}
+          <div className="relative w-20 h-20 flex-shrink-0">
+            <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
+              <circle
+                cx="40"
+                cy="40"
+                r="34"
+                fill="none"
+                className="stroke-gray-200"
+                strokeWidth="8"
+              />
+              <circle
+                cx="40"
+                cy="40"
+                r="34"
+                fill="none"
+                className="stroke-purple-500"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeDasharray={`${(pct / 100) * 213.6} 213.6`}
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className={`text-lg font-bold ${completionColor(pct)}`}>{pct}%</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
+              Completion
+            </h3>
+            <p className="text-2xl font-bold text-gray-900">
+              {total_logged}{' '}
+              <span className="text-base font-normal text-gray-400">
+                / {expected_workouts}
+              </span>
+            </p>
+            <p className="text-xs text-gray-500">workouts logged</p>
+            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden mt-1">
+              <div
+                className={`h-full rounded-full ${completionBg(pct)}`}
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Weekly Progress Chart */}
+        <WeeklyProgressChart
+          weeklyProgress={weekly_progress}
+          daysPerWeek={daysPerWeek}
+        />
+
+        {/* Volume Chart */}
+        <VolumeChart exerciseVolume={exercise_volume} />
+
+        {/* Recent Workouts */}
+        <RecentWorkouts workouts={recent_workouts} />
+
+        {/* Edit Program CTA */}
+        {client?.access_code && (
+          <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-200 p-6 flex flex-col items-center justify-center gap-3 lg:col-span-2">
+            <p className="text-gray-600 text-sm font-medium text-center">
+              Need to adjust this client's program mid-cycle?
+            </p>
+            <button
+              onClick={() => {
+                const isLocal = window.location.hostname === 'localhost';
+                const base = isLocal
+                  ? 'http://localhost:5173'
+                  : (window.tdConfig?.builderUrl || '/workout-builder');
+                const url = `${base}/?accessCode=${encodeURIComponent(client.access_code)}&email=${encodeURIComponent(client.user_email)}&mode=override`;
+                window.open(url, '_blank');
+              }}
+              className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white font-semibold hover:opacity-90 transition-opacity"
+            >
+              Open in Workout Builder
+            </button>
+            <p className="text-xs text-gray-400">
+              Opens the builder with this client's program. Changes save as overrides per week/day.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
