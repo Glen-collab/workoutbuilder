@@ -173,7 +173,12 @@ export default function App() {
     const data = workoutState.getAllWorkoutsForSave();
     const payload = {
       ...programInfo,
-      ...data,
+      programData: {
+        allWorkouts: data.allWorkouts,
+        mainMaxes: data.mainMaxes,
+        daysPerWeek: data.daysPerWeek,
+        totalWeeks: data.totalWeeks,
+      },
     };
 
     try {
