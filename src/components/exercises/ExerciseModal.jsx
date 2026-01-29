@@ -10,6 +10,38 @@ import MovementCategoryList from './MovementCategoryList';
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
 
+const VIRTUAL_CATEGORIES = { functional: 'functional', corrective: 'corrective' };
+const REDIRECT_MAP = { olympic_lifting: 'oly_complexes', first_responder: 'tactical' };
+const UPPER_PARTS = ['chest', 'back', 'shoulders', 'arms'];
+const LOWER_PARTS = ['legs', 'core'];
+
+function getExercisesForSelection(muscleGroup, subcategory) {
+  // Virtual categories (functional/corrective → upper_body/lower_body)
+  if (VIRTUAL_CATEGORIES[muscleGroup]) {
+    const subKey = VIRTUAL_CATEGORIES[muscleGroup];
+    const parts = subcategory === 'upper_body' ? UPPER_PARTS : LOWER_PARTS;
+    const results = [];
+    for (const part of parts) {
+      const cat = exerciseCategories[part];
+      const sub = cat?.subcategories?.[subKey];
+      if (sub) {
+        const exs = Array.isArray(sub) ? sub : sub.exercises || [];
+        results.push(...exs);
+      }
+    }
+    return results;
+  }
+
+  // Redirected categories (olympic_lifting → oly_complexes, first_responder → tactical)
+  const resolvedKey = REDIRECT_MAP[muscleGroup] || muscleGroup;
+  const mg = exerciseCategories[resolvedKey];
+  if (mg?.subcategories?.[subcategory]) {
+    const sub = mg.subcategories[subcategory];
+    return Array.isArray(sub) ? sub : sub.exercises || [];
+  }
+  return [];
+}
+
 function getAllExercisesFromCategories(cats) {
   const results = [];
   if (!cats) return results;
@@ -161,12 +193,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
-    const mg = exerciseCategories[selectedMuscleGroup];
-    let exercises = [];
-    if (mg && mg.subcategories && mg.subcategories[selectedSubcategory]) {
-      const sub = mg.subcategories[selectedSubcategory];
-      exercises = Array.isArray(sub) ? sub : sub.exercises || [];
-    }
+    const exercises = getExercisesForSelection(selectedMuscleGroup, selectedSubcategory);
 
     return (
       <ExerciseList

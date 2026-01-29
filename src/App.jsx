@@ -10,6 +10,7 @@ import CircuitTypeSelector from './components/builder/CircuitTypeSelector';
 import ExerciseModal from './components/exercises/ExerciseModal';
 import SaveProgramModal from './components/programs/SaveProgramModal';
 import ManagePrograms from './components/programs/ManagePrograms';
+import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
 
 export default function App() {
   const workoutState = useWorkoutState();
@@ -30,7 +31,9 @@ export default function App() {
   const [exerciseModalBlockId, setExerciseModalBlockId] = useState(null);
   const [exerciseModalBlockType, setExerciseModalBlockType] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [savedAccessCode, setSavedAccessCode] = useState(null);
   const [showManageModal, setShowManageModal] = useState(false);
+  const [showPreMadePicker, setShowPreMadePicker] = useState(false);
   const [insertPosition, setInsertPosition] = useState(null);
 
   // ── Detect override mode from URL params ──
@@ -93,11 +96,32 @@ export default function App() {
       return;
     }
     if (type === 'premade') {
-      // Premade handling - placeholder for future implementation
+      setShowPreMadePicker(true);
       return;
     }
     workoutState.addBlock({ type }, insertPosition);
     setInsertPosition(null);
+  };
+
+  const handleSelectPreMade = (workout) => {
+    if (!workout || !workout.blocks) return;
+    for (const pmBlock of workout.blocks) {
+      const exercises = (pmBlock.exercises || []).map((ex) => ({
+        id: Date.now() + Math.random(),
+        name: ex.name || '',
+        setsCount: ex.sets || '',
+        reps: String(ex.reps || ''),
+        weight: ex.weight || '',
+        rest: ex.rest || '',
+        notes: '',
+        qualifier: '',
+      }));
+      workoutState.addBlock({
+        type: pmBlock.type || 'straight-set',
+        exercises,
+      });
+    }
+    setShowPreMadePicker(false);
   };
 
   // ── Circuit Type Selection ──
@@ -157,6 +181,8 @@ export default function App() {
         payload.programId = workoutState.loadedProgram.id;
         payload.accessCode = workoutState.loadedProgram.accessCode;
         await programAPI.updateProgram(payload);
+        setShowSaveModal(false);
+        setSavedAccessCode(workoutState.loadedProgram.accessCode);
       } else {
         const result = await programAPI.saveProgram(payload);
         if (result && result.programId) {
@@ -166,9 +192,10 @@ export default function App() {
             name: programInfo.programName,
             ...data,
           });
+          setShowSaveModal(false);
+          setSavedAccessCode(result.accessCode);
         }
       }
-      setShowSaveModal(false);
     } catch {
       // Error is handled by the hook and displayed via programAPI.error
     }
@@ -277,6 +304,8 @@ export default function App() {
     daysPerWeek: workoutState.daysPerWeek,
     blocks: workoutState.workoutBlocks,
     mainMaxes: workoutState.mainMaxes,
+    setMainMaxes: workoutState.setMainMaxes,
+    allWorkouts: workoutState.allWorkouts,
     switchDay: workoutState.switchDay,
     switchWeek: workoutState.switchWeek,
     copyWeek: workoutState.copyWeekToNext,
@@ -339,6 +368,24 @@ export default function App() {
         />
       )}
 
+      {/* Access Code Toast */}
+      {savedAccessCode && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] bg-white rounded-xl shadow-2xl border border-gray-200 px-6 py-4 max-w-sm w-full">
+          <div className="text-center">
+            <div className="text-[13px] font-semibold text-green-600 mb-1">Program Saved!</div>
+            <div className="text-[11px] text-gray-400 uppercase font-semibold mb-2">Access Code</div>
+            <div className="text-[22px] font-extrabold tracking-wider text-gray-900 bg-gray-100 rounded-lg py-2 px-4 select-all">{savedAccessCode}</div>
+            <p className="text-[12px] text-gray-400 mt-2">Share this code with your client so they can access their program.</p>
+            <button
+              onClick={() => setSavedAccessCode(null)}
+              className="mt-3 px-5 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Modals */}
       <BlockTypeSelector
         isOpen={showBlockTypeSelector}
@@ -383,6 +430,12 @@ export default function App() {
         onClose={() => setShowManageModal(false)}
         onLoadProgram={handleLoadProgram}
         apiHook={programAPI}
+      />
+
+      <PreMadeWorkoutPicker
+        isOpen={showPreMadePicker}
+        onClose={() => setShowPreMadePicker(false)}
+        onSelectWorkout={handleSelectPreMade}
       />
     </>
   );

@@ -1,5 +1,7 @@
 import WeekDaySelector from './WeekDaySelector';
 import BlockList from './BlockList';
+import PercentageMaxInputs from '../shared/PercentageMaxInputs';
+import DailySummary from './DailySummary';
 
 export default function BuilderScreen({
   workoutState,
@@ -19,6 +21,8 @@ export default function BuilderScreen({
     daysPerWeek,
     blocks,
     mainMaxes,
+    setMainMaxes,
+    allWorkouts,
     switchDay,
     switchWeek,
     copyWeek,
@@ -86,6 +90,11 @@ export default function BuilderScreen({
         </div>
       </div>
 
+      {/* Editable Main Maxes */}
+      <div className="mb-4">
+        <PercentageMaxInputs mainMaxes={mainMaxes} onUpdate={setMainMaxes} />
+      </div>
+
       <WeekDaySelector
         currentWeek={currentWeek}
         currentDay={currentDay}
@@ -113,6 +122,16 @@ export default function BuilderScreen({
         onRemoveSet={removeSet}
         onDuplicateSet={duplicateSet}
         mainMaxes={mainMaxes}
+      />
+
+      <DailySummary
+        blocks={blocks}
+        mainMaxes={mainMaxes}
+        currentDay={currentDay}
+        currentWeek={currentWeek}
+        daysPerWeek={daysPerWeek}
+        totalWeeks={totalWeeks}
+        allWorkouts={allWorkouts}
       />
 
       <div className="flex gap-3 flex-wrap mt-7 pt-5 border-t border-gray-200">

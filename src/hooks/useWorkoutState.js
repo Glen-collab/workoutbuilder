@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef } from 'react';
 
 const DEFAULT_MAIN_MAXES = {
-  bench: 225,
-  squat: 315,
-  powerClean: 185,
-  deadlift: 365,
+  bench: 0,
+  squat: 0,
+  powerClean: 0,
+  deadlift: 0,
 };
 
 function createEmptyDay() {

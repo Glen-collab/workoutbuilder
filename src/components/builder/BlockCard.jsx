@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import ExerciseRow from './ExerciseRow';
+import ThemeSelector from './ThemeSelector';
 
 function getBlockIcon(type) {
   const icons = { theme: '📋', warmup: '🔥', mobility: '🧘', movement: '⚡', 'straight-set': '💪', superset: '🔄', triset: '🔁', circuit: '🎯', conditioning: '🏃' };
@@ -45,10 +47,17 @@ export default function BlockCard({
   onDuplicateSet,
   mainMaxes,
 }) {
+  const [showThemeSelector, setShowThemeSelector] = useState(false);
   const color = blockColors[block.type] || '#95a5a6';
   const exercises = block.exercises || [];
   const maxEx = getMaxExercises(block.type);
   const canAdd = exercises.length < maxEx && block.type !== 'theme';
+
+  const handleThemeAppend = (text) => {
+    const current = block.themeText || '';
+    const separator = current && !current.endsWith(' ') && !current.endsWith('\n') ? ' ' : '';
+    onUpdateBlock(block.id, { themeText: current + separator + text });
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-md mb-4 overflow-hidden">
@@ -73,14 +82,37 @@ export default function BlockCard({
       {/* Body */}
       {!block.collapsed && (
         <div className="p-4">
-          {/* Theme block: just a textarea */}
+          {/* Theme block: textarea + theme picker */}
           {block.type === 'theme' && (
-            <textarea
-              value={block.themeText || ''}
-              onChange={(e) => onUpdateBlock(block.id, { themeText: e.target.value })}
-              placeholder="Enter theme, focus, or notes for this section..."
-              className="w-full min-h-[70px] px-3 py-2.5 rounded-lg border border-gray-300 text-sm font-[inherit] resize-y outline-none box-border"
-            />
+            <div className="flex flex-col gap-2">
+              <textarea
+                value={block.themeText || ''}
+                onChange={(e) => onUpdateBlock(block.id, { themeText: e.target.value })}
+                placeholder="Enter theme, focus, or notes for this section... or use the picker below"
+                className="w-full min-h-[90px] px-3 py-2.5 rounded-lg border border-gray-300 text-sm font-[inherit] resize-y outline-none box-border"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setShowThemeSelector(true)}
+                  className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                >
+                  Theme Picker
+                </button>
+                {block.themeText && (
+                  <button
+                    onClick={() => onUpdateBlock(block.id, { themeText: '' })}
+                    className="px-3 py-2 text-[13px] font-semibold text-red-500 bg-red-50 border border-red-200 rounded-lg cursor-pointer hover:bg-red-100 transition-colors"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <ThemeSelector
+                isOpen={showThemeSelector}
+                onClose={() => setShowThemeSelector(false)}
+                onAppendText={handleThemeAppend}
+              />
+            </div>
           )}
 
           {/* Circuit config */}

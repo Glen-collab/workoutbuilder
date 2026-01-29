@@ -19,7 +19,7 @@ export default function BlockTypeSelector({ isOpen, onClose, onSelect, insertPos
 
   return (
     <div
-      className="fixed inset-0 bg-black/45 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/45 flex items-center justify-center z-[10000]"
       onClick={onClose}
     >
       <div
