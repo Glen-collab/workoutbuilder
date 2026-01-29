@@ -185,8 +185,10 @@ export default function App() {
         setSavedAccessCode(workoutState.loadedProgram.accessCode);
       } else {
         const result = await programAPI.saveProgram(payload);
+        console.log('Save result:', JSON.stringify(result));
         const programId = result?.programId || result?.data?.programId;
         const accessCode = result?.accessCode || result?.data?.accessCode;
+        console.log('Parsed:', { programId, accessCode });
         if (programId) {
           workoutState.loadProgram({
             id: programId,
