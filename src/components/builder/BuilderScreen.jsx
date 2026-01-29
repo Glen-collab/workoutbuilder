@@ -1,72 +1,17 @@
-import React from 'react';
 import WeekDaySelector from './WeekDaySelector';
 import BlockList from './BlockList';
 
-const styles = {
-  container: {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '20px',
-  },
-  header: {
-    marginBottom: '20px',
-  },
-  title: {
-    fontSize: '22px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    margin: '0 0 4px 0',
-  },
-  subtitle: {
-    fontSize: '13px',
-    color: '#999',
-    margin: 0,
-  },
-  bottomBar: {
-    display: 'flex',
-    gap: '12px',
-    flexWrap: 'wrap',
-    marginTop: '28px',
-    padding: '20px 0',
-    borderTop: '1px solid #eee',
-  },
-  saveButton: {
-    flex: 1,
-    minWidth: '140px',
-    padding: '14px 24px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-  manageButton: {
-    padding: '14px 24px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: 'transparent',
-    color: '#667eea',
-    border: '2px solid #667eea',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-  backButton: {
-    padding: '14px 24px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: 'transparent',
-    color: '#999',
-    border: '2px solid #ddd',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-};
-
-export default function BuilderScreen({ workoutState, onBack, onSave, onManage }) {
+export default function BuilderScreen({
+  workoutState,
+  onBack,
+  onSave,
+  onManage,
+  overrideContext,
+  overrideSaveStatus,
+  onRevertOverride,
+  onGoToDashboard,
+  onExitOverrideMode,
+}) {
   const {
     currentWeek,
     currentDay,
@@ -94,12 +39,51 @@ export default function BuilderScreen({ workoutState, onBack, onSave, onManage }
   } = workoutState;
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h2 style={styles.title}>Workout Builder</h2>
-        <p style={styles.subtitle}>
-          Week {currentWeek} &middot; Day {currentDay}
-        </p>
+    <div className="max-w-3xl mx-auto px-4 py-5">
+      {/* Override mode banner */}
+      {overrideContext && (
+        <div className="flex flex-col gap-0.5 bg-gradient-to-br from-yellow-300 to-yellow-400 text-amber-900 px-4 py-3 rounded-xl mb-4 text-sm">
+          <span className="font-semibold">Override Mode</span>
+          <span className="text-[13px]">
+            Editing overrides for <strong>{overrideContext.email}</strong> (code: {overrideContext.accessCode})
+          </span>
+          <span className="text-xs opacity-80">
+            Changes save per week/day — base program is not modified
+          </span>
+        </div>
+      )}
+
+      {/* Override save status toast */}
+      {overrideSaveStatus === 'saved' && (
+        <div className="bg-green-500 text-white px-4 py-2.5 rounded-lg mb-3 text-sm font-semibold text-center">
+          Override saved successfully!
+        </div>
+      )}
+      {overrideSaveStatus === 'error' && (
+        <div className="bg-red-600 text-white px-4 py-2.5 rounded-lg mb-3 text-sm font-semibold text-center">
+          Failed to save override. Please try again.
+        </div>
+      )}
+
+      <div className="mb-5">
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-[22px] font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-1">
+              Workout Builder
+            </h2>
+            <p className="text-[13px] text-gray-400 m-0">
+              Week {currentWeek} &middot; Day {currentDay}
+            </p>
+          </div>
+          {onGoToDashboard && (
+            <button
+              onClick={onGoToDashboard}
+              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
+            >
+              Trainer Dashboard
+            </button>
+          )}
+        </div>
       </div>
 
       <WeekDaySelector
@@ -131,16 +115,65 @@ export default function BuilderScreen({ workoutState, onBack, onSave, onManage }
         mainMaxes={mainMaxes}
       />
 
-      <div style={styles.bottomBar}>
-        <button style={styles.saveButton} onClick={onSave}>
-          Save Program
-        </button>
-        <button style={styles.manageButton} onClick={onManage}>
-          Manage Programs
-        </button>
-        <button style={styles.backButton} onClick={onBack}>
-          Back
-        </button>
+      <div className="flex gap-3 flex-wrap mt-7 pt-5 border-t border-gray-200">
+        {overrideContext ? (
+          <>
+            {/* Save override — stays in builder so you can keep editing */}
+            <button
+              className="flex-1 min-w-[140px] w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-xl cursor-pointer hover:opacity-90 transition-opacity duration-200"
+              onClick={onSave}
+            >
+              Save Override (W{currentWeek} D{currentDay})
+            </button>
+            {onRevertOverride && (
+              <button
+                className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-red-500 border-2 border-red-500 rounded-xl cursor-pointer hover:bg-red-50 transition-colors duration-200"
+                onClick={onRevertOverride}
+              >
+                Revert to Base
+              </button>
+            )}
+            {/* Opens dashboard in new tab so builder stays alive */}
+            <button
+              className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-[#667eea] border-2 border-[#667eea] rounded-xl cursor-pointer hover:bg-[#667eea]/10 transition-colors duration-200"
+              onClick={onGoToDashboard}
+            >
+              Open Dashboard
+            </button>
+            {/* Exit override mode — go back to normal builder */}
+            {onExitOverrideMode && (
+              <button
+                className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border-2 border-gray-300 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+                onClick={onExitOverrideMode}
+              >
+                Exit Override Mode
+              </button>
+            )}
+          </>
+        ) : (
+          <>
+            <button
+              className="flex-1 min-w-[140px] w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-xl cursor-pointer hover:opacity-90 transition-opacity duration-200"
+              onClick={onSave}
+            >
+              Save Program
+            </button>
+            {onManage && (
+              <button
+                className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-[#667eea] border-2 border-[#667eea] rounded-xl cursor-pointer hover:bg-[#667eea]/10 transition-colors duration-200"
+                onClick={onManage}
+              >
+                Manage Programs
+              </button>
+            )}
+            <button
+              className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border-2 border-gray-300 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+              onClick={onBack}
+            >
+              Back
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

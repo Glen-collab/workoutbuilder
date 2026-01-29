@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { exerciseCategories } from '../../data/exerciseLibrary';
 import { warmupCategories } from '../../data/warmupExercises';
 import { mobilityCategories } from '../../data/mobilityExercises';
@@ -9,77 +9,6 @@ import ExerciseList from './ExerciseList';
 import MovementCategoryList from './MovementCategoryList';
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
-
-const styles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'rgba(0,0,0,0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 9999,
-    padding: '16px',
-  },
-  modal: {
-    background: '#f5f3ff',
-    borderRadius: '16px',
-    width: '100%',
-    maxWidth: '520px',
-    maxHeight: '85vh',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-  },
-  header: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    padding: '18px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  headerTitle: {
-    color: '#fff',
-    fontSize: '18px',
-    fontWeight: '700',
-    margin: 0,
-  },
-  closeBtn: {
-    background: 'rgba(255,255,255,0.2)',
-    border: 'none',
-    color: '#fff',
-    fontSize: '18px',
-    width: '34px',
-    height: '34px',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  searchWrap: {
-    padding: '12px 16px',
-    background: '#fff',
-    borderBottom: '1px solid #eee',
-  },
-  searchInput: {
-    width: '100%',
-    padding: '10px 14px',
-    border: '2px solid #e8e8e8',
-    borderRadius: '8px',
-    fontSize: '14px',
-    outline: 'none',
-    boxSizing: 'border-box',
-  },
-  body: {
-    flex: 1,
-    overflowY: 'auto',
-  },
-};
 
 function getAllExercisesFromCategories(cats) {
   const results = [];
@@ -154,7 +83,6 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     nonStrengthCategories = generalMovements;
     nonStrengthTitle = 'Movement Categories';
   } else if (blockType === 'conditioning') {
-    // Filter generalMovements to conditioning-related categories
     const conditioningKeys = ['conditioning_general', 'cardio_equipment'];
     const filtered = {};
     if (generalMovements) {
@@ -185,7 +113,6 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
 
   // Render body content
   const renderContent = () => {
-    // Search results override everything
     if (searchResults) {
       return (
         <ExerciseList
@@ -196,7 +123,6 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
-    // Non-strength blocks: category list -> exercise list
     if (!isStrength) {
       if (selectedCategory && nonStrengthCategories && nonStrengthCategories[selectedCategory]) {
         const cat = nonStrengthCategories[selectedCategory];
@@ -220,7 +146,6 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
-    // Strength blocks: muscle group -> subcategory -> exercise list
     if (!selectedMuscleGroup) {
       return <MuscleGroupGrid onSelect={setSelectedMuscleGroup} />;
     }
@@ -236,7 +161,6 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
-    // Show exercises for the selected subcategory
     const mg = exerciseCategories[selectedMuscleGroup];
     let exercises = [];
     if (mg && mg.subcategories && mg.subcategories[selectedSubcategory]) {
@@ -255,24 +179,22 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   };
 
   return (
-    <div style={styles.overlay} onClick={handleClose}>
-      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div style={styles.header}>
-          <h3 style={styles.headerTitle}>Select Exercise</h3>
-          <button style={styles.closeBtn} onClick={handleClose}>✕</button>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4" onClick={handleClose}>
+      <div className="bg-purple-50 rounded-2xl w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-gradient-to-br from-[#667eea] to-[#764ba2] px-5 py-4 flex items-center justify-between">
+          <h3 className="text-white text-lg font-bold m-0">Select Exercise</h3>
+          <button className="bg-white/20 border-none text-white text-lg w-[34px] h-[34px] rounded-full cursor-pointer flex items-center justify-center hover:bg-white/30 transition" onClick={handleClose}>✕</button>
         </div>
-        <div style={styles.searchWrap}>
+        <div className="px-4 py-3 bg-white border-b border-gray-200">
           <input
-            style={styles.searchInput}
+            className="w-full px-3.5 py-2.5 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-[#667eea] transition-colors"
             type="text"
             placeholder="Search exercises..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-            onBlur={(e) => (e.target.style.borderColor = '#e8e8e8')}
           />
         </div>
-        <div style={styles.body}>
+        <div className="flex-1 overflow-y-auto">
           {renderContent()}
         </div>
       </div>

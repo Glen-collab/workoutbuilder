@@ -1,95 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Modal from '../shared/Modal';
-
-const styles = {
-  searchRow: {
-    display: 'flex',
-    gap: '10px',
-    marginBottom: '20px',
-  },
-  searchInput: {
-    flex: 1,
-    padding: '12px 14px',
-    fontSize: '15px',
-    borderRadius: '8px',
-    border: '1px solid rgba(255,255,255,0.12)',
-    background: 'rgba(255,255,255,0.06)',
-    color: '#e0e0e0',
-    outline: 'none',
-  },
-  searchBtn: {
-    padding: '12px 20px',
-    fontSize: '14px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-  },
-  programList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
-  programCard: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '14px 16px',
-    borderRadius: '10px',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
-  },
-  programInfo: {
-    flex: 1,
-  },
-  programName: {
-    fontSize: '15px',
-    fontWeight: '700',
-    color: '#e0e0e0',
-    marginBottom: '4px',
-  },
-  programMeta: {
-    fontSize: '12px',
-    color: '#888',
-    display: 'flex',
-    gap: '12px',
-  },
-  loadBtn: {
-    padding: '8px 18px',
-    fontSize: '13px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    flexShrink: 0,
-  },
-  emptyText: {
-    textAlign: 'center',
-    color: '#888',
-    padding: '30px 0',
-    fontSize: '14px',
-  },
-  errorBox: {
-    padding: '12px 16px',
-    borderRadius: '8px',
-    background: 'rgba(239, 68, 68, 0.15)',
-    border: '1px solid rgba(239, 68, 68, 0.3)',
-    color: '#fca5a5',
-    fontSize: '13px',
-    marginBottom: '16px',
-  },
-  spinner: {
-    textAlign: 'center',
-    padding: '30px 0',
-    color: '#999',
-    fontSize: '14px',
-  },
-};
 
 export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook }) {
   const [email, setEmail] = useState('wisco.barbell@gmail.com');
@@ -116,23 +26,17 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Manage Programs" maxWidth="560px">
-      <div style={styles.searchRow}>
+      <div className="flex gap-2.5 mb-5">
         <input
-          style={styles.searchInput}
+          className="flex-1 px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none focus:border-[#667eea] transition-colors"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Trainer email address"
           onKeyDown={handleKeyDown}
-          onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-          onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
         />
         <button
-          style={{
-            ...styles.searchBtn,
-            opacity: loading ? 0.5 : 1,
-            cursor: loading ? 'not-allowed' : 'pointer',
-          }}
+          className={`py-3 px-5 text-sm font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg whitespace-nowrap transition-opacity ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
           onClick={handleSearch}
           disabled={loading}
         >
@@ -140,28 +44,28 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
         </button>
       </div>
 
-      {error && <div style={styles.errorBox}>{error}</div>}
+      {error && <div className="px-4 py-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-300 text-[13px] mb-4">{error}</div>}
 
-      {loading && <div style={styles.spinner}>Loading programs...</div>}
+      {loading && <div className="text-center py-8 text-gray-500 text-sm">Loading programs...</div>}
 
       {!loading && searched && programs.length === 0 && (
-        <div style={styles.emptyText}>No programs found for this email.</div>
+        <div className="text-center text-gray-500 py-8 text-sm">No programs found for this email.</div>
       )}
 
       {!loading && programs.length > 0 && (
-        <div style={styles.programList}>
+        <div className="flex flex-col gap-2.5">
           {programs.map((program) => (
-            <div key={program.id || program.accessCode} style={styles.programCard}>
-              <div style={styles.programInfo}>
-                <div style={styles.programName}>{program.name}</div>
-                <div style={styles.programMeta}>
+            <div key={program.id || program.accessCode} className="flex items-center justify-between py-3.5 px-4 rounded-[10px] bg-white/[0.04] border border-white/[0.08]">
+              <div className="flex-1">
+                <div className="text-[15px] font-bold text-gray-200 mb-1">{program.name}</div>
+                <div className="text-xs text-gray-500 flex gap-3">
                   <span>Code: {program.accessCode}</span>
                   {program.createdAt && (
                     <span>{new Date(program.createdAt).toLocaleDateString()}</span>
                   )}
                 </div>
               </div>
-              <button style={styles.loadBtn} onClick={() => onLoadProgram(program)}>
+              <button className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer shrink-0 hover:opacity-90 transition-opacity" onClick={() => onLoadProgram(program)}>
                 Load
               </button>
             </div>

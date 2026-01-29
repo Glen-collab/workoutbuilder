@@ -1,76 +1,9 @@
-import React from 'react';
-
 const MAXES_CONFIG = [
-  { key: 'bench', label: 'Bench', color: '#4a90d9', gradient: 'linear-gradient(135deg, #4a90d9, #357abd)' },
-  { key: 'squat', label: 'Squat', color: '#27ae60', gradient: 'linear-gradient(135deg, #27ae60, #1e8c4c)' },
-  { key: 'powerClean', label: 'Clean', color: '#e67e22', gradient: 'linear-gradient(135deg, #e67e22, #d35400)' },
-  { key: 'deadlift', label: 'Deadlift', color: '#8e44ad', gradient: 'linear-gradient(135deg, #8e44ad, #732d91)' },
+  { key: 'bench', label: 'Bench', gradient: 'from-[#4a90d9] to-[#357abd]' },
+  { key: 'squat', label: 'Squat', gradient: 'from-[#27ae60] to-[#1e8c4c]' },
+  { key: 'powerClean', label: 'Clean', gradient: 'from-[#e67e22] to-[#d35400]' },
+  { key: 'deadlift', label: 'Deadlift', gradient: 'from-[#8e44ad] to-[#732d91]' },
 ];
-
-const gridStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: '10px',
-};
-
-const cardStyle = (gradient) => ({
-  background: gradient,
-  borderRadius: '10px',
-  padding: '10px 12px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '6px',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-});
-
-const labelStyle = {
-  color: '#fff',
-  fontWeight: '700',
-  fontSize: '13px',
-  textTransform: 'uppercase',
-  letterSpacing: '0.5px',
-};
-
-const inputWrapStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
-};
-
-const inputStyle = {
-  width: '70px',
-  padding: '6px 8px',
-  borderRadius: '6px',
-  border: '1px solid rgba(255, 255, 255, 0.25)',
-  background: 'rgba(0, 0, 0, 0.25)',
-  color: '#fff',
-  fontSize: '15px',
-  fontWeight: '600',
-  textAlign: 'center',
-  outline: 'none',
-};
-
-const suffixStyle = {
-  color: 'rgba(255, 255, 255, 0.7)',
-  fontSize: '12px',
-  fontWeight: '600',
-};
-
-// Inject responsive media query once
-if (typeof document !== 'undefined') {
-  const id = 'pmi-responsive-style';
-  if (!document.getElementById(id)) {
-    const style = document.createElement('style');
-    style.id = id;
-    style.textContent = `
-      @media (max-width: 600px) {
-        .pmi-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-}
 
 export default function PercentageMaxInputs({ mainMaxes, onUpdate }) {
   const handleChange = (key, value) => {
@@ -79,20 +12,20 @@ export default function PercentageMaxInputs({ mainMaxes, onUpdate }) {
   };
 
   return (
-    <div className="pmi-grid" style={gridStyle}>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
       {MAXES_CONFIG.map(({ key, label, gradient }) => (
-        <div key={key} style={cardStyle(gradient)}>
-          <span style={labelStyle}>{label}</span>
-          <div style={inputWrapStyle}>
+        <div key={key} className={`bg-gradient-to-br ${gradient} rounded-[10px] px-3 py-2.5 flex flex-col items-center gap-1.5 shadow-md`}>
+          <span className="text-white font-bold text-[13px] uppercase tracking-wide">{label}</span>
+          <div className="flex items-center gap-1">
             <input
               type="number"
               step={5}
               min={0}
               value={mainMaxes[key] ?? ''}
               onChange={(e) => handleChange(key, e.target.value)}
-              style={inputStyle}
+              className="w-[70px] px-2 py-1.5 rounded-md border border-white/25 bg-black/25 text-white text-[15px] font-semibold text-center outline-none focus:border-white/50 transition-colors"
             />
-            <span style={suffixStyle}>lbs</span>
+            <span className="text-white/70 text-xs font-semibold">lbs</span>
           </div>
         </div>
       ))}

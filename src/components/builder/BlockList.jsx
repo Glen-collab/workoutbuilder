@@ -1,51 +1,4 @@
-import React from 'react';
 import BlockCard from './BlockCard';
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-  },
-  emptyState: {
-    textAlign: 'center',
-    padding: '60px 20px',
-    background: '#fff',
-    borderRadius: '14px',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-  },
-  emptyIcon: {
-    fontSize: '48px',
-    marginBottom: '12px',
-  },
-  emptyTitle: {
-    fontSize: '18px',
-    fontWeight: '600',
-    color: '#555',
-    margin: '0 0 6px 0',
-  },
-  emptyDesc: {
-    fontSize: '14px',
-    color: '#999',
-    margin: 0,
-  },
-  addButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    width: '100%',
-    padding: '14px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: '#fff',
-    color: '#667eea',
-    border: '2px dashed #ccc',
-    borderRadius: '12px',
-    cursor: 'pointer',
-    transition: 'border-color 0.2s',
-  },
-};
 
 export default function BlockList({
   blocks,
@@ -66,17 +19,15 @@ export default function BlockList({
 }) {
   if (!blocks || blocks.length === 0) {
     return (
-      <div style={styles.container}>
-        <div style={styles.emptyState}>
-          <div style={styles.emptyIcon}>{'\ud83c\udfcb\ufe0f'}</div>
-          <h3 style={styles.emptyTitle}>No blocks yet</h3>
-          <p style={styles.emptyDesc}>Add your first block to start building the workout.</p>
+      <div className="flex flex-col gap-4">
+        <div className="text-center py-15 px-5 bg-white rounded-[14px] shadow-md">
+          <div className="text-5xl mb-3">{'\ud83c\udfcb\ufe0f'}</div>
+          <h3 className="text-lg font-semibold text-gray-600 mb-1.5">No blocks yet</h3>
+          <p className="text-sm text-gray-400 m-0">Add your first block to start building the workout.</p>
         </div>
         <button
-          style={styles.addButton}
+          className="flex items-center justify-center gap-2 w-full py-3.5 text-[15px] font-semibold bg-white text-[#667eea] border-2 border-dashed border-gray-300 rounded-xl cursor-pointer transition-colors duration-200 hover:border-[#667eea]"
           onClick={onAddBlock}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#667eea')}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#ccc')}
         >
           + Add Block
         </button>
@@ -85,7 +36,7 @@ export default function BlockList({
   }
 
   return (
-    <div style={styles.container}>
+    <div className="flex flex-col gap-4">
       {blocks.map((block, index) => (
         <BlockCard
           key={block.id || index}
@@ -106,10 +57,8 @@ export default function BlockList({
         />
       ))}
       <button
-        style={styles.addButton}
+        className="flex items-center justify-center gap-2 w-full py-3.5 text-[15px] font-semibold bg-white text-[#667eea] border-2 border-dashed border-gray-300 rounded-xl cursor-pointer transition-colors duration-200 hover:border-[#667eea]"
         onClick={onAddBlock}
-        onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#667eea')}
-        onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#ccc')}
       >
         + Add Block
       </button>

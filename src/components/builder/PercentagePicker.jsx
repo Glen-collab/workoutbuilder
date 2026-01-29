@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const TENS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const ONES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -52,13 +52,18 @@ function PickerColumn({ items, selected, onChange, label }) {
   };
 
   return (
-    <div style={styles.column}>
-      <div style={styles.columnLabel}>{label}</div>
-      <div style={styles.pickerWrapper}>
-        <div style={styles.selectionHighlight} />
+    <div className="flex flex-col items-center">
+      <div className="text-[10px] font-semibold text-gray-400 uppercase mb-1.5 tracking-wide">{label}</div>
+      <div className="relative overflow-hidden rounded-xl bg-[#f8f7ff]" style={{ height: `${PICKER_HEIGHT}px`, width: '60px' }}>
+        {/* Selection highlight */}
+        <div
+          className="absolute left-1 right-1 rounded-lg border-2 border-[#667eea] bg-gradient-to-br from-[#667eea]/15 to-[#764ba2]/15 pointer-events-none z-[1]"
+          style={{ top: `${ITEM_HEIGHT * 2}px`, height: `${ITEM_HEIGHT}px` }}
+        />
         <div
           ref={listRef}
-          style={styles.scrollList}
+          className="h-full overflow-y-auto snap-y snap-mandatory scrollbar-none"
+          style={{ WebkitOverflowScrolling: 'touch' }}
           onScroll={handleScroll}
         >
           {/* Top padding so first item can center */}
@@ -69,10 +74,10 @@ function PickerColumn({ items, selected, onChange, label }) {
               <div
                 key={item}
                 onClick={() => handleItemClick(item, index)}
-                style={{
-                  ...styles.item,
-                  ...(isSelected ? styles.itemSelected : {}),
-                }}
+                className={`flex items-center justify-center cursor-pointer snap-start select-none transition-colors duration-150 ${
+                  isSelected ? 'text-gray-800 text-[26px] font-extrabold' : 'text-gray-400 text-[22px] font-semibold'
+                }`}
+                style={{ height: `${ITEM_HEIGHT}px` }}
               >
                 {String(item)}
               </div>
@@ -109,7 +114,6 @@ export default function PercentagePicker({ isOpen, currentPercentage, onSelect, 
     onSelect(previewValue);
   };
 
-  // Quick preset buttons
   const quickPresets = [40, 50, 60, 65, 70, 75, 80, 85, 90, 95];
 
   const handleQuickSelect = (pct) => {
@@ -120,28 +124,29 @@ export default function PercentagePicker({ isOpen, currentPercentage, onSelect, 
   };
 
   return (
-    <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000] p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl w-full max-w-[380px] overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div style={styles.header}>
-          <span style={styles.headerTitle}>Set Percentage</span>
-          <button style={styles.closeBtn} onClick={onClose}>✕</button>
+        <div className="bg-gradient-to-br from-[#667eea] to-[#764ba2] px-4.5 py-3.5 flex items-center justify-between">
+          <span className="text-white text-base font-bold">Set Percentage</span>
+          <button className="bg-white/20 border-none text-white text-base w-[30px] h-[30px] rounded-full cursor-pointer flex items-center justify-center" onClick={onClose}>✕</button>
         </div>
 
         {/* Preview */}
-        <div style={styles.preview}>
-          <span style={styles.previewValue}>{previewValue}%</span>
+        <div className="text-center pt-4.5 pb-2">
+          <span className="text-[42px] font-extrabold bg-gradient-to-br from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">{previewValue}%</span>
         </div>
 
         {/* Quick Presets */}
-        <div style={styles.quickRow}>
+        <div className="flex flex-wrap gap-1.5 px-4 pb-3.5 justify-center">
           {quickPresets.map((pct) => (
             <button
               key={pct}
-              style={{
-                ...styles.quickBtn,
-                ...(previewValue === pct ? styles.quickBtnActive : {}),
-              }}
+              className={`px-3 py-1.5 text-[13px] font-semibold rounded-full cursor-pointer transition-all duration-150 ${
+                previewValue === pct
+                  ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-2 border-[#667eea]'
+                  : 'bg-white text-gray-600 border-2 border-[#e0dff5]'
+              }`}
               onClick={() => handleQuickSelect(pct)}
             >
               {pct}%
@@ -150,18 +155,18 @@ export default function PercentagePicker({ isOpen, currentPercentage, onSelect, 
         </div>
 
         {/* Ticker Columns */}
-        <div style={styles.pickerRow}>
+        <div className="flex items-center justify-center gap-1 px-5 pb-4">
           <PickerColumn items={TENS} selected={tens} onChange={setTens} label="Tens" />
           <PickerColumn items={ONES} selected={ones} onChange={setOnes} label="Ones" />
-          <div style={styles.dot}>.</div>
+          <div className="text-[32px] font-extrabold text-[#667eea] pt-5">.</div>
           <PickerColumn items={DECIMALS} selected={decimal} onChange={setDecimal} label="Dec" />
-          <div style={styles.percentSign}>%</div>
+          <div className="text-2xl font-bold text-gray-400 pt-5">%</div>
         </div>
 
-        {/* Confirm */}
-        <div style={styles.footer}>
-          <button style={styles.cancelBtn} onClick={onClose}>Cancel</button>
-          <button style={styles.confirmBtn} onClick={handleConfirm}>
+        {/* Footer */}
+        <div className="flex gap-2.5 p-4 border-t border-gray-200">
+          <button className="flex-1 py-3 text-[15px] font-semibold bg-gray-100 text-gray-500 border-none rounded-[10px] cursor-pointer" onClick={onClose}>Cancel</button>
+          <button className="flex-[2] py-3 text-[15px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] cursor-pointer" onClick={handleConfirm}>
             Set {previewValue}%
           </button>
         </div>
@@ -169,189 +174,3 @@ export default function PercentagePicker({ isOpen, currentPercentage, onSelect, 
     </div>
   );
 }
-
-const styles = {
-  overlay: {
-    position: 'fixed',
-    top: 0, left: 0, right: 0, bottom: 0,
-    background: 'rgba(0,0,0,0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10000,
-    padding: '16px',
-  },
-  modal: {
-    background: '#fff',
-    borderRadius: '16px',
-    width: '100%',
-    maxWidth: '380px',
-    overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-  },
-  header: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    padding: '14px 18px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  headerTitle: {
-    color: '#fff',
-    fontSize: '16px',
-    fontWeight: '700',
-  },
-  closeBtn: {
-    background: 'rgba(255,255,255,0.2)',
-    border: 'none',
-    color: '#fff',
-    fontSize: '16px',
-    width: '30px',
-    height: '30px',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  preview: {
-    textAlign: 'center',
-    padding: '18px 0 8px 0',
-  },
-  previewValue: {
-    fontSize: '42px',
-    fontWeight: '800',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  },
-  quickRow: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '6px',
-    padding: '8px 16px 14px',
-    justifyContent: 'center',
-  },
-  quickBtn: {
-    padding: '6px 12px',
-    fontSize: '13px',
-    fontWeight: '600',
-    border: '2px solid #e0dff5',
-    borderRadius: '20px',
-    background: '#fff',
-    color: '#555',
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-  },
-  quickBtnActive: {
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    borderColor: '#667eea',
-  },
-  pickerRow: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '4px',
-    padding: '0 20px 16px',
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  columnLabel: {
-    fontSize: '10px',
-    fontWeight: '600',
-    color: '#999',
-    textTransform: 'uppercase',
-    marginBottom: '6px',
-    letterSpacing: '0.5px',
-  },
-  pickerWrapper: {
-    position: 'relative',
-    height: PICKER_HEIGHT + 'px',
-    width: '60px',
-    overflow: 'hidden',
-    borderRadius: '12px',
-    background: '#f8f7ff',
-  },
-  selectionHighlight: {
-    position: 'absolute',
-    top: ITEM_HEIGHT * 2 + 'px',
-    left: '4px',
-    right: '4px',
-    height: ITEM_HEIGHT + 'px',
-    background: 'linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15))',
-    borderRadius: '8px',
-    border: '2px solid #667eea',
-    pointerEvents: 'none',
-    zIndex: 1,
-  },
-  scrollList: {
-    height: '100%',
-    overflowY: 'auto',
-    scrollSnapType: 'y mandatory',
-    WebkitOverflowScrolling: 'touch',
-    msOverflowStyle: 'none',
-    scrollbarWidth: 'none',
-  },
-  item: {
-    height: ITEM_HEIGHT + 'px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '22px',
-    fontWeight: '600',
-    color: '#aaa',
-    cursor: 'pointer',
-    scrollSnapAlign: 'start',
-    transition: 'color 0.15s',
-    userSelect: 'none',
-  },
-  itemSelected: {
-    color: '#333',
-    fontSize: '26px',
-    fontWeight: '800',
-  },
-  dot: {
-    fontSize: '32px',
-    fontWeight: '800',
-    color: '#667eea',
-    paddingTop: '20px',
-  },
-  percentSign: {
-    fontSize: '24px',
-    fontWeight: '700',
-    color: '#999',
-    paddingTop: '20px',
-  },
-  footer: {
-    display: 'flex',
-    gap: '10px',
-    padding: '16px',
-    borderTop: '1px solid #eee',
-  },
-  cancelBtn: {
-    flex: 1,
-    padding: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: '#f0f0f0',
-    color: '#666',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-  confirmBtn: {
-    flex: 2,
-    padding: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-};

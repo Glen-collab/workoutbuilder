@@ -1,80 +1,25 @@
-import React from 'react';
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '80vh',
-    padding: '40px 20px',
-  },
-  card: {
-    background: '#fff',
-    borderRadius: '16px',
-    boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
-    padding: '48px 40px',
-    maxWidth: '480px',
-    width: '100%',
-    textAlign: 'center',
-  },
-  title: {
-    fontSize: '32px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    margin: '0 0 12px 0',
-  },
-  description: {
-    fontSize: '16px',
-    color: '#666',
-    lineHeight: '1.6',
-    margin: '0 0 36px 0',
-  },
-  buttonGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '14px',
-  },
-  primaryButton: {
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    padding: '14px 28px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'opacity 0.2s',
-  },
-  secondaryButton: {
-    background: 'transparent',
-    color: '#667eea',
-    border: '2px solid #667eea',
-    borderRadius: '10px',
-    padding: '12px 28px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background 0.2s',
-  },
-};
-
 export default function WelcomeScreen({ onNewProgram, onManagePrograms }) {
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Workout Program Builder</h1>
-        <p style={styles.description}>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] px-5 py-10">
+      <div className="bg-white rounded-2xl shadow-lg px-8 py-12 max-w-md w-full text-center">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-3">
+          Workout Program Builder
+        </h1>
+        <p className="text-base text-gray-500 leading-relaxed mb-9">
           Design custom workout programs with blocks, supersets, circuits, and more.
           Build once, train for weeks.
         </p>
-        <div style={styles.buttonGroup}>
-          <button style={styles.primaryButton} onClick={onNewProgram}>
+        <div className="flex flex-col gap-3.5">
+          <button
+            className="w-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-xl py-3.5 px-7 text-base font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-90"
+            onClick={onNewProgram}
+          >
             Build New Program
           </button>
-          <button style={styles.secondaryButton} onClick={onManagePrograms}>
+          <button
+            className="w-full bg-transparent text-[#667eea] border-2 border-[#667eea] rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#667eea]/10"
+            onClick={onManagePrograms}
+          >
             Manage Programs
           </button>
         </div>

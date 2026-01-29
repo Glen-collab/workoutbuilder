@@ -1,119 +1,4 @@
-import React, { useState } from 'react';
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '40px 20px',
-    minHeight: '80vh',
-  },
-  card: {
-    background: '#fff',
-    borderRadius: '16px',
-    boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
-    padding: '36px 32px',
-    maxWidth: '520px',
-    width: '100%',
-  },
-  title: {
-    fontSize: '24px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    margin: '0 0 8px 0',
-  },
-  subtitle: {
-    fontSize: '14px',
-    color: '#888',
-    margin: '0 0 28px 0',
-  },
-  fieldGroup: {
-    marginBottom: '20px',
-  },
-  label: {
-    display: 'block',
-    fontSize: '13px',
-    fontWeight: '600',
-    color: '#444',
-    marginBottom: '6px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-  },
-  input: {
-    width: '100%',
-    padding: '10px 14px',
-    fontSize: '15px',
-    border: '1.5px solid #ddd',
-    borderRadius: '8px',
-    outline: 'none',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.2s',
-  },
-  select: {
-    width: '100%',
-    padding: '10px 14px',
-    fontSize: '15px',
-    border: '1.5px solid #ddd',
-    borderRadius: '8px',
-    outline: 'none',
-    boxSizing: 'border-box',
-    background: '#fff',
-    cursor: 'pointer',
-  },
-  radioGroup: {
-    display: 'flex',
-    gap: '10px',
-    flexWrap: 'wrap',
-  },
-  radioButton: (active) => ({
-    padding: '8px 18px',
-    fontSize: '14px',
-    fontWeight: '500',
-    borderRadius: '8px',
-    border: active ? '2px solid #667eea' : '2px solid #ddd',
-    background: active ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#fff',
-    color: active ? '#fff' : '#555',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-  }),
-  row: {
-    display: 'flex',
-    gap: '16px',
-  },
-  halfField: {
-    flex: 1,
-    marginBottom: '20px',
-  },
-  buttonRow: {
-    display: 'flex',
-    gap: '12px',
-    marginTop: '28px',
-  },
-  backButton: {
-    flex: '0 0 auto',
-    background: 'transparent',
-    color: '#667eea',
-    border: '2px solid #667eea',
-    borderRadius: '10px',
-    padding: '12px 24px',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-  },
-  submitButton: {
-    flex: 1,
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    padding: '14px 28px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-  },
-};
+import { useState } from 'react';
 
 const GOALS = [
   'Strength',
@@ -146,20 +31,26 @@ export default function ProfileSetup({ onComplete, onBack }) {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.title}>Profile Setup</h2>
-        <p style={styles.subtitle}>Tell us about yourself to customize your program.</p>
+    <div className="flex flex-col items-center px-5 py-10 min-h-[80vh]">
+      <div className="bg-white rounded-2xl shadow-lg px-8 py-9 max-w-lg w-full">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-2">
+          Profile Setup
+        </h2>
+        <p className="text-sm text-gray-400 mb-7">Tell us about yourself to customize your program.</p>
 
         {/* Gender */}
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Gender</label>
-          <div style={styles.radioGroup}>
+        <div className="mb-5">
+          <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Gender</label>
+          <div className="flex gap-2.5 flex-wrap">
             {['Male', 'Female', 'Other'].map((g) => (
               <button
                 key={g}
                 type="button"
-                style={styles.radioButton(gender === g)}
+                className={`px-4 py-2 text-sm font-medium rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                  gender === g
+                    ? 'border-[#667eea] bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white'
+                    : 'border-gray-300 bg-white text-gray-500 hover:border-gray-400'
+                }`}
                 onClick={() => setGender(g)}
               >
                 {g}
@@ -169,11 +60,11 @@ export default function ProfileSetup({ onComplete, onBack }) {
         </div>
 
         {/* Age */}
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Age</label>
+        <div className="mb-5">
+          <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Age</label>
           <input
             type="number"
-            style={styles.input}
+            className="w-full px-3.5 py-2.5 text-[15px] border-[1.5px] border-gray-300 rounded-lg outline-none transition-colors duration-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             value={age}
             onChange={(e) => setAge(e.target.value)}
             placeholder="e.g. 30"
@@ -183,9 +74,13 @@ export default function ProfileSetup({ onComplete, onBack }) {
         </div>
 
         {/* Goal */}
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Goal</label>
-          <select style={styles.select} value={goal} onChange={(e) => setGoal(e.target.value)}>
+        <div className="mb-5">
+          <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Goal</label>
+          <select
+            className="w-full px-3.5 py-2.5 text-[15px] border-[1.5px] border-gray-300 rounded-lg outline-none bg-white cursor-pointer focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+          >
             {GOALS.map((g) => (
               <option key={g} value={g}>{g}</option>
             ))}
@@ -193,14 +88,18 @@ export default function ProfileSetup({ onComplete, onBack }) {
         </div>
 
         {/* Experience */}
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Experience Level</label>
-          <div style={styles.radioGroup}>
+        <div className="mb-5">
+          <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Experience Level</label>
+          <div className="flex gap-2.5 flex-wrap">
             {EXPERIENCE_LEVELS.map((lvl) => (
               <button
                 key={lvl}
                 type="button"
-                style={styles.radioButton(experience === lvl)}
+                className={`px-4 py-2 text-sm font-medium rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                  experience === lvl
+                    ? 'border-[#667eea] bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white'
+                    : 'border-gray-300 bg-white text-gray-500 hover:border-gray-400'
+                }`}
                 onClick={() => setExperience(lvl)}
               >
                 {lvl}
@@ -210,23 +109,23 @@ export default function ProfileSetup({ onComplete, onBack }) {
         </div>
 
         {/* Days per week & Total weeks */}
-        <div style={styles.row}>
-          <div style={styles.halfField}>
-            <label style={styles.label}>Days Per Week</label>
+        <div className="flex gap-4">
+          <div className="flex-1 mb-5">
+            <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Days Per Week</label>
             <input
               type="number"
-              style={styles.input}
+              className="w-full px-3.5 py-2.5 text-[15px] border-[1.5px] border-gray-300 rounded-lg outline-none transition-colors duration-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               value={daysPerWeek}
               onChange={(e) => setDaysPerWeek(e.target.value)}
               min="1"
               max="7"
             />
           </div>
-          <div style={styles.halfField}>
-            <label style={styles.label}>Total Weeks</label>
+          <div className="flex-1 mb-5">
+            <label className="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wide">Total Weeks</label>
             <input
               type="number"
-              style={styles.input}
+              className="w-full px-3.5 py-2.5 text-[15px] border-[1.5px] border-gray-300 rounded-lg outline-none transition-colors duration-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               value={totalWeeks}
               onChange={(e) => setTotalWeeks(e.target.value)}
               min="1"
@@ -236,9 +135,19 @@ export default function ProfileSetup({ onComplete, onBack }) {
         </div>
 
         {/* Buttons */}
-        <div style={styles.buttonRow}>
-          <button style={styles.backButton} onClick={onBack}>Back</button>
-          <button style={styles.submitButton} onClick={handleSubmit}>Start Building</button>
+        <div className="flex gap-3 mt-7">
+          <button
+            className="shrink-0 bg-transparent text-[#667eea] border-2 border-[#667eea] rounded-xl py-3 px-6 text-[15px] font-semibold cursor-pointer hover:bg-[#667eea]/10 transition-colors duration-200"
+            onClick={onBack}
+          >
+            Back
+          </button>
+          <button
+            className="flex-1 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-xl py-3.5 px-7 text-base font-semibold cursor-pointer hover:opacity-90 transition-opacity duration-200"
+            onClick={handleSubmit}
+          >
+            Start Building
+          </button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useWorkoutState from './hooks/useWorkoutState';
 import useProgramAPI from './hooks/useProgramAPI';
 import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
@@ -15,6 +15,11 @@ export default function App() {
   const workoutState = useWorkoutState();
   const programAPI = useProgramAPI();
 
+  // Override mode (launched from trainer dashboard)
+  const [overrideContext, setOverrideContext] = useState(null); // { accessCode, email }
+  const [overrideLoading, setOverrideLoading] = useState(false);
+  const [overrideSaveStatus, setOverrideSaveStatus] = useState(null); // 'saved' | 'error' | null
+
   // Screen navigation
   const [screen, setScreen] = useState('welcome');
 
@@ -27,6 +32,40 @@ export default function App() {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
   const [insertPosition, setInsertPosition] = useState(null);
+
+  // ── Detect override mode from URL params ──
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const accessCode = params.get('accessCode');
+    const email = params.get('email');
+    const mode = params.get('mode');
+
+    if (accessCode && email && mode === 'override') {
+      setOverrideContext({ accessCode, email });
+      setOverrideLoading(true);
+      programAPI
+        .loadProgramByCode(accessCode, email)
+        .then((result) => {
+          if (result && result.success && result.data) {
+            const prog = result.data;
+            workoutState.loadProgram({
+              id: prog.id || prog.programId,
+              accessCode: prog.accessCode || accessCode,
+              name: prog.name || prog.programName || 'Client Program',
+              allWorkouts: prog.programData?.allWorkouts || prog.allWorkouts || {},
+              mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
+              daysPerWeek: prog.programData?.daysPerWeek || prog.daysPerWeek || 3,
+              totalWeeks: prog.programData?.totalWeeks || prog.totalWeeks || 4,
+            });
+            setScreen('builder');
+          }
+        })
+        .catch((err) => {
+          console.error('Failed to load program for override:', err);
+        })
+        .finally(() => setOverrideLoading(false));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Welcome Screen ──
   const handleBuildNew = () => setScreen('profile');
@@ -135,6 +174,92 @@ export default function App() {
     }
   };
 
+  // ── Override Save (per week/day) ──
+  const handleSaveOverride = async () => {
+    if (!overrideContext) return;
+    const week = workoutState.currentWeek;
+    const day = workoutState.currentDay;
+    const data = workoutState.getAllWorkoutsForSave();
+    const dayKey = `${week}-${day}`;
+    const workoutData = data.allWorkouts?.[dayKey] || workoutState.workoutBlocks;
+
+    try {
+      await programAPI.saveUserOverride(
+        overrideContext.accessCode,
+        overrideContext.email,
+        week,
+        day,
+        workoutData,
+        'Trainer override from builder'
+      );
+      setOverrideSaveStatus('saved');
+      setTimeout(() => setOverrideSaveStatus(null), 3000);
+    } catch {
+      setOverrideSaveStatus('error');
+      setTimeout(() => setOverrideSaveStatus(null), 4000);
+    }
+  };
+
+  const handleRevertOverride = async () => {
+    if (!overrideContext) return;
+    try {
+      await programAPI.deleteUserOverride(
+        overrideContext.accessCode,
+        overrideContext.email,
+        workoutState.currentWeek,
+        workoutState.currentDay
+      );
+      // Reload the base program day
+      const result = await programAPI.loadProgramByCode(
+        overrideContext.accessCode,
+        overrideContext.email
+      );
+      if (result?.success && result.data) {
+        const prog = result.data;
+        const allWorkouts = prog.programData?.allWorkouts || prog.allWorkouts || {};
+        const dayKey = `${workoutState.currentWeek}-${workoutState.currentDay}`;
+        workoutState.loadProgram({
+          id: prog.id,
+          accessCode: overrideContext.accessCode,
+          name: prog.name || 'Client Program',
+          allWorkouts,
+          mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
+          daysPerWeek: prog.programData?.daysPerWeek || workoutState.daysPerWeek,
+          totalWeeks: prog.programData?.totalWeeks || workoutState.totalWeeks,
+        });
+        // Navigate to same week/day
+        workoutState.switchWeek(workoutState.currentWeek);
+        workoutState.switchDay(workoutState.currentDay);
+      }
+      setOverrideSaveStatus('saved');
+      setTimeout(() => setOverrideSaveStatus(null), 3000);
+    } catch {
+      setOverrideSaveStatus('error');
+      setTimeout(() => setOverrideSaveStatus(null), 4000);
+    }
+  };
+
+  const handleGoToDashboard = () => {
+    const isLocal = window.location.hostname === 'localhost';
+    const dashboardUrl = isLocal
+      ? 'http://localhost:5175/'
+      : (window.gwbConfig?.dashboardUrl || '/trainer-dashboard/');
+    // Open in new tab so builder state is preserved
+    window.open(dashboardUrl, '_blank');
+  };
+
+  const handleExitOverrideMode = () => {
+    // Clear override context and URL params, return to normal builder
+    setOverrideContext(null);
+    setOverrideSaveStatus(null);
+    // Clean URL params without reload
+    const url = new URL(window.location);
+    url.searchParams.delete('accessCode');
+    url.searchParams.delete('email');
+    url.searchParams.delete('mode');
+    window.history.replaceState({}, '', url);
+  };
+
   // ── Manage Programs ──
   const handleOpenManage = () => setShowManageModal(true);
 
@@ -193,12 +318,24 @@ export default function App() {
         />
       )}
 
+      {overrideLoading && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '12px' }}>
+          <div style={{ width: 40, height: 40, border: '4px solid #e5e7eb', borderTopColor: '#667eea', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+          <p style={{ color: '#666', fontSize: 14 }}>Loading client program...</p>
+        </div>
+      )}
+
       {screen === 'builder' && (
         <BuilderScreen
           workoutState={builderWorkoutState}
           onBack={() => setScreen('welcome')}
-          onSave={handleOpenSave}
-          onManage={handleOpenManage}
+          onSave={overrideContext ? handleSaveOverride : handleOpenSave}
+          onManage={overrideContext ? null : handleOpenManage}
+          overrideContext={overrideContext}
+          overrideSaveStatus={overrideSaveStatus}
+          onRevertOverride={overrideContext ? handleRevertOverride : null}
+          onGoToDashboard={handleGoToDashboard}
+          onExitOverrideMode={overrideContext ? handleExitOverrideMode : null}
         />
       )}
 

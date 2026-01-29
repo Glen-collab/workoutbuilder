@@ -1,80 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from '../shared/Modal';
-
-const styles = {
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-  },
-  fieldGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-  },
-  label: {
-    fontSize: '13px',
-    fontWeight: '600',
-    color: '#ccc',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-  },
-  input: {
-    padding: '12px 14px',
-    fontSize: '15px',
-    borderRadius: '8px',
-    border: '1px solid rgba(255,255,255,0.12)',
-    background: 'rgba(255,255,255,0.06)',
-    color: '#e0e0e0',
-    outline: 'none',
-    transition: 'border-color 0.2s',
-  },
-  loadedBadge: {
-    padding: '10px 14px',
-    borderRadius: '8px',
-    background: 'rgba(102, 126, 234, 0.15)',
-    border: '1px solid rgba(102, 126, 234, 0.3)',
-    fontSize: '13px',
-    color: '#a0b4f8',
-  },
-  loadedName: {
-    fontWeight: '700',
-    color: '#c0cfff',
-  },
-  accessCode: {
-    fontSize: '12px',
-    color: '#888',
-    marginTop: '4px',
-  },
-  buttonRow: {
-    display: 'flex',
-    gap: '12px',
-    marginTop: '8px',
-  },
-  saveBtn: {
-    flex: 1,
-    padding: '14px 24px',
-    fontSize: '15px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    opacity: 1,
-    transition: 'opacity 0.2s',
-  },
-  cancelBtn: {
-    padding: '14px 24px',
-    fontSize: '15px',
-    fontWeight: '600',
-    background: 'transparent',
-    color: '#999',
-    border: '1px solid rgba(255,255,255,0.12)',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
-};
 
 export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgram, loading }) {
   const [programName, setProgramName] = useState('');
@@ -105,84 +30,72 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="480px">
-      <form style={styles.form} onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         {isUpdate && (
-          <div style={styles.loadedBadge}>
+          <div className="p-3 rounded-lg bg-[#667eea]/15 border border-[#667eea]/30 text-sm text-[#a0b4f8]">
             <div>
-              Updating: <span style={styles.loadedName}>{loadedProgram.name}</span>
+              Updating: <span className="font-bold text-[#c0cfff]">{loadedProgram.name}</span>
             </div>
-            <div style={styles.accessCode}>
+            <div className="text-xs text-gray-500 mt-1">
               Access Code: {loadedProgram.accessCode}
             </div>
           </div>
         )}
 
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Program Name *</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Program Name *</label>
           <input
-            style={styles.input}
+            className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="text"
             value={programName}
             onChange={(e) => setProgramName(e.target.value)}
             placeholder="e.g. Summer Strength Phase 1"
             required
-            onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
           />
         </div>
 
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Program Nickname</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Program Nickname</label>
           <input
-            style={styles.input}
+            className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="text"
             value={programNickname}
             onChange={(e) => setProgramNickname(e.target.value)}
             placeholder="Optional short name"
-            onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
           />
         </div>
 
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Trainer Email</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Trainer Email</label>
           <input
-            style={styles.input}
+            className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="email"
             value={trainerEmail}
             onChange={(e) => setTrainerEmail(e.target.value)}
             placeholder="trainer@email.com"
-            onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
           />
         </div>
 
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Optional CC Email</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Optional CC Email</label>
           <input
-            style={styles.input}
+            className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="email"
             value={optionalTrainerEmail}
             onChange={(e) => setOptionalTrainerEmail(e.target.value)}
             placeholder="cc@email.com"
-            onFocus={(e) => (e.target.style.borderColor = '#667eea')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
           />
         </div>
 
-        <div style={styles.buttonRow}>
+        <div className="flex gap-3 mt-2">
           <button
             type="submit"
-            style={{
-              ...styles.saveBtn,
-              opacity: loading || !programName.trim() ? 0.5 : 1,
-              cursor: loading || !programName.trim() ? 'not-allowed' : 'pointer',
-            }}
+            className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
             disabled={loading || !programName.trim()}
           >
             {loading ? 'Saving...' : isUpdate ? 'Update Program' : 'Save Program'}
           </button>
-          <button type="button" style={styles.cancelBtn} onClick={onClose}>
+          <button type="button" className="py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border border-white/[0.12] rounded-[10px] cursor-pointer hover:bg-white/[0.06] transition" onClick={onClose}>
             Cancel
           </button>
         </div>

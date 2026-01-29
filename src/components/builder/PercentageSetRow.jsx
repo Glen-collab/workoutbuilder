@@ -1,113 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { calculateWeight } from '../../utils/percentageCalc';
 import PercentagePicker from './PercentagePicker';
-
-const styles = {
-  row: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: '8px 12px',
-    borderRadius: '8px',
-    background: '#f8f9fa',
-    marginBottom: '6px',
-    flexWrap: 'wrap',
-  },
-  rowWarmup: {
-    background: '#fff9db',
-    border: '1px solid #ffd43b',
-  },
-  checkbox: {
-    width: '16px',
-    height: '16px',
-    cursor: 'pointer',
-    accentColor: '#f59f00',
-  },
-  setLabel: {
-    fontWeight: '700',
-    fontSize: '13px',
-    minWidth: '50px',
-    color: '#495057',
-  },
-  warmupLabel: {
-    color: '#e67700',
-  },
-  input: {
-    width: '56px',
-    padding: '6px 8px',
-    borderRadius: '6px',
-    border: '1px solid #dee2e6',
-    fontSize: '13px',
-    textAlign: 'center',
-    outline: 'none',
-  },
-  pctButton: {
-    padding: '6px 14px',
-    borderRadius: '8px',
-    border: '2px solid #667eea',
-    fontSize: '14px',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08))',
-    color: '#667eea',
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-    minWidth: '65px',
-    textAlign: 'center',
-  },
-  calcWeight: {
-    fontSize: '13px',
-    fontWeight: '600',
-    color: '#667eea',
-    minWidth: '70px',
-  },
-  manualInput: {
-    width: '72px',
-    padding: '6px 8px',
-    borderRadius: '6px',
-    border: '2px solid #3b82f6',
-    fontSize: '13px',
-    textAlign: 'center',
-    outline: 'none',
-    background: '#eff6ff',
-  },
-  strikethrough: {
-    fontSize: '12px',
-    color: '#adb5bd',
-    textDecoration: 'line-through',
-  },
-  arrow: {
-    fontSize: '14px',
-    color: '#495057',
-  },
-  lbs: {
-    fontSize: '12px',
-    color: '#868e96',
-  },
-  iconBtn: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '16px',
-    padding: '4px',
-    borderRadius: '4px',
-    lineHeight: 1,
-  },
-  removeBtn: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '15px',
-    padding: '4px',
-    borderRadius: '4px',
-    color: '#e03131',
-    lineHeight: 1,
-  },
-  removeBtnDisabled: {
-    opacity: 0.3,
-    cursor: 'not-allowed',
-    color: '#adb5bd',
-  },
-};
 
 export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onDuplicate, onRemove, canRemove }) {
   const [showPicker, setShowPicker] = useState(false);
@@ -121,18 +14,18 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
   };
 
   return (
-    <div style={{ ...styles.row, ...(set.isWarmup ? styles.rowWarmup : {}) }}>
+    <div className={`flex items-center gap-2 px-3 py-2 rounded-lg mb-1.5 flex-wrap ${set.isWarmup ? 'bg-amber-50 border border-amber-300' : 'bg-gray-50'}`}>
       {/* Warmup checkbox */}
       <input
         type="checkbox"
         checked={!!set.isWarmup}
         onChange={(e) => onUpdate({ isWarmup: e.target.checked })}
         title="Mark as warmup"
-        style={styles.checkbox}
+        className="w-4 h-4 cursor-pointer accent-amber-500"
       />
 
       {/* Label */}
-      <span style={{ ...styles.setLabel, ...(set.isWarmup ? styles.warmupLabel : {}) }}>
+      <span className={`font-bold text-[13px] min-w-[50px] ${set.isWarmup ? 'text-amber-600' : 'text-gray-600'}`}>
         {label}
       </span>
 
@@ -144,27 +37,27 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
         value={set.reps || ''}
         onChange={(e) => onUpdate({ reps: parseInt(e.target.value) || 0 })}
         placeholder="Reps"
-        style={styles.input}
+        className="w-14 md:w-16 px-2 py-1.5 rounded-md border border-gray-300 text-[13px] text-center outline-none"
       />
 
       {!isManual ? (
         <>
-          {/* Percentage button — opens ticker picker */}
+          {/* Percentage button */}
           <button
             onClick={() => setShowPicker(true)}
-            style={styles.pctButton}
+            className="px-3.5 py-1.5 rounded-lg border-2 border-[#667eea] text-sm font-bold bg-gradient-to-br from-[#667eea]/[0.08] to-[#764ba2]/[0.08] text-[#667eea] cursor-pointer transition-all duration-150 min-w-[65px] text-center"
             title="Tap to change percentage"
           >
             {set.percentage || 70}%
           </button>
 
           {/* Calculated weight */}
-          <span style={styles.calcWeight}>= {calcLbs} lbs</span>
+          <span className="text-[13px] font-semibold text-[#667eea] min-w-[70px]">= {calcLbs} lbs</span>
 
           {/* Unlock to manual */}
           <button
             onClick={() => onUpdate({ manualWeight: calcLbs })}
-            style={styles.iconBtn}
+            className="bg-none border-none cursor-pointer text-base p-1 rounded leading-none"
             title="Override with manual weight"
           >
             🔓
@@ -173,11 +66,11 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
       ) : (
         <>
           {/* Strikethrough original calc */}
-          <span style={styles.strikethrough}>
+          <span className="text-xs text-gray-400 line-through">
             {set.percentage}% = {calcLbs} lbs
           </span>
 
-          <span style={styles.arrow}>&rarr;</span>
+          <span className="text-sm text-gray-600">&rarr;</span>
 
           {/* Manual weight input */}
           <input
@@ -185,14 +78,14 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
             step={5}
             value={set.manualWeight || ''}
             onChange={(e) => onUpdate({ manualWeight: parseFloat(e.target.value) || 0 })}
-            style={styles.manualInput}
+            className="w-[72px] md:w-20 px-2 py-1.5 rounded-md border-2 border-blue-500 text-[13px] text-center outline-none bg-blue-50"
           />
-          <span style={styles.lbs}>lbs</span>
+          <span className="text-xs text-gray-400">lbs</span>
 
           {/* Lock to return to percentage */}
           <button
             onClick={() => onUpdate({ manualWeight: null })}
-            style={styles.iconBtn}
+            className="bg-none border-none cursor-pointer text-base p-1 rounded leading-none"
             title="Return to percentage mode"
           >
             🔒
@@ -201,17 +94,14 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
       )}
 
       {/* Duplicate */}
-      <button onClick={onDuplicate} style={styles.iconBtn} title="Duplicate set">
+      <button onClick={onDuplicate} className="bg-none border-none cursor-pointer text-base p-1 rounded leading-none" title="Duplicate set">
         📋
       </button>
 
       {/* Remove */}
       <button
         onClick={canRemove ? onRemove : undefined}
-        style={{
-          ...styles.removeBtn,
-          ...(canRemove ? {} : styles.removeBtnDisabled),
-        }}
+        className={`bg-none border-none cursor-pointer text-[15px] p-1 rounded leading-none ${canRemove ? 'text-red-600' : 'opacity-30 cursor-not-allowed text-gray-400'}`}
         disabled={!canRemove}
         title="Remove set"
       >

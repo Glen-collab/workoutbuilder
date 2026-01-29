@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CIRCUIT_TYPES = [
   { key: 'amrap', label: 'AMRAP', desc: 'As Many Rounds As Possible' },
   { key: 'fortime', label: 'For Time', desc: 'Complete as fast as possible' },
@@ -9,99 +7,37 @@ const CIRCUIT_TYPES = [
   { key: 'rounds', label: 'Rounds', desc: 'Specific number of rounds' },
 ];
 
-const styles = {
-  overlay: {
-    position: 'fixed',
-    inset: 0,
-    background: 'rgba(0,0,0,0.45)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000,
-  },
-  modal: {
-    background: '#fff',
-    borderRadius: '16px',
-    boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
-    padding: '28px 24px',
-    maxWidth: '440px',
-    width: '92%',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '20px',
-  },
-  title: {
-    fontSize: '20px',
-    fontWeight: '700',
-    color: '#333',
-    margin: 0,
-  },
-  closeBtn: {
-    background: 'none',
-    border: 'none',
-    fontSize: '22px',
-    color: '#999',
-    cursor: 'pointer',
-    padding: '4px 8px',
-  },
-  list: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
-  option: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '14px 16px',
-    borderRadius: '10px',
-    border: '1.5px solid #eee',
-    background: '#fafafa',
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-  },
-  optionLabel: {
-    fontSize: '15px',
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: '2px',
-  },
-  optionDesc: {
-    fontSize: '13px',
-    color: '#888',
-  },
-};
-
 export default function CircuitTypeSelector({ isOpen, onClose, onSelect }) {
   if (!isOpen) return null;
 
   return (
-    <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div style={styles.header}>
-          <h3 style={styles.title}>Select Circuit Type</h3>
-          <button style={styles.closeBtn} onClick={onClose}>&times;</button>
+    <div
+      className="fixed inset-0 bg-black/45 flex items-center justify-center z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl shadow-2xl p-6 sm:p-7 max-w-[440px] w-[92%]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-5">
+          <h3 className="text-xl font-bold text-gray-800">Select Circuit Type</h3>
+          <button
+            className="bg-transparent border-none text-2xl text-gray-400 cursor-pointer px-2 py-1 hover:text-gray-600"
+            onClick={onClose}
+          >
+            &times;
+          </button>
         </div>
 
-        <div style={styles.list}>
+        <div className="flex flex-col gap-2.5">
           {CIRCUIT_TYPES.map((ct) => (
             <div
               key={ct.key}
-              style={styles.option}
+              className="flex flex-col py-3.5 px-4 rounded-xl border border-gray-200 bg-gray-50 cursor-pointer transition-all hover:border-[#667eea] hover:bg-indigo-50"
               onClick={() => onSelect(ct.key)}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#667eea';
-                e.currentTarget.style.background = '#f0f0ff';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#eee';
-                e.currentTarget.style.background = '#fafafa';
-              }}
             >
-              <span style={styles.optionLabel}>{ct.label}</span>
-              <span style={styles.optionDesc}>{ct.desc}</span>
+              <span className="text-[15px] font-bold text-gray-800 mb-0.5">{ct.label}</span>
+              <span className="text-[13px] text-gray-500">{ct.desc}</span>
             </div>
           ))}
         </div>

@@ -1,69 +1,4 @@
-import React, { useEffect } from 'react';
-
-const overlayStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: 10000,
-  padding: '20px',
-};
-
-const containerStyle = (maxWidth) => ({
-  background: '#1e1e2f',
-  borderRadius: '12px',
-  width: '100%',
-  maxWidth,
-  maxHeight: '90vh',
-  overflow: 'hidden',
-  display: 'flex',
-  flexDirection: 'column',
-  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
-  border: '1px solid rgba(255, 255, 255, 0.08)',
-});
-
-const headerStyle = {
-  background: 'linear-gradient(135deg, #6c5ce7, #4a90d9)',
-  padding: '16px 20px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  borderRadius: '12px 12px 0 0',
-};
-
-const titleStyle = {
-  color: '#fff',
-  fontSize: '18px',
-  fontWeight: '700',
-  margin: 0,
-};
-
-const closeBtnStyle = {
-  background: 'rgba(255, 255, 255, 0.15)',
-  border: 'none',
-  color: '#fff',
-  fontSize: '20px',
-  width: '32px',
-  height: '32px',
-  borderRadius: '8px',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  lineHeight: 1,
-};
-
-const bodyStyle = {
-  padding: '20px',
-  overflowY: 'auto',
-  flex: 1,
-  color: '#e0e0e0',
-};
+import { useEffect } from 'react';
 
 export default function Modal({ isOpen, onClose, title, children, maxWidth = '600px' }) {
   useEffect(() => {
@@ -78,15 +13,19 @@ export default function Modal({ isOpen, onClose, title, children, maxWidth = '60
   if (!isOpen) return null;
 
   return (
-    <div style={overlayStyle} onClick={onClose}>
-      <div style={containerStyle(maxWidth)} onClick={(e) => e.stopPropagation()}>
-        <div style={headerStyle}>
-          <h2 style={titleStyle}>{title}</h2>
-          <button style={closeBtnStyle} onClick={onClose} title="Close">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[10000] p-5" onClick={onClose}>
+      <div
+        className="bg-[#1e1e2f] rounded-xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-white/[0.08]"
+        style={{ maxWidth }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-gradient-to-br from-[#6c5ce7] to-[#4a90d9] px-5 py-4 flex items-center justify-between rounded-t-xl">
+          <h2 className="text-white text-lg font-bold m-0">{title}</h2>
+          <button className="bg-white/15 border-none text-white text-xl w-8 h-8 rounded-lg cursor-pointer flex items-center justify-center leading-none hover:bg-white/25 transition" onClick={onClose} title="Close">
             &times;
           </button>
         </div>
-        <div style={bodyStyle}>{children}</div>
+        <div className="p-5 overflow-y-auto flex-1 text-gray-200">{children}</div>
       </div>
     </div>
   );

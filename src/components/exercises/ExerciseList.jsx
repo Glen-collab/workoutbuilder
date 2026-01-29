@@ -1,126 +1,45 @@
-import React from 'react';
-
-const styles = {
-  container: {
-    padding: '16px',
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    marginBottom: '16px',
-  },
-  backButton: {
-    background: 'none',
-    border: 'none',
-    fontSize: '20px',
-    cursor: 'pointer',
-    color: '#667eea',
-    padding: '4px 8px',
-    borderRadius: '6px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: '18px',
-    fontWeight: '700',
-    color: '#333',
-    margin: 0,
-  },
-  list: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-    maxHeight: '400px',
-    overflowY: 'auto',
-  },
-  item: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '14px 16px',
-    background: '#ffffff',
-    border: 'none',
-    borderRadius: '10px',
-    boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
-    cursor: 'pointer',
-    textAlign: 'left',
-    width: '100%',
-    transition: 'all 0.15s',
-  },
-  itemContent: {
-    flex: 1,
-  },
-  name: {
-    fontSize: '15px',
-    fontWeight: '600',
-    color: '#333',
-    margin: 0,
-  },
-  description: {
-    fontSize: '12px',
-    color: '#888',
-    margin: '4px 0 0 0',
-  },
-  youtube: {
-    fontSize: '18px',
-    marginLeft: '10px',
-    flexShrink: 0,
-  },
-};
-
 export default function ExerciseList({ exercises, onSelect, onBack, title }) {
   if (!exercises || exercises.length === 0) {
     return (
-      <div style={styles.container}>
-        <div style={styles.header}>
+      <div className="p-4">
+        <div className="flex items-center gap-3 mb-4">
           {onBack && (
-            <button style={styles.backButton} onClick={onBack}>←</button>
+            <button className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition" onClick={onBack}>←</button>
           )}
-          <h3 style={styles.title}>{title || 'Exercises'}</h3>
+          <h3 className="text-lg font-bold text-gray-700 m-0">{title || 'Exercises'}</h3>
         </div>
-        <p style={{ color: '#888', textAlign: 'center', padding: '20px' }}>No exercises found.</p>
+        <p className="text-gray-400 text-center py-5">No exercises found.</p>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <div className="p-4">
+      <div className="flex items-center gap-3 mb-4">
         {onBack && (
           <button
-            style={styles.backButton}
+            className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition"
             onClick={onBack}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#f0f0f0')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
           >
             ←
           </button>
         )}
-        <h3 style={styles.title}>{title || 'Exercises'}</h3>
+        <h3 className="text-lg font-bold text-gray-700 m-0">{title || 'Exercises'}</h3>
       </div>
-      <div style={styles.list}>
+      <div className="flex flex-col gap-2 max-h-[400px] overflow-y-auto">
         {exercises.map((exercise, idx) => (
           <button
             key={exercise.name + idx}
-            style={styles.item}
+            className="flex items-center justify-between py-3.5 px-4 bg-white border-none rounded-[10px] shadow-sm cursor-pointer text-left w-full transition-all duration-150 hover:bg-purple-50 hover:shadow-md"
             onClick={() => onSelect(exercise)}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#f7f5ff';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(102,126,234,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#ffffff';
-              e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
-            }}
           >
-            <div style={styles.itemContent}>
-              <p style={styles.name}>{exercise.name}</p>
+            <div className="flex-1">
+              <p className="text-[15px] font-semibold text-gray-700 m-0">{exercise.name}</p>
               {exercise.description && (
-                <p style={styles.description}>{exercise.description}</p>
+                <p className="text-xs text-gray-400 mt-1 mb-0">{exercise.description}</p>
               )}
             </div>
-            {exercise.youtube && <span style={styles.youtube}>🎥</span>}
+            {exercise.youtube && <span className="text-lg ml-2.5 shrink-0">🎥</span>}
           </button>
         ))}
       </div>

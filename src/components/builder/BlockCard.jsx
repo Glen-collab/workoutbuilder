@@ -1,4 +1,3 @@
-import React from 'react';
 import ExerciseRow from './ExerciseRow';
 
 function getBlockIcon(type) {
@@ -30,122 +29,6 @@ const blockColors = {
   theme: '#95a5a6',
 };
 
-const styles = {
-  card: {
-    background: '#fff',
-    borderRadius: '12px',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-    marginBottom: '16px',
-    overflow: 'hidden',
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '12px 16px',
-    color: '#fff',
-    cursor: 'pointer',
-  },
-  headerLeft: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    fontSize: '15px',
-    fontWeight: '700',
-  },
-  headerRight: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-  },
-  headerBtn: {
-    background: 'rgba(255,255,255,0.2)',
-    border: 'none',
-    color: '#fff',
-    borderRadius: '6px',
-    padding: '5px 10px',
-    fontSize: '13px',
-    cursor: 'pointer',
-    fontWeight: '600',
-  },
-  deleteBtn: {
-    background: 'rgba(255,255,255,0.25)',
-    border: 'none',
-    color: '#fff',
-    borderRadius: '6px',
-    padding: '5px 10px',
-    fontSize: '14px',
-    cursor: 'pointer',
-  },
-  collapseIcon: {
-    fontSize: '12px',
-    marginRight: '4px',
-  },
-  body: {
-    padding: '16px',
-  },
-  textarea: {
-    width: '100%',
-    minHeight: '70px',
-    padding: '10px 12px',
-    borderRadius: '8px',
-    border: '1px solid #dee2e6',
-    fontSize: '14px',
-    fontFamily: 'inherit',
-    resize: 'vertical',
-    outline: 'none',
-    boxSizing: 'border-box',
-  },
-  circuitConfig: {
-    display: 'flex',
-    gap: '12px',
-    flexWrap: 'wrap',
-    marginBottom: '14px',
-  },
-  configField: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '3px',
-  },
-  configLabel: {
-    fontSize: '11px',
-    color: '#868e96',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-  configInput: {
-    width: '80px',
-    padding: '7px 8px',
-    borderRadius: '6px',
-    border: '1px solid #dee2e6',
-    fontSize: '13px',
-    outline: 'none',
-  },
-  addExBtn: {
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    padding: '10px 18px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    marginTop: '10px',
-  },
-  addExBtnDisabled: {
-    opacity: 0.4,
-    cursor: 'not-allowed',
-  },
-  notesLabel: {
-    fontSize: '12px',
-    fontWeight: '600',
-    color: '#868e96',
-    marginTop: '14px',
-    marginBottom: '4px',
-    textTransform: 'uppercase',
-  },
-};
-
 export default function BlockCard({
   block,
   onDelete,
@@ -168,73 +51,74 @@ export default function BlockCard({
   const canAdd = exercises.length < maxEx && block.type !== 'theme';
 
   return (
-    <div style={styles.card}>
-      {/* Header */}
+    <div className="bg-white rounded-xl shadow-md mb-4 overflow-hidden">
+      {/* Header — dynamic color requires inline style for background */}
       <div
-        style={{ ...styles.header, background: color }}
+        className="flex items-center justify-between px-4 py-3 text-white cursor-pointer"
+        style={{ background: color }}
         onClick={() => onToggleCollapse(block.id)}
       >
-        <div style={styles.headerLeft}>
-          <span style={styles.collapseIcon}>{block.collapsed ? '▶' : '▼'}</span>
+        <div className="flex items-center gap-2.5 text-[15px] font-bold">
+          <span className="text-xs mr-1">{block.collapsed ? '▶' : '▼'}</span>
           <span>{getBlockIcon(block.type)}</span>
           <span>{getBlockTypeName(block.type)}</span>
         </div>
-        <div style={styles.headerRight} onClick={(e) => e.stopPropagation()}>
-          <button style={styles.headerBtn} onClick={() => onInsertAbove(block.id)} title="Insert block above">↑+</button>
-          <button style={styles.headerBtn} onClick={() => onInsertBelow(block.id)} title="Insert block below">↓+</button>
-          <button style={styles.deleteBtn} onClick={() => onDelete(block.id)} title="Delete block">🗑</button>
+        <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+          <button className="bg-white/20 border-none text-white rounded-md px-2.5 py-1 text-[13px] cursor-pointer font-semibold" onClick={() => onInsertAbove(block.id)} title="Insert block above">↑+</button>
+          <button className="bg-white/20 border-none text-white rounded-md px-2.5 py-1 text-[13px] cursor-pointer font-semibold" onClick={() => onInsertBelow(block.id)} title="Insert block below">↓+</button>
+          <button className="bg-white/25 border-none text-white rounded-md px-2.5 py-1 text-sm cursor-pointer" onClick={() => onDelete(block.id)} title="Delete block">🗑</button>
         </div>
       </div>
 
       {/* Body */}
       {!block.collapsed && (
-        <div style={styles.body}>
+        <div className="p-4">
           {/* Theme block: just a textarea */}
           {block.type === 'theme' && (
             <textarea
               value={block.themeText || ''}
               onChange={(e) => onUpdateBlock(block.id, { themeText: e.target.value })}
               placeholder="Enter theme, focus, or notes for this section..."
-              style={styles.textarea}
+              className="w-full min-h-[70px] px-3 py-2.5 rounded-lg border border-gray-300 text-sm font-[inherit] resize-y outline-none box-border"
             />
           )}
 
           {/* Circuit config */}
           {block.type === 'circuit' && (
-            <div style={styles.circuitConfig}>
+            <div className="flex gap-3 flex-wrap mb-3.5">
               {(block.circuitType === 'rounds' || block.circuitType === 'amrap' || !block.circuitType) && (
-                <div style={styles.configField}>
-                  <span style={styles.configLabel}>Rounds</span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[11px] text-gray-400 font-semibold uppercase">Rounds</span>
                   <input
                     type="number"
                     min={1}
                     value={block.rounds || ''}
                     onChange={(e) => onUpdateBlock(block.id, { rounds: parseInt(e.target.value) || 0 })}
                     placeholder="3"
-                    style={styles.configInput}
+                    className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
                   />
                 </div>
               )}
               {(block.circuitType === 'amrap' || block.circuitType === 'forTime') && (
-                <div style={styles.configField}>
-                  <span style={styles.configLabel}>Time Limit</span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[11px] text-gray-400 font-semibold uppercase">Time Limit</span>
                   <input
                     type="text"
                     value={block.timeLimit || ''}
                     onChange={(e) => onUpdateBlock(block.id, { timeLimit: e.target.value })}
                     placeholder="12 min"
-                    style={styles.configInput}
+                    className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
                   />
                 </div>
               )}
-              <div style={styles.configField}>
-                <span style={styles.configLabel}>Rest Between Rounds</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="text-[11px] text-gray-400 font-semibold uppercase">Rest Between Rounds</span>
                 <input
                   type="text"
                   value={block.restBetweenRounds || ''}
                   onChange={(e) => onUpdateBlock(block.id, { restBetweenRounds: e.target.value })}
                   placeholder="60s"
-                  style={styles.configInput}
+                  className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
                 />
               </div>
             </div>
@@ -261,7 +145,7 @@ export default function BlockCard({
           {block.type !== 'theme' && (
             <button
               onClick={canAdd ? () => onAddExercise(block.id, block.type) : undefined}
-              style={{ ...styles.addExBtn, ...(canAdd ? {} : styles.addExBtnDisabled) }}
+              className={`bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg px-4.5 py-2.5 text-sm font-semibold cursor-pointer mt-2.5 ${!canAdd ? 'opacity-40 cursor-not-allowed' : ''}`}
               disabled={!canAdd}
             >
               + Add Exercise {maxEx < 999 ? `(${exercises.length}/${maxEx})` : ''}
@@ -271,12 +155,12 @@ export default function BlockCard({
           {/* Notes */}
           {block.type !== 'theme' && (
             <>
-              <div style={styles.notesLabel}>Notes</div>
+              <div className="text-xs font-semibold text-gray-400 mt-3.5 mb-1 uppercase">Notes</div>
               <textarea
                 value={block.notes || ''}
                 onChange={(e) => onUpdateBlock(block.id, { notes: e.target.value })}
                 placeholder="Block notes..."
-                style={{ ...styles.textarea, minHeight: '50px' }}
+                className="w-full min-h-[50px] px-3 py-2.5 rounded-lg border border-gray-300 text-sm font-[inherit] resize-y outline-none box-border"
               />
             </>
           )}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const muscleGroups = [
   { key: 'chest', emoji: '🏋️', label: 'Chest' },
   { key: 'back', emoji: '🔙', label: 'Back' },
@@ -13,57 +11,17 @@ const muscleGroups = [
   { key: 'first_responder', emoji: '🚒', label: 'First Responder' },
 ];
 
-const styles = {
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '12px',
-    padding: '16px',
-  },
-  button: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20px 12px',
-    background: '#ffffff',
-    border: 'none',
-    borderRadius: '12px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-    cursor: 'pointer',
-    transition: 'transform 0.15s, box-shadow 0.15s',
-    minHeight: '90px',
-  },
-  emoji: {
-    fontSize: '28px',
-    marginBottom: '8px',
-  },
-  label: {
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#333',
-  },
-};
-
 export default function MuscleGroupGrid({ onSelect }) {
   return (
-    <div style={styles.grid}>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4">
       {muscleGroups.map((mg) => (
         <button
           key={mg.key}
-          style={styles.button}
+          className="flex flex-col items-center justify-center py-5 px-3 bg-white border-none rounded-xl shadow-sm cursor-pointer transition-all duration-150 min-h-[90px] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#667eea]/30"
           onClick={() => onSelect(mg.key)}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 4px 14px rgba(102,126,234,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-          }}
         >
-          <span style={styles.emoji}>{mg.emoji}</span>
-          <span style={styles.label}>{mg.label}</span>
+          <span className="text-[28px] mb-2">{mg.emoji}</span>
+          <span className="text-sm font-semibold text-gray-700">{mg.label}</span>
         </button>
       ))}
     </div>

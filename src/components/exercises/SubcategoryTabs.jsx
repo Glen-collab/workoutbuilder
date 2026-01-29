@@ -1,53 +1,3 @@
-import React from 'react';
-
-const styles = {
-  container: {
-    padding: '16px',
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    marginBottom: '16px',
-  },
-  backButton: {
-    background: 'none',
-    border: 'none',
-    fontSize: '20px',
-    cursor: 'pointer',
-    color: '#667eea',
-    padding: '4px 8px',
-    borderRadius: '6px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: '18px',
-    fontWeight: '700',
-    color: '#333',
-    margin: 0,
-    textTransform: 'capitalize',
-  },
-  tabsWrap: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '10px',
-  },
-  tab: {
-    padding: '12px 20px',
-    background: '#ffffff',
-    border: '2px solid #e8e8e8',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#555',
-    boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
-    transition: 'all 0.15s',
-    textTransform: 'capitalize',
-  },
-};
-
 export default function SubcategoryTabs({ muscleGroup, exerciseCategories, onSelectSubcategory, onBack }) {
   const category = exerciseCategories[muscleGroup];
   if (!category || !category.subcategories) return null;
@@ -55,34 +5,22 @@ export default function SubcategoryTabs({ muscleGroup, exerciseCategories, onSel
   const subcategoryKeys = Object.keys(category.subcategories);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <div className="p-4">
+      <div className="flex items-center gap-3 mb-4">
         <button
-          style={styles.backButton}
+          className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition"
           onClick={onBack}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#f0f0f0')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
         >
           ←
         </button>
-        <h3 style={styles.title}>{muscleGroup.replace(/_/g, ' ')}</h3>
+        <h3 className="text-lg font-bold text-gray-700 m-0 capitalize">{muscleGroup.replace(/_/g, ' ')}</h3>
       </div>
-      <div style={styles.tabsWrap}>
+      <div className="flex flex-wrap gap-2.5">
         {subcategoryKeys.map((key) => (
           <button
             key={key}
-            style={styles.tab}
+            className="py-3 px-5 bg-white border-2 border-gray-200 rounded-[10px] cursor-pointer text-sm font-semibold text-gray-600 shadow-sm transition-all duration-150 capitalize hover:border-[#667eea] hover:text-[#667eea] hover:shadow-md"
             onClick={() => onSelectSubcategory(key)}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#667eea';
-              e.currentTarget.style.color = '#667eea';
-              e.currentTarget.style.boxShadow = '0 3px 10px rgba(102,126,234,0.2)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#e8e8e8';
-              e.currentTarget.style.color = '#555';
-              e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.06)';
-            }}
           >
             {key.replace(/_/g, ' ')}
           </button>

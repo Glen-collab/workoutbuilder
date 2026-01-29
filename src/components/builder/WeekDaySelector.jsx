@@ -1,87 +1,4 @@
-import React, { useState } from 'react';
-
-const styles = {
-  container: {
-    position: 'sticky',
-    top: 0,
-    zIndex: 100,
-    background: '#fff',
-    borderRadius: '12px',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-    padding: '14px 18px',
-    marginBottom: '20px',
-  },
-  topRow: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: '12px',
-    flexWrap: 'wrap',
-    gap: '10px',
-  },
-  weekSelect: {
-    padding: '8px 14px',
-    fontSize: '14px',
-    fontWeight: '600',
-    border: '1.5px solid #ddd',
-    borderRadius: '8px',
-    background: '#fff',
-    cursor: 'pointer',
-    outline: 'none',
-  },
-  copyDropdownWrapper: {
-    position: 'relative',
-  },
-  copyButton: {
-    padding: '8px 16px',
-    fontSize: '13px',
-    fontWeight: '600',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-  },
-  copyMenu: {
-    position: 'absolute',
-    top: '100%',
-    right: 0,
-    marginTop: '4px',
-    background: '#fff',
-    borderRadius: '10px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-    minWidth: '240px',
-    overflow: 'hidden',
-    zIndex: 200,
-  },
-  copyMenuItem: {
-    display: 'block',
-    width: '100%',
-    padding: '10px 16px',
-    fontSize: '14px',
-    color: '#333',
-    background: 'none',
-    border: 'none',
-    textAlign: 'left',
-    cursor: 'pointer',
-  },
-  dayRow: {
-    display: 'flex',
-    gap: '8px',
-    flexWrap: 'wrap',
-  },
-  dayButton: (active) => ({
-    padding: '8px 16px',
-    fontSize: '13px',
-    fontWeight: '600',
-    borderRadius: '8px',
-    border: active ? 'none' : '1.5px solid #ddd',
-    background: active ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#fff',
-    color: active ? '#fff' : '#555',
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-  }),
-};
+import { useState } from 'react';
 
 export default function WeekDaySelector({
   currentWeek,
@@ -107,10 +24,10 @@ export default function WeekDaySelector({
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.topRow}>
+    <div className="sticky top-0 z-[100] bg-white rounded-xl shadow-md p-3.5 mb-5">
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2.5">
         <select
-          style={styles.weekSelect}
+          className="px-3.5 py-2 text-sm font-semibold border-[1.5px] border-gray-300 rounded-lg bg-white cursor-pointer outline-none"
           value={currentWeek}
           onChange={(e) => onSwitchWeek(parseInt(e.target.value, 10))}
         >
@@ -122,50 +39,42 @@ export default function WeekDaySelector({
         </select>
 
         {remainingWeeks > 0 && (
-          <div style={styles.copyDropdownWrapper}>
+          <div className="relative">
             <button
-              style={styles.copyButton}
+              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
               onClick={() => setCopyMenuOpen(!copyMenuOpen)}
             >
               Copy Week ▾
             </button>
             {copyMenuOpen && (
-              <div style={styles.copyMenu}>
+              <div className="absolute top-full right-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[240px] overflow-hidden z-[200]">
                 {remainingWeeks >= 1 && (
                   <button
-                    style={styles.copyMenuItem}
+                    className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                     onClick={() => handleCopy(1)}
-                    onMouseEnter={(e) => (e.target.style.background = '#f5f5ff')}
-                    onMouseLeave={(e) => (e.target.style.background = 'none')}
                   >
                     Copy to Next Week
                   </button>
                 )}
                 {remainingWeeks >= 2 && (
                   <button
-                    style={styles.copyMenuItem}
+                    className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                     onClick={() => handleCopy(2)}
-                    onMouseEnter={(e) => (e.target.style.background = '#f5f5ff')}
-                    onMouseLeave={(e) => (e.target.style.background = 'none')}
                   >
                     Copy to Next 2 Weeks
                   </button>
                 )}
                 {remainingWeeks >= 3 && (
                   <button
-                    style={styles.copyMenuItem}
+                    className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                     onClick={() => handleCopy(3)}
-                    onMouseEnter={(e) => (e.target.style.background = '#f5f5ff')}
-                    onMouseLeave={(e) => (e.target.style.background = 'none')}
                   >
                     Copy to Next 3 Weeks
                   </button>
                 )}
                 <button
-                  style={{ ...styles.copyMenuItem, fontWeight: '600', color: '#667eea' }}
+                  className="block w-full px-4 py-2.5 text-sm font-semibold text-[#667eea] bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                   onClick={() => handleCopy('all')}
-                  onMouseEnter={(e) => (e.target.style.background = '#f5f5ff')}
-                  onMouseLeave={(e) => (e.target.style.background = 'none')}
                 >
                   Copy to All Remaining Weeks
                 </button>
@@ -175,11 +84,15 @@ export default function WeekDaySelector({
         )}
       </div>
 
-      <div style={styles.dayRow}>
+      <div className="flex gap-2 flex-wrap">
         {Array.from({ length: daysPerWeek }, (_, i) => (
           <button
             key={i + 1}
-            style={styles.dayButton(currentDay === i + 1)}
+            className={`px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer transition-all duration-150 ${
+              currentDay === i + 1
+                ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none'
+                : 'bg-white border-[1.5px] border-gray-300 text-gray-600 hover:border-purple-300'
+            }`}
             onClick={() => onSwitchDay(i + 1)}
           >
             Day {i + 1}
