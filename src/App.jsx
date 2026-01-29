@@ -185,19 +185,22 @@ export default function App() {
         setSavedAccessCode(workoutState.loadedProgram.accessCode);
       } else {
         const result = await programAPI.saveProgram(payload);
-        if (result && result.programId) {
+        const programId = result?.programId || result?.data?.programId;
+        const accessCode = result?.accessCode || result?.data?.accessCode;
+        if (programId) {
           workoutState.loadProgram({
-            id: result.programId,
-            accessCode: result.accessCode,
+            id: programId,
+            accessCode: accessCode,
             name: programInfo.programName,
             ...data,
           });
           setShowSaveModal(false);
-          setSavedAccessCode(result.accessCode);
+          setSavedAccessCode(accessCode);
         }
       }
-    } catch {
-      // Error is handled by the hook and displayed via programAPI.error
+    } catch (err) {
+      console.error('Save failed:', err);
+      alert('Save failed: ' + (err.message || 'Unknown error'));
     }
   };
 
