@@ -53,7 +53,7 @@ export default function WeekDaySelector({
                     className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                     onClick={() => handleCopy(1)}
                   >
-                    Copy to Next Week
+                    Copy This Day to Next Week
                   </button>
                 )}
                 {remainingWeeks >= 2 && (
@@ -69,14 +69,14 @@ export default function WeekDaySelector({
                     className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                     onClick={() => handleCopy(3)}
                   >
-                    Copy to Next 3 Weeks
+                    Copy This Day to Next 3 Weeks
                   </button>
                 )}
                 <button
                   className="block w-full px-4 py-2.5 text-sm font-semibold text-[#667eea] bg-none border-none text-left cursor-pointer hover:bg-purple-50"
                   onClick={() => handleCopy('all')}
                 >
-                  Copy to All Remaining Weeks
+                  Copy This Day to All Weeks
                 </button>
               </div>
             )}

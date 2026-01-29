@@ -3,10 +3,12 @@ import { useState, useCallback } from 'react';
 const isLocal = () => window.location.hostname === 'localhost';
 
 function getApiBase() {
-  return (
-    (typeof window !== 'undefined' && window.gwbConfig?.apiBase) ||
-    'https://bestrongagain.com/workout-programs/api/general/'
-  );
+  // WordPress provides gwbConfig.apiBase
+  if (typeof window !== 'undefined' && window.gwbConfig?.apiBase) {
+    return window.gwbConfig.apiBase;
+  }
+  // On Netlify, use proxy to avoid CORS
+  return '/api/';
 }
 
 export default function useProgramAPI() {

@@ -213,38 +213,36 @@ export default function useWorkoutState() {
     saveCurrent();
     setAllWorkouts((prev) => {
       const updated = { ...prev, [getWorkoutKey()]: [...workoutBlocksRef.current] };
+      // Only copy the CURRENT DAY to the same day in the next N weeks
+      const srcKey = `${currentWeekRef.current}-${currentDayRef.current}`;
       for (let n = 1; n <= numberOfWeeks; n++) {
         const targetWeek = currentWeekRef.current + n;
         if (targetWeek > totalWeeks) break;
-        for (let d = 1; d <= daysPerWeek; d++) {
-          const srcKey = `${currentWeekRef.current}-${d}`;
-          const destKey = `${targetWeek}-${d}`;
-          if (updated[srcKey]) {
-            updated[destKey] = JSON.parse(JSON.stringify(updated[srcKey]));
-          }
+        const destKey = `${targetWeek}-${currentDayRef.current}`;
+        if (updated[srcKey]) {
+          updated[destKey] = JSON.parse(JSON.stringify(updated[srcKey]));
         }
       }
       return updated;
     });
-  }, [saveCurrent, getWorkoutKey, totalWeeks, daysPerWeek]);
+  }, [saveCurrent, getWorkoutKey, totalWeeks]);
 
   const copyWeekToAll = useCallback(() => {
     saveCurrent();
     setAllWorkouts((prev) => {
       const updated = { ...prev, [getWorkoutKey()]: [...workoutBlocksRef.current] };
+      // Only copy the CURRENT DAY to the same day in all other weeks
+      const srcKey = `${currentWeekRef.current}-${currentDayRef.current}`;
       for (let w = 1; w <= totalWeeks; w++) {
         if (w === currentWeekRef.current) continue;
-        for (let d = 1; d <= daysPerWeek; d++) {
-          const srcKey = `${currentWeekRef.current}-${d}`;
-          const destKey = `${w}-${d}`;
-          if (updated[srcKey]) {
-            updated[destKey] = JSON.parse(JSON.stringify(updated[srcKey]));
-          }
+        const destKey = `${w}-${currentDayRef.current}`;
+        if (updated[srcKey]) {
+          updated[destKey] = JSON.parse(JSON.stringify(updated[srcKey]));
         }
       }
       return updated;
     });
-  }, [saveCurrent, getWorkoutKey, totalWeeks, daysPerWeek]);
+  }, [saveCurrent, getWorkoutKey, totalWeeks]);
 
   const setDaysPerWeek = useCallback((n) => {
     setDaysPerWeekState(n);
