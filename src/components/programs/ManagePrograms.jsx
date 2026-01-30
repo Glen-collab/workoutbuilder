@@ -12,7 +12,7 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
     if (!email.trim()) return;
     try {
       const result = await listPrograms(email.trim());
-      setPrograms(result.programs || []);
+      setPrograms(result?.data?.programs || result?.programs || []);
       setSearched(true);
     } catch {
       setSearched(true);

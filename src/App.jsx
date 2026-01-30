@@ -301,7 +301,17 @@ export default function App() {
   const handleOpenManage = () => setShowManageModal(true);
 
   const handleLoadProgram = (program) => {
-    workoutState.loadProgram(program);
+    // Unwrap programData from API response into the shape loadProgram expects
+    const pd = program.programData || {};
+    workoutState.loadProgram({
+      id: program.id,
+      accessCode: program.accessCode,
+      name: program.name || program.programName,
+      allWorkouts: pd.allWorkouts || program.allWorkouts || {},
+      mainMaxes: pd.mainMaxes || program.mainMaxes,
+      daysPerWeek: pd.daysPerWeek || program.daysPerWeek,
+      totalWeeks: pd.totalWeeks || program.totalWeeks,
+    });
     setShowManageModal(false);
     setScreen('builder');
   };
