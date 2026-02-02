@@ -8,6 +8,7 @@ const BLOCK_TYPES = [
   { key: 'triset', icon: '\ud83d\udd01', label: 'Triset' },
   { key: 'circuit', icon: '\ud83c\udfaf', label: 'Circuit / MetCon' },
   { key: 'conditioning', icon: '\ud83c\udfc3', label: 'Conditioning' },
+  { key: 'cooldown', icon: '\u2744\ufe0f', label: 'Cool Down' },
 ];
 
 export default function BlockTypeSelector({ isOpen, onClose, onSelect, insertPosition }) {

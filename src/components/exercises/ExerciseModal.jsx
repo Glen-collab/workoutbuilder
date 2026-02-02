@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { exerciseCategories } from '../../data/exerciseLibrary';
-import { warmupCategories } from '../../data/warmupExercises';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
 import MuscleGroupGrid from './MuscleGroupGrid';
@@ -9,6 +8,7 @@ import ExerciseList from './ExerciseList';
 import MovementCategoryList from './MovementCategoryList';
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
+const warmupCooldownTypes = ['warmup', 'cooldown'];
 
 const VIRTUAL_CATEGORIES = { functional: 'functional', corrective: 'corrective' };
 const REDIRECT_MAP = { olympic_lifting: 'oly_complexes', first_responder: 'tactical' };
@@ -88,6 +88,17 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [searchTerm, setSearchTerm] = useState('');
 
   const isStrength = strengthTypes.includes(blockType);
+  const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
+
+  // For cooldown, resolve shared_with to pull from warm_up exercises
+  const warmupCooldownKey = (() => {
+    if (blockType === 'warmup') return 'warm_up';
+    if (blockType === 'cooldown') {
+      const cd = exerciseCategories['cool_down'];
+      return cd?.shared_with || 'warm_up';
+    }
+    return null;
+  })();
 
   const handleClose = () => {
     setSelectedMuscleGroup(null);
@@ -105,10 +116,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   // Determine which categories to use for non-strength blocks
   let nonStrengthCategories = null;
   let nonStrengthTitle = '';
-  if (blockType === 'warmup') {
-    nonStrengthCategories = warmupCategories;
-    nonStrengthTitle = 'Warmup Categories';
-  } else if (blockType === 'mobility') {
+  if (blockType === 'mobility') {
     nonStrengthCategories = mobilityCategories;
     nonStrengthTitle = 'Mobility Categories';
   } else if (blockType === 'movement') {
@@ -134,6 +142,14 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
 
     if (isStrength) {
       pool = getAllStrengthExercises();
+    } else if (isWarmupCooldown && warmupCooldownKey) {
+      const wuCat = exerciseCategories[warmupCooldownKey];
+      if (wuCat?.subcategories) {
+        Object.values(wuCat.subcategories).forEach((sub) => {
+          const exs = Array.isArray(sub) ? sub : (sub.exercises || []);
+          pool.push(...exs);
+        });
+      }
     } else if (nonStrengthCategories) {
       pool = getAllExercisesFromCategories(nonStrengthCategories);
     }
@@ -151,6 +167,32 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
           exercises={searchResults}
           onSelect={handleSelect}
           title={`Results (${searchResults.length})`}
+        />
+      );
+    }
+
+    // Warmup / Cooldown: use SubcategoryTabs from exerciseLibrary.warm_up
+    if (isWarmupCooldown && warmupCooldownKey) {
+      if (!selectedSubcategory) {
+        return (
+          <SubcategoryTabs
+            muscleGroup={warmupCooldownKey}
+            exerciseCategories={exerciseCategories}
+            onSelectSubcategory={setSelectedSubcategory}
+            onBack={handleClose}
+          />
+        );
+      }
+      const wuCat = exerciseCategories[warmupCooldownKey];
+      const sub = wuCat?.subcategories?.[selectedSubcategory];
+      const exercises = Array.isArray(sub) ? sub : (sub?.exercises || []);
+      const title = sub?.label || selectedSubcategory.replace(/_/g, ' ');
+      return (
+        <ExerciseList
+          exercises={exercises}
+          onSelect={handleSelect}
+          onBack={() => setSelectedSubcategory(null)}
+          title={title}
         />
       );
     }

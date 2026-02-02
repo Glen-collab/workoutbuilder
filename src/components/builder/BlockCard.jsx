@@ -3,12 +3,12 @@ import ExerciseRow from './ExerciseRow';
 import ThemeSelector from './ThemeSelector';
 
 function getBlockIcon(type) {
-  const icons = { theme: '📋', warmup: '🔥', mobility: '🧘', movement: '⚡', 'straight-set': '💪', superset: '🔄', triset: '🔁', circuit: '🎯', conditioning: '🏃' };
+  const icons = { theme: '📋', warmup: '🔥', mobility: '🧘', movement: '⚡', 'straight-set': '💪', superset: '🔄', triset: '🔁', circuit: '🎯', conditioning: '🏃', cooldown: '❄️' };
   return icons[type] || '📋';
 }
 
 function getBlockTypeName(type) {
-  const names = { theme: 'Theme / Notes', warmup: 'Warm Up', mobility: 'Mobility', movement: 'Movement', 'straight-set': 'Straight Set', superset: 'Superset', triset: 'Triset', circuit: 'Circuit / MetCon', conditioning: 'Conditioning' };
+  const names = { theme: 'Theme / Notes', warmup: 'Warm Up', mobility: 'Mobility', movement: 'Movement', 'straight-set': 'Straight Set', superset: 'Superset', triset: 'Triset', circuit: 'Circuit / MetCon', conditioning: 'Conditioning', cooldown: 'Cool Down' };
   return names[type] || type;
 }
 
@@ -26,6 +26,7 @@ const blockColors = {
   circuit: '#9b59b6',
   conditioning: '#27ae60',
   warmup: '#f39c12',
+  cooldown: '#5dade2',
   mobility: '#1abc9c',
   movement: '#3498db',
   theme: '#95a5a6',

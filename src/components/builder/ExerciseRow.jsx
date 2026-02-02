@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PercentageSetRow from './PercentageSetRow';
 import CuesPicker from './CuesPicker';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
@@ -86,10 +86,11 @@ export default function ExerciseRow({
   mainMaxes,
 }) {
   const [showCues, setShowCues] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const isStrength = ['straight-set', 'superset', 'triset'].includes(blockType);
   const isCircuit = blockType === 'circuit';
-  const isWarmupMobility = ['warmup', 'mobility'].includes(blockType);
+  const isWarmupMobility = ['warmup', 'mobility', 'cooldown'].includes(blockType);
   const isMovementConditioning = ['movement', 'conditioning'].includes(blockType);
 
   const baseMaxValue = exercise.baseMax ? (mainMaxes[exercise.baseMax] || 0) : 0;
@@ -110,13 +111,30 @@ export default function ExerciseRow({
         <div className="flex items-center gap-2 flex-1">
           <span className="font-bold text-[15px] text-gray-900">{exercise.name || 'Unnamed Exercise'}</span>
           {exercise.youtube && (
-            <a href={exercise.youtube} target="_blank" rel="noopener noreferrer" className="text-red-600 no-underline text-base" title="Watch video">
-              ▶
-            </a>
+            <button
+              onClick={() => setShowVideo(v => !v)}
+              className="border-none rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold text-white transition-colors"
+              style={{ background: showVideo ? 'linear-gradient(135deg, #1565c0, #42a5f5)' : 'linear-gradient(135deg, #f5851f, #f6a623)' }}
+              title={showVideo ? 'Hide video' : 'Watch video'}
+            >
+              {showVideo ? '✖' : '📹'}
+            </button>
           )}
         </div>
         <button onClick={onRemove} className="bg-red-100 text-red-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Remove</button>
       </div>
+
+      {/* Inline Cloudflare Stream video player */}
+      {showVideo && exercise.youtube && (
+        <div className="mb-2.5 rounded-lg overflow-hidden bg-black" style={{ position: 'relative', paddingTop: '56.25%' }}>
+          <iframe
+            src={`${exercise.youtube}?preload=metadata`}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      )}
 
       {/* STRENGTH BLOCKS */}
       {isStrength && (
