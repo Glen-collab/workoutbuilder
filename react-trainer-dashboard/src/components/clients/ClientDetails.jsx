@@ -66,7 +66,7 @@ export default function ClientDetails({ client, details, loading, onClose }) {
                 const isLocal = window.location.hostname === 'localhost';
                 const base = isLocal
                   ? 'http://localhost:5173'
-                  : (window.tdConfig?.builderUrl || '/workout-builder');
+                  : (window.tdConfig?.builderUrl || 'https://workoutbuild.netlify.app');
                 const url = `${base}/?accessCode=${encodeURIComponent(client.access_code)}&email=${encodeURIComponent(client.user_email)}&mode=override`;
                 window.open(url, '_blank');
               }}
@@ -152,7 +152,7 @@ export default function ClientDetails({ client, details, loading, onClose }) {
                 const isLocal = window.location.hostname === 'localhost';
                 const base = isLocal
                   ? 'http://localhost:5173'
-                  : (window.tdConfig?.builderUrl || '/workout-builder');
+                  : (window.tdConfig?.builderUrl || 'https://workoutbuild.netlify.app');
                 const url = `${base}/?accessCode=${encodeURIComponent(client.access_code)}&email=${encodeURIComponent(client.user_email)}&mode=override`;
                 window.open(url, '_blank');
               }}
