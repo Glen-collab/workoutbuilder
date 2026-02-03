@@ -32,6 +32,8 @@ export default function ClientDetails({ client, details, loading, onClose }) {
     exercise_volume = {},
     recent_workouts = [],
     days_per_week,
+    total_volume_stats = {},
+    weekly_volume_stats = [],
   } = details;
 
   const daysPerWeek = days_per_week || client?.days_per_week || 5;
@@ -135,7 +137,44 @@ export default function ClientDetails({ client, details, loading, onClose }) {
           daysPerWeek={daysPerWeek}
         />
 
-        {/* Volume Chart */}
+        {/* Total Volume Stats */}
+        {(total_volume_stats.tonnage > 0 || total_volume_stats.est_calories > 0) && (
+          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-5 border border-indigo-100">
+            <h4 className="text-sm font-semibold text-gray-700 mb-3">Total Volume Stats</h4>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {total_volume_stats.tonnage > 0 && (
+                <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                  <p className="text-xs text-gray-500 mb-1">Tonnage</p>
+                  <p className="text-lg font-bold text-indigo-600">{total_volume_stats.tonnage.toLocaleString()}</p>
+                  <p className="text-xs text-gray-400">lbs</p>
+                </div>
+              )}
+              {total_volume_stats.est_calories > 0 && (
+                <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                  <p className="text-xs text-gray-500 mb-1">Calories</p>
+                  <p className="text-lg font-bold text-red-500">{total_volume_stats.est_calories.toLocaleString()}</p>
+                  <p className="text-xs text-gray-400">burned</p>
+                </div>
+              )}
+              {total_volume_stats.core_crunches > 0 && (
+                <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                  <p className="text-xs text-gray-500 mb-1">Core</p>
+                  <p className="text-lg font-bold text-green-600">{total_volume_stats.core_crunches.toLocaleString()}</p>
+                  <p className="text-xs text-gray-400">reps</p>
+                </div>
+              )}
+              {total_volume_stats.cardio_minutes > 0 && (
+                <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                  <p className="text-xs text-gray-500 mb-1">Cardio</p>
+                  <p className="text-lg font-bold text-orange-500">{total_volume_stats.cardio_minutes}</p>
+                  <p className="text-xs text-gray-400">minutes</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Volume Chart (legacy exercise-based) */}
         <VolumeChart exerciseVolume={exercise_volume} />
 
         {/* Recent Workouts */}
