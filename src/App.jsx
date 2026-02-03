@@ -280,7 +280,7 @@ export default function App() {
     const isLocal = window.location.hostname === 'localhost';
     const dashboardUrl = isLocal
       ? 'http://localhost:5175/'
-      : (window.gwbConfig?.dashboardUrl || '/trainer-dashboard/');
+      : (window.gwbConfig?.dashboardUrl || 'https://bsa-trainer-dashboard.netlify.app');
     // Open in new tab so builder state is preserved
     window.open(dashboardUrl, '_blank');
   };

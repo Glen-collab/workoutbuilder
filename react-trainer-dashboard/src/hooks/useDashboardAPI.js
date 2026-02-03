@@ -36,7 +36,7 @@ export default function useDashboardAPI() {
     setError(null);
     try {
       if (window.location.hostname === 'localhost') return getMockClients();
-      return await wpAjax('td_get_clients');
+      return await externalApi('get-clients.php', {});
     } catch (err) {
       setError(err.message);
       if (window.location.hostname === 'localhost') return getMockClients();
@@ -44,25 +44,25 @@ export default function useDashboardAPI() {
     } finally {
       setLoading(false);
     }
-  }, [wpAjax]);
+  }, [externalApi]);
 
   const fetchStats = useCallback(async () => {
     try {
       if (window.location.hostname === 'localhost') {
         return { active_clients: 12, workouts_this_week: 34, total_workouts: 892, avg_completion: 78 };
       }
-      return await wpAjax('td_refresh_stats');
+      return await externalApi('get-dashboard-stats.php', {});
     } catch {
       return { active_clients: 0, workouts_this_week: 0, total_workouts: 0, avg_completion: 0 };
     }
-  }, [wpAjax]);
+  }, [externalApi]);
 
   const fetchClientDetails = useCallback(
     async (accessCode, userEmail) => {
       setLoading(true);
       try {
         if (window.location.hostname === 'localhost') return getMockClientDetails();
-        return await wpAjax('td_get_client_details', {
+        return await externalApi('get-client-details.php', {
           access_code: accessCode,
           user_email: userEmail,
         });
@@ -74,17 +74,17 @@ export default function useDashboardAPI() {
         setLoading(false);
       }
     },
-    [wpAjax],
+    [externalApi],
   );
 
   const deleteClient = useCallback(
     async (accessCode, userEmail) => {
-      return await wpAjax('td_delete_client', {
+      return await externalApi('delete-client.php', {
         access_code: accessCode,
         user_email: userEmail,
       });
     },
-    [wpAjax],
+    [externalApi],
   );
 
   const loadProgram = useCallback(
