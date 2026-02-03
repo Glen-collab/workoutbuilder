@@ -2,8 +2,13 @@ import { useState, useCallback } from 'react';
 
 const getAjaxUrl = () => window.trainerDashboard?.ajaxUrl || '/wp-admin/admin-ajax.php';
 const getNonce = () => window.trainerDashboard?.nonce || '';
-const getApiBase = () =>
-  window.trainerDashboard?.apiBase || 'https://bestrongagain.com/workout-programs/api/general';
+const getApiBase = () => {
+  // Use Netlify proxy to avoid CORS issues
+  if (window.location.hostname !== 'localhost') {
+    return '/api';
+  }
+  return window.trainerDashboard?.apiBase || 'https://bestrongagain.com/workout-programs/api/general';
+};
 
 export default function useDashboardAPI() {
   const [loading, setLoading] = useState(false);
