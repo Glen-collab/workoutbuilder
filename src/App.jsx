@@ -185,9 +185,19 @@ export default function App() {
       if (workoutState.loadedProgram) {
         payload.programId = workoutState.loadedProgram.id;
         payload.accessCode = workoutState.loadedProgram.accessCode;
-        await programAPI.updateProgram(payload);
+        const result = await programAPI.updateProgram(payload);
+        // Check if a new code was generated
+        const newCode = result?.accessCode || result?.data?.accessCode || workoutState.loadedProgram.accessCode;
+        const codeRegenerated = result?.codeRegenerated || result?.data?.codeRegenerated;
+        if (codeRegenerated) {
+          // Update the loaded program with new access code
+          workoutState.loadProgram({
+            ...workoutState.loadedProgram,
+            accessCode: newCode,
+          });
+        }
         setShowSaveModal(false);
-        setSavedAccessCode(workoutState.loadedProgram.accessCode);
+        setSavedAccessCode(newCode);
       } else {
         const result = await programAPI.saveProgram(payload);
         console.log('Save result:', JSON.stringify(result));

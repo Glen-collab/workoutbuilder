@@ -14,6 +14,9 @@ const QUALIFIER_OPTIONS = [
   { value: 'each side', label: 'Each Side' },
   { value: 'all one arm first', label: 'All One Arm First' },
   { value: 'all one leg first', label: 'All One Leg First' },
+  { value: 'x2 combo', label: 'x2 (Combo)' },
+  { value: 'x3 combo', label: 'x3 (Combo)' },
+  { value: 'x4 combo', label: 'x4 (Combo)' },
 ];
 
 function FieldInput({ label, value, onChange, placeholder, type = 'text', width }) {

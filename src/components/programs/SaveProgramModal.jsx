@@ -6,12 +6,15 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
   const [programNickname, setProgramNickname] = useState('');
   const [trainerEmail, setTrainerEmail] = useState('wisco.barbell@gmail.com');
   const [optionalTrainerEmail, setOptionalTrainerEmail] = useState('');
+  const [regenerateCode, setRegenerateCode] = useState(false);
 
   const isUpdate = !!loadedProgram;
+  const hasOldCodeFormat = isUpdate && loadedProgram.accessCode && loadedProgram.accessCode.includes('-');
 
   useEffect(() => {
     if (isOpen && loadedProgram) {
       setProgramName(loadedProgram.name || '');
+      setRegenerateCode(false); // Reset on open
     }
   }, [isOpen, loadedProgram]);
 
@@ -23,6 +26,7 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
       programNickname: programNickname.trim(),
       trainerEmail: trainerEmail.trim(),
       optionalTrainerEmail: optionalTrainerEmail.trim(),
+      regenerateCode: isUpdate ? regenerateCode : false,
     });
   };
 
@@ -39,6 +43,17 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
             <div className="text-xs text-gray-500 mt-1">
               Access Code: {loadedProgram.accessCode}
             </div>
+            {hasOldCodeFormat && (
+              <label className="flex items-center gap-2 mt-2 cursor-pointer text-xs text-amber-400">
+                <input
+                  type="checkbox"
+                  checked={regenerateCode}
+                  onChange={(e) => setRegenerateCode(e.target.checked)}
+                  className="w-4 h-4 rounded border-gray-600 bg-gray-700 text-[#667eea] focus:ring-[#667eea]"
+                />
+                Generate new 4-digit access code
+              </label>
+            )}
           </div>
         )}
 

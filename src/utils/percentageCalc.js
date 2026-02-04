@@ -18,6 +18,9 @@ const QUALIFIER_MULTIPLIER = {
   'each side': 2,
   'all one arm first': 2,
   'all one leg first': 2,
+  'x2 combo': 2,
+  'x3 combo': 3,
+  'x4 combo': 4,
 };
 
 function getQualifierMultiplier(qualifier) {
