@@ -21,7 +21,7 @@ const METRICS = [
   { key: 'cardio_minutes', label: 'Cardio', color: '#f59e0b', suffix: ' min' },
 ];
 
-export default function VolumeChart({ weeklyVolumeStats = [] }) {
+export default function VolumeChart({ weeklyVolumeStats = [], totalWeeks = 12 }) {
   const [activeMetric, setActiveMetric] = useState('tonnage');
 
   // Check if we have any data
@@ -29,22 +29,23 @@ export default function VolumeChart({ weeklyVolumeStats = [] }) {
     w.tonnage > 0 || w.core_crunches > 0 || w.cardio_minutes > 0 || w.est_calories > 0
   );
 
-  if (!hasData) {
-    return (
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Weekly Volume
-        </h3>
-        <p className="text-gray-400 text-sm text-center py-8">No volume data yet</p>
-      </div>
-    );
+  // Build week labels - if no data, show empty weeks 1-4 or up to totalWeeks
+  const numWeeks = weeklyVolumeStats.length > 0
+    ? Math.max(...weeklyVolumeStats.map(w => w.week), 4)
+    : Math.min(totalWeeks, 4);
+
+  // Create array of all weeks with data or zeros
+  const allWeeks = [];
+  for (let w = 1; w <= numWeeks; w++) {
+    const existing = weeklyVolumeStats.find(s => s.week === w);
+    allWeeks.push(existing || { week: w, tonnage: 0, core_crunches: 0, cardio_minutes: 0, est_calories: 0 });
   }
 
   const metric = METRICS.find(m => m.key === activeMetric) || METRICS[0];
 
-  // Build labels and data from weekly stats
-  const labels = weeklyVolumeStats.map(w => `Week ${w.week}`);
-  const dataValues = weeklyVolumeStats.map(w => w[metric.key] || 0);
+  // Build labels and data from all weeks
+  const labels = allWeeks.map(w => `Week ${w.week}`);
+  const dataValues = allWeeks.map(w => w[metric.key] || 0);
 
   const data = {
     labels,
@@ -127,6 +128,11 @@ export default function VolumeChart({ weeklyVolumeStats = [] }) {
       </div>
 
       <Line data={data} options={options} />
+      {!hasData && (
+        <p className="text-gray-400 text-xs text-center mt-2">
+          Volume data will appear as workouts are logged
+        </p>
+      )}
     </div>
   );
 }

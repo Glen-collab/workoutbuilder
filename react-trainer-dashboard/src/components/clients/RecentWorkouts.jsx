@@ -165,12 +165,15 @@ function BlockSection({ block }) {
 }
 
 function ExerciseRow({ exercise }) {
-  const { name, sets, reps, actualReps, weights, weight, notes } = exercise;
+  const { name, sets, reps, actualReps, weights, weight, notes, duration, durationUnit, intensity, miles, distance } = exercise;
+
+  // Check if this is a conditioning/cardio exercise (has duration or distance)
+  const isCardio = duration || miles || distance;
 
   // Format weight display (supports both weights array and single weight)
   let weightDisplay = '';
   const w = weights || weight;
-  if (w) {
+  if (w && !isCardio) {
     if (Array.isArray(w)) {
       const filtered = w.filter((v) => v != null && v !== '');
       if (filtered.length > 1) {
@@ -190,22 +193,53 @@ function ExerciseRow({ exercise }) {
   const targetNum = Number(reps);
   const missedReps = Array.isArray(actualReps) && actualReps.some((r) => r < targetNum);
 
+  // Format duration for cardio exercises
+  let durationDisplay = '';
+  if (duration) {
+    const unit = durationUnit || 'min';
+    durationDisplay = `${duration} ${unit}`;
+  }
+
+  // Format distance
+  let distanceDisplay = '';
+  if (miles) {
+    distanceDisplay = `${miles} mi`;
+  } else if (distance) {
+    distanceDisplay = `${distance}`;
+  }
+
   return (
     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-xs">
       <span className="font-medium text-gray-800">{name}</span>
-      <span className="text-gray-500">
-        {sets && `${sets}x`}
-        {actualTotal ? (
-          <span className={missedReps ? 'text-red-500 font-semibold' : ''}>
-            {actualTotal}
-            {reps && <span className="text-gray-400">/{reps}</span>}
+      {isCardio ? (
+        <>
+          {durationDisplay && (
+            <span className="text-orange-600 font-medium">{durationDisplay}</span>
+          )}
+          {distanceDisplay && (
+            <span className="text-blue-600 font-medium">{distanceDisplay}</span>
+          )}
+          {intensity && (
+            <span className="text-gray-500 italic">{intensity}</span>
+          )}
+        </>
+      ) : (
+        <>
+          <span className="text-gray-500">
+            {sets && `${sets}x`}
+            {actualTotal ? (
+              <span className={missedReps ? 'text-red-500 font-semibold' : ''}>
+                {actualTotal}
+                {reps && <span className="text-gray-400">/{reps}</span>}
+              </span>
+            ) : (
+              reps && <span>{reps}</span>
+            )}
           </span>
-        ) : (
-          reps && <span>{reps}</span>
-        )}
-      </span>
-      {weightDisplay && (
-        <span className="text-purple-600 font-medium">{weightDisplay}</span>
+          {weightDisplay && (
+            <span className="text-purple-600 font-medium">{weightDisplay}</span>
+          )}
+        </>
       )}
       {notes && <span className="text-gray-400 italic">{notes}</span>}
     </div>
