@@ -428,11 +428,845 @@ const themeLabels = {
   cut: "Cut / Lean Out"
 };
 
+// Day-specific theme messages that coordinate with the weekly theme
+// "mid" = Days 2-3 (mid-week check-in), "close" = final day(s) (close-out)
+const dayThemeData = {
+  athletes: {
+    testing: {
+      mid: [
+        "[name], more assessments today. Stay locked in—every test gives us better data to build your program.",
+        "Testing continues, [name]. Same focus as Day 1. Honest effort, accurate results."
+      ],
+      close: [
+        "[name], final testing session. Finish strong—these last numbers complete the picture. You've shown up and earned your data.",
+        "Last test day, [name]. Leave nothing in the tank. After today, we have everything we need to move forward."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], back on the conditioning track today. Your body is adapting—trust the burn and keep pushing.",
+        "More cardio work today, [name]. Yesterday's effort made you better. Today's effort stacks on top of it."
+      ],
+      close: [
+        "[name], final conditioning session of the week. Close it out strong—you've built serious capacity.",
+        "Last run day, [name]. Everything this week has expanded your engine. Finish with pride."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Control the weight, own every second of the rep. This builds what shortcuts can't.",
+        "Back to time-based training, [name]. Your muscles are responding to the extended tension. Stay disciplined with the tempo."
+      ],
+      close: [
+        "[name], last tempo session this week. You've been patient with the pace—that discipline is paying off.",
+        "Final time-focused day, [name]. Close the week with control and precision. Every rep earned."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more mobility work today. Each session opens up ranges that make you more athletic. Stay committed.",
+        "Mobility continues, [name]. You're investing in movement freedom that pays dividends all season."
+      ],
+      close: [
+        "[name], final mobility session. You should already feel a difference. This investment compounds over time.",
+        "Last mobility day, [name]. You've put in the work to move better. Carry that into next week."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], flexibility work continues today. Lengthening what's limiting you takes consistency. Stay with it.",
+        "More stretching today, [name]. Your body is responding. Keep building that range of motion."
+      ],
+      close: [
+        "[name], wrapping up flexibility focus. You've expanded your range—maintain it moving forward.",
+        "Final flexibility session, [name]. The work you've done this week protects you long-term."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], recovery continues today. Light movement, quality work. Your body is adapting to everything we've built.",
+        "Another recovery day, [name]. This isn't wasted time—it's when your body gets stronger."
+      ],
+      close: [
+        "[name], last recovery session. You should feel recharged and ready. Next week we attack with a full tank.",
+        "Recovery week closes out today, [name]. You've been smart. Now your body is primed to perform."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], deload continues. Light weights, quality movement. Stay sharp without grinding yourself down.",
+        "More deload work today, [name]. Keep the motor running but don't redline it. Recovery is the priority."
+      ],
+      close: [
+        "[name], last deload session. You've been disciplined with the lighter weights. Next week we reload.",
+        "Deload wraps up today, [name]. Blade is sharpened, body is fresh. Get ready to attack."
+      ]
+    },
+    peak_week: {
+      mid: [
+        "[name], stay the course. Peak week means precise, confident work. You're primed—don't overthink it.",
+        "Peak week continues, [name]. Short, sharp, explosive. Trust what you've built and let it show."
+      ],
+      close: [
+        "[name], final session of peak week. You're ready. Light, confident, explosive. Game time is here.",
+        "Last day of peak week, [name]. Everything has led to this. Trust your preparation and perform."
+      ]
+    },
+    taper: {
+      mid: [
+        "[name], taper continues. Less volume, maintained sharpness. Your body is supercompensating—let it happen.",
+        "More taper work today, [name]. It might feel weird to hold back. Trust the science—this makes you faster."
+      ],
+      close: [
+        "[name], taper wraps up. You should feel fresh, explosive, ready. That's the supercompensation effect.",
+        "Final taper session, [name]. Light and sharp. You're physically prepared for what's ahead."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], volume work continues. More reps, more capacity. Your body adapts to the demands—keep stacking.",
+        "Back at it with more volume today, [name]. Consistency through these sessions is what separates athletes."
+      ],
+      close: [
+        "[name], final high-volume session. You've handled the workload like a competitor. Recovery starts now.",
+        "Volume week closes today, [name]. You stacked the reps and built the work capacity. Strong week."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], heavy work continues today. Respect the weight, attack it with confidence. You're building strength.",
+        "More intensity today, [name]. Every heavy rep builds physical and mental toughness. Focus and execute."
+      ],
+      close: [
+        "[name], last heavy session this week. Give it everything—you've been building toward this all week.",
+        "Final intensity day, [name]. Close the week at the top. You've earned the strength. Show it."
+      ]
+    },
+    time_under_tension: {
+      mid: [
+        "[name], more TUT work today. Slow and controlled—your muscles don't know weight, they know tension and time.",
+        "Time under tension continues, [name]. Embrace the burn. This builds the strength that sticks."
+      ],
+      close: [
+        "[name], last TUT session. You've been disciplined with the tempo all week. That control is strength.",
+        "Final time-under-tension day, [name]. Close it out with the same patience you started with."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], precision continues today. Every rep with full attention and perfect intent. Basics mastered.",
+        "More technique work, [name]. The athletes who nail fundamentals dominate. Keep refining."
+      ],
+      close: [
+        "[name], final focus session. Your movement quality has improved this week. Carry that standard forward.",
+        "Technique week wraps up, [name]. The details you've dialed in compound over time."
+      ]
+    },
+    bulk: {
+      mid: [
+        "[name], building phase continues. Eat to grow, train to grow. Your body needs fuel—keep feeding it.",
+        "More growth-focused work today, [name]. Mass doesn't build overnight. Consistency is the recipe."
+      ],
+      close: [
+        "[name], last session of the growth push this week. Strong work. Keep the nutrition dialed in.",
+        "Building phase closes for the week, [name]. You've put in the volume. Let nutrition do its job."
+      ]
+    },
+    cut: {
+      mid: [
+        "[name], cut phase continues. Training stays intense—we protect muscle while the body leans out.",
+        "More work today, [name]. Discipline in training and nutrition. You're in the process—trust it."
+      ],
+      close: [
+        "[name], last session of the cut this week. Mental toughness showing. Stay the course.",
+        "Cut week wraps up, [name]. You've maintained intensity while leaning out. Discipline paying off."
+      ]
+    }
+  },
+  adults: {
+    testing: {
+      mid: [
+        "[name], more assessments today. These numbers guide your training—stay focused and give honest effort.",
+        "Testing continues, [name]. No pressure, just data. Each test gives us a clearer picture."
+      ],
+      close: [
+        "[name], final assessment today. Great work showing up consistently. These baselines set you up for progress.",
+        "Last testing day, [name]. You've given us great data. Now we know exactly where to focus."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], more cardio work today. You're building stamina that shows up in everything—work, energy, sleep.",
+        "Conditioning continues, [name]. Your cardiovascular system is adapting. Keep showing up."
+      ],
+      close: [
+        "[name], last cardio session this week. Your engine is stronger than when the week started.",
+        "Conditioning wraps up, [name]. The stamina you've built carries into everything you do."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Controlling the pace gets more from every movement.",
+        "Time-based training continues, [name]. Slow and controlled builds real, functional strength."
+      ],
+      close: [
+        "[name], final tempo session. You've been patient with the pace—your body thanks you.",
+        "Last time-focused day, [name]. Quality reps all week. Well done."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more mobility work today. You're investing in how you'll feel for decades. Worth every minute.",
+        "Mobility continues, [name]. Better movement today means less pain tomorrow."
+      ],
+      close: [
+        "[name], last mobility session. You should feel the difference already. Maintain this going forward.",
+        "Mobility week wraps up, [name]. Freedom of movement earned. Keep it up."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], more stretching today. Your body is loosening up—keep the consistency going.",
+        "Flexibility work continues, [name]. Each session builds on the last."
+      ],
+      close: [
+        "[name], last flexibility session. The maintenance you've done prevents future breakdowns.",
+        "Stretching wraps up, [name]. Your body is thanking you. Keep incorporating this."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], recovery continues today. Light movement, letting your body consolidate. This is strategic.",
+        "More recovery work, [name]. You've been consistent—your body needs and deserves this time."
+      ],
+      close: [
+        "[name], last recovery session. You should feel refreshed and ready for next week. Smart training.",
+        "Recovery week wraps up, [name]. Recharged and ready. The patience pays off."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], deload continues. Same quality movement, lighter load. Your body is resetting.",
+        "More light work today, [name]. Keep the habit alive while giving your system a break."
+      ],
+      close: [
+        "[name], deload wraps up. You've been disciplined. Your body is ready for the next push.",
+        "Final deload session, [name]. Fresh and maintained. Next week we build."
+      ]
+    },
+    peak_week: {
+      mid: [
+        "[name], peak week continues. Stay confident—your consistent work has prepared you for this.",
+        "More peak work today, [name]. Feel strong? That's the result of everything you've built."
+      ],
+      close: [
+        "[name], peak week finishes today. You might have surprised yourself. That's what consistency does.",
+        "Final peak session, [name]. Strong finish. You've proven what you're capable of."
+      ]
+    },
+    taper: {
+      mid: [
+        "[name], taper continues. Less volume, more freshness. You should start feeling more energetic.",
+        "More taper work today, [name]. Let the fatigue clear—you'll feel the difference soon."
+      ],
+      close: [
+        "[name], taper wraps up. You should feel lighter, fresher, stronger. Mission accomplished.",
+        "Final taper session, [name]. Your body has recovered while maintaining fitness. Well done."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], more volume today. Stacking reps builds results. Some sessions are tough—that's the point.",
+        "Volume continues, [name]. Consistency through challenging work is where the magic happens."
+      ],
+      close: [
+        "[name], final high-volume session. You've handled the workload. Your body will reward the effort.",
+        "Volume week wraps up, [name]. Strong showing. Recovery time earned."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], heavy work continues. Maintain technique, push limits. You're discovering what you're capable of.",
+        "More intensity today, [name]. Focus, brace, execute. You've got this."
+      ],
+      close: [
+        "[name], last heavy session this week. Finish with confidence. You've been strong all week.",
+        "Intensity week wraps up, [name]. New limits discovered. Well earned."
+      ]
+    },
+    time_under_tension: {
+      mid: [
+        "[name], more TUT today. Slow and controlled—it's harder than it sounds and more effective too.",
+        "Time under tension continues, [name]. Your muscles are learning what real work feels like."
+      ],
+      close: [
+        "[name], last TUT session. The patience and control you've shown builds lasting strength.",
+        "TUT wraps up, [name]. Disciplined reps all week. Your muscles will remember."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], technique focus continues. Perfect practice makes progress. Keep refining.",
+        "More precision work today, [name]. Quality over quantity. Each rep with intention."
+      ],
+      close: [
+        "[name], final technique session. Your movement quality is better than it was Monday. That lasts.",
+        "Focus week wraps up, [name]. Better movement patterns established. Carry them forward."
+      ]
+    },
+    bulk: {
+      mid: [
+        "[name], growth phase continues. Train hard, eat enough, recover well. Building takes patience.",
+        "More building work today, [name]. Your body is responding. Keep fueling it."
+      ],
+      close: [
+        "[name], last growth session this week. Strong work. Keep the nutrition supporting the training.",
+        "Building week wraps up, [name]. Consistent effort plus proper nutrition equals results."
+      ]
+    },
+    cut: {
+      mid: [
+        "[name], cut phase continues. Training stays intense—nutrition stays disciplined. You're doing it right.",
+        "More work today, [name]. Protecting muscle while leaning out takes effort. Stay the course."
+      ],
+      close: [
+        "[name], final cut session this week. Discipline is showing. Keep trusting the process.",
+        "Cut week wraps up, [name]. Consistent intensity with smart nutrition. Results are coming."
+      ]
+    }
+  },
+  recreational: {
+    testing: {
+      mid: [
+        "[name], more benchmarks today. Easy process, useful data. Just show up and give your best.",
+        "Testing continues, [name]. Each assessment adds to the picture. No stress."
+      ],
+      close: [
+        "[name], last test today. Great job showing up. These numbers help us plan what's next.",
+        "Assessment wraps up, [name]. Simple, useful, done. Now we know where to focus."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], more cardio today. Building stamina makes daily life easier. Find your pace and push it.",
+        "Conditioning continues, [name]. Your engine is getting stronger. Keep moving."
+      ],
+      close: [
+        "[name], last cardio session this week. You've built real stamina. Nice work.",
+        "Running wraps up, [name]. The effort you put in shows up everywhere else."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Controlling each rep gets more from every movement.",
+        "Time-based training continues, [name]. Making each rep count—that's the focus."
+      ],
+      close: [
+        "[name], last tempo session. Quality reps all week. Well done.",
+        "Time-focused work wraps up, [name]. Patience and control—that's how results are built."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more mobility today. Keeping you feeling good between sessions—that's the goal.",
+        "Movement work continues, [name]. Less stiffness, more energy. This is the payoff."
+      ],
+      close: [
+        "[name], last mobility session. You should feel noticeably better moving around. Keep it going.",
+        "Mobility wraps up, [name]. The investment in how you move pays off daily."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], more stretching today. It might feel easy, but it's protecting your body long-term.",
+        "Flexibility continues, [name]. Each session maintains and builds your range."
+      ],
+      close: [
+        "[name], last stretch session. Your body is more pliable than Monday. Maintain it.",
+        "Flexibility wraps up, [name]. Easy work with lasting benefits."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], more easy movement today. Let your body adapt. No guilt, just recovery.",
+        "Recovery continues, [name]. Active rest—staying in the habit without the grind."
+      ],
+      close: [
+        "[name], recovery week wraps up. You should feel refreshed. Next week we go.",
+        "Last recovery day, [name]. Smart training includes smart rest. Well done."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], more light work today. Same movements, easy effort. Keep the routine.",
+        "Deload continues, [name]. Think of it as maintenance mode. Light and consistent."
+      ],
+      close: [
+        "[name], deload wraps up. Your body got the break it needed. Ready for next week.",
+        "Last easy day, [name]. Consistency through deload shows commitment. Well done."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], more reps today. You've got the consistency to handle it. Pace yourself and execute.",
+        "Volume continues, [name]. Extra work builds extra results. Show up and stack reps."
+      ],
+      close: [
+        "[name], last volume session. Big workload this week—your body will reward the effort.",
+        "High volume wraps up, [name]. You handled the challenge. Strong week."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], more heavy work today. Maintain form, push effort. You're ready for this.",
+        "Intensity continues, [name]. Challenging yourself builds capability. Keep going."
+      ],
+      close: [
+        "[name], last heavy session. You've pushed limits this week. Finish strong.",
+        "Intensity wraps up, [name]. Stronger than Monday. That's the goal."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], more technique work today. Refining each rep makes every future session better.",
+        "Quality focus continues, [name]. Getting the details right pays dividends."
+      ],
+      close: [
+        "[name], last focus session. Better movement established this week. Carry it forward.",
+        "Technique wraps up, [name]. The quality you've built is permanent progress."
+      ]
+    }
+  },
+  runners: {
+    testing: {
+      mid: [
+        "[name], more assessments today. Pace honest, effort full. Every test sharpens the picture.",
+        "Testing continues, [name]. Run your race, not someone else's. Accurate data over big numbers."
+      ],
+      close: [
+        "[name], final benchmark today. Leave it on the track. After today we have the full picture.",
+        "Last test run, [name]. Give everything—this data sets the course forward."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], more miles today. Easy pace, stacked volume. Trust the slow build.",
+        "Base building continues, [name]. Keep the effort conversational. Aerobic foundation grows with patience."
+      ],
+      close: [
+        "[name], last run of the week. The miles you've banked build the base for speed later.",
+        "Volume week closes, [name]. Consistent easy miles all week. Your aerobic engine thanks you."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Comfortably hard—the effort that builds race fitness.",
+        "Tempo continues, [name]. Your body is learning to hold pace under fatigue. Trust the process."
+      ],
+      close: [
+        "[name], last tempo run. You've trained your body to run fast when tired. Race-specific fitness built.",
+        "Time-based work wraps up, [name]. The speed endurance from this week shows up on race day."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more hip and ankle work today. Mobile runners are efficient runners. Keep investing.",
+        "Mobility continues, [name]. Opening up your stride pays dividends every run."
+      ],
+      close: [
+        "[name], last mobility session. Your stride should feel freer already. Maintain this.",
+        "Mobility wraps up, [name]. Efficient movement established. Carry it into your miles."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], more stretching today. Tight muscles limit your stride. We're addressing that.",
+        "Flexibility continues, [name]. Runners who stretch stay healthy longer. Worth the time."
+      ],
+      close: [
+        "[name], last stretch session. Hamstrings, hips, calves—all more pliable. Keep it up.",
+        "Flexibility wraps up, [name]. Pliability built this week protects you for thousands of miles."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], easy running today. Keep moving, keep it light. Your body is adapting.",
+        "Recovery continues, [name]. Easy effort, good form. Let your legs come back."
+      ],
+      close: [
+        "[name], last recovery day. Legs should feel fresh. That means it worked.",
+        "Recovery wraps up, [name]. Recharged and ready to train properly again."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], reduced miles again today. Cut volume, keep frequency. Legs freshen up daily.",
+        "Deload continues, [name]. Running light is still running. Maintain the rhythm."
+      ],
+      close: [
+        "[name], deload wraps up. Fresh legs, maintained fitness. Ready to push again.",
+        "Last deload run, [name]. You've been patient. That patience becomes speed."
+      ]
+    },
+    peak_week: {
+      mid: [
+        "[name], stay sharp. Short, quality efforts. You're fit and ready—don't force it.",
+        "Peak week continues, [name]. Confidence over volume. Trust what you've built."
+      ],
+      close: [
+        "[name], last peak session. Light legs, sharp mind. You're prepared. Go race.",
+        "Peak week finishes, [name]. The work is done. Now you perform."
+      ]
+    },
+    taper: {
+      mid: [
+        "[name], taper continues. Less volume, maintained intensity. Your body is supercompensating.",
+        "More rest, less miles today, [name]. It feels counterintuitive. It works."
+      ],
+      close: [
+        "[name], taper wraps up. You should feel fresh and fast. Trust it—race day ready.",
+        "Final taper session, [name]. Light, easy, done. Your legs are loaded for race day."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], big miles again today. Manage effort, stay fueled. This builds the engine.",
+        "Volume continues, [name]. Don't rush the easy runs. Patient miles compound."
+      ],
+      close: [
+        "[name], last high-volume day. You've stacked serious miles this week. Time to recover.",
+        "Volume wraps up, [name]. The endurance built this week is in the bank. Well done."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], more speed work today. Quality over quantity. Recover fully between efforts.",
+        "Intensity continues, [name]. Execute each interval with purpose. This builds top-end speed."
+      ],
+      close: [
+        "[name], last speed session. Fast legs earned this week. Quality work all around.",
+        "Intensity wraps up, [name]. The speed you've built shows up when it counts."
+      ]
+    },
+    time_under_tension: {
+      mid: [
+        "[name], more strength work today. Eccentric loading builds the durability your legs need for miles.",
+        "TUT continues, [name]. Slow strength builds the tissue resilience runners need. Stay patient."
+      ],
+      close: [
+        "[name], last TUT session. Stronger, more resilient legs built this week. Protection for the road ahead.",
+        "Strength work wraps up, [name]. Your body is more durable. Miles will feel easier."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], more form work today. Cadence, posture, foot strike. Small gains, big efficiency.",
+        "Technique continues, [name]. Better mechanics mean faster, more efficient running. Keep refining."
+      ],
+      close: [
+        "[name], last form session. The habits you've built last for thousands of miles.",
+        "Focus wraps up, [name]. Efficient movement established. Every future run benefits."
+      ]
+    }
+  },
+  golfers: {
+    testing: {
+      mid: [
+        "[name], more assessments today. Rotational power, stability, mobility—all driving your golf game.",
+        "Testing continues, [name]. Each measurement tells us where to focus for your swing."
+      ],
+      close: [
+        "[name], final testing session. Complete picture of your physical capabilities. Now we optimize.",
+        "Assessment wraps up, [name]. Great data collected. This guides everything moving forward."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], more conditioning today. Fitness affects your back nine more than most golfers realize.",
+        "Cardio continues, [name]. A fit golfer makes better decisions late in the round. Building that."
+      ],
+      close: [
+        "[name], last conditioning session. Stamina built this week shows up in late-round performance.",
+        "Cardio wraps up, [name]. You won't fade on the back nine. Endurance earned."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Controlled movement builds the body control your swing demands.",
+        "Time-based training continues, [name]. Slow, deliberate loading transfers directly to your game."
+      ],
+      close: [
+        "[name], last tempo session. Control built this week shows up in your swing consistency.",
+        "Tempo work wraps up, [name]. Body control refined. That's golf-specific strength."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more rotation and mobility work today. Your swing is limited by your range—we're expanding it.",
+        "Mobility continues, [name]. Thoracic spine, hips, shoulders—all opening up for better movement."
+      ],
+      close: [
+        "[name], last mobility session. You should feel freer in your rotation already. Game changer.",
+        "Mobility wraps up, [name]. The range you've built translates directly to your swing."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], more stretching today. Tight muscles create compensations that show up in your swing.",
+        "Flexibility continues, [name]. Your body needs length for the positions a good swing requires."
+      ],
+      close: [
+        "[name], last stretch session. More pliable, fewer compensations. Your swing thanks you.",
+        "Flexibility wraps up, [name]. Range built, consistency protected. Smart investment."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], more easy work today. Active mobility, light movement. Season is long—stay fresh.",
+        "Recovery continues, [name]. Strategic rest keeps you performing through a long golf season."
+      ],
+      close: [
+        "[name], recovery wraps up. You should feel refreshed and ready to perform.",
+        "Last recovery day, [name]. Smart recovery is smart golf. Recharged and ready."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], more light work today. Maintain the groove without the grind. Joints happy.",
+        "Deload continues, [name]. Same movement quality, easier load. Your body is resetting."
+      ],
+      close: [
+        "[name], deload wraps up. Body refreshed, movement maintained. Ready for the next block.",
+        "Last light day, [name]. Disciplined deload sets up a strong next phase."
+      ]
+    },
+    peak_week: {
+      mid: [
+        "[name], stay sharp and explosive today. Light work, confidence building. Your body is primed.",
+        "Peak continues, [name]. Maintain and fine-tune. You're physically ready to perform."
+      ],
+      close: [
+        "[name], peak week finishes. You're athletic, explosive, and ready. Trust your preparation.",
+        "Final peak session, [name]. Light, confident, sharp. Tournament ready."
+      ]
+    },
+    taper: {
+      mid: [
+        "[name], taper continues. Less is more right now. Stay loose, stay confident.",
+        "More taper today, [name]. Reduced volume, maintained feel. You'll be explosive by game day."
+      ],
+      close: [
+        "[name], taper wraps up. You should feel athletic and powerful. Perfect timing.",
+        "Final taper session, [name]. Fresh, explosive, ready. Go perform."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], more volume today. Building the durability and work capacity golfers need for long seasons.",
+        "Volume continues, [name]. More reps build the physical foundation. Keep executing."
+      ],
+      close: [
+        "[name], last volume session. You've built durability this week. Solid work.",
+        "High volume wraps up, [name]. Strong work capacity built. Your body can handle the season."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], more power work today. Rotational strength and explosive movement—where club head speed lives.",
+        "Intensity continues, [name]. Heavy loading builds the strength that becomes power in your swing."
+      ],
+      close: [
+        "[name], last heavy session. Stronger foundation built this week. That translates to the course.",
+        "Strength focus wraps up, [name]. More powerful, more athletic. Your golf game benefits."
+      ]
+    },
+    time_under_tension: {
+      mid: [
+        "[name], more stability work today. Controlled loading builds the resilience your joints need.",
+        "TUT continues, [name]. Slow, deliberate strength work for longevity and control."
+      ],
+      close: [
+        "[name], last TUT session. Stability and control refined this week. Your body is more resilient.",
+        "Time under tension wraps up, [name]. Joint health and stability improved. Playing for decades."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], more technique refinement today. Quality reps that transfer to your swing. Precision focus.",
+        "Form work continues, [name]. Golf is control. Training is control. They reinforce each other."
+      ],
+      close: [
+        "[name], last technique session. Movement quality improved this week. That shows up on the course.",
+        "Focus wraps up, [name]. Refined movement patterns established. Better training, better golf."
+      ]
+    }
+  },
+  fitness: {
+    testing: {
+      mid: [
+        "[name], more assessments today. No judgment—just useful information to guide your training.",
+        "Testing continues, [name]. Honest effort, helpful data. Each test tells us something useful."
+      ],
+      close: [
+        "[name], final test today. Great work. These numbers guide everything going forward.",
+        "Assessment wraps up, [name]. Clear picture established. Now we move with purpose."
+      ]
+    },
+    running: {
+      mid: [
+        "[name], more cardio today. Building your aerobic base improves energy, mood, and health.",
+        "Conditioning continues, [name]. Your heart and lungs are getting stronger. Keep it going."
+      ],
+      close: [
+        "[name], last cardio session. You've built real stamina this week. Carries into everything.",
+        "Cardio wraps up, [name]. Stronger engine built. That energy shows up in daily life."
+      ]
+    },
+    time: {
+      mid: [
+        "[name], more tempo work today. Controlled pace maximizes results from every rep.",
+        "Time-based training continues, [name]. Slow and controlled—this is where real strength builds."
+      ],
+      close: [
+        "[name], final tempo session. Patience with the pace all week. Your muscles are thanking you.",
+        "Tempo wraps up, [name]. Quality week of controlled work. Results incoming."
+      ]
+    },
+    mobility: {
+      mid: [
+        "[name], more mobility work today. Better movement makes better workouts and better daily life.",
+        "Mobility continues, [name]. Investing in how you move pays off in everything you do."
+      ],
+      close: [
+        "[name], last mobility session. Moving better already. Keep this going.",
+        "Mobility wraps up, [name]. Freedom of movement earned. Maintain it."
+      ]
+    },
+    flexibility: {
+      mid: [
+        "[name], more stretching today. Range of motion maintenance—essential and often overlooked.",
+        "Flexibility continues, [name]. Your body is looser and more capable. Keep stretching."
+      ],
+      close: [
+        "[name], last stretch session. Your body is more pliable. That's protection and performance.",
+        "Flexibility wraps up, [name]. Maintenance done right. Feel the difference."
+      ]
+    },
+    recovery: {
+      mid: [
+        "[name], more easy movement today. Strategic rest is part of smart training.",
+        "Recovery continues, [name]. Light effort, big adaptation. Your body is consolidating."
+      ],
+      close: [
+        "[name], recovery wraps up. Recharged and ready for next week. Smart training.",
+        "Last recovery day, [name]. Patience pays off. You're fresh and ready."
+      ]
+    },
+    deload: {
+      mid: [
+        "[name], more light work today. Same exercises, less intensity. Keep the groove.",
+        "Deload continues, [name]. Maintaining the habit while letting fatigue clear."
+      ],
+      close: [
+        "[name], deload wraps up. Body rested, habits maintained. Ready for the next push.",
+        "Last deload session, [name]. Disciplined and consistent. That's how it's done."
+      ]
+    },
+    peak_week: {
+      mid: [
+        "[name], peak work continues. You've built toward this—enjoy feeling strong.",
+        "More peak testing today, [name]. Your consistent sessions have added up. Show yourself."
+      ],
+      close: [
+        "[name], peak week finishes. You might have surprised yourself with what you can do.",
+        "Final peak session, [name]. Strong week. Your consistency created this capability."
+      ]
+    },
+    taper: {
+      mid: [
+        "[name], taper continues. You should be starting to feel fresher and more energetic.",
+        "Less volume again today, [name]. Let the accumulated fatigue clear. The difference is coming."
+      ],
+      close: [
+        "[name], taper wraps up. Feeling fresher? That was the plan. Well executed.",
+        "Final taper session, [name]. Fresh, strong, ready. Mission accomplished."
+      ]
+    },
+    high_volume: {
+      mid: [
+        "[name], more volume today. Stacking reps is where results get built. Keep executing.",
+        "Volume continues, [name]. Challenging weeks build the strongest foundations. Show up."
+      ],
+      close: [
+        "[name], last high-volume session. You've done the work. Your body rewards consistency.",
+        "Volume wraps up, [name]. Big workload handled with composure. Strong week."
+      ]
+    },
+    high_intensity: {
+      mid: [
+        "[name], heavy work continues. You're discovering capability. Focus and deliver.",
+        "More intensity today, [name]. Respect the weights, push yourself. You've got this."
+      ],
+      close: [
+        "[name], last heavy session. Stronger than Monday. That's the whole point.",
+        "Intensity wraps up, [name]. New limits found. New confidence earned."
+      ]
+    },
+    time_under_tension: {
+      mid: [
+        "[name], more TUT today. Make every rep count by controlling every second of it.",
+        "Time under tension continues, [name]. Slow reps, real results. Embrace the burn."
+      ],
+      close: [
+        "[name], last TUT session. Disciplined tempo all week. Your muscles learned real work.",
+        "TUT wraps up, [name]. Patient, controlled work. Lasting strength built."
+      ]
+    },
+    focus: {
+      mid: [
+        "[name], more technique today. Every rep with attention and intention. Quality builds quality.",
+        "Precision continues, [name]. Better movement now means better results always."
+      ],
+      close: [
+        "[name], last focus session. Your form has improved this week. That's permanent progress.",
+        "Technique wraps up, [name]. Quality movement established. Carry this standard forward."
+      ]
+    },
+    bulk: {
+      mid: [
+        "[name], building phase continues. Train hard, eat enough. Mass takes time and consistency.",
+        "More growth work today, [name]. Feed the process. Your body is responding."
+      ],
+      close: [
+        "[name], last building session this week. Strong work. Keep the nutrition supporting it.",
+        "Growth week wraps up, [name]. Consistent effort plus nutrition equals results."
+      ]
+    },
+    cut: {
+      mid: [
+        "[name], cut continues. Training stays intense, nutrition stays disciplined. Trust the process.",
+        "More work today, [name]. Protecting muscle while leaning out. Discipline is the tool."
+      ],
+      close: [
+        "[name], last cut session this week. You've shown the mental toughness this requires.",
+        "Cut wraps up, [name]. Consistent intensity with controlled nutrition. Changes are happening."
+      ]
+    }
+  }
+};
+
+const dayPhaseLabels = {
+  weekly: 'Start of Week',
+  mid: 'Mid-Week',
+  close: 'Close Out'
+};
+
 export default function ThemeSelector({ isOpen, onClose, onAppendText }) {
   const [selectedCategory, setSelectedCategory] = useState('athletes');
   const [selectedTheme, setSelectedTheme] = useState('testing');
   const [customName, setCustomName] = useState('[name]');
   const [appendedIndices, setAppendedIndices] = useState(new Set());
+  const [dayPhase, setDayPhase] = useState('weekly');
 
   // Reset appended state when modal opens
   useEffect(() => {
@@ -443,13 +1277,15 @@ export default function ThemeSelector({ isOpen, onClose, onAppendText }) {
 
   const categories = Object.keys(themeMessages);
   const availableThemes = Object.keys(themeMessages[selectedCategory].themes);
-  const messages = themeMessages[selectedCategory]?.themes[selectedTheme] || [];
+  const messages = dayPhase === 'weekly'
+    ? (themeMessages[selectedCategory]?.themes[selectedTheme] || [])
+    : (dayThemeData[selectedCategory]?.[selectedTheme]?.[dayPhase] || []);
 
   const formatMessage = (msg) => msg.replace(/\[name\]/g, customName);
 
   const handleAppend = (message, index) => {
     onAppendText(formatMessage(message));
-    setAppendedIndices((prev) => new Set(prev).add(`${selectedCategory}-${selectedTheme}-${index}`));
+    setAppendedIndices((prev) => new Set(prev).add(`${dayPhase}-${selectedCategory}-${selectedTheme}-${index}`));
   };
 
   return (
@@ -460,8 +1296,8 @@ export default function ThemeSelector({ isOpen, onClose, onAppendText }) {
         <div className="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white px-5 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold">Weekly Theme Selector</h2>
-              <p className="text-white/70 text-sm">Choose category, focus, then click messages to add them</p>
+              <h2 className="text-lg font-bold">Theme Selector</h2>
+              <p className="text-white/70 text-sm">Choose category, focus, day phase, then click messages to add</p>
             </div>
             <button onClick={onClose} className="bg-white/20 border-none text-white text-base w-[30px] h-[30px] rounded-full cursor-pointer flex items-center justify-center">&times;</button>
           </div>
@@ -528,14 +1364,37 @@ export default function ThemeSelector({ isOpen, onClose, onAppendText }) {
             </div>
           </div>
 
+          {/* Day phase pills */}
+          <div className="mb-4">
+            <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">Day Phase</label>
+            <div className="flex gap-1.5">
+              {Object.entries(dayPhaseLabels).map(([phase, label]) => (
+                <button
+                  key={phase}
+                  onClick={() => setDayPhase(phase)}
+                  className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${
+                    dayPhase === phase
+                      ? 'bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Messages — click to append */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">
-              Click to add to notes (multiple allowed)
+              {dayPhase === 'weekly' ? 'Weekly Messages' : dayPhase === 'mid' ? 'Mid-Week Messages' : 'Close-Out Messages'} — click to add (multiple allowed)
             </label>
             <div className="flex flex-col gap-2">
+              {messages.length === 0 && (
+                <p className="text-sm text-gray-400 italic py-3">No messages for this combination. Try a different day phase or training focus.</p>
+              )}
               {messages.map((message, index) => {
-                const key = `${selectedCategory}-${selectedTheme}-${index}`;
+                const key = `${dayPhase}-${selectedCategory}-${selectedTheme}-${index}`;
                 const wasAppended = appendedIndices.has(key);
                 return (
                   <div
