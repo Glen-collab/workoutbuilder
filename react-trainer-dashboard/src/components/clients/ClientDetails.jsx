@@ -1,9 +1,33 @@
+import { useState } from 'react';
 import { completionColor, completionBg } from '../../utils/helpers';
 import WeeklyProgressChart from '../charts/WeeklyProgressChart';
 import VolumeChart from '../charts/VolumeChart';
 import RecentWorkouts from './RecentWorkouts';
 
-export default function ClientDetails({ client, details, loading, onClose }) {
+export default function ClientDetails({ client, details, loading, onClose, onUpdateMaxes }) {
+  const [showMaxesEditor, setShowMaxesEditor] = useState(false);
+  const [maxes, setMaxes] = useState({
+    bench: client?.bench_max || '',
+    squat: client?.squat_max || '',
+    deadlift: client?.deadlift_max || '',
+    clean: client?.clean_max || '',
+  });
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState('');
+
+  const handleSaveMaxes = async () => {
+    if (!onUpdateMaxes) return;
+    setSaving(true);
+    setSaveMessage('');
+    const success = await onUpdateMaxes(client, maxes);
+    setSaving(false);
+    if (success) {
+      setSaveMessage('Saved!');
+      setTimeout(() => setSaveMessage(''), 2000);
+    } else {
+      setSaveMessage('Error saving');
+    }
+  };
   if (loading) {
     return (
       <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 relative">
@@ -29,7 +53,6 @@ export default function ClientDetails({ client, details, loading, onClose }) {
     expected_workouts = 0,
     completion_rate = 0,
     weekly_progress = [],
-    exercise_volume = {},
     recent_workouts = [],
     days_per_week,
     total_volume_stats = {},
@@ -174,8 +197,8 @@ export default function ClientDetails({ client, details, loading, onClose }) {
           </div>
         )}
 
-        {/* Volume Chart (legacy exercise-based) */}
-        <VolumeChart exerciseVolume={exercise_volume} />
+        {/* Volume Chart */}
+        <VolumeChart weeklyVolumeStats={weekly_volume_stats} />
 
         {/* Recent Workouts */}
         <RecentWorkouts workouts={recent_workouts} />
@@ -202,6 +225,91 @@ export default function ClientDetails({ client, details, loading, onClose }) {
             <p className="text-xs text-gray-400">
               Opens the builder with this client's program. Changes save as overrides per week/day.
             </p>
+          </div>
+        )}
+
+        {/* Update Client Maxes (Trainer Only) */}
+        {client?.access_code && (
+          <div className="bg-white rounded-xl border border-gray-200 p-4 lg:col-span-2">
+            <button
+              onClick={() => setShowMaxesEditor(!showMaxesEditor)}
+              className="w-full flex items-center justify-between text-left"
+            >
+              <span className="text-sm font-semibold text-gray-700">
+                Update 1RM Values
+              </span>
+              <span className="text-gray-400 text-lg">
+                {showMaxesEditor ? '−' : '+'}
+              </span>
+            </button>
+
+            {showMaxesEditor && (
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <p className="text-xs text-gray-500 mb-3">
+                  Set estimated maxes for clients who don't know their 1RM. These values are used for percentage-based exercises.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">Bench (lbs)</label>
+                    <input
+                      type="number"
+                      value={maxes.bench}
+                      onChange={(e) => setMaxes({ ...maxes, bench: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">Squat (lbs)</label>
+                    <input
+                      type="number"
+                      value={maxes.squat}
+                      onChange={(e) => setMaxes({ ...maxes, squat: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">Deadlift (lbs)</label>
+                    <input
+                      type="number"
+                      value={maxes.deadlift}
+                      onChange={(e) => setMaxes({ ...maxes, deadlift: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">Clean (lbs)</label>
+                    <input
+                      type="number"
+                      value={maxes.clean}
+                      onChange={(e) => setMaxes({ ...maxes, clean: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      placeholder="0"
+                    />
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      console.log('Save Maxes clicked', { client, maxes, onUpdateMaxes: !!onUpdateMaxes });
+                      handleSaveMaxes();
+                    }}
+                    disabled={saving}
+                    className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 cursor-pointer"
+                  >
+                    {saving ? 'Saving...' : 'Save Maxes'}
+                  </button>
+                  {saveMessage && (
+                    <span className={`text-sm font-medium ${saveMessage === 'Saved!' ? 'text-green-600' : 'text-red-500'}`}>
+                      {saveMessage}
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

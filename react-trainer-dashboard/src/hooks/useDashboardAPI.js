@@ -142,6 +142,20 @@ export default function useDashboardAPI() {
     [externalApi],
   );
 
+  const updateClientMaxes = useCallback(
+    async (accessCode, userEmail, maxes) => {
+      return await externalApi('update-client-maxes.php', {
+        access_code: accessCode,
+        user_email: userEmail,
+        bench_max: maxes.bench || null,
+        squat_max: maxes.squat || null,
+        deadlift_max: maxes.deadlift || null,
+        clean_max: maxes.clean || null,
+      });
+    },
+    [externalApi],
+  );
+
   return {
     loading,
     error,
@@ -153,6 +167,7 @@ export default function useDashboardAPI() {
     loadUserOverride,
     saveUserOverride,
     deleteUserOverride,
+    updateClientMaxes,
   };
 }
 

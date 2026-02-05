@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -8,72 +9,71 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-const COLORS = ['#667eea', '#4caf50', '#f44336', '#ff9800'];
+const METRICS = [
+  { key: 'tonnage', label: 'Tonnage', color: '#667eea', suffix: ' lbs' },
+  { key: 'est_calories', label: 'Calories', color: '#ef4444', suffix: '' },
+  { key: 'core_crunches', label: 'Core', color: '#10b981', suffix: ' reps' },
+  { key: 'cardio_minutes', label: 'Cardio', color: '#f59e0b', suffix: ' min' },
+];
 
-export default function VolumeChart({ exerciseVolume = {} }) {
-  const exercises = Object.keys(exerciseVolume).slice(0, 4);
+export default function VolumeChart({ weeklyVolumeStats = [] }) {
+  const [activeMetric, setActiveMetric] = useState('tonnage');
 
-  if (!exercises.length) {
+  // Check if we have any data
+  const hasData = weeklyVolumeStats.some(w =>
+    w.tonnage > 0 || w.core_crunches > 0 || w.cardio_minutes > 0 || w.est_calories > 0
+  );
+
+  if (!hasData) {
     return (
       <div className="bg-white rounded-xl border border-gray-200 p-5">
         <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Total Volume (Tonnage)
+          Weekly Volume
         </h3>
         <p className="text-gray-400 text-sm text-center py-8">No volume data yet</p>
       </div>
     );
   }
 
-  // Collect all week labels across exercises
-  const weekSet = new Set();
-  exercises.forEach((ex) => {
-    const weekly = exerciseVolume[ex]?.weekly || {};
-    Object.keys(weekly).forEach((w) => weekSet.add(w));
-  });
-  const labels = Array.from(weekSet).sort((a, b) => {
-    const na = parseInt(a.replace(/\D/g, '')) || 0;
-    const nb = parseInt(b.replace(/\D/g, '')) || 0;
-    return na - nb;
-  });
+  const metric = METRICS.find(m => m.key === activeMetric) || METRICS[0];
 
-  const datasets = exercises.map((ex, i) => {
-    const weekly = exerciseVolume[ex]?.weekly || {};
-    return {
-      label: ex,
-      data: labels.map((w) => weekly[w] || 0),
-      borderColor: COLORS[i],
-      backgroundColor: COLORS[i],
-      tension: 0.3,
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      borderWidth: 2,
-    };
-  });
+  // Build labels and data from weekly stats
+  const labels = weeklyVolumeStats.map(w => `Week ${w.week}`);
+  const dataValues = weeklyVolumeStats.map(w => w[metric.key] || 0);
 
-  const data = { labels, datasets };
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: metric.label,
+        data: dataValues,
+        borderColor: metric.color,
+        backgroundColor: `${metric.color}22`,
+        tension: 0.3,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 2,
+        fill: true,
+      },
+    ],
+  };
 
   const options = {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
       legend: {
-        position: 'bottom',
-        labels: {
-          usePointStyle: true,
-          pointStyleWidth: 10,
-          padding: 16,
-          font: { size: 11 },
-          color: '#6b7280',
-        },
+        display: false,
       },
       tooltip: {
         callbacks: {
           label: (ctx) =>
-            `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString()} lbs`,
+            `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString()}${metric.suffix}`,
         },
         backgroundColor: '#1f2937',
         titleFont: { size: 12 },
@@ -105,8 +105,27 @@ export default function VolumeChart({ exerciseVolume = {} }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5">
       <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-        Total Volume (Tonnage)
+        Weekly Volume
       </h3>
+
+      {/* Metric tabs */}
+      <div className="flex gap-2 mb-4 flex-wrap">
+        {METRICS.map(m => (
+          <button
+            key={m.key}
+            onClick={() => setActiveMetric(m.key)}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              activeMetric === m.key
+                ? 'text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+            style={activeMetric === m.key ? { backgroundColor: m.color } : {}}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+
       <Line data={data} options={options} />
     </div>
   );

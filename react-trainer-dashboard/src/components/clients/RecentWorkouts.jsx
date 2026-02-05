@@ -90,7 +90,11 @@ export default function RecentWorkouts({ workouts = [] }) {
 
 function WorkoutCard({ workout }) {
   const { day_number, workout_date, parsed_data } = workout;
-  const blocks = parsed_data?.blocks || [];
+  const allBlocks = parsed_data?.blocks || [];
+  // Filter to only show workout blocks (exclude warmup, mobility, cooldown, theme)
+  const blocks = allBlocks.filter(b =>
+    ['straight-set', 'superset', 'triset', 'conditioning'].includes(b.type)
+  );
   const trainerNotes = parsed_data?.trainerNotes;
   const clientNotes = parsed_data?.clientNotes;
 

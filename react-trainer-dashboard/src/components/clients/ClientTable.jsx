@@ -13,6 +13,7 @@ export default function ClientTable({
   clientDetails,
   detailsLoading,
   onCloseDetails,
+  onUpdateMaxes,
 }) {
   const allSelected = clients.length > 0 && selectedIds.size === clients.length;
   const clientKey = (c) => `${c.access_code || ''}|${c.user_email}`;
@@ -98,6 +99,7 @@ export default function ClientTable({
                   details={clientDetails}
                   loading={detailsLoading}
                   onClose={onCloseDetails}
+                  onUpdateMaxes={onUpdateMaxes}
                 />
               )}
             </div>
@@ -210,6 +212,7 @@ export default function ClientTable({
                             details={clientDetails}
                             loading={detailsLoading}
                             onClose={onCloseDetails}
+                            onUpdateMaxes={onUpdateMaxes}
                           />
                         </div>
                       </td>
