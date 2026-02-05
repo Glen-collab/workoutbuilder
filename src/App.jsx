@@ -182,7 +182,7 @@ export default function App() {
     };
 
     try {
-      if (workoutState.loadedProgram) {
+      if (workoutState.loadedProgram && !programInfo.saveAsNew) {
         payload.programId = workoutState.loadedProgram.id;
         payload.accessCode = workoutState.loadedProgram.accessCode;
         const result = await programAPI.updateProgram(payload);
@@ -199,6 +199,8 @@ export default function App() {
         setShowSaveModal(false);
         setSavedAccessCode(newCode);
       } else {
+        // New program OR "Save as New" from an existing program
+        delete payload.saveAsNew;
         const result = await programAPI.saveProgram(payload);
         console.log('Save result:', JSON.stringify(result));
         const programId = result?.programId || result?.data?.programId;

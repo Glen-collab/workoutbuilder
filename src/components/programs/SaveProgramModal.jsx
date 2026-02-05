@@ -18,7 +18,7 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
     }
   }, [isOpen, loadedProgram]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, saveAsNew = false) => {
     e.preventDefault();
     if (!programName.trim()) return;
     onSave({
@@ -26,7 +26,8 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
       programNickname: programNickname.trim(),
       trainerEmail: trainerEmail.trim(),
       optionalTrainerEmail: optionalTrainerEmail.trim(),
-      regenerateCode: isUpdate ? regenerateCode : false,
+      regenerateCode: isUpdate && !saveAsNew ? regenerateCode : false,
+      saveAsNew,
     });
   };
 
@@ -102,17 +103,29 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
           />
         </div>
 
-        <div className="flex gap-3 mt-2">
-          <button
-            type="submit"
-            className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
-            disabled={loading || !programName.trim()}
-          >
-            {loading ? 'Saving...' : isUpdate ? 'Update Program' : 'Save Program'}
-          </button>
-          <button type="button" className="py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border border-white/[0.12] rounded-[10px] cursor-pointer hover:bg-white/[0.06] transition" onClick={onClose}>
-            Cancel
-          </button>
+        <div className="flex flex-col gap-2 mt-2">
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
+              disabled={loading || !programName.trim()}
+            >
+              {loading ? 'Saving...' : isUpdate ? 'Update Program' : 'Save Program'}
+            </button>
+            <button type="button" className="py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border border-white/[0.12] rounded-[10px] cursor-pointer hover:bg-white/[0.06] transition" onClick={onClose}>
+              Cancel
+            </button>
+          </div>
+          {isUpdate && (
+            <button
+              type="button"
+              onClick={(e) => handleSubmit(e, true)}
+              className={`w-full py-3 px-6 text-[14px] font-semibold bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
+              disabled={loading || !programName.trim()}
+            >
+              {loading ? 'Saving...' : 'Save as New Program'}
+            </button>
+          )}
         </div>
       </form>
     </Modal>
