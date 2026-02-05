@@ -129,7 +129,7 @@ export default function ProfileSetup({ onComplete, onBack }) {
               value={totalWeeks}
               onChange={(e) => setTotalWeeks(e.target.value)}
               min="1"
-              max="12"
+              max="52"
             />
           </div>
         </div>
