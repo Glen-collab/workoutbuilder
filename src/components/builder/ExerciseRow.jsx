@@ -52,6 +52,66 @@ function QualifierSelect({ value, onChange }) {
   );
 }
 
+const DURATION_UNITS = [
+  { value: 'sec', label: 'Seconds' },
+  { value: 'min', label: 'Minutes' },
+  { value: 'hr', label: 'Hours' },
+];
+
+const DISTANCE_UNITS = [
+  { value: 'm', label: 'Meters' },
+  { value: 'yd', label: 'Yards' },
+  { value: 'ft', label: 'Feet' },
+  { value: 'mi', label: 'Miles' },
+  { value: 'km', label: 'Kilometers' },
+];
+
+const SPEED_UNITS = [
+  { value: 'mph', label: 'MPH' },
+  { value: 'kph', label: 'KPH' },
+  { value: 'min/mi', label: 'Min/Mile' },
+];
+
+function FieldWithUnit({ label, value, unit, onChangeValue, onChangeUnit, placeholder, units, valueWidth = '60px', unitWidth = '75px' }) {
+  const hasValue = value && value.toString().trim() !== '';
+  const activeUnit = unit || units[0].value;
+
+  return (
+    <div className="flex flex-col gap-0.5">
+      <span className="text-[11px] text-gray-400 font-semibold uppercase">{label}</span>
+      <div className="flex gap-1">
+        <input
+          type="text"
+          value={value || ''}
+          onChange={(e) => onChangeValue(e.target.value)}
+          placeholder={placeholder}
+          className="px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
+          style={{
+            width: valueWidth,
+            borderColor: hasValue ? '#667eea' : undefined,
+            background: hasValue ? '#f0f4ff' : undefined,
+          }}
+        />
+        <select
+          value={activeUnit}
+          onChange={(e) => onChangeUnit(e.target.value)}
+          className="px-1 py-[7px] rounded-md border text-[11px] outline-none cursor-pointer font-semibold"
+          style={{
+            width: unitWidth,
+            borderColor: hasValue ? '#667eea' : '#d1d5db',
+            background: hasValue ? '#667eea' : '#f3f4f6',
+            color: hasValue ? '#fff' : '#9ca3af',
+          }}
+        >
+          {units.map((u) => (
+            <option key={u.value} value={u.value} style={{ background: '#fff', color: '#333' }}>{u.label}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
+}
+
 function NotesWithCues({ value, onChange, onOpenCues }) {
   return (
     <div className="flex flex-col gap-0.5 w-full">
@@ -96,8 +156,9 @@ export default function ExerciseRow({
   const isWarmupMobility = ['warmup', 'mobility', 'cooldown'].includes(blockType);
   const isMovementConditioning = ['movement', 'conditioning'].includes(blockType);
 
+  const isBodyweight = exercise.baseMax === 'bodyweight';
   const baseMaxValue = exercise.baseMax ? (mainMaxes[exercise.baseMax] || 0) : 0;
-  const tonnage = isStrength ? calculateExerciseTonnage(exercise, mainMaxes) : 0;
+  const tonnage = isStrength && !isBodyweight ? calculateExerciseTonnage(exercise, mainMaxes) : 0;
 
   const baseMaxColor = exercise.baseMax ? baseMaxColors[exercise.baseMax] : baseMaxColors.bench;
 
@@ -156,7 +217,7 @@ export default function ExerciseRow({
               }}
             >
               {Object.entries(baseMaxLabels).map(([key, label]) => (
-                <option key={key} value={key}>{label} ({mainMaxes[key] || 0} lbs)</option>
+                <option key={key} value={key}>{label}{key !== 'bodyweight' ? ` (${mainMaxes[key] || 0} lbs)` : ''}</option>
               ))}
             </select>
           </div>
@@ -167,7 +228,15 @@ export default function ExerciseRow({
               <div className="flex gap-2 flex-wrap items-end mb-2.5">
                 <QualifierSelect value={exercise.qualifier} onChange={(v) => onUpdate({ qualifier: v })} />
                 <FieldInput label="Tempo" value={exercise.tempo} onChange={(v) => onUpdate({ tempo: v })} placeholder="3-1-1-0" width="80px" />
-                <FieldInput label="Time" value={exercise.time} onChange={(v) => onUpdate({ time: v })} placeholder="30s" width="64px" />
+                <FieldWithUnit
+                  label="Duration"
+                  value={exercise.duration}
+                  unit={exercise.durationUnit}
+                  onChangeValue={(v) => onUpdate({ duration: v })}
+                  onChangeUnit={(v) => onUpdate({ durationUnit: v })}
+                  placeholder="30"
+                  units={DURATION_UNITS}
+                />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
               </div>
 
@@ -177,6 +246,7 @@ export default function ExerciseRow({
                   set={set}
                   setIndex={idx}
                   baseMax={baseMaxValue}
+                  isBodyweight={isBodyweight}
                   onUpdate={(updates) => onUpdateSet(set.id, updates)}
                   onDuplicate={() => onDuplicateSet(set)}
                   onRemove={() => onRemoveSet(set.id)}
@@ -187,21 +257,23 @@ export default function ExerciseRow({
                 <button onClick={onAddSet} className="bg-blue-50 text-blue-700 border border-blue-200 rounded-md px-3.5 py-1.5 text-xs font-semibold cursor-pointer mr-2 mt-1.5">+ Add Set</button>
               </div>
 
-              {/* Scheme quick-apply */}
-              <div className="flex gap-1.5 flex-wrap mt-2">
-                {Object.entries(schemePresets).map(([key, scheme]) => (
-                  <button
-                    key={key}
-                    onClick={() => {
-                      const updated = applyScheme(key, exercise);
-                      onUpdate({ sets: updated.sets, scheme: updated.scheme, isPercentageBased: true });
-                    }}
-                    className="bg-gray-100 border border-gray-300 rounded-md px-2.5 py-1 text-[11px] font-semibold cursor-pointer text-gray-600"
-                  >
-                    {scheme.name}
-                  </button>
-                ))}
-              </div>
+              {/* Scheme quick-apply - hidden for bodyweight exercises */}
+              {!isBodyweight && (
+                <div className="flex gap-1.5 flex-wrap mt-2">
+                  {Object.entries(schemePresets).map(([key, scheme]) => (
+                    <button
+                      key={key}
+                      onClick={() => {
+                        const updated = applyScheme(key, exercise);
+                        onUpdate({ sets: updated.sets, scheme: updated.scheme, isPercentageBased: true });
+                      }}
+                      className="bg-gray-100 border border-gray-300 rounded-md px-2.5 py-1 text-[11px] font-semibold cursor-pointer text-gray-600"
+                    >
+                      {scheme.name}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Notes */}
               <div className="mt-2.5">
@@ -224,7 +296,15 @@ export default function ExerciseRow({
                 <QualifierSelect value={exercise.qualifier} onChange={(v) => onUpdate({ qualifier: v })} />
                 <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="135" width="72px" />
                 <FieldInput label="Tempo" value={exercise.tempo} onChange={(v) => onUpdate({ tempo: v })} placeholder="3-1-1-0" width="80px" />
-                <FieldInput label="Time" value={exercise.time} onChange={(v) => onUpdate({ time: v })} placeholder="30s" width="64px" />
+                <FieldWithUnit
+                  label="Duration"
+                  value={exercise.duration}
+                  unit={exercise.durationUnit}
+                  onChangeValue={(v) => onUpdate({ duration: v })}
+                  onChangeUnit={(v) => onUpdate({ durationUnit: v })}
+                  placeholder="30"
+                  units={DURATION_UNITS}
+                />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
                 <button
                   onClick={() => {
@@ -256,11 +336,27 @@ export default function ExerciseRow({
       {isCircuit && (
         <>
           <div className="flex gap-2 flex-wrap items-end mb-2">
-            <FieldInput label="Sets" value={exercise.setsCount} onChange={(v) => onUpdate({ setsCount: v })} placeholder="3" width="56px" />
             <FieldInput label="Reps" value={exercise.reps} onChange={(v) => onUpdate({ reps: v })} placeholder="10" width="72px" />
             <QualifierSelect value={exercise.qualifier} onChange={(v) => onUpdate({ qualifier: v })} />
             <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="BW" width="72px" />
-            <FieldInput label="Time" value={exercise.time} onChange={(v) => onUpdate({ time: v })} placeholder="30s" width="64px" />
+            <FieldWithUnit
+              label="Duration"
+              value={exercise.duration}
+              unit={exercise.durationUnit}
+              onChangeValue={(v) => onUpdate({ duration: v })}
+              onChangeUnit={(v) => onUpdate({ durationUnit: v })}
+              placeholder="30"
+              units={DURATION_UNITS}
+            />
+            <FieldWithUnit
+              label="Distance"
+              value={exercise.distance}
+              unit={exercise.distanceUnit}
+              onChangeValue={(v) => onUpdate({ distance: v })}
+              onChangeUnit={(v) => onUpdate({ distanceUnit: v })}
+              placeholder="400"
+              units={DISTANCE_UNITS}
+            />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="30s" width="64px" />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
@@ -274,7 +370,15 @@ export default function ExerciseRow({
             <FieldInput label="Sets" value={exercise.setsCount} onChange={(v) => onUpdate({ setsCount: v })} placeholder="1" width="56px" />
             <FieldInput label="Reps" value={exercise.reps} onChange={(v) => onUpdate({ reps: v })} placeholder="10" width="72px" />
             <QualifierSelect value={exercise.qualifier} onChange={(v) => onUpdate({ qualifier: v })} />
-            <FieldInput label="Duration" value={exercise.duration} onChange={(v) => onUpdate({ duration: v })} placeholder="30s" width="72px" />
+            <FieldWithUnit
+              label="Duration"
+              value={exercise.duration}
+              unit={exercise.durationUnit}
+              onChangeValue={(v) => onUpdate({ duration: v })}
+              onChangeUnit={(v) => onUpdate({ durationUnit: v })}
+              placeholder="30"
+              units={DURATION_UNITS}
+            />
             <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="BW" width="72px" />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
@@ -288,9 +392,34 @@ export default function ExerciseRow({
             <FieldInput label="Sets" value={exercise.setsCount} onChange={(v) => onUpdate({ setsCount: v })} placeholder="4" width="56px" />
             <FieldInput label="Reps" value={exercise.reps} onChange={(v) => onUpdate({ reps: v })} placeholder="10" width="72px" />
             <QualifierSelect value={exercise.qualifier} onChange={(v) => onUpdate({ qualifier: v })} />
-            <FieldInput label="Duration" value={exercise.duration} onChange={(v) => onUpdate({ duration: v })} placeholder="60s" width="72px" />
-            <FieldInput label="Distance" value={exercise.distance} onChange={(v) => onUpdate({ distance: v })} placeholder="400m" width="80px" />
-            <FieldInput label="Speed" value={exercise.speed} onChange={(v) => onUpdate({ speed: v })} placeholder="6.0 mph" width="80px" />
+            <FieldWithUnit
+              label="Duration"
+              value={exercise.duration}
+              unit={exercise.durationUnit}
+              onChangeValue={(v) => onUpdate({ duration: v })}
+              onChangeUnit={(v) => onUpdate({ durationUnit: v })}
+              placeholder="60"
+              units={DURATION_UNITS}
+            />
+            <FieldWithUnit
+              label="Distance"
+              value={exercise.distance}
+              unit={exercise.distanceUnit}
+              onChangeValue={(v) => onUpdate({ distance: v })}
+              onChangeUnit={(v) => onUpdate({ distanceUnit: v })}
+              placeholder="1000"
+              units={DISTANCE_UNITS}
+            />
+            <FieldWithUnit
+              label="Speed"
+              value={exercise.speed}
+              unit={exercise.speedUnit}
+              onChangeValue={(v) => onUpdate({ speed: v })}
+              onChangeUnit={(v) => onUpdate({ speedUnit: v })}
+              placeholder="6.0"
+              units={SPEED_UNITS}
+            />
+            <FieldInput label="Incline" value={exercise.incline} onChange={(v) => onUpdate({ incline: v })} placeholder="5%" width="56px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />

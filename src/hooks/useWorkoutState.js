@@ -22,6 +22,8 @@ function createBlock(id, type = 'straight-set') {
     rounds: '',
     timeLimit: '',
     restBetweenRounds: '',
+    workInterval: '',
+    restInterval: '',
     themeText: '',
   };
 }

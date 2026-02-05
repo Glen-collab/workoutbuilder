@@ -119,7 +119,8 @@ export default function BlockCard({
           {/* Circuit config */}
           {block.type === 'circuit' && (
             <div className="flex gap-3 flex-wrap mb-3.5">
-              {(block.circuitType === 'rounds' || block.circuitType === 'amrap' || !block.circuitType) && (
+              {/* Rounds: show for rounds, fortime, or no type selected */}
+              {(block.circuitType === 'rounds' || block.circuitType === 'fortime' || !block.circuitType) && (
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[11px] text-gray-400 font-semibold uppercase">Rounds</span>
                   <input
@@ -132,28 +133,59 @@ export default function BlockCard({
                   />
                 </div>
               )}
-              {(block.circuitType === 'amrap' || block.circuitType === 'forTime') && (
+              {/* Time Limit: show for AMRAP, EMOM, Tabata, For Time (as cap) */}
+              {(block.circuitType === 'amrap' || block.circuitType === 'emom' || block.circuitType === 'tabata' || block.circuitType === 'fortime') && (
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] text-gray-400 font-semibold uppercase">Time Limit</span>
+                  <span className="text-[11px] text-gray-400 font-semibold uppercase">
+                    {block.circuitType === 'emom' ? 'Total Minutes' : block.circuitType === 'fortime' ? 'Time Cap' : 'Time Limit'}
+                  </span>
                   <input
                     type="text"
                     value={block.timeLimit || ''}
                     onChange={(e) => onUpdateBlock(block.id, { timeLimit: e.target.value })}
-                    placeholder="12 min"
+                    placeholder={block.circuitType === 'emom' ? '12' : block.circuitType === 'tabata' ? '4' : '20 min'}
                     className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
                   />
                 </div>
               )}
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[11px] text-gray-400 font-semibold uppercase">Rest Between Rounds</span>
-                <input
-                  type="text"
-                  value={block.restBetweenRounds || ''}
-                  onChange={(e) => onUpdateBlock(block.id, { restBetweenRounds: e.target.value })}
-                  placeholder="60s"
-                  className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
-                />
-              </div>
+              {/* Work/Rest intervals for Tabata */}
+              {block.circuitType === 'tabata' && (
+                <>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[11px] text-gray-400 font-semibold uppercase">Work</span>
+                    <input
+                      type="text"
+                      value={block.workInterval || ''}
+                      onChange={(e) => onUpdateBlock(block.id, { workInterval: e.target.value })}
+                      placeholder="20s"
+                      className="w-16 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[11px] text-gray-400 font-semibold uppercase">Rest</span>
+                    <input
+                      type="text"
+                      value={block.restInterval || ''}
+                      onChange={(e) => onUpdateBlock(block.id, { restInterval: e.target.value })}
+                      placeholder="10s"
+                      className="w-16 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
+                    />
+                  </div>
+                </>
+              )}
+              {/* Rest Between Rounds: show for all except tabata (has its own rest) and chipper (one pass) */}
+              {block.circuitType !== 'tabata' && block.circuitType !== 'chipper' && (
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[11px] text-gray-400 font-semibold uppercase">Rest Between Rounds</span>
+                  <input
+                    type="text"
+                    value={block.restBetweenRounds || ''}
+                    onChange={(e) => onUpdateBlock(block.id, { restBetweenRounds: e.target.value })}
+                    placeholder="60s"
+                    className="w-20 px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
+                  />
+                </div>
+              )}
             </div>
           )}
 

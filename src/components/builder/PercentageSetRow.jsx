@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { calculateWeight } from '../../utils/percentageCalc';
 import PercentagePicker from './PercentagePicker';
 
-export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onDuplicate, onRemove, canRemove }) {
+export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onDuplicate, onRemove, canRemove, isBodyweight }) {
   const [showPicker, setShowPicker] = useState(false);
   const calcLbs = calculateWeight(set.percentage || 0, baseMax || 0);
   const isManual = set.manualWeight != null;
@@ -12,6 +12,33 @@ export default function PercentageSetRow({ set, setIndex, baseMax, onUpdate, onD
     onUpdate({ percentage: pct });
     setShowPicker(false);
   };
+
+  // Bodyweight mode: just show set label, reps, duplicate, remove
+  if (isBodyweight) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg mb-1.5 flex-wrap bg-gray-50">
+        <span className="font-bold text-[13px] min-w-[50px] text-gray-600">{label}</span>
+        <input
+          type="number"
+          min={1}
+          max={100}
+          value={set.reps || ''}
+          onChange={(e) => onUpdate({ reps: parseInt(e.target.value) || 0 })}
+          placeholder="Reps"
+          className="w-14 md:w-16 px-2 py-1.5 rounded-md border border-gray-300 text-[13px] text-center outline-none"
+        />
+        <span className="text-[13px] font-semibold text-gray-500">reps</span>
+        <span className="text-[12px] text-gray-400 italic">BW</span>
+        <button onClick={onDuplicate} className="bg-none border-none cursor-pointer text-base p-1 rounded leading-none" title="Duplicate set">📋</button>
+        <button
+          onClick={canRemove ? onRemove : undefined}
+          className={`bg-none border-none cursor-pointer text-[15px] p-1 rounded leading-none ${canRemove ? 'text-red-600' : 'opacity-30 cursor-not-allowed text-gray-400'}`}
+          disabled={!canRemove}
+          title="Remove set"
+        >🗑</button>
+      </div>
+    );
+  }
 
   return (
     <div className={`flex items-center gap-2 px-3 py-2 rounded-lg mb-1.5 flex-wrap ${set.isWarmup ? 'bg-amber-50 border border-amber-300' : 'bg-gray-50'}`}>
