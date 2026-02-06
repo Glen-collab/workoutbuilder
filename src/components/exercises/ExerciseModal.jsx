@@ -12,7 +12,7 @@ const warmupCooldownTypes = ['warmup', 'cooldown'];
 
 const VIRTUAL_CATEGORIES = { functional: 'functional', corrective: 'corrective' };
 const REDIRECT_MAP = { olympic_lifting: 'oly_complexes', first_responder: 'tactical' };
-const UPPER_PARTS = ['chest', 'back', 'shoulders', 'arms'];
+const UPPER_PARTS = ['chest', 'back', 'shoulders', 'biceps', 'triceps'];
 const LOWER_PARTS = ['legs', 'core'];
 
 function getExercisesForSelection(muscleGroup, subcategory) {
