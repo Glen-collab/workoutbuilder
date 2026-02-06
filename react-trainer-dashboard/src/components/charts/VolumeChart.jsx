@@ -15,10 +15,11 @@ import {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 const METRICS = [
-  { key: 'tonnage', label: 'Tonnage', color: '#667eea', suffix: ' lbs' },
-  { key: 'est_calories', label: 'Calories', color: '#ef4444', suffix: '' },
-  { key: 'core_crunches', label: 'Core', color: '#10b981', suffix: ' reps' },
-  { key: 'cardio_minutes', label: 'Cardio', color: '#f59e0b', suffix: ' min' },
+  { key: 'tonnage', label: 'Tonnage (lbs)', color: '#667eea', suffix: ' lbs' },
+  { key: 'est_calories', label: 'Calories', color: '#ef4444', suffix: ' cal' },
+  { key: 'core_crunches', label: 'Core (reps)', color: '#10b981', suffix: ' reps' },
+  { key: 'cardio_minutes', label: 'Time (min)', color: '#f59e0b', suffix: ' min' },
+  { key: 'cardio_miles', label: 'Distance (mi)', color: '#3b82f6', suffix: ' mi' },
 ];
 
 export default function VolumeChart({ weeklyVolumeStats = [], totalWeeks = 12 }) {
@@ -26,7 +27,7 @@ export default function VolumeChart({ weeklyVolumeStats = [], totalWeeks = 12 })
 
   // Check if we have any data
   const hasData = weeklyVolumeStats.some(w =>
-    w.tonnage > 0 || w.core_crunches > 0 || w.cardio_minutes > 0 || w.est_calories > 0
+    w.tonnage > 0 || w.core_crunches > 0 || w.cardio_minutes > 0 || w.cardio_miles > 0 || w.est_calories > 0
   );
 
   // Build week labels - if no data, show empty weeks 1-4 or up to totalWeeks
@@ -38,7 +39,7 @@ export default function VolumeChart({ weeklyVolumeStats = [], totalWeeks = 12 })
   const allWeeks = [];
   for (let w = 1; w <= numWeeks; w++) {
     const existing = weeklyVolumeStats.find(s => s.week === w);
-    allWeeks.push(existing || { week: w, tonnage: 0, core_crunches: 0, cardio_minutes: 0, est_calories: 0 });
+    allWeeks.push(existing || { week: w, tonnage: 0, core_crunches: 0, cardio_minutes: 0, cardio_miles: 0, est_calories: 0 });
   }
 
   const metric = METRICS.find(m => m.key === activeMetric) || METRICS[0];
