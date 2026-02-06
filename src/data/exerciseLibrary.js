@@ -522,16 +522,38 @@ export const exerciseCategories = {
         }
     },
 
-    // ARMS
-    arms: {
-        label: "Arms",
+    // BICEPS
+    biceps: {
+        label: "Biceps",
         subcategories: {
-            biceps: {
-                label: "Biceps",
+            barbell: {
+                label: "Barbell",
                 exercises: [
-                    // --- Existing exercises with CF Video ---
                     { name: 'EZ Bar Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1364d3db0a45a5e5154386c0a28bb6bc' },
                     { name: 'EZ Bar Reverse Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/45b239b0f05777ae901564638c35fb19' },
+                    { name: 'Straight Bar Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0aabc5571f37023c27ad55680ba66dce' },
+                    { name: 'Straight Bar Broken Wrist Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5ec0c5b254ddf362d4adf359a11b955a' },
+                    { name: 'Barbell Drag Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7bacecb8b2fefb1cf88b549b243b5460' },
+                    { name: 'Wide Grip Barbell Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdae52ce422ad9f501ad92d47268dca9' },
+                    { name: 'EZ Bar Reverse Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1dc755dca34d390e10ca0917e4be9282' },
+                    { name: 'EZ Bar Preacher 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f65d250483410e058e4fe1dff7d3a960' },
+                    { name: 'Narrow Grip EZ Bar Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bc0789cb4c5dd1eabb275fc1f347f9ec' },
+                    { name: 'Wide Grip EZ Bar Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a20615bc1d88d7aa41b73e1703871a4a' },
+                    { name: 'Barbell 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b7dfb838d032c125c02f4da080910de7' },
+                    { name: 'EZ Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3250947fc5319cc3d18f21b852a2abdc' },
+                    { name: 'Barbell Reverse Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5d67a2b2f4e43cf6f3df9607d1cedb6' },
+                    { name: 'Back against Wall EZ Bar Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c38e55021fe3490afbe57c01e9c67106' },
+                    { name: 'Back against Wall EZ Bar Reverse Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dde524e4619858e99fd6efde4da54925' },
+                    { name: 'Narrow Grip EZ Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/417a4fd3a971880c43f7180e665efc6e' },
+                    { name: 'EZ Bar Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a6efed5d8474a27b7a222925a709ad60' },
+                    { name: 'EZ Bar 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/45cd7a17137da3505e310088529c6cd0' },
+                    { name: 'Reverse Grip Straight Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/42f7435f98f27023f25b0f7b07f76edd' },
+                    { name: 'Narrow Grip Barbell Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/20c4c77645af33cad69e93d640a3def8' }
+                ]
+            },
+            dumbbell: {
+                label: "Dumbbell",
+                exercises: [
                     { name: 'Dumbbell Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/70d2b87f3fbc3af2fb17a0e10eeeb71d' },
                     { name: 'Alternating Dumbbell Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/84f5ae04df96989a94d680c6d3b5cdb4', geriatric_priority: true },
                     { name: 'Dumbbell Standing Zottman Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4d9043eb3b85126dd15ea29e07e000c8' },
@@ -543,123 +565,134 @@ export const exerciseCategories = {
                     { name: 'Dumbbell Cross Body Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/adc620c063f1fe1828a69bbac0fb5f41' },
                     { name: 'Alternating Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3afb2ca32880c6e9ac2ce3280518fca6' },
                     { name: 'Alternating Dumbbell Curls (Seated)', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5feb0e3f7f514ab587a58ce8e6a250dd', geriatric_priority: true },
+                    { name: 'Incline Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/252bafb8f50447dcf8afc53e3103ca19' },
+                    { name: 'DB Alternating Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/96a5c2f534ff33c18a77d2ca801bf540' },
+                    { name: 'Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fc6df89af19ba9ac2332c23261b7ae8b' },
+                    { name: 'Standing Single Arm Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b041f510c9fc468ca21a8ae12915e53a' },
+                    { name: 'DB Crossbody Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f6f86a35e5ed8fa3cbcd6ca42dc52cb' },
+                    { name: 'DB Concentration Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/10c2515f1160a97c6a8d4898a7cbaf96' },
+                    { name: 'Spider Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/10db742ece036316b8b15fd7605cc127' },
+                    { name: 'Incline Preacher Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6309d9e36ef45f03a5852fd7a7a7d89d' },
+                    { name: 'DB Alternating Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3d6271ef77c06147381af00092ef6b2e' },
+                    { name: 'Double Arm Incline Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/454e0d08f6b827234cf34c8232f1eb66' },
+                    { name: 'DB Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f0c4a20aff32162a76651f998184feed' },
+                    { name: 'DB Pronate to Supinate Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b69bb4bc6f32acf5c876c7c889fb884b' },
+                    { name: 'DB Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6a9236afe2414fcbd870959ca0338c39' },
+                    { name: 'Broken Wrist Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/83b1d33aef9df1dfc2b4a608b73a1f01' },
+                    { name: 'Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7f84de31e94dcac1151702410ff69d3f' },
+                    { name: 'Reverse Grip DB Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ad3c66b2d325fe142a473f71426ba988' },
+                    { name: 'Incline Preacher Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2bb2c7108561b8784120d5e90365134a' },
+                    { name: 'DB Alternating Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9f07b7fa4ed45c4e1e72d4b6e8211785' },
+                    { name: 'Alternating DB Incline Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2381dffe4d5149b85a9546aae054a3bc' },
+                    { name: 'DB 21s Against the Wall', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c79c4c82cc17774fad570e7aca956b5d' },
+                    { name: 'Incline Hammer Reverse Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/173ed61fdf8e774d3980246105a4b197' },
+                    { name: 'Single Arm Incline Curl on Bench', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5da2296d49807758366b81e42715c1f9' },
+                    { name: 'DB Bent over Concentration Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d3517d5fa639dc50e25a06790954b8d1' },
+                    { name: 'DB 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/770e335a5ed1e2426a510742f756c345' }
+                ]
+            },
+            cable: {
+                label: "Cable",
+                exercises: [
                     { name: 'Single Arm Cable Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5b6c80c3096db8082da9038dc3f056c1' },
                     { name: 'Standing Rope Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5eb6ee8a1812a2ae57c22fa4187480fc' },
                     { name: 'Rope Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6ae2bab5d832238bbc45d7871da6f82d' },
                     { name: 'Alternating Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b953bb1b0f7d319d4e87cf8d10dad4f9' },
                     { name: 'Standing Rope Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/07ed4a4fbeaee4d403e81dff8484ec63' },
-                    { name: 'Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fcaf9c7b79470f50c84c4108f76921e7', geriatric_priority: true },
-                    { name: 'Band Curls from Rack', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/059a8020058876c826b2cfdd2f0f9e69' },
-                    // --- New Biceps exercises from Cloudflare upload ---
                     { name: 'Standing Single Arm Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6254d63ece08d20382a52638be8ac4c9' },
-                    { name: 'Stability Ball Alternating Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/59f471cd2ed30a31eceececd8470a05a' },
-                    { name: 'Straight Bar Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0aabc5571f37023c27ad55680ba66dce' },
-                    { name: 'Stability Ball Single Arm Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c26e2e9e19b99a0440e22f1a1620ef15' },
                     { name: 'Single Arm Reverse Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3f7ba1b3ce7d3df43a16b3d167062152' },
-                    { name: 'Straight Bar Broken Wrist Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5ec0c5b254ddf362d4adf359a11b955a' },
-                    { name: 'Standing Alternating Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bde735c81dcf6a843478f7dd356bbe0' },
-                    { name: 'Incline Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/252bafb8f50447dcf8afc53e3103ca19' },
-                    { name: 'Alternating Band Hammer Curls Standing', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cf2d921db251eeb9db7b66f6e003f8b4' },
                     { name: 'Dual Cable 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/08f14c4f66ab17bdec3be45e132014bd' },
-                    { name: 'DB Alternating Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/96a5c2f534ff33c18a77d2ca801bf540' },
-                    { name: 'Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fc6df89af19ba9ac2332c23261b7ae8b' },
-                    { name: 'Standing Reverse Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d60eb653bccc7039167847880a3fe07c' },
-                    { name: 'Standing Single Arm Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b041f510c9fc468ca21a8ae12915e53a' },
                     { name: 'Cable Rope Preacher Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d717d84232fbd833bbb6be9c8fd546f7' },
-                    { name: 'Barbell Drag Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7bacecb8b2fefb1cf88b549b243b5460' },
-                    { name: 'Wide Grip Barbell Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdae52ce422ad9f501ad92d47268dca9' },
-                    { name: 'DB Crossbody Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f6f86a35e5ed8fa3cbcd6ca42dc52cb' },
                     { name: 'Cable EZ Bar Reverse Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/32870aef1f65b87a8b33e0986fc065e9' },
-                    { name: 'DB Concentration Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/10c2515f1160a97c6a8d4898a7cbaf96' },
-                    { name: 'Spider Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/10db742ece036316b8b15fd7605cc127' },
-                    { name: 'Stability Ball Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5b77dfe7a08c6020e7012c105bffda5' },
-                    { name: 'Stability Ball Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8b172f0c1405b84d3b6d569411c17d28' },
-                    { name: 'EZ Bar Reverse Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1dc755dca34d390e10ca0917e4be9282' },
-                    { name: 'Incline Preacher Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6309d9e36ef45f03a5852fd7a7a7d89d' },
-                    { name: 'Stability Ball Preacher Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4fb819d2c23308549c8e953a81e9524a' },
-                    { name: 'EZ Bar Preacher 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f65d250483410e058e4fe1dff7d3a960' },
-                    { name: 'DB Alternating Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3d6271ef77c06147381af00092ef6b2e' },
-                    { name: 'Narrow Grip EZ Bar Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bc0789cb4c5dd1eabb275fc1f347f9ec' },
-                    { name: 'Stability Ball Preacher Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/af7198b2d0c76f506892d163866646fc' },
-                    { name: 'Double Arm Incline Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/454e0d08f6b827234cf34c8232f1eb66' },
-                    { name: 'Band Curls Standing', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3d7b11066806cf478b50ddc53c783738' },
-                    { name: 'DB Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f0c4a20aff32162a76651f998184feed' },
                     { name: 'Cable EZ Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ceb3496a3ec350855015f1a3d6727fc7' },
                     { name: 'Cable Reverse Curl 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/60fa486e59f38f17041c0eba26b4ca09' },
-                    { name: 'Wide Grip EZ Bar Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a20615bc1d88d7aa41b73e1703871a4a' },
-                    { name: 'DB Pronate to Supinate Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b69bb4bc6f32acf5c876c7c889fb884b' },
                     { name: 'Cable Cross Body Single Arm Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/05e12d6a4c5bd34fb032bf495d54a985' },
-                    { name: 'DB Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6a9236afe2414fcbd870959ca0338c39' },
-                    { name: 'Broken Wrist Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/83b1d33aef9df1dfc2b4a608b73a1f01' },
-                    { name: 'Standing Band Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f7ae5baeed43fa3ce3c7137c866ca7f3' },
-                    { name: 'Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7f84de31e94dcac1151702410ff69d3f' },
-                    { name: 'Reverse Grip DB Spider Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ad3c66b2d325fe142a473f71426ba988' },
-                    { name: 'Barbell 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b7dfb838d032c125c02f4da080910de7' },
-                    { name: 'Incline Preacher Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2bb2c7108561b8784120d5e90365134a' },
-                    { name: 'Stability Ball Preacher Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5c58071e73932d9a8ef3dc5435348fd2' },
                     { name: 'Broken Wrist Single Arm Cable Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/036a0c371638a961eb361c8afb411879' },
-                    { name: 'DB Alternating Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9f07b7fa4ed45c4e1e72d4b6e8211785' },
-                    { name: 'Alternating DB Incline Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2381dffe4d5149b85a9546aae054a3bc' },
-                    { name: 'DB 21s Against the Wall', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c79c4c82cc17774fad570e7aca956b5d' },
-                    { name: 'Incline Hammer Reverse Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/173ed61fdf8e774d3980246105a4b197' },
-                    { name: 'Band Standing Drag Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/39131f4950e9382809d6a961ad63a70c' },
-                    { name: 'EZ Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3250947fc5319cc3d18f21b852a2abdc' },
-                    { name: 'Barbell Reverse Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5d67a2b2f4e43cf6f3df9607d1cedb6' },
                     { name: 'Cable EZ Bar Preacher 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d76febdfdfc2b7d840da14b122b52f16' },
                     { name: 'Single Arm Big Ron Cable Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fddb9534ddbbec112307797b39ad4bb2' },
-                    { name: 'TRX Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c0ee18e9b0b781e49802eae48126f54c' },
                     { name: 'Straight Bar Cable Drag Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a9eaafad4c10e84de072a1d4a5fdc71e' },
                     { name: 'High Rope Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0728c369f1338e734f72b07120823ca6' },
                     { name: 'Cable Straight Bar 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eaf00f71c6216cff8d43d475452916be' },
-                    { name: 'Back against Wall EZ Bar Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c38e55021fe3490afbe57c01e9c67106' },
                     { name: 'Straight Bar Reverse Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c9d9ab4563e4654fa8cf74be3127ff50' },
-                    { name: 'Back against Wall EZ Bar Reverse Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dde524e4619858e99fd6efde4da54925' },
-                    { name: 'Single Arm Incline Curl on Bench', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5da2296d49807758366b81e42715c1f9' },
                     { name: 'Straight Bar High Cable Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3c1cc936965f90bb32e4b18d9d998c89' },
                     { name: 'Double Arm Cable Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f12710f9d888976841d7d634267ddf9d' },
-                    { name: 'Narrow Grip EZ Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/417a4fd3a971880c43f7180e665efc6e' },
-                    { name: 'DB Bent over Concentration Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d3517d5fa639dc50e25a06790954b8d1' },
-                    { name: 'EZ Bar Broken Wrist Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a6efed5d8474a27b7a222925a709ad60' },
-                    { name: 'EZ Bar 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/45cd7a17137da3505e310088529c6cd0' },
                     { name: 'Cable Preacher Curls Straight Bar', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/102d8158268367babea5ea7f2abf947a' },
                     { name: 'Standing Straight Bar Cable Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8ae3b1c8d7b95e38f1443211e91c5e15' },
-                    { name: 'Stability Ball Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a64d26ec7c9c82e872fe2bb714a7ceac' },
-                    { name: 'Reverse Grip Straight Bar Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/42f7435f98f27023f25b0f7b07f76edd' },
-                    { name: 'Stability Ball Single Arm Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/15c5622fb69d081962823f99aced0b97' },
-                    { name: 'Narrow Grip Barbell Curl', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/20c4c77645af33cad69e93d640a3def8' },
-                    { name: 'DB 21s', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/770e335a5ed1e2426a510742f756c345' },
                     { name: 'Cable Straight Bar Wrist Flexion Extension', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/42f2507b2e896862705fe557e60c5a9b' }
                 ]
             },
-            triceps: {
-                label: "Triceps",
+            other: {
+                label: "Other",
                 exercises: [
-                    // --- Existing exercises with CF Video ---
+                    { name: 'Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fcaf9c7b79470f50c84c4108f76921e7', geriatric_priority: true },
+                    { name: 'Band Curls from Rack', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/059a8020058876c826b2cfdd2f0f9e69' },
+                    { name: 'Standing Alternating Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bde735c81dcf6a843478f7dd356bbe0' },
+                    { name: 'Alternating Band Hammer Curls Standing', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cf2d921db251eeb9db7b66f6e003f8b4' },
+                    { name: 'Standing Reverse Band Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d60eb653bccc7039167847880a3fe07c' },
+                    { name: 'Band Curls Standing', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3d7b11066806cf478b50ddc53c783738' },
+                    { name: 'Standing Band Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f7ae5baeed43fa3ce3c7137c866ca7f3' },
+                    { name: 'Band Standing Drag Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/39131f4950e9382809d6a961ad63a70c' },
+                    { name: 'Stability Ball Alternating Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/59f471cd2ed30a31eceececd8470a05a' },
+                    { name: 'Stability Ball Single Arm Preacher Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c26e2e9e19b99a0440e22f1a1620ef15' },
+                    { name: 'Stability Ball Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5b77dfe7a08c6020e7012c105bffda5' },
+                    { name: 'Stability Ball Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8b172f0c1405b84d3b6d569411c17d28' },
+                    { name: 'Stability Ball Preacher Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4fb819d2c23308549c8e953a81e9524a' },
+                    { name: 'Stability Ball Preacher Hammer Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/af7198b2d0c76f506892d163866646fc' },
+                    { name: 'Stability Ball Preacher Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5c58071e73932d9a8ef3dc5435348fd2' },
+                    { name: 'Stability Ball Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a64d26ec7c9c82e872fe2bb714a7ceac' },
+                    { name: 'Stability Ball Single Arm Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/15c5622fb69d081962823f99aced0b97' },
+                    { name: 'TRX Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c0ee18e9b0b781e49802eae48126f54c' }
+                ]
+            }
+        }
+    },
+
+    // TRICEPS
+    triceps: {
+        label: "Triceps",
+        subcategories: {
+            barbell: {
+                label: "Barbell",
+                exercises: [
                     { name: 'Close Grip Bench Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/c951cb36291c1f1ddb328e6fd692153d' },
                     { name: 'Barbell Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b9f8f065ac5fb24749f74d05aa70e3f6' },
-                    { name: 'EZ Bar Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/69b888a6476ee0931fa75918e0d5d271' },
+                    { name: 'EZ Bar Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/69b888a6476ee0931fa75918e0d5d271' }
+                ]
+            },
+            dumbbell: {
+                label: "Dumbbell",
+                exercises: [
                     { name: 'Tate Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5e98b80bb0d4421b84660e9471b6b2da' },
                     { name: 'Dumbbell Seated Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f25db0daf8b4adc9465204ce7d03ad1d', geriatric_priority: true },
                     { name: 'Standing Dumbbell Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e01902f3ef48f20c40d2a8f6ca5aaf4d' },
-                    { name: 'Dumbbell Bent Over Kickbacks', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/07c7698b00229ef4b7db460792b86d58', geriatric_priority: true },
+                    { name: 'Dumbbell Bent Over Kickbacks', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/07c7698b00229ef4b7db460792b86d58', geriatric_priority: true }
+                ]
+            },
+            cable: {
+                label: "Cable",
+                exercises: [
                     { name: 'Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d503d1a6cbbc4eb696f2193b586c285e' },
                     { name: 'Rope Single Arm Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f9bf5da2427554de25afd6ff8703ae8a' },
                     { name: 'Single Arm Rope Tricep Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a19d7db58d37cb49edfe9e84089aaf9d' },
                     { name: 'Rope Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eed0fff80ce5ec256d93ef5178f9026a' },
                     { name: 'Turn-Around Bent Over Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/27c84f61a02c3150c966137d8eef4983' },
+                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6eeacaf962a73cd24b09a7c2044c5779' },
+                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/9fef28bfa783b1ced1869ea6a7d7fe48' },
+                    { name: 'Rope Pushdown Bent over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f1c34bd44cc25461d0be37f05139f2a' }
+                ]
+            },
+            other: {
+                label: "Other",
+                exercises: [
                     { name: 'Band Overhead Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/59993a59bb50f9a3276dd9da92419287' },
                     { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true },
                     { name: 'Stability Ball Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/28d2ea35b932f8dd53d7a8b7de3d1279' },
                     { name: 'Band Triceps Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/638e518ec176a61ffa7cddb8c8e5c947' },
-                    // --- New Triceps exercises from Cloudflare upload ---
-                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6eeacaf962a73cd24b09a7c2044c5779' },
                     { name: 'Turn Around Band Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/94b47d865fa9458883e88b09d490a707' },
-                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/9fef28bfa783b1ced1869ea6a7d7fe48' },
                     { name: 'Band Pushdown to Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a3239ad4529ad27ac306f0e04110e8d1' },
                     { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ae4860e0385c1f363b52852b1cebeae2', geriatric_priority: true },
                     { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f8b63953af49fb9e464354e40c058bb0' },
-                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c42775c49b990b23950ba99830ea5fb5' },
-                    { name: 'Rope Pushdown Bent over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f1c34bd44cc25461d0be37f05139f2a' }
+                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c42775c49b990b23950ba99830ea5fb5' }
                 ]
             }
         }
