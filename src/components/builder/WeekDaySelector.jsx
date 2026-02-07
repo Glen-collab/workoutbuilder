@@ -10,9 +10,11 @@ export default function WeekDaySelector({
   onCopyWeek,
   onCopyAllWeeks,
   onInsertWeek,
+  onAddWeeks,
 }) {
   const [copyMenuOpen, setCopyMenuOpen] = useState(false);
   const [insertMenuOpen, setInsertMenuOpen] = useState(false);
+  const [addWeeksMenuOpen, setAddWeeksMenuOpen] = useState(false);
 
   const remainingWeeks = totalWeeks - currentWeek;
 
@@ -45,7 +47,7 @@ export default function WeekDaySelector({
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#22c55e] to-[#16a34a] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => { setInsertMenuOpen(!insertMenuOpen); setCopyMenuOpen(false); }}
+              onClick={() => { setInsertMenuOpen(!insertMenuOpen); setCopyMenuOpen(false); setAddWeeksMenuOpen(false); }}
             >
               + Insert Week ▾
             </button>
@@ -67,11 +69,36 @@ export default function WeekDaySelector({
           </div>
         )}
 
+        {/* Add Multiple Weeks Button */}
+        {onAddWeeks && (
+          <div className="relative">
+            <button
+              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] text-white border-none rounded-lg cursor-pointer"
+              onClick={() => { setAddWeeksMenuOpen(!addWeeksMenuOpen); setCopyMenuOpen(false); setInsertMenuOpen(false); }}
+            >
+              + Add Weeks ▾
+            </button>
+            {addWeeksMenuOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[160px] overflow-hidden z-[200]">
+                {[1, 2, 3, 4, 5, 6, 8, 10, 12].map((count) => (
+                  <button
+                    key={count}
+                    className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-blue-50"
+                    onClick={() => { setAddWeeksMenuOpen(false); onAddWeeks(count); }}
+                  >
+                    Add {count} week{count > 1 ? 's' : ''} (→ {totalWeeks + count} total)
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {remainingWeeks > 0 && (
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => { setCopyMenuOpen(!copyMenuOpen); setInsertMenuOpen(false); }}
+              onClick={() => { setCopyMenuOpen(!copyMenuOpen); setInsertMenuOpen(false); setAddWeeksMenuOpen(false); }}
             >
               Copy Week ▾
             </button>

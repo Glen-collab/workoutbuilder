@@ -300,6 +300,16 @@ export default function useWorkoutState() {
     setWorkoutBlocks([]);
   }, [saveCurrent, getWorkoutKey]);
 
+  // Add multiple empty weeks at the end of the program
+  const addWeeksToEnd = useCallback((count) => {
+    saveCurrent();
+    setAllWorkouts((prev) => ({
+      ...prev,
+      [getWorkoutKey()]: [...workoutBlocksRef.current]
+    }));
+    setTotalWeeksState((prev) => prev + count);
+  }, [saveCurrent, getWorkoutKey]);
+
   const loadProgram = useCallback((program) => {
     if (!program) return;
     setLoadedProgram({ id: program.id, accessCode: program.accessCode, name: program.name });
@@ -373,6 +383,7 @@ export default function useWorkoutState() {
     copyWeekToNext,
     copyWeekToAll,
     insertWeekAt,
+    addWeeksToEnd,
     setDaysPerWeek,
     setTotalWeeks,
     setMainMaxes,

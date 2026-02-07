@@ -28,6 +28,7 @@ export default function BuilderScreen({
     copyWeek,
     copyAllWeeks,
     insertWeek,
+    addWeeks,
     addBlock,
     deleteBlock,
     toggleCollapse,
@@ -106,6 +107,7 @@ export default function BuilderScreen({
         onCopyWeek={copyWeek}
         onCopyAllWeeks={copyAllWeeks}
         onInsertWeek={insertWeek}
+        onAddWeeks={addWeeks}
       />
 
       <BlockList
