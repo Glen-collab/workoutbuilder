@@ -9,8 +9,10 @@ export default function WeekDaySelector({
   onSwitchWeek,
   onCopyWeek,
   onCopyAllWeeks,
+  onInsertWeek,
 }) {
   const [copyMenuOpen, setCopyMenuOpen] = useState(false);
+  const [insertMenuOpen, setInsertMenuOpen] = useState(false);
 
   const remainingWeeks = totalWeeks - currentWeek;
 
@@ -38,11 +40,38 @@ export default function WeekDaySelector({
           ))}
         </select>
 
+        {/* Insert Week Button */}
+        {onInsertWeek && (
+          <div className="relative">
+            <button
+              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#22c55e] to-[#16a34a] text-white border-none rounded-lg cursor-pointer"
+              onClick={() => { setInsertMenuOpen(!insertMenuOpen); setCopyMenuOpen(false); }}
+            >
+              + Insert Week ▾
+            </button>
+            {insertMenuOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[200px] overflow-hidden z-[200] max-h-[300px] overflow-y-auto">
+                {Array.from({ length: totalWeeks + 1 }, (_, i) => i + 1).map((pos) => (
+                  <button
+                    key={pos}
+                    className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-green-50"
+                    onClick={() => { setInsertMenuOpen(false); onInsertWeek(pos); }}
+                  >
+                    {pos === 1 ? 'Insert as Week 1 (before current Week 1)' :
+                     pos === totalWeeks + 1 ? `Insert as Week ${pos} (at end)` :
+                     `Insert before Week ${pos}`}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {remainingWeeks > 0 && (
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => setCopyMenuOpen(!copyMenuOpen)}
+              onClick={() => { setCopyMenuOpen(!copyMenuOpen); setInsertMenuOpen(false); }}
             >
               Copy Week ▾
             </button>

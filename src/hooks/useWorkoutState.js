@@ -265,6 +265,41 @@ export default function useWorkoutState() {
     }
   }, [saveCurrent, loadDay]);
 
+  // Insert a new empty week at the specified position, shifting existing weeks forward
+  const insertWeekAt = useCallback((insertPosition) => {
+    saveCurrent();
+    setAllWorkouts((prev) => {
+      // First, save current blocks
+      const updated = { ...prev, [getWorkoutKey()]: [...workoutBlocksRef.current] };
+      const newWorkouts = {};
+
+      // Shift all weeks >= insertPosition forward by 1
+      Object.entries(updated).forEach(([key, blocks]) => {
+        const [weekStr, dayStr] = key.split('-');
+        const week = parseInt(weekStr, 10);
+        const day = parseInt(dayStr, 10);
+
+        if (week >= insertPosition) {
+          // Shift this week forward
+          newWorkouts[`${week + 1}-${day}`] = blocks;
+        } else {
+          // Keep week as is
+          newWorkouts[key] = blocks;
+        }
+      });
+
+      return newWorkouts;
+    });
+
+    // Increment total weeks
+    setTotalWeeksState((prev) => prev + 1);
+
+    // Navigate to the new empty week
+    setCurrentWeek(insertPosition);
+    setCurrentDay(1);
+    setWorkoutBlocks([]);
+  }, [saveCurrent, getWorkoutKey]);
+
   const loadProgram = useCallback((program) => {
     if (!program) return;
     setLoadedProgram({ id: program.id, accessCode: program.accessCode, name: program.name });
@@ -337,6 +372,7 @@ export default function useWorkoutState() {
     duplicateSet,
     copyWeekToNext,
     copyWeekToAll,
+    insertWeekAt,
     setDaysPerWeek,
     setTotalWeeks,
     setMainMaxes,

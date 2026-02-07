@@ -26,8 +26,9 @@ export default function SearchBar({ searchTerm, onSearchChange, sortBy, onSortCh
         </select>
 
         <button
-          onClick={onRefresh}
-          className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+          type="button"
+          onClick={() => onRefresh && onRefresh()}
+          className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity cursor-pointer"
           title="Refresh"
         >
           🔄
