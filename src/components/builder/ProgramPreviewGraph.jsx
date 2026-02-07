@@ -1,13 +1,38 @@
 import { useState, useMemo } from 'react';
-import { calculateTonnageByCategory, calculateCardioTotals } from '../../utils/percentageCalc';
+import { calculateTonnageByCategory, calculateCardioTotals, calculateWeight } from '../../utils/percentageCalc';
 
 const GRAPH_METRICS = [
   { key: 'tonnage', label: 'Tonnage', color: '#667eea', suffix: ' lbs' },
+  { key: 'bench', label: 'Bench', color: '#3b82f6', suffix: ' lbs' },
+  { key: 'squat', label: 'Squat', color: '#22c55e', suffix: ' lbs' },
+  { key: 'deadlift', label: 'Deadlift', color: '#a855f7', suffix: ' lbs' },
+  { key: 'powerClean', label: 'Clean', color: '#f97316', suffix: ' lbs' },
   { key: 'calories', label: 'Calories', color: '#ef4444', suffix: '' },
   { key: 'core', label: 'Core', color: '#10b981', suffix: ' reps' },
   { key: 'time', label: 'Time', color: '#f59e0b', suffix: ' min' },
-  { key: 'distance', label: 'Distance', color: '#3b82f6', suffix: ' mi' },
+  { key: 'distance', label: 'Distance', color: '#06b6d4', suffix: ' mi' },
 ];
+
+// Calculate tonnage for exercises using a specific baseMax
+function calculateLiftTonnage(blocks, mainMaxes, targetBaseMax) {
+  let total = 0;
+  for (const block of (blocks || [])) {
+    if (block.type === 'theme') continue;
+    for (const exercise of (block.exercises || [])) {
+      // Only count percentage-based exercises with matching baseMax
+      if (!exercise.isPercentageBased || exercise.baseMax !== targetBaseMax) continue;
+      if (!Array.isArray(exercise.sets)) continue;
+
+      const baseMax = mainMaxes[targetBaseMax] || 0;
+      for (const set of exercise.sets) {
+        if (set.isWarmup) continue;
+        const weight = set.manualWeight || calculateWeight(set.percentage || 0, baseMax);
+        total += (set.reps || 0) * weight;
+      }
+    }
+  }
+  return Math.round(total);
+}
 
 // Count core reps from core blocks
 function countCoreReps(blocks) {
@@ -84,6 +109,7 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
     const stats = [];
     for (let w = 1; w <= totalWeeks; w++) {
       let weekTonnage = 0, weekCore = 0, weekTime = 0, weekDistance = 0, weekCalories = 0;
+      let weekBench = 0, weekSquat = 0, weekDeadlift = 0, weekClean = 0;
 
       for (let d = 1; d <= daysPerWeek; d++) {
         const blocks = allWorkouts[`${w}-${d}`] || [];
@@ -91,6 +117,12 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
         const { totalMinutes, totalMiles } = calculateCardioTotals(blocks);
         const coreReps = countCoreReps(blocks);
         const calories = estimateCalories(blocks, totalMinutes, totalMiles);
+
+        // Calculate tonnage for each specific lift
+        weekBench += calculateLiftTonnage(blocks, mainMaxes, 'bench');
+        weekSquat += calculateLiftTonnage(blocks, mainMaxes, 'squat');
+        weekDeadlift += calculateLiftTonnage(blocks, mainMaxes, 'deadlift');
+        weekClean += calculateLiftTonnage(blocks, mainMaxes, 'powerClean');
 
         weekTonnage += total;
         weekCore += coreReps;
@@ -102,6 +134,10 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
       stats.push({
         week: w,
         tonnage: Math.round(weekTonnage),
+        bench: weekBench,
+        squat: weekSquat,
+        deadlift: weekDeadlift,
+        powerClean: weekClean,
         core: Math.round(weekCore),
         time: Math.round(weekTime * 10) / 10,
         distance: Math.round(weekDistance * 100) / 100,
@@ -119,6 +155,10 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
   // Check which metrics have data
   const hasMetric = {
     tonnage: weeklyStats.some(w => w.tonnage > 0),
+    bench: weeklyStats.some(w => w.bench > 0),
+    squat: weeklyStats.some(w => w.squat > 0),
+    deadlift: weeklyStats.some(w => w.deadlift > 0),
+    powerClean: weeklyStats.some(w => w.powerClean > 0),
     calories: weeklyStats.some(w => w.calories > 0),
     core: weeklyStats.some(w => w.core > 0),
     time: weeklyStats.some(w => w.time > 0),
@@ -132,6 +172,10 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
   // Program totals
   const totals = {
     tonnage: weeklyStats.reduce((sum, w) => sum + w.tonnage, 0),
+    bench: weeklyStats.reduce((sum, w) => sum + w.bench, 0),
+    squat: weeklyStats.reduce((sum, w) => sum + w.squat, 0),
+    deadlift: weeklyStats.reduce((sum, w) => sum + w.deadlift, 0),
+    powerClean: weeklyStats.reduce((sum, w) => sum + w.powerClean, 0),
     calories: weeklyStats.reduce((sum, w) => sum + w.calories, 0),
     core: weeklyStats.reduce((sum, w) => sum + w.core, 0),
     time: weeklyStats.reduce((sum, w) => sum + w.time, 0),
@@ -178,6 +222,30 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
             <div className="bg-white/10 rounded-lg px-3 py-2 text-center min-w-[70px]">
               <div className="text-[10px] font-semibold text-white/60 uppercase">Tonnage</div>
               <div className="text-sm font-extrabold text-white">{totals.tonnage.toLocaleString()}</div>
+            </div>
+          )}
+          {hasMetric.bench && (
+            <div className="bg-blue-500/20 rounded-lg px-3 py-2 text-center min-w-[70px]">
+              <div className="text-[10px] font-semibold text-blue-300 uppercase">Bench</div>
+              <div className="text-sm font-extrabold text-white">{totals.bench.toLocaleString()}</div>
+            </div>
+          )}
+          {hasMetric.squat && (
+            <div className="bg-green-500/20 rounded-lg px-3 py-2 text-center min-w-[70px]">
+              <div className="text-[10px] font-semibold text-green-300 uppercase">Squat</div>
+              <div className="text-sm font-extrabold text-white">{totals.squat.toLocaleString()}</div>
+            </div>
+          )}
+          {hasMetric.deadlift && (
+            <div className="bg-purple-500/20 rounded-lg px-3 py-2 text-center min-w-[70px]">
+              <div className="text-[10px] font-semibold text-purple-300 uppercase">Deadlift</div>
+              <div className="text-sm font-extrabold text-white">{totals.deadlift.toLocaleString()}</div>
+            </div>
+          )}
+          {hasMetric.powerClean && (
+            <div className="bg-orange-500/20 rounded-lg px-3 py-2 text-center min-w-[70px]">
+              <div className="text-[10px] font-semibold text-orange-300 uppercase">Clean</div>
+              <div className="text-sm font-extrabold text-white">{totals.powerClean.toLocaleString()}</div>
             </div>
           )}
           {hasMetric.calories && (
