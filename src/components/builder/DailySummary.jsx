@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { calculateTonnageByCategory, calculateCardioTotals } from '../../utils/percentageCalc';
-import WeeklyVolumeGraph from './WeeklyVolumeGraph';
-import CardioGraph from './CardioGraph';
+import ProgramPreviewGraph from './ProgramPreviewGraph';
 
 export default function DailySummary({ blocks, mainMaxes, currentDay, currentWeek, daysPerWeek, totalWeeks, allWorkouts }) {
   const [showGraphs, setShowGraphs] = useState(false);
@@ -76,20 +75,12 @@ export default function DailySummary({ blocks, mainMaxes, currentDay, currentWee
         </button>
       </div>
 
-      {/* Weekly graphs */}
+      {/* Program Preview Graph */}
       {showGraphs && (
-        <div className="flex flex-col gap-4 mb-4">
-          <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wide">
-            Program Volume Overview
-          </h3>
-          <WeeklyVolumeGraph
+        <div className="mb-4">
+          <ProgramPreviewGraph
             allWorkouts={mergedWorkouts}
             mainMaxes={mainMaxes}
-            totalWeeks={totalWeeks}
-            daysPerWeek={daysPerWeek}
-          />
-          <CardioGraph
-            allWorkouts={mergedWorkouts}
             totalWeeks={totalWeeks}
             daysPerWeek={daysPerWeek}
           />
