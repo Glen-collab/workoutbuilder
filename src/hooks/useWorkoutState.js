@@ -11,6 +11,12 @@ function createEmptyDay() {
   return [];
 }
 
+// Collapse all blocks when loading a day
+function collapseAllBlocks(blocks) {
+  if (!blocks || !Array.isArray(blocks)) return [];
+  return blocks.map(b => ({ ...b, collapsed: true }));
+}
+
 function createBlock(id, type = 'straight-set') {
   return {
     id,
@@ -65,7 +71,7 @@ export default function useWorkoutState() {
   const loadDay = useCallback((week, day) => {
     const key = `${week}-${day}`;
     const saved = allWorkoutsRef.current[key];
-    setWorkoutBlocks(saved ? [...saved] : createEmptyDay());
+    setWorkoutBlocks(saved ? collapseAllBlocks(saved) : createEmptyDay());
   }, []);
 
   const switchDay = useCallback((day) => {
@@ -76,7 +82,7 @@ export default function useWorkoutState() {
       const savedKey = getWorkoutKey();
       const updated = { ...prev, [savedKey]: [...workoutBlocksRef.current] };
       const key = `${currentWeekRef.current}-${day}`;
-      setWorkoutBlocks(updated[key] ? [...updated[key]] : createEmptyDay());
+      setWorkoutBlocks(updated[key] ? collapseAllBlocks(updated[key]) : createEmptyDay());
       return updated;
     });
   }, [saveCurrent, getWorkoutKey]);
@@ -87,7 +93,7 @@ export default function useWorkoutState() {
       const savedKey = getWorkoutKey();
       const updated = { ...prev, [savedKey]: [...workoutBlocksRef.current] };
       const key = `${week}-1`;
-      setWorkoutBlocks(updated[key] ? [...updated[key]] : createEmptyDay());
+      setWorkoutBlocks(updated[key] ? collapseAllBlocks(updated[key]) : createEmptyDay());
       return updated;
     });
     setCurrentWeek(week);
@@ -331,7 +337,7 @@ export default function useWorkoutState() {
 
     setCurrentWeek(1);
     setCurrentDay(1);
-    setWorkoutBlocks(workouts['1-1'] ? [...workouts['1-1']] : []);
+    setWorkoutBlocks(workouts['1-1'] ? collapseAllBlocks(workouts['1-1']) : []);
   }, []);
 
   const clearAll = useCallback(() => {
