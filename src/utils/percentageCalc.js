@@ -150,14 +150,17 @@ function parseDuration(str) {
   return parseFloat(s) || 0; // assume minutes
 }
 
-function parseDistance(str) {
-  if (!str) return 0;
-  const s = String(str).trim().toLowerCase();
-  // "2 miles", "400m", "1.5mi", "800"
-  if (s.includes('mi')) return parseFloat(s) || 0;
-  if (s.includes('km')) return (parseFloat(s) || 0) * 0.621371;
-  if (s.includes('m') && !s.includes('mi')) return (parseFloat(s) || 0) / 1609.34; // meters to miles
-  return parseFloat(s) || 0; // assume miles
+function convertToMiles(distance, unit) {
+  const dist = parseFloat(distance) || 0;
+  if (!dist) return 0;
+  switch (unit) {
+    case 'm': return dist / 1609.34;      // meters to miles
+    case 'yd': return dist / 1760;        // yards to miles
+    case 'ft': return dist / 5280;        // feet to miles
+    case 'km': return dist * 0.621371;    // km to miles
+    case 'mi': return dist;               // already miles
+    default: return dist;                 // assume miles if no unit
+  }
 }
 
 export function calculateCardioTotals(blocks) {
@@ -167,7 +170,7 @@ export function calculateCardioTotals(blocks) {
     for (const exercise of (block.exercises || [])) {
       const sets = parseInt(exercise.setsCount) || 1;
       totalMinutes += parseDuration(exercise.duration || exercise.time) * sets;
-      totalMiles += parseDistance(exercise.distance) * sets;
+      totalMiles += convertToMiles(exercise.distance, exercise.distanceUnit) * sets;
     }
   }
   return { totalMinutes: Math.round(totalMinutes * 10) / 10, totalMiles: Math.round(totalMiles * 100) / 100 };
