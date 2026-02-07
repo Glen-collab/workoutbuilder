@@ -51,8 +51,8 @@ function countSets(blocks) {
 
 // Estimate calories burned using MET formula
 // Strength: MET 6, ~1.5 min per working set (includes rest)
-// Cardio: MET 7.5, use actual cardio minutes
-function estimateCalories(blocks, cardioMinutes, userWeight = 150) {
+// Cardio: MET 7.5, use actual cardio minutes or estimate from distance
+function estimateCalories(blocks, cardioMinutes, cardioMiles, userWeight = 150) {
   const weightKg = userWeight * 0.453592;
   const totalSets = countSets(blocks);
 
@@ -62,7 +62,16 @@ function estimateCalories(blocks, cardioMinutes, userWeight = 150) {
   const strengthCals = 6 * weightKg * (strengthMinutes / 60);
 
   // Cardio: MET 7.5 × weightKg × (cardioMinutes / 60)
-  const cardioCals = 7.5 * weightKg * (cardioMinutes / 60);
+  // If no duration set but distance exists, estimate ~10 min/mile
+  let effectiveCardioMinutes = cardioMinutes;
+  if (cardioMinutes === 0 && cardioMiles > 0) {
+    effectiveCardioMinutes = cardioMiles * 10; // ~10 min per mile average
+  } else if (cardioMinutes > 0 && cardioMiles > 0) {
+    // If both are set, use the larger calorie estimate
+    const minutesFromDistance = cardioMiles * 10;
+    effectiveCardioMinutes = Math.max(cardioMinutes, minutesFromDistance);
+  }
+  const cardioCals = 7.5 * weightKg * (effectiveCardioMinutes / 60);
 
   return Math.round(strengthCals + cardioCals);
 }
@@ -81,7 +90,7 @@ export default function ProgramPreviewGraph({ allWorkouts, mainMaxes, totalWeeks
         const { total } = calculateTonnageByCategory(blocks, mainMaxes);
         const { totalMinutes, totalMiles } = calculateCardioTotals(blocks);
         const coreReps = countCoreReps(blocks);
-        const calories = estimateCalories(blocks, totalMinutes);
+        const calories = estimateCalories(blocks, totalMinutes, totalMiles);
 
         weekTonnage += total;
         weekCore += coreReps;
