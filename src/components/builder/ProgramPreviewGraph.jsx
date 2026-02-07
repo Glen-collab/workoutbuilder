@@ -27,29 +27,38 @@ function countCoreReps(blocks) {
   return Math.round(total);
 }
 
-// Count completed exercises for calorie estimation
-function countExercises(blocks) {
-  let strength = 0, cardio = 0;
+// Count total working sets for calorie estimation
+function countSets(blocks) {
+  let strengthSets = 0;
   for (const block of (blocks || [])) {
     if (block.type === 'theme') continue;
-    const isCardio = ['conditioning', 'movement'].includes(block.type);
+    const isCardio = ['conditioning', 'movement', 'core'].includes(block.type);
+    if (isCardio) continue;
+
     for (const ex of (block.exercises || [])) {
-      if (isCardio) cardio++;
-      else strength++;
+      // For percentage-based exercises, count the sets array
+      if (ex.isPercentageBased && Array.isArray(ex.sets)) {
+        // Count non-warmup sets
+        strengthSets += ex.sets.filter(s => !s.isWarmup).length;
+      } else {
+        // For regular exercises, use setsCount
+        strengthSets += parseInt(ex.setsCount) || 1;
+      }
     }
   }
-  return { strength, cardio };
+  return strengthSets;
 }
 
 // Estimate calories burned using MET formula
-// Strength: MET 6, ~3 min per exercise
+// Strength: MET 6, ~1.5 min per working set (includes rest)
 // Cardio: MET 7.5, use actual cardio minutes
 function estimateCalories(blocks, cardioMinutes, userWeight = 150) {
   const weightKg = userWeight * 0.453592;
-  const { strength, cardio } = countExercises(blocks);
+  const totalSets = countSets(blocks);
 
   // Strength: MET 6 × weightKg × (strengthMinutes / 60)
-  const strengthMinutes = strength * 3;
+  // ~1.5 min per set (30 sec work + 60 sec rest average)
+  const strengthMinutes = totalSets * 1.5;
   const strengthCals = 6 * weightKg * (strengthMinutes / 60);
 
   // Cardio: MET 7.5 × weightKg × (cardioMinutes / 60)
