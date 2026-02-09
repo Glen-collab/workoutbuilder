@@ -24,10 +24,27 @@ function calculateLiftTonnage(blocks, mainMaxes, targetBaseMax) {
       if (!Array.isArray(exercise.sets)) continue;
 
       const baseMax = mainMaxes[targetBaseMax] || 0;
+      const isDropSet = exercise.qualifier === 'drop set';
+      const isStripSet = exercise.qualifier === 'strip set';
+
       for (const set of exercise.sets) {
         if (set.isWarmup) continue;
+
+        // Main set tonnage
         const weight = set.manualWeight || calculateWeight(set.percentage || 0, baseMax);
         total += (set.reps || 0) * weight;
+
+        // Add drop set tonnage
+        if ((isDropSet || isStripSet) && set.dropPercentage && set.dropReps) {
+          const dropWeight = calculateWeight(set.dropPercentage, baseMax);
+          total += set.dropReps * dropWeight;
+        }
+
+        // Add strip set tonnage (third drop)
+        if (isStripSet && set.stripPercentage && set.stripReps) {
+          const stripWeight = calculateWeight(set.stripPercentage, baseMax);
+          total += set.stripReps * stripWeight;
+        }
       }
     }
   }

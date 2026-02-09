@@ -90,14 +90,32 @@ export function calculateWeight(percentage, baseMax) {
 // Calculate tonnage for a single exercise
 export function calculateExerciseTonnage(exercise, mainMaxes) {
   const multiplier = getQualifierMultiplier(exercise.qualifier);
+  const isDropSet = exercise.qualifier === 'drop set';
+  const isStripSet = exercise.qualifier === 'strip set';
 
   // Percentage-based exercise with sets array
   if (exercise.isPercentageBased && Array.isArray(exercise.sets) && exercise.baseMax) {
     const baseMax = mainMaxes[exercise.baseMax] || 0;
     return exercise.sets.reduce((total, set) => {
       if (set.isWarmup) return total;
+
+      // Main set tonnage
       const weight = set.manualWeight || calculateWeight(set.percentage || 0, baseMax);
-      return total + ((set.reps || 0) * weight);
+      let setTonnage = (set.reps || 0) * weight;
+
+      // Add drop set tonnage (for drop set and strip set)
+      if ((isDropSet || isStripSet) && set.dropPercentage && set.dropReps) {
+        const dropWeight = calculateWeight(set.dropPercentage, baseMax);
+        setTonnage += set.dropReps * dropWeight;
+      }
+
+      // Add strip set tonnage (third drop, only for strip set)
+      if (isStripSet && set.stripPercentage && set.stripReps) {
+        const stripWeight = calculateWeight(set.stripPercentage, baseMax);
+        setTonnage += set.stripReps * stripWeight;
+      }
+
+      return total + setTonnage;
     }, 0) * multiplier;
   }
 

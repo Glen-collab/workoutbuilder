@@ -17,6 +17,8 @@ const QUALIFIER_OPTIONS = [
   { value: 'x2 combo', label: 'x2 (Combo)' },
   { value: 'x3 combo', label: 'x3 (Combo)' },
   { value: 'x4 combo', label: 'x4 (Combo)' },
+  { value: 'drop set', label: 'Drop Set' },
+  { value: 'strip set', label: 'Strip Set' },
 ];
 
 function FieldInput({ label, value, onChange, placeholder, type = 'text', width }) {
@@ -247,6 +249,7 @@ export default function ExerciseRow({
                   setIndex={idx}
                   baseMax={baseMaxValue}
                   isBodyweight={isBodyweight}
+                  qualifier={exercise.qualifier}
                   onUpdate={(updates) => onUpdateSet(set.id, updates)}
                   onDuplicate={() => onDuplicateSet(set)}
                   onRemove={() => onRemoveSet(set.id)}
