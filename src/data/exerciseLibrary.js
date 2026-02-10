@@ -78,16 +78,13 @@ export const exerciseCategories = {
                     { name: 'Incline Dumbbell Chest Press Tempo', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7a0c399c6dcad3bd91e66f391931d0c7' },
                     { name: 'How To Set Up For Dumbbell Bench', movement: ['Push'], intent: ['Education'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/54c7cbfbab54ce3c7d32589cc61150f0' },
                     { name: 'DB Alternating Chest Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6a57cc830655dd17b8696792ea41215d' },
-                    // --- No video yet ---
-                    { name: 'Dumbbell Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Dumbbell Flyes', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Single Arm Dumbbell Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Crush Press (Dumbbells)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Decline Dumbbell Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Squeeze Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Press with Bands', movement: ['Push'], intent: ['Power'], equipment: ['Dumbbell', 'Band'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Dumbbell Chest Squeeze', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'DB Decline Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    // --- New uploads ---
+                    { name: 'Dumbbell Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/2c00adc35f411cd799e4acb89b0a576c', geriatric_priority: true },
+                    { name: 'Dumbbell Single Arm Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/a6aa11617443c553c44da70d10ef5d66', geriatric_priority: true },
+                    { name: 'Dumbbell Crush Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/19e6a7af691b0b7fa8a76bffbfac8de9', geriatric_priority: true },
+                    { name: 'Dumbbell Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/d1553c5ad706332eaa1e4b2a915adc65', geriatric_priority: true },
+                    { name: 'Dumbbell Decline Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5f0ba481c83161a5c5e49dc22d655cb' },
+                    { name: 'Dumbbell Decline Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f870a377c55c60198873fdcdccfe4b5e' }
                 ]
             },
             functional: {
@@ -118,52 +115,23 @@ export const exerciseCategories = {
                     { name: 'Tempo Push-Ups', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a097a391ee624a65983fd67c32eeeb63' },
                     { name: 'Assisted Pushups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cb586c95f79966fe0861d4d01d62d93a', geriatric_priority: true },
                     { name: 'Tempo Wall Pushups', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9069a794c9902e771b753f389b005bfb', geriatric_priority: true },
-                    { name: 'Band Single Arm Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99374d221449ddb2fb9c8aa0d8ec1144' },
-                    // --- No video yet ---
-                    { name: 'Plyometric Push-Ups', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: '' },
-                    { name: 'Cable Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Landmine Press', movement: ['Push'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Incline Push-Ups', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Ring Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Rings'], contraindications: [], youtube: '' },
-                    { name: 'Suspension Trainer Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Suspension'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Cable Fly (Mid)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Low to High Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'High to Low Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Single Arm Cable Press', movement: ['Push'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Single Arm Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Standing Cable Chest Press', movement: ['Push'], intent: ['Strength'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Split Stance Cable Press', movement: ['Push'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Cable Chest Fly + Chest Press + Chest Fly + Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', description: 'Fly - Press - Fly - Press complex. 4 movements in sequence without rest. Destroys the chest!' },
-                    { name: 'Resistance Band Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Band Fly (Standing)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Landmine Chest Press (Two-Hand)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Half-Kneeling Landmine Press', movement: ['Push'], intent: ['Stability'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Medicine Ball Push-Up', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Medicine Ball Chest Throw (Wall)', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Sled Chest Press', movement: ['Push'], intent: ['Strength'], equipment: ['Sled'], contraindications: [], youtube: '' },
-                    { name: 'Bear Crawl Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Push-Up Hold', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Fly-Press Combo', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Decline Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' }
+                    { name: 'Band Single Arm Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99374d221449ddb2fb9c8aa0d8ec1144' }
                 ]
             },
             machine: {
                 label: "Machine",
                 exercises: [
-                    // --- Cloudflare videos ---
                     { name: 'Low to High Chest Fly Cable', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/de8ce1e900424a15643c129d118f4a1d' },
                     { name: 'Single Arm Cable Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7bb87fb42802c6e72d9372fa5a960eff' },
                     { name: 'Cable Chest Press Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/947e373c57852131ad49710af09f7d5b', geriatric_priority: true },
                     { name: 'Cable Chest Fly Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/085f938f3ef5f44a6ed4aee63910769c' },
-                    // --- No video yet ---
-                    { name: 'Machine Chest Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Incline Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Decline Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Chest Fly (Pec Deck)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Iso-Lateral Chest Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Smith Machine Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Smith Machine Incline Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Assisted Dip Machine', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true }
+                    { name: 'Single Arm Cable Fly High to Low', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2adf9a0c805fbddd8bfa2adbd68813c8' },
+                    { name: 'Cable High to Low Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7415558e79d83c76c355c6569018ce67' },
+                    { name: 'Cable Chest Fly-Press-Fly-Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/18bc0d77418cca964aaae07af16b67a9' },
+                    { name: 'Cable Fly Low to High', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b68cbcb54c5a560a40e92da69201a747' },
+                    { name: 'Cable Chest Fly Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6e30bcb8edf3e6e1d1bd9ebe795fa3ed' },
+                    { name: 'Split Stance Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/38b867dd7800f4aee0573dbf852e648b' },
+                    { name: 'Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/90e6fd39abd4255a4781cf7dea9e37b0' }
                 ]
             },
             corrective: {
@@ -183,31 +151,7 @@ export const exerciseCategories = {
                     { name: 'Scap Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/db235fa11cae5ab24dd9ee998a92d22a', geriatric_priority: true },
                     { name: 'T Spine Back-Bend', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Foam Roller'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5ff0d67ea7267bcf9a4f5e4012c64d79', geriatric_priority: true },
                     { name: 'Doorway Pec Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0dc5a7ad69cadf1bb7b929ebce285b7f', geriatric_priority: true },
-                    { name: 'Wall Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/659970359bb34845d7a04030eeb22d9c', geriatric_priority: true },
-                    // --- No video yet ---
-                    { name: 'Band Chest Fly', movement: ['Push'], intent: ['Stability', 'Mobility'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Wall Slides', movement: ['Push'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Foam Roll Pec/Lat', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Incline Scapular Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Band-Assisted Push-Ups', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Chest Isometric Hold (Band)', movement: ['Push'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Seated Band Chest Press', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Foam Roller Bench Press (PVC)', movement: ['Push'], intent: ['Stability'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Supine Chest Reach', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Quadruped Chest Opener', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Side-Lying Chest Opener', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Wall Pec Stretch (Bent Arm)', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Wall Pec Stretch (Straight Arm)', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Breathing Chest Expansion Drill', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Foam Roll Pec Minor', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Thoracic Extension on Roller', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'PVC Chest Pass (Controlled)', movement: ['Push'], intent: ['Motor Control'], equipment: ['PVC'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Wall Press', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Supine Band Fly', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Standing Band Chest Reach', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Bench-Supported Push-Up Plus', movement: ['Push'], intent: ['Stability'], equipment: ['Bench'], contraindications: [], youtube: '' },
-                    { name: 'Breathing Push-Ups', movement: ['Push'], intent: ['Motor Control'], equipment: ['Bodyweight'], contraindications: [], youtube: '' }
-
+                    { name: 'Wall Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/659970359bb34845d7a04030eeb22d9c', geriatric_priority: true }
                 ]
             }
         }
@@ -1327,7 +1271,10 @@ export const exerciseCategories = {
                     // --- Tactical / Burpees ---
                     { name: '8 Count Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/564d2a366e76ee46af19620499d2411f' },
                     { name: 'Clean and Jerk 8 Count Burpee', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2bdc7109679ccf376321717c6a42173a' },
-                    { name: 'Burpee Clean Jump Over Bar', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/199b11f8e29518ca4bc3dde52f495ef8' }
+                    { name: 'Burpee Clean Jump Over Bar', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/199b11f8e29518ca4bc3dde52f495ef8' },
+                    // --- Tactical / Locomotion ---
+                    { name: 'Bear Walk Straight Legs', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f90d94374a9dda5f0eba2e4f63bf4811' },
+                    { name: 'Monkey Hops', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02a383b06abac5374ccb12e0f642169f' }
                 ]
             },
             corrective: {
