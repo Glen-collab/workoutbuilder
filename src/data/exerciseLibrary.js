@@ -1234,21 +1234,26 @@ export const exerciseCategories = {
             barbell: {
                 label: "Olympic Lifts",
                 exercises: [
-                    { name: 'Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fd18a5c14868f872bc5a9dd4afd1e986' },
+                    { name: 'Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/24532f09aa140d2cae76a23005a7b95c' },
+                    { name: 'Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/65592773cf4889527cad39bf4743ce97' },
+                    { name: 'Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/3f02ccf9ddbd029566639cff86dc2154' },
+                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1d385316464882f2c39a2a3dd97f3e09' },
+                    { name: 'Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/50fbe85ac065560bfc5203086ec2177e' },
+                    { name: 'Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/cfb6e19659f0f1b5d20861f6cceee284' },
                     { name: 'Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Squat Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Hang Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a3474a1a868aba6cdc3fa504656db05f' },
+                    { name: 'Hang Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/7831b4227fea936a7fc2785516179a0a' },
+                    { name: 'Full Clean to Push Jerk', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b75892acbf27698717a5735d3e9e5bd1' },
+                    { name: 'Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0a38da737bf9947cc4afa34ab0c2db3f' },
                     // --- CF Video exercises ---
                     { name: 'Block Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3a7724f8b6302d3a436013ca78445d02' },
                     { name: 'Block Full-Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/45a3bb0f04d43b054b2ecb1bd98f93a0' },
                     { name: 'Block Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/61a3d8073a50037bd4265593ed2bdc46' },
                     { name: 'Block Power Clean to Jerk', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c8f980cc47e82f158665c236ee2cd39f' },
                     // --- No video ---
+                    { name: 'Block Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4640b11eaa598848dcb9d23dc65421e4' },
                     { name: 'Block Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Deficit Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Deficit Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
@@ -1258,12 +1263,12 @@ export const exerciseCategories = {
                     { name: 'Clean Pull to Knee', movement: ['Olympic', 'Pull'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch Pull + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean Pull + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/85cdaa513f2d8f6629d12ba7618dd6ec' },
                     { name: 'Heaving Snatch Balance', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean from Power Position', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch from Power Position', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Pause Clean (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Pause Snatch (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Pause Clean (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a4ed2c0ea2b984144686b6c8d4f43a94' },
+                    { name: 'Pause Snatch (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/dffb0a0ea6111754c75c96af3aa563af' }
                 ]
             },
             dumbbell: {
@@ -1303,13 +1308,16 @@ export const exerciseCategories = {
                     // --- CF Video exercises ---
                     { name: 'Pull + RDL + Hang Clean + Front Squat + Push Press', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6ae5c5f0bd99c196e84c5d6e55def666' },
                     { name: 'Pull + RDL + Hang Clean + Front Squat + Thruster', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/afebb5ef41ba38bc7efc5e68edf8cda3' },
+                    // --- CF Video exercises (new uploads) ---
+                    { name: 'Pull + RDL + Hang Clean + Front Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c6839e2575fc191f6756f9b1d22c6443' },
+                    { name: 'Pull + RDL + Hang Clean + Front Squat (Singles)', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f36ac18290eb2d73daf559db2ab9224a' },
+                    { name: 'Snatch Pull + RDL + Hang Snatch + Squat + Overhead Squat (Singles)', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/5d650aabc3ab7c0e7d3d4677b580d762' },
                     // --- No video ---
-                    { name: 'Pull + RDL + Hang Clean + Front Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Pull + RDL + Hang Snatch + Back Squat to Press + Overhead Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Pull + Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean + Front Squat + Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch + OHS', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Snatch + OHS', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/8b4e2e7f596ac8d3233d9c9fd7d4bc28' },
                     { name: 'Clean High Pull + Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Clean + Front Squat + Clean', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch + OHS + Snatch', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
@@ -1319,8 +1327,8 @@ export const exerciseCategories = {
                     { name: 'Snatch + Pause OHS', movement: ['Olympic'], intent: ['Mobility', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean from Blocks + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch from Blocks + OHS', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Hang Clean + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Hang Snatch + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Hang Clean + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dab9848d73a68319d9ca7630b489567c' },
+                    { name: 'Hang Snatch + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6888dbd0ee951fce85f7eacebe312866' },
                     { name: 'Clean + Jerk + Split Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Snatch + Snatch Balance', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean Pull + Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
@@ -1338,6 +1346,9 @@ export const exerciseCategories = {
                 exercises: [
                     // --- CF Video exercises ---
                     { name: 'Hip Flexor to Hamstring', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/588cd9d5cd58db8ea61ec9e9a61708b8' },
+                    { name: 'Snatch Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/65a109207bb007e982abf06ee350f196' },
+                    { name: 'Clean Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/74a964b05a52f3ea4a3b6254838790b1' },
+                    { name: 'Full Snatch Catch Pause', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/8a5ade91c66703162499668151c7a277' },
                     // --- No video ---
                     { name: 'Tall Cleans', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Drop Snatches', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
