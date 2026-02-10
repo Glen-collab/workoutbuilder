@@ -229,7 +229,8 @@ export const baseMaxLabels = {
   squat: 'Squat',
   powerClean: 'Clean',
   deadlift: 'Deadlift',
-  bodyweight: 'Body Weight'
+  bodyweight: 'Body Weight',
+  manual: 'Manual Weight'
 };
 
 // Base max color classes
@@ -238,5 +239,6 @@ export const baseMaxColors = {
   squat: { bg: '#22c55e', light: '#dcfce7', text: '#166534' },
   powerClean: { bg: '#f97316', light: '#ffedd5', text: '#9a3412' },
   deadlift: { bg: '#a855f7', light: '#f3e8ff', text: '#6b21a8' },
-  bodyweight: { bg: '#6b7280', light: '#f3f4f6', text: '#374151' }
+  bodyweight: { bg: '#6b7280', light: '#f3f4f6', text: '#374151' },
+  manual: { bg: '#ec4899', light: '#fce7f3', text: '#9d174d' }
 };
