@@ -1109,7 +1109,26 @@ export const exerciseCategories = {
                     { name: 'Dumbbell Step-Up to Press', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Squat Clean + Push Press', movement: ['Full Body'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Ground Flow Complex', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Burpee Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    { name: 'Dumbbell Burpee Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
+                    // --- Kettlebell ---
+                    { name: 'Kettlebell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7dcbd62bf1aff7c91d662d05914534c0' },
+                    { name: 'Single Arm Kettlebell Swing', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c796f3cc721a66e07ca3f4b11af06783' },
+                    { name: 'Alternating Kettlebell Swings', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/65537c0c9626aed18e7f32997c260154' },
+                    { name: 'Single Arm Kettlebell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1582547d1bd6423b5a66bf5f5e572883' },
+                    { name: 'Single Arm Kettlebell Clean', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/20fb38d4ae2d6606140eecda28f1a869' },
+                    { name: 'Kettlebell Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/026888a77adef2bac78abef90b81897c' },
+                    { name: 'Kettlebell Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/726d2344e2f63206cf7d6966aae9e542' },
+                    { name: 'Single Arm Kettlebell Flip', movement: ['Power'], intent: ['Power', 'Coordination'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a31771ca989b686f1a3343a0e44eae9e' },
+                    // --- Barbell ---
+                    { name: 'Barbell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4b1499afcb2e46ed853b531ad93277e0' },
+                    { name: 'Single Arm Barbell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d310e3554f70e7c9f814d933c2fa3e39' },
+                    // --- Burpees ---
+                    { name: '8 Count Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/564d2a366e76ee46af19620499d2411f' },
+                    { name: 'Clean and Jerk 8 Count Burpee', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2bdc7109679ccf376321717c6a42173a' },
+                    { name: 'Burpee Clean Jump Over Bar', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/199b11f8e29518ca4bc3dde52f495ef8' },
+                    // --- Locomotion ---
+                    { name: 'Bear Walk Straight Legs', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f90d94374a9dda5f0eba2e4f63bf4811' },
+                    { name: 'Monkey Hops', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02a383b06abac5374ccb12e0f642169f' }
                 ]
             },
             functional: {
@@ -1255,26 +1274,7 @@ export const exerciseCategories = {
                     { name: 'Clean + Clean Pull', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch + Snatch Pull', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Hang Clean + Front Squat + Jerk', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Hang Snatch + OHS', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    // --- Tactical / Kettlebell ---
-                    { name: 'Kettlebell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7dcbd62bf1aff7c91d662d05914534c0' },
-                    { name: 'Single Arm Kettlebell Swing', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c796f3cc721a66e07ca3f4b11af06783' },
-                    { name: 'Alternating Kettlebell Swings', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/65537c0c9626aed18e7f32997c260154' },
-                    { name: 'Single Arm Kettlebell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1582547d1bd6423b5a66bf5f5e572883' },
-                    { name: 'Single Arm Kettlebell Clean', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/20fb38d4ae2d6606140eecda28f1a869' },
-                    { name: 'Kettlebell Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/026888a77adef2bac78abef90b81897c' },
-                    { name: 'Kettlebell Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/726d2344e2f63206cf7d6966aae9e542' },
-                    { name: 'Single Arm Kettlebell Flip', movement: ['Power'], intent: ['Power', 'Coordination'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a31771ca989b686f1a3343a0e44eae9e' },
-                    // --- Tactical / Barbell ---
-                    { name: 'Barbell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4b1499afcb2e46ed853b531ad93277e0' },
-                    { name: 'Single Arm Barbell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d310e3554f70e7c9f814d933c2fa3e39' },
-                    // --- Tactical / Burpees ---
-                    { name: '8 Count Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/564d2a366e76ee46af19620499d2411f' },
-                    { name: 'Clean and Jerk 8 Count Burpee', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2bdc7109679ccf376321717c6a42173a' },
-                    { name: 'Burpee Clean Jump Over Bar', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/199b11f8e29518ca4bc3dde52f495ef8' },
-                    // --- Tactical / Locomotion ---
-                    { name: 'Bear Walk Straight Legs', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f90d94374a9dda5f0eba2e4f63bf4811' },
-                    { name: 'Monkey Hops', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02a383b06abac5374ccb12e0f642169f' }
+                    { name: 'Hang Snatch + OHS', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
                 ]
             },
             corrective: {
