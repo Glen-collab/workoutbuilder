@@ -40,7 +40,9 @@ export const exerciseCategories = {
                     { name: 'Decline Barbell Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/451681b06592fdbb779cbba1f99b9d35' },
                     { name: 'Close Grip Bench Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/c951cb36291c1f1ddb328e6fd692153d' },
                     { name: 'Floor Press (Barbell)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/1059b63970964c6d927111d69184587e' },
-                    { name: 'American Bar Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc28fd6ce68ae8ea2a2b333c24945f9' }
+                    { name: 'American Bar Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc28fd6ce68ae8ea2a2b333c24945f9' },
+                    { name: 'Barbell Band Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Band'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/64a507e40ae3f865530b084f1f935960' },
+                    { name: 'Chain Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Chain'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/4139f25debf1be5a7b543c05fa407676' }
                 ]
             },
             dumbbell: {
@@ -583,44 +585,79 @@ export const exerciseCategories = {
                 label: "Barbell",
                 exercises: [
                     { name: 'Close Grip Bench Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/c951cb36291c1f1ddb328e6fd692153d' },
-                    { name: 'Barbell Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b9f8f065ac5fb24749f74d05aa70e3f6' },
-                    { name: 'EZ Bar Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/69b888a6476ee0931fa75918e0d5d271' }
+                    { name: 'Seated EZ Bar Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/a261c8c18c7361c25d2bba164fe7d43b' },
+                    { name: 'Barbell EZ Bar Skull Crusher to Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6db08e10c49cd27838d0bbc8f1e72253' },
+                    { name: 'EZ Bar Decline Skull and Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/56a986eea97b79ee36883b58756c7e8c' },
+                    { name: 'EZ Bar Incline Skulls Behind Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0a250709a8735b2f7454e06281cc595f' },
+                    { name: 'Barbell Skull Crusher to Chin', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e8a3c168db531f5f6126c9fcf9de57db' },
+                    { name: 'EZ Bar Incline Skull Crusher to Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c156855dd9c4e164fc93b3cb29975dfd' },
+                    { name: 'Bar Chain Skulls and Presses', movement: ['Push'], intent: ['Hypertrophy', 'Power'], equipment: ['Barbell', 'Chain'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ab9ce63f73a6ab8d32c459691d5f0440' },
+                    { name: 'EZ Bar Extended Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4866da0c9a406bee49b5e9bbb464e788' },
+                    { name: 'Barbell Skull plus Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3a7b57e951cc11325c61db02cba294fb' }
                 ]
             },
             dumbbell: {
                 label: "Dumbbell",
                 exercises: [
                     { name: 'Tate Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5e98b80bb0d4421b84660e9471b6b2da' },
-                    { name: 'Dumbbell Seated Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f25db0daf8b4adc9465204ce7d03ad1d', geriatric_priority: true },
-                    { name: 'Standing Dumbbell Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e01902f3ef48f20c40d2a8f6ca5aaf4d' },
-                    { name: 'Dumbbell Bent Over Kickbacks', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/07c7698b00229ef4b7db460792b86d58', geriatric_priority: true }
+                    { name: 'Seated DB Overhead Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/50e88f9b131e6d9995568570182b5241', geriatric_priority: true },
+                    { name: 'DB Decline Crush Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8f306a5bb4999d738fabce87b819fba5' },
+                    { name: 'Standing Alternating DB Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/da05e9ab61fbb050c4f2a599d685ae2e' },
+                    { name: 'DB Skull Crusher to Chin', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cda2265ee711eeab71c8d317221170e8' },
+                    { name: 'DB Skull Crusher Prone Grip', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3b0b78b857f135fbe7d1f5e21309b599' },
+                    { name: 'DB Decline Supine Grip Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f1cbf3312b92f906601cc1ca64ee8d76' },
+                    { name: 'DB Incline Alternating Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f5e595d2a2d728391cdc3e4d4c79013' },
+                    { name: 'DB Seated Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/953ca43e8b9b6d9990631c0d1debc91a' },
+                    { name: 'DB Incline Prone Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b8368f14cc6760703aa794c44a401039' },
+                    { name: 'Bent Over Double Arm Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bc2a3b464d9604050627b21b4c9015d', geriatric_priority: true },
+                    { name: 'DB Skull Crusher Top of Head Extended', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/79f85ac735dd2fea3347c1a5a612fcb3' },
+                    { name: 'DB Decline Extended Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/736b23aea2c300f3437f155e5fd6e9d4' },
+                    { name: '2 DB Seated Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/61916021c64097e5b4a24335eec18686' },
+                    { name: 'Single Arm Kickback Hand on Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/db17a579160850f86540a17c6aac1ed0', geriatric_priority: true },
+                    { name: 'Lying Triceps Skull Crushers Roll', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fe820475ba5c2df9247badc264392f5e' },
+                    { name: 'DB Decline Prone Grip Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8e77a40a35308ad6c27e4dbac197fce4' },
+                    { name: 'Standing DB Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6a75484bfb6a9e410f924884918d5c37' },
+                    { name: 'DB Decline Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/39ceb3118c35e7d9559a48d322ad9187' },
+                    { name: 'DB Decline Alternating Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/adb05b9e9375f762450b60d988f98913' },
+                    { name: '2 DB Alternating Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/94c69e8de3d30115e00890ff05737e4a' },
+                    { name: 'DB Incline Supine Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/28ad1f8973f7e703021988c08262510a' },
+                    { name: 'Standing DB Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b0ad6d7a060c241397ee68608fb1d968' },
+                    { name: 'DB Skull Crusher Supine Grip', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca63ecb381eb02a2046d3da2aaa645eb' },
+                    { name: 'DB Incline Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e3e8a135a05aae8faa8b2b8fca6baab5' },
+                    { name: 'Single Arm Kickback Kneeling on Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8c076a88aa1cd293a3aeaea1a2eedeed', geriatric_priority: true },
+                    { name: '2 DB Standing Overhead Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/79feae87d0eba16707c636851cb438f5' }
                 ]
             },
             cable: {
                 label: "Cable",
                 exercises: [
-                    { name: 'Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d503d1a6cbbc4eb696f2193b586c285e' },
-                    { name: 'Rope Single Arm Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f9bf5da2427554de25afd6ff8703ae8a' },
-                    { name: 'Single Arm Rope Tricep Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a19d7db58d37cb49edfe9e84089aaf9d' },
-                    { name: 'Rope Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eed0fff80ce5ec256d93ef5178f9026a' },
-                    { name: 'Turn-Around Bent Over Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/27c84f61a02c3150c966137d8eef4983' },
-                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6eeacaf962a73cd24b09a7c2044c5779' },
-                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/9fef28bfa783b1ced1869ea6a7d7fe48' },
-                    { name: 'Rope Pushdown Bent over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f1c34bd44cc25461d0be37f05139f2a' }
+                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/84e8527ac7bdd614dd2bec25f512df95' },
+                    { name: 'Single Arm Rope Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7f8332731616c5ca34901439ce63f67e', geriatric_priority: true },
+                    { name: '3 Position Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/082d7785b9b9662cdcea97a89bb5dfc4' },
+                    { name: 'Banded Rope Kickback Bloodflow', movement: ['Push'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Cable', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2507a080fca823f14df0ddecf9f0ec24' },
+                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b31f1b10e2ecd9e8acb26cbcc09fba22' },
+                    { name: 'Straight Bar Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d3b872c7c89a848c88d24ee612bda978', geriatric_priority: true },
+                    { name: 'EZ Bar Cable Pushdown and Turn Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/aa181368aaa024d3c7286696b9e324c3' },
+                    { name: 'Band and Rope Pushdown Drop Blood Flow', movement: ['Push'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Cable', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/223e1ebfdb3a7b54224b3488303d635e' },
+                    { name: 'Single Arm Rope Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/912ef621404c4c379b1e79eaedae8e66', geriatric_priority: true },
+                    { name: 'EZ Bar Cable Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/75d966bf4b7e2e4c2bb22f069409f65f' },
+                    { name: 'EZ Bar Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7022e78cca8698e92d3b78edf8bc4195' },
+                    { name: 'Rope Pushdown Bent Over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/68688d06154364a2f91f5fb49ec230dd' },
+                    { name: 'Straight Bar Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/24114549f663bc7a7c30b4ec29a4db47' },
+                    { name: 'Rope Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b3c429e1f42f071da7e7f8e827bdfcff' },
+                    { name: 'Rope Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/525287f15713281c1732cb7bb86c0509', geriatric_priority: true },
+                    { name: 'Cable Overhead Rope Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d357266d9a25bb77fcf4867927631db7' }
                 ]
             },
             other: {
                 label: "Other",
                 exercises: [
-                    { name: 'Band Overhead Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/59993a59bb50f9a3276dd9da92419287' },
-                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true },
-                    { name: 'Stability Ball Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/28d2ea35b932f8dd53d7a8b7de3d1279' },
-                    { name: 'Band Triceps Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/638e518ec176a61ffa7cddb8c8e5c947' },
-                    { name: 'Turn Around Band Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/94b47d865fa9458883e88b09d490a707' },
-                    { name: 'Band Pushdown to Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a3239ad4529ad27ac306f0e04110e8d1' },
-                    { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ae4860e0385c1f363b52852b1cebeae2', geriatric_priority: true },
-                    { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f8b63953af49fb9e464354e40c058bb0' },
-                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c42775c49b990b23950ba99830ea5fb5' }
+                    { name: 'Turn Around Band Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/003023b65c981969585473b52e71b544' },
+                    { name: 'Band Pushdown to Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/724635587faa56e1f7e1a5293c4b9821' },
+                    { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c3e1d5d28875edbde346306bac55ecb0', geriatric_priority: true },
+                    { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d9c131c51073368c11295f328dc89a7a' },
+                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca2c4c97aed9d1e25e56f116cc357fe1', geriatric_priority: true },
+                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true }
                 ]
             }
         }
