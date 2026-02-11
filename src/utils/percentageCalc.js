@@ -172,12 +172,12 @@ function convertToMiles(distance, unit) {
   const dist = parseFloat(distance) || 0;
   if (!dist) return 0;
   switch (unit) {
-    case 'm': return dist / 1609.34;      // meters to miles
     case 'yd': return dist / 1760;        // yards to miles
     case 'ft': return dist / 5280;        // feet to miles
     case 'km': return dist * 0.621371;    // km to miles
     case 'mi': return dist;               // already miles
-    default: return dist;                 // assume miles if no unit
+    case 'm':                             // meters to miles
+    default: return dist / 1609.34;       // default to meters (matches UI default)
   }
 }
 
