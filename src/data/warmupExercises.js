@@ -359,7 +359,7 @@ export const warmupCategories = {
         label: "Stretching",
         exercises: [
             { name: 'Stretching Preset 1', duration: '8-10 min', description: 'Full body stretching routine', youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
-            { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', duration: '10-12 min', description: 'Yoga-based stretching flow: Pyramid, Triangle, Low Lunge, Extended Angle', youtube: 'https://iframe.videodelivery.net/96ef69b9a55e0865e42d61c0088c6246' }
+            { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', duration: '10-12 min', description: 'Yoga-based stretching flow: Pyramid, Triangle, Low Lunge, Extended Angle', youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' }
         ]
     }
 };
