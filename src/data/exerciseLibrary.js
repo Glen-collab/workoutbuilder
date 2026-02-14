@@ -1778,6 +1778,15 @@ export const exerciseCategories = {
                     { name: 'Massage Gun Biceps and Serratus and Teres Minor', movement: ['Recovery'], intent: ['Recovery'], equipment: ['Massage Gun'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f330857f436433768d82b6d0db2e3ea0' },
                     // --- No video ---
                 ]
+            },
+            stretching: {
+                label: "Stretching",
+                exercises: [
+                    // --- CF Video exercises ---
+                    { name: 'Stretching Preset 1', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
+                    { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' },
+                    // --- No video ---
+                ]
             }
         }
     },
@@ -1821,6 +1830,10 @@ export const exerciseCategories = {
             },
             massage_gun: {
                 label: "Massage Gun",
+                exercises: []
+            },
+            stretching: {
+                label: "Stretching",
                 exercises: []
             }
         }
