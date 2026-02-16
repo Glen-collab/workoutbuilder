@@ -13,6 +13,7 @@ export default function BuilderScreen({
   onRevertOverride,
   onGoToDashboard,
   onExitOverrideMode,
+  onSaveTravel,
 }) {
   const {
     currentWeek,
@@ -181,6 +182,14 @@ export default function BuilderScreen({
             >
               Save Program
             </button>
+            {onSaveTravel && (
+              <button
+                className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-gradient-to-br from-orange-500 to-orange-600 text-white border-none rounded-xl cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                onClick={onSaveTravel}
+              >
+                Save as Travel Workout
+              </button>
+            )}
             {onManage && (
               <button
                 className="w-full sm:w-auto py-3.5 px-6 text-[15px] font-semibold bg-transparent text-[#667eea] border-2 border-[#667eea] rounded-xl cursor-pointer hover:bg-[#667eea]/10 transition-colors duration-200"

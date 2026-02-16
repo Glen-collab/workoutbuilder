@@ -1,4 +1,4 @@
-export default function WelcomeScreen({ onNewProgram, onManagePrograms }) {
+export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-5 py-10">
       <div className="bg-white rounded-2xl shadow-lg px-8 py-12 max-w-md w-full text-center">
@@ -21,6 +21,12 @@ export default function WelcomeScreen({ onNewProgram, onManagePrograms }) {
             onClick={onManagePrograms}
           >
             Manage Programs
+          </button>
+          <button
+            className="w-full bg-gradient-to-br from-orange-500 to-orange-600 text-white border-none rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-90"
+            onClick={onManageTravelWorkouts}
+          >
+            Travel Workouts
           </button>
         </div>
       </div>
