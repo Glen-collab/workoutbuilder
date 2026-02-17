@@ -13,7 +13,9 @@ export default function ManageTravelWorkouts({ isOpen, onClose, onLoadWorkout, a
       setLoaded(false);
       getTravelWorkouts('wisco.barbell@gmail.com')
         .then((result) => {
-          setWorkouts(result?.data || []);
+          // API returns array directly in result.data, or wrapped in result.data.workouts
+          const list = Array.isArray(result?.data) ? result.data : (result?.data?.workouts || []);
+          setWorkouts(list);
           setLoaded(true);
         })
         .catch(() => {
