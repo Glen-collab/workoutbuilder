@@ -43,6 +43,7 @@ export default function ManageTravelWorkouts({ isOpen, onClose, onLoadWorkout, a
   // Group workouts by equipment type
   const bodyweight = workouts.filter((w) => w.equipment_type === 'bodyweight').sort((a, b) => a.day_number - b.day_number);
   const hotelGym = workouts.filter((w) => w.equipment_type === 'hotel_gym').sort((a, b) => a.day_number - b.day_number);
+  const bandsBodyweight = workouts.filter((w) => w.equipment_type === 'bands_bodyweight').sort((a, b) => a.day_number - b.day_number);
 
   const renderGroup = (title, items) => {
     if (items.length === 0) return null;
@@ -102,6 +103,7 @@ export default function ManageTravelWorkouts({ isOpen, onClose, onLoadWorkout, a
         <>
           {renderGroup('Bodyweight', bodyweight)}
           {renderGroup('Hotel Gym', hotelGym)}
+          {renderGroup('Bands & Bodyweight', bandsBodyweight)}
         </>
       )}
     </Modal>

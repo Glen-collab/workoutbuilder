@@ -15,7 +15,8 @@ export default function TravelSaveModal({ isOpen, onClose, onSave, loading }) {
     });
   };
 
-  const equipLabel = equipmentType === 'hotel_gym' ? 'Hotel Gym' : 'Bodyweight';
+  const equipLabels = { bodyweight: 'Bodyweight', hotel_gym: 'Hotel Gym', bands_bodyweight: 'Bands & Bodyweight' };
+  const equipLabel = equipLabels[equipmentType] || 'Bodyweight';
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Save as Travel Workout" maxWidth="440px">
@@ -33,6 +34,7 @@ export default function TravelSaveModal({ isOpen, onClose, onSave, loading }) {
           >
             <option value="bodyweight">Bodyweight Only</option>
             <option value="hotel_gym">Hotel Gym</option>
+            <option value="bands_bodyweight">Bands & Bodyweight</option>
           </select>
         </div>
 
