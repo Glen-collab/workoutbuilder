@@ -40,7 +40,9 @@ export const exerciseCategories = {
                     { name: 'Decline Barbell Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/451681b06592fdbb779cbba1f99b9d35' },
                     { name: 'Close Grip Bench Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/c951cb36291c1f1ddb328e6fd692153d' },
                     { name: 'Floor Press (Barbell)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/1059b63970964c6d927111d69184587e' },
-                    { name: 'American Bar Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc28fd6ce68ae8ea2a2b333c24945f9' }
+                    { name: 'American Bar Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc28fd6ce68ae8ea2a2b333c24945f9' },
+                    { name: 'Barbell Band Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Band'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/64a507e40ae3f865530b084f1f935960' },
+                    { name: 'Chain Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Chain'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/4139f25debf1be5a7b543c05fa407676' }
                 ]
             },
             dumbbell: {
@@ -78,16 +80,13 @@ export const exerciseCategories = {
                     { name: 'Incline Dumbbell Chest Press Tempo', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7a0c399c6dcad3bd91e66f391931d0c7' },
                     { name: 'How To Set Up For Dumbbell Bench', movement: ['Push'], intent: ['Education'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/54c7cbfbab54ce3c7d32589cc61150f0' },
                     { name: 'DB Alternating Chest Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6a57cc830655dd17b8696792ea41215d' },
-                    // --- No video yet ---
-                    { name: 'Dumbbell Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Dumbbell Flyes', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Single Arm Dumbbell Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Crush Press (Dumbbells)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: '', geriatric_priority: true },
-                    { name: 'Decline Dumbbell Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Squeeze Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Press with Bands', movement: ['Push'], intent: ['Power'], equipment: ['Dumbbell', 'Band'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Dumbbell Chest Squeeze', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'DB Decline Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    // --- New uploads ---
+                    { name: 'Dumbbell Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/2c00adc35f411cd799e4acb89b0a576c', geriatric_priority: true },
+                    { name: 'Dumbbell Single Arm Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/a6aa11617443c553c44da70d10ef5d66', geriatric_priority: true },
+                    { name: 'Dumbbell Crush Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/19e6a7af691b0b7fa8a76bffbfac8de9', geriatric_priority: true },
+                    { name: 'Dumbbell Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/d1553c5ad706332eaa1e4b2a915adc65', geriatric_priority: true },
+                    { name: 'Dumbbell Decline Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5f0ba481c83161a5c5e49dc22d655cb' },
+                    { name: 'Dumbbell Decline Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f870a377c55c60198873fdcdccfe4b5e' }
                 ]
             },
             functional: {
@@ -118,52 +117,23 @@ export const exerciseCategories = {
                     { name: 'Tempo Push-Ups', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a097a391ee624a65983fd67c32eeeb63' },
                     { name: 'Assisted Pushups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cb586c95f79966fe0861d4d01d62d93a', geriatric_priority: true },
                     { name: 'Tempo Wall Pushups', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9069a794c9902e771b753f389b005bfb', geriatric_priority: true },
-                    { name: 'Band Single Arm Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99374d221449ddb2fb9c8aa0d8ec1144' },
-                    // --- No video yet ---
-                    { name: 'Plyometric Push-Ups', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: '' },
-                    { name: 'Cable Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Landmine Press', movement: ['Push'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Incline Push-Ups', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Ring Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Rings'], contraindications: [], youtube: '' },
-                    { name: 'Suspension Trainer Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Suspension'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Cable Fly (Mid)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Low to High Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'High to Low Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Single Arm Cable Press', movement: ['Push'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Single Arm Cable Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Standing Cable Chest Press', movement: ['Push'], intent: ['Strength'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Split Stance Cable Press', movement: ['Push'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Cable Chest Fly + Chest Press + Chest Fly + Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', description: 'Fly - Press - Fly - Press complex. 4 movements in sequence without rest. Destroys the chest!' },
-                    { name: 'Resistance Band Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Band Fly (Standing)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Landmine Chest Press (Two-Hand)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Half-Kneeling Landmine Press', movement: ['Push'], intent: ['Stability'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Medicine Ball Push-Up', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Medicine Ball Chest Throw (Wall)', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Sled Chest Press', movement: ['Push'], intent: ['Strength'], equipment: ['Sled'], contraindications: [], youtube: '' },
-                    { name: 'Bear Crawl Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Push-Up Hold', movement: ['Push'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Fly-Press Combo', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Decline Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' }
+                    { name: 'Band Single Arm Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99374d221449ddb2fb9c8aa0d8ec1144' }
                 ]
             },
             machine: {
                 label: "Machine",
                 exercises: [
-                    // --- Cloudflare videos ---
                     { name: 'Low to High Chest Fly Cable', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/de8ce1e900424a15643c129d118f4a1d' },
                     { name: 'Single Arm Cable Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7bb87fb42802c6e72d9372fa5a960eff' },
                     { name: 'Cable Chest Press Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/947e373c57852131ad49710af09f7d5b', geriatric_priority: true },
                     { name: 'Cable Chest Fly Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/085f938f3ef5f44a6ed4aee63910769c' },
-                    // --- No video yet ---
-                    { name: 'Machine Chest Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Incline Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Decline Chest Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Chest Fly (Pec Deck)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Iso-Lateral Chest Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Smith Machine Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Smith Machine Incline Bench Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Assisted Dip Machine', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true }
+                    { name: 'Single Arm Cable Fly High to Low', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2adf9a0c805fbddd8bfa2adbd68813c8' },
+                    { name: 'Cable High to Low Chest Fly', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7415558e79d83c76c355c6569018ce67' },
+                    { name: 'Cable Chest Fly-Press-Fly-Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/18bc0d77418cca964aaae07af16b67a9' },
+                    { name: 'Cable Fly Low to High', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b68cbcb54c5a560a40e92da69201a747' },
+                    { name: 'Cable Chest Fly Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6e30bcb8edf3e6e1d1bd9ebe795fa3ed' },
+                    { name: 'Split Stance Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/38b867dd7800f4aee0573dbf852e648b' },
+                    { name: 'Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/90e6fd39abd4255a4781cf7dea9e37b0' }
                 ]
             },
             corrective: {
@@ -183,31 +153,7 @@ export const exerciseCategories = {
                     { name: 'Scap Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/db235fa11cae5ab24dd9ee998a92d22a', geriatric_priority: true },
                     { name: 'T Spine Back-Bend', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Foam Roller'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5ff0d67ea7267bcf9a4f5e4012c64d79', geriatric_priority: true },
                     { name: 'Doorway Pec Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0dc5a7ad69cadf1bb7b929ebce285b7f', geriatric_priority: true },
-                    { name: 'Wall Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/659970359bb34845d7a04030eeb22d9c', geriatric_priority: true },
-                    // --- No video yet ---
-                    { name: 'Band Chest Fly', movement: ['Push'], intent: ['Stability', 'Mobility'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Wall Slides', movement: ['Push'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Foam Roll Pec/Lat', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Incline Scapular Push-Ups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Band-Assisted Push-Ups', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Chest Isometric Hold (Band)', movement: ['Push'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Seated Band Chest Press', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Foam Roller Bench Press (PVC)', movement: ['Push'], intent: ['Stability'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Supine Chest Reach', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Quadruped Chest Opener', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Side-Lying Chest Opener', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Wall Pec Stretch (Bent Arm)', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Wall Pec Stretch (Straight Arm)', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Breathing Chest Expansion Drill', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Foam Roll Pec Minor', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Thoracic Extension on Roller', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'PVC Chest Pass (Controlled)', movement: ['Push'], intent: ['Motor Control'], equipment: ['PVC'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Wall Press', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Supine Band Fly', movement: ['Push'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Standing Band Chest Reach', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Bench-Supported Push-Up Plus', movement: ['Push'], intent: ['Stability'], equipment: ['Bench'], contraindications: [], youtube: '' },
-                    { name: 'Breathing Push-Ups', movement: ['Push'], intent: ['Motor Control'], equipment: ['Bodyweight'], contraindications: [], youtube: '' }
-
+                    { name: 'Wall Pushups', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/659970359bb34845d7a04030eeb22d9c', geriatric_priority: true }
                 ]
             }
         }
@@ -356,37 +302,33 @@ export const exerciseCategories = {
             barbell: {
                 label: "Barbell",
                 exercises: [
-                    { name: 'Overhead Press (Barbell)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'Upper Body Load Limited'], youtube: '' },
-                    { name: 'Push Press', movement: ['Push', 'Power'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Bradford Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Behind the Neck Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'ROM Restricted'], youtube: '' },
-                    { name: 'Landmine Press (Barbell)', movement: ['Push'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Strict Overhead Press (Paused)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Tempo Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Seated Barbell Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Z Press', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Pin Press (Overhead)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch Grip Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Wide Grip Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Close Grip Overhead Press', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Split Jerk', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Power Jerk', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Behind the Neck Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'ROM Restricted'], youtube: '' },
-                    { name: 'Overhead Press with Bands', movement: ['Push'], intent: ['Power'], equipment: ['Barbell', 'Band'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Overhead Press with Chains', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'One-and-a-Half Rep Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Isometric Overhead Press Hold', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Landmine Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Landmine Shoulder Press (Single Arm)', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Landmine Lateral Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Landmine Press with Rotation', movement: ['Push'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Tall Kneeling Barbell Press', movement: ['Push'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Standing Barbell Shoulder Press', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/a75667a8352d8d5fecc43bfc5c8cdca7' },
+                    { name: 'Standing 1 and a Half Military Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/7d5184c7f72de7d4866ce75740543b76' },
+                    { name: 'Push Jerk', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4efe91ef944fa4df7038813ef3b5c7ae' },
+                    { name: 'Tempo Behind the Neck Bar Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/42654c4b23334f91f3d74601f0e23579' },
+                    { name: 'Rotational Landmine Press', movement: ['Push'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d1a86054971ba65e0a837c021931d6ec' },
+                    { name: 'Double Arm Landmine Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8dc6ab5d246ed907e2fdb7ec654ae184' },
+                    { name: 'Pause Strict Bar Press', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/947fa9f474f910dc628270a730a32133' },
+                    { name: 'Seated Bar Military Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c44471724988dfd1a92205c461b70314' },
+                    { name: 'Bar Push Press', movement: ['Push', 'Power'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/fe13b7af8c123dd1e3eec81c2a17eea8' },
+                    { name: 'Bradford Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/dfcdcd19618eea8a8752ce3030dffc8f' },
+                    { name: 'Single Arm Landmine Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/040163798fe3cf3126b2fc2cd79152a2' },
+                    { name: 'Tempo Military Press Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/91809b656fdd75a0fd5698def64436ff' },
+                    { name: 'Landmine Single Arm Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/143eb975e09582d7a5d69cda7af07d45' },
+                    { name: 'Neutral Grip Landmine Press Double', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b25e6eebb888eeeb3713c61c00c2844a' },
+                    { name: 'Behind the Head Shoulder Press Standing', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/7b8e1dba0f0fcea953717802c399a6ae' },
+                    { name: 'Single Arm Split Landmine Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2b53b4579f97a3b288f76af311357cba' },
+                    { name: 'Split Jerk', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/65a15996df8868cfb74ebe8059892699' },
+                    { name: 'Landmine Press Double Arm', movement: ['Push'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/52dcdc4daba2c0c919e87ba2d745bb9c' },
+                    { name: 'Landmine Split Jerk Double Arm', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/61f60787bbff23ba6dad61ab24ea860b' },
+                    { name: 'Behind the Neck Press Seated', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/47d16eec949945967bdad8f8146b335d' },
+                    { name: '1 and a Half Seated Military Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/82793537d1cccf8ba9d09b75a82b841e' }
                 ]
             },
             dumbbell: {
                 label: "Dumbbell",
                 exercises: [
-                    // --- CF Video exercises ---
+                    // --- Previous CF Video exercises ---
                     { name: 'Standing Dumbbell Z Press', movement: ['Push'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/299ad9881975aafbb36fffa1fc27a6e3' },
                     { name: 'Dumbbell Arnold Press (Seated)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2de337bce8285916bdb8745d95673c97', geriatric_priority: true },
                     { name: 'Dumbbell Seated Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1cfac9621a2171751f0fe9f52e51533d' },
@@ -397,33 +339,44 @@ export const exerciseCategories = {
                     { name: 'Front, Lateral, Bent Over Raise', movement: ['Push', 'Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/412fd7dcca7953b1bf8411c205e61e5e' },
                     { name: 'Dumbbell Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fc2e4d9ad5cc2a9447ac4cb614a6dbff', geriatric_priority: true },
                     { name: 'Seated Z Press', movement: ['Push'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/754e8548238795ff9247860b38e0c150' },
-                    // --- No video ---
-                    { name: 'Dumbbell Shoulder Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '', geriatric_priority: true },
-                    { name: 'Seated Dumbbell Shoulder Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '', geriatric_priority: true },
-                    { name: 'Neutral Grip Dumbbell Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '', geriatric_priority: true },
-                    { name: 'Single Arm Dumbbell Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Half Kneeling Dumbbell Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Dumbbell Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Lean Away Dumbbell Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Lateral Raise (Partial)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Lateral Raise (Paused)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Front Raise (Alternating)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Front Raise (Plate Style)', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Incline Dumbbell Rear Delt Fly', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Chest Supported Rear Delt Raise', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Dumbbell Rear Delt Row', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Cuban Press (Dumbbell)', movement: ['Push'], intent: ['Stability', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Scaption Raise', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Dumbbell Press with Bands', movement: ['Push'], intent: ['Power'], equipment: ['Dumbbell', 'Band'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Dumbbell Press Iso Hold', movement: ['Push'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Dumbbell Lateral Raise Mechanical Drop Set', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Rear Delt Iso Hold', movement: ['Pull'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    // --- New Shoulder Videos ---
+                    { name: 'Dumbbell Shoulder Press Standing', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/aa953722d074c7e017fa5d31382810f9', geriatric_priority: true },
+                    { name: 'Seated Single Arm Neutral Grip Shoulder Press', movement: ['Push'], intent: ['Strength', 'Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/ba1758bd3f45fce0a1e156211e401463' },
+                    { name: 'Seated Neutral Grip DB Shoulder Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/0cd7161a187eb788c0595f7e2e5675eb', geriatric_priority: true },
+                    { name: 'Scarecrows', movement: ['Pull'], intent: ['Stability', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/46ee29434650f43807acffcc0d213c0e' },
+                    { name: 'Squat Position Front Plate Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/86e72997d2219fb031f69e1cb1cc11ab' },
+                    { name: 'DB Push Press', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/631647d11b3e8a3b89d90fc88ced4a6d' },
+                    { name: 'DB Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5eedac066048e02dc03d5c07e4faf97a' },
+                    { name: 'Cuban Press', movement: ['Push'], intent: ['Stability', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5a3fb60916af4b402df2ebc57ab8aeed' },
+                    { name: 'DB Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5dac022811e3ea6c727ad8ac5f13efba' },
+                    { name: 'Suitcase Carry', movement: ['Carry'], intent: ['Stability', 'Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5823e9f38d9980b933d82313d6a129ec' },
+                    { name: 'Seated DB Shoulder Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e965238facdb91cedbb57a72b34ab306', geriatric_priority: true },
+                    { name: 'DB Alt Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a747dc573aef871c435d0bdf76d2073a' },
+                    { name: 'Seated Single Arm Shoulder Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/0cecbc61b88663bd2e38b29275ab3c83' },
+                    { name: '3 Way Rotator Raise', movement: ['Pull'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6ddf890d8d423af2c32d60d9e0e4a249' },
+                    { name: 'Rear Delt W Raise', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1e63e1cba44946f3cc3b9bf054ccaee5' },
+                    { name: 'DB Push Jerk', movement: ['Push', 'Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/57113624570253d0ccc22f1aadb57e67' },
+                    { name: 'Seated Alt. DB Shoulder Press', movement: ['Push'], intent: ['Strength', 'Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/7b07006c37c6168607471d787ad8e840' },
+                    { name: 'Front Plate Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f0b19432e2c136b5cb304d49af88f67f' },
+                    { name: 'Single Arm Server Carry', movement: ['Carry'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4826d4fdf84df7988e800829355953c8' },
+                    { name: '10 Deg Scarecrows', movement: ['Pull'], intent: ['Stability', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d36fbc6407cc844fbe194fe1c317f7f6' },
+                    { name: 'DB Alt. Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c5a6096ed5efc3db0c40c2499db65555' },
+                    { name: 'DB Lean Aways', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b59f89fd4beca1476c424b4ace42013d' },
+                    { name: 'Standing Alt. DB Shoulder Press', movement: ['Push'], intent: ['Strength', 'Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c13e3838a0d83094898b984f921a1046' },
+                    { name: 'Plate Bus Drivers', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fc01317daf5cb6649ebf8206cecb7185' },
+                    { name: 'Front to Lateral to Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7b7578d3f65307cb4d3f875375c0da32' },
+                    { name: '10 Deg Cuban Press', movement: ['Push'], intent: ['Stability', 'Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f239e028fe827a9243d99a3babbb4858' },
+                    { name: 'Farmers Carry', movement: ['Carry'], intent: ['Stability', 'Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9ad489fddeaeef0809d1a63870aec31d' },
+                    { name: '10 Deg Reverse Fly Thumbs Up', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cb41eb9b734d4e23d0665362d389aef4' },
+                    { name: 'Server Carry', movement: ['Carry'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/fdd88ab8404a98f3e07514574acd31ba' },
+                    { name: 'DB Neutral Grip Standing Shoulder Press', movement: ['Push'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/031c76e7019bad52e027648cebdd4705' },
+                    { name: 'Half Kneeling Shoulder Press', movement: ['Push'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/bde438499e26e59c67d7a64ea8122aab' }
                 ]
             },
             functional: {
                 label: "Functional",
                 exercises: [
-                    // --- CF Video exercises ---
+                    // --- Previous CF Video exercises ---
                     { name: 'Cable Squat Face Pulls', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2b6de2e343cfe1061b2e00ba171b7cf9' },
                     { name: 'Rope Shrug to Upright Row', movement: ['Pull'], intent: ['Hypertrophy', 'Power'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fbde0e803aaef5a9d6f15da2330b93fa' },
                     { name: 'Rope Upright Rows', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3f357e85c08c1581317d575ed190259b' },
@@ -432,91 +385,68 @@ export const exerciseCategories = {
                     { name: 'Squat Position Face Pulls', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ddc5bae50e6132754eb5d1383dc0c8d8' },
                     { name: 'TRX Fall Outs', movement: ['Push', 'Core'], intent: ['Stability'], equipment: ['TRX'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8c53a53910a974b4f28f90ce25505c79' },
                     { name: 'Cable Reverse Fly', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc5cfbd57900591d066ea33a1f38a1a', geriatric_priority: true },
-                    // --- No video ---
-                    { name: 'Pike Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Handstand Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Cable Lateral Raises', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Cable Face Pulls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Cable'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Overhead Carries', movement: ['Carry'], intent: ['Stability', 'Strength'], equipment: ['Dumbbell', 'Kettlebell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Incline Pike Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Feet Elevated Pike Push-Ups', movement: ['Push'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Wall Assisted Handstand Hold', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Handstand Shoulder Taps', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Single Arm Cable Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Behind the Body Cable Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Cable Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Single Arm Cable Face Pull', movement: ['Pull'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Cable High Pull (Shoulder Bias)', movement: ['Pull'], intent: ['Power'], equipment: ['Cable'], contraindications: [], youtube: '' },
-                    { name: 'Resistance Band Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Resistance Band Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Band Pull to External Rotation', movement: ['Pull'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Bottoms Up Kettlebell Press', movement: ['Push'], intent: ['Stability'], equipment: ['Kettlebell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Bottoms Up Carry (Overhead)', movement: ['Carry'], intent: ['Stability'], equipment: ['Kettlebell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Single Arm Overhead Carry', movement: ['Carry'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Farmer to Overhead Press Combo', movement: ['Push', 'Carry'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Sled Rope Overhead Pull', movement: ['Pull'], intent: ['Strength'], equipment: ['Sled'], contraindications: [], youtube: '' },
-                    { name: 'Bear Crawl Shoulder Taps', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Isometric Overhead Hold', movement: ['Carry'], intent: ['Stability'], equipment: ['Dumbbell', 'Kettlebell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Standing Cable Shoulder Press', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    // --- New Shoulder Videos ---
+                    { name: 'Band External and Internal Rotators', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5ca024ff0e406a4cfab0697a8fcefd2c', geriatric_priority: true },
+                    { name: 'Band Single Arm Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/61b4155b67a1627281b7632547378cb5', geriatric_priority: true },
+                    { name: 'Band Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c47609f180f0821d26e83dc2c5713201', geriatric_priority: true },
+                    { name: 'Band Single Arm Scarecrow', movement: ['Pull'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6aff46119d5bcdae3d141117fd8c3361' },
+                    { name: 'Band Bent Over Lateral Raise', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/01deab3d337ea568aa72b06ced469477' },
+                    { name: 'Band Shoulder Press Standing', movement: ['Push'], intent: ['Strength'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/129033b5c12b83cf6b643d2789a591ed', geriatric_priority: true },
+                    { name: 'Band Single Arm Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8536858cc78eb67ea123a0905278599c' },
+                    { name: 'Band Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/db3842ce42cb47391a5e8c361a9dd7b5', geriatric_priority: true },
+                    { name: 'Band Double Arm Scarecrow', movement: ['Pull'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/191372c26d83441f0db79a5516647171' }
                 ]
             },
             machine: {
                 label: "Machine",
                 exercises: [
-                    // --- CF Video exercises ---
+                    // --- Previous CF Video exercises ---
                     { name: 'Cable Shoulder Press (Inside Grip)', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/33819943c43d7c14e56862b7ad1f9adf' },
                     { name: 'Lateral Cable Flyes', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6282ac825d76b4c53a9b24ed5a9c72a1' },
                     { name: 'Seated Face Pulls (Rope)', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f314775d001069e6570aadc982a971b7' },
-                    // --- No video ---
-                    { name: 'Machine Shoulder Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Rear Delt Fly', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Reverse Fly (Pec Deck Reverse)', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Smith Machine Overhead Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Machine Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Machine Iso-Lateral Shoulder Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true }
+                    // --- New Shoulder Videos ---
+                    { name: 'Cable Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/27838523621af26a08a38b37f044c106' },
+                    { name: 'Cable Lean Away In Front', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/52ff2a4f5d5223598cc01cbc91532997' },
+                    { name: 'Cable Standing Shoulder Press (Outside Grip)', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/fbbff1d635b528546eb751cb936eaf5d' },
+                    { name: 'Cable External and Internal Rotator', movement: ['Stability'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/172a3e8b05f5b58795bf645f717fe93d' },
+                    { name: 'Cable Single Arm Scarecrow', movement: ['Pull'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/aaca2d634fde8ff333bb3a093d38be91' },
+                    { name: 'Cable Alt Front Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/225c13eab70f4e91832d31ae09738d5b' },
+                    { name: 'Rope Internal Rotator', movement: ['Stability'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d5704fc558ef75d521251cf4a1dc1a68' },
+                    { name: 'Cable Lean Away Behind Butt', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1a54a8c42cc00e791bf29b9bd4e92c6a' },
+                    { name: 'Cable Cuban Press Single Arm', movement: ['Push'], intent: ['Stability', 'Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9b5bfd282476d794092bf0b5c781eaf5' },
+                    { name: 'Rope Y Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4539d3c63380486f6ccbaba87e598891' },
+                    { name: 'Cable Y Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/efc78cfafd089f9bcfa5ba0cec57cdc3' },
+                    { name: 'Lateral Cable Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/445b0622e2065da87b04d897c57c4f09', geriatric_priority: true },
+                    { name: 'Cable Standing Shoulder Press (Inside Grip)', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/fc85afbdc81c0d06ca626544c939a74e' },
+                    { name: 'Rope External Rotator', movement: ['Stability'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5bac72738eda7850b94488ad4f929413' }
                 ]
             },
             corrective: {
                 label: "Corrective",
                 exercises: [
-                    // --- CF Video exercises ---
+                    // --- Previous CF Video exercises ---
                     { name: 'Lacrosse Ball Rear Delt Wall', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Lacrosse Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/03b8879866882f65a77de036005553c4' },
                     { name: 'Band YTA', movement: ['Stability'], intent: ['Stability', 'Posture'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4254c327ea25a2628bdb70725eda7321', geriatric_priority: true },
                     { name: 'Stability Ball Kneeling Shoulder Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/09e723723e172ff56fb0946ec2c6cdce' },
-                    { name: 'Wall Slides', movement: ['Stability'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1bf8806481406979c56fc2abdb7d9c33', geriatric_priority: true },
                     { name: 'Shoulder Stretch on Bench', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bdad4b4afbc39e1371a819ff631ca1e' },
                     { name: 'Stability Ball Modified Cuban Press', movement: ['Stability'], intent: ['Stability', 'Corrective'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b00d09ac7b9d200bb5bbd7d2e847d3c8' },
                     { name: 'Stability Ball Shoulder Dislocates', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6e564111fd16c2e7e24df293bbf6c380' },
                     { name: 'YTWA on Stability Ball', movement: ['Stability'], intent: ['Stability', 'Posture'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/71a54198e31a31edd516c4b5a99774d2' },
                     { name: 'YTAW', movement: ['Stability'], intent: ['Stability', 'Posture'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fbbc29c8041483e22dacba8037797c65' },
                     { name: 'Stability Ball Cobra', movement: ['Mobility', 'Extension'], intent: ['Mobility', 'Posture'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bf51df18d7afbad10992470fb40c5201' },
-                    // --- No video ---
-                    { name: 'External Rotations (Band)', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Internal Rotations (Band)', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'YTWs', movement: ['Stability'], intent: ['Stability', 'Posture'], equipment: ['Bodyweight', 'Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Wall Angels', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Shoulder Dislocations (Band)', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Sidelying External Rotation (Dumbbell)', movement: ['Stability'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Sidelying Internal Rotation (Dumbbell)', movement: ['Stability'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Prone I Raise', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Prone Y Raise (Thumbs Up)', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Prone T Raise (Paused)', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Prone W Raise (Paused)', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Serratus Wall Slides', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Push-Up Plus', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Quadruped Scapular Circles', movement: ['Stability'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Scapular Clock Drill', movement: ['Stability'], intent: ['Motor Control'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Band External Rotation at 90 Degrees', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Band Internal Rotation at 90 Degrees', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'PVC Shoulder CARs', movement: ['Mobility'], intent: ['Mobility'], equipment: ['PVC'], contraindications: [], youtube: '' },
-                    { name: 'Standing Shoulder CARs', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Foam Roll Posterior Shoulder', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Foam Roll Lats and Teres', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: '' },
-                    { name: 'Doorway External Rotation Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Cross Body Posterior Capsule Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Isometric External Rotation Hold', movement: ['Stability'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: '' },
-                    { name: 'Breathing Assisted Overhead Reach', movement: ['Mobility'], intent: ['Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' }
+                    // --- New Shoulder Videos ---
+                    { name: 'Shoulder CARS', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/70f8439809e03c5cb48b94cf4fe8f11c', geriatric_priority: true },
+                    { name: 'Overhead Plate Carry', movement: ['Carry'], intent: ['Stability', 'Strength'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/737697cfef2c4f32b356058434858ef3' },
+                    { name: 'Standing Overhead Plate Hold', movement: ['Carry'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d9432afe88a46a8e63a41e5744496645' },
+                    { name: 'Wall Handstands', movement: ['Push'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e4dbd62ceffd81a343f8726494d384bd' },
+                    { name: 'Rear ISO Hold on Wall', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/95e177f7cc885ffb176307278bce16db' },
+                    { name: 'Wall Slides', movement: ['Stability'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9c061fc4732b95615c679842223eb075', geriatric_priority: true },
+                    { name: 'Wall Angels', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/84b6efcc08cf76ae4a449d9b69f195da', geriatric_priority: true },
+                    { name: 'Dip Shrugs', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5d5f50575d868e6dc7e89b0e422e128f' },
+                    { name: 'Bench Dip Shrugs', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6190775cb3c7e4bce0bfe6e8bf8666a4' },
+                    { name: 'Alternating DB Drop and Catch', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aafab424fc0f84a1c2355c41b7c39f1' },
+                    { name: 'External DB Release Drops', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dd124c85df2a5fde55b00caf4eb4f390' },
+                    { name: 'Elbow Knee External Rotators', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9cd0652af2db9bc882402ac04cda5c36' }
                 ]
             }
         }
@@ -655,44 +585,79 @@ export const exerciseCategories = {
                 label: "Barbell",
                 exercises: [
                     { name: 'Close Grip Bench Press', movement: ['Push'], intent: ['Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/c951cb36291c1f1ddb328e6fd692153d' },
-                    { name: 'Barbell Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b9f8f065ac5fb24749f74d05aa70e3f6' },
-                    { name: 'EZ Bar Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/69b888a6476ee0931fa75918e0d5d271' }
+                    { name: 'Seated EZ Bar Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/a261c8c18c7361c25d2bba164fe7d43b' },
+                    { name: 'Barbell EZ Bar Skull Crusher to Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6db08e10c49cd27838d0bbc8f1e72253' },
+                    { name: 'EZ Bar Decline Skull and Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/56a986eea97b79ee36883b58756c7e8c' },
+                    { name: 'EZ Bar Incline Skulls Behind Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0a250709a8735b2f7454e06281cc595f' },
+                    { name: 'Barbell Skull Crusher to Chin', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e8a3c168db531f5f6126c9fcf9de57db' },
+                    { name: 'EZ Bar Incline Skull Crusher to Head', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c156855dd9c4e164fc93b3cb29975dfd' },
+                    { name: 'Bar Chain Skulls and Presses', movement: ['Push'], intent: ['Hypertrophy', 'Power'], equipment: ['Barbell', 'Chain'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ab9ce63f73a6ab8d32c459691d5f0440' },
+                    { name: 'EZ Bar Extended Skull Crushers', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4866da0c9a406bee49b5e9bbb464e788' },
+                    { name: 'Barbell Skull plus Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3a7b57e951cc11325c61db02cba294fb' }
                 ]
             },
             dumbbell: {
                 label: "Dumbbell",
                 exercises: [
                     { name: 'Tate Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5e98b80bb0d4421b84660e9471b6b2da' },
-                    { name: 'Dumbbell Seated Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f25db0daf8b4adc9465204ce7d03ad1d', geriatric_priority: true },
-                    { name: 'Standing Dumbbell Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e01902f3ef48f20c40d2a8f6ca5aaf4d' },
-                    { name: 'Dumbbell Bent Over Kickbacks', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/07c7698b00229ef4b7db460792b86d58', geriatric_priority: true }
+                    { name: 'Seated DB Overhead Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/50e88f9b131e6d9995568570182b5241', geriatric_priority: true },
+                    { name: 'DB Decline Crush Press', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8f306a5bb4999d738fabce87b819fba5' },
+                    { name: 'Standing Alternating DB Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/da05e9ab61fbb050c4f2a599d685ae2e' },
+                    { name: 'DB Skull Crusher to Chin', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cda2265ee711eeab71c8d317221170e8' },
+                    { name: 'DB Skull Crusher Prone Grip', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3b0b78b857f135fbe7d1f5e21309b599' },
+                    { name: 'DB Decline Supine Grip Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f1cbf3312b92f906601cc1ca64ee8d76' },
+                    { name: 'DB Incline Alternating Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f5e595d2a2d728391cdc3e4d4c79013' },
+                    { name: 'DB Seated Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/953ca43e8b9b6d9990631c0d1debc91a' },
+                    { name: 'DB Incline Prone Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b8368f14cc6760703aa794c44a401039' },
+                    { name: 'Bent Over Double Arm Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bc2a3b464d9604050627b21b4c9015d', geriatric_priority: true },
+                    { name: 'DB Skull Crusher Top of Head Extended', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/79f85ac735dd2fea3347c1a5a612fcb3' },
+                    { name: 'DB Decline Extended Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/736b23aea2c300f3437f155e5fd6e9d4' },
+                    { name: '2 DB Seated Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/61916021c64097e5b4a24335eec18686' },
+                    { name: 'Single Arm Kickback Hand on Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/db17a579160850f86540a17c6aac1ed0', geriatric_priority: true },
+                    { name: 'Lying Triceps Skull Crushers Roll', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fe820475ba5c2df9247badc264392f5e' },
+                    { name: 'DB Decline Prone Grip Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8e77a40a35308ad6c27e4dbac197fce4' },
+                    { name: 'Standing DB Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6a75484bfb6a9e410f924884918d5c37' },
+                    { name: 'DB Decline Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/39ceb3118c35e7d9559a48d322ad9187' },
+                    { name: 'DB Decline Alternating Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/adb05b9e9375f762450b60d988f98913' },
+                    { name: '2 DB Alternating Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/94c69e8de3d30115e00890ff05737e4a' },
+                    { name: 'DB Incline Supine Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/28ad1f8973f7e703021988c08262510a' },
+                    { name: 'Standing DB Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b0ad6d7a060c241397ee68608fb1d968' },
+                    { name: 'DB Skull Crusher Supine Grip', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca63ecb381eb02a2046d3da2aaa645eb' },
+                    { name: 'DB Incline Skull Crusher', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e3e8a135a05aae8faa8b2b8fca6baab5' },
+                    { name: 'Single Arm Kickback Kneeling on Bench', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8c076a88aa1cd293a3aeaea1a2eedeed', geriatric_priority: true },
+                    { name: '2 DB Standing Overhead Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/79feae87d0eba16707c636851cb438f5' }
                 ]
             },
             cable: {
                 label: "Cable",
                 exercises: [
-                    { name: 'Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d503d1a6cbbc4eb696f2193b586c285e' },
-                    { name: 'Rope Single Arm Overhead Triceps Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f9bf5da2427554de25afd6ff8703ae8a' },
-                    { name: 'Single Arm Rope Tricep Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a19d7db58d37cb49edfe9e84089aaf9d' },
-                    { name: 'Rope Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eed0fff80ce5ec256d93ef5178f9026a' },
-                    { name: 'Turn-Around Bent Over Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/27c84f61a02c3150c966137d8eef4983' },
-                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6eeacaf962a73cd24b09a7c2044c5779' },
-                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/9fef28bfa783b1ced1869ea6a7d7fe48' },
-                    { name: 'Rope Pushdown Bent over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1f1c34bd44cc25461d0be37f05139f2a' }
+                    { name: 'Bent Over Pushdown Rope', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/84e8527ac7bdd614dd2bec25f512df95' },
+                    { name: 'Single Arm Rope Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7f8332731616c5ca34901439ce63f67e', geriatric_priority: true },
+                    { name: '3 Position Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/082d7785b9b9662cdcea97a89bb5dfc4' },
+                    { name: 'Banded Rope Kickback Bloodflow', movement: ['Push'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Cable', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2507a080fca823f14df0ddecf9f0ec24' },
+                    { name: 'Rope Turn Around Overhead Triceps', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b31f1b10e2ecd9e8acb26cbcc09fba22' },
+                    { name: 'Straight Bar Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d3b872c7c89a848c88d24ee612bda978', geriatric_priority: true },
+                    { name: 'EZ Bar Cable Pushdown and Turn Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/aa181368aaa024d3c7286696b9e324c3' },
+                    { name: 'Band and Rope Pushdown Drop Blood Flow', movement: ['Push'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Cable', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/223e1ebfdb3a7b54224b3488303d635e' },
+                    { name: 'Single Arm Rope Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/912ef621404c4c379b1e79eaedae8e66', geriatric_priority: true },
+                    { name: 'EZ Bar Cable Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/75d966bf4b7e2e4c2bb22f069409f65f' },
+                    { name: 'EZ Bar Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7022e78cca8698e92d3b78edf8bc4195' },
+                    { name: 'Rope Pushdown Bent Over Turn Around', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/68688d06154364a2f91f5fb49ec230dd' },
+                    { name: 'Straight Bar Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/24114549f663bc7a7c30b4ec29a4db47' },
+                    { name: 'Rope Single Arm Overhead Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b3c429e1f42f071da7e7f8e827bdfcff' },
+                    { name: 'Rope Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/525287f15713281c1732cb7bb86c0509', geriatric_priority: true },
+                    { name: 'Cable Overhead Rope Tri Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d357266d9a25bb77fcf4867927631db7' }
                 ]
             },
             other: {
                 label: "Other",
                 exercises: [
-                    { name: 'Band Overhead Tricep Extension', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/59993a59bb50f9a3276dd9da92419287' },
-                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true },
-                    { name: 'Stability Ball Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/28d2ea35b932f8dd53d7a8b7de3d1279' },
-                    { name: 'Band Triceps Kickback', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/638e518ec176a61ffa7cddb8c8e5c947' },
-                    { name: 'Turn Around Band Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/94b47d865fa9458883e88b09d490a707' },
-                    { name: 'Band Pushdown to Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a3239ad4529ad27ac306f0e04110e8d1' },
-                    { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ae4860e0385c1f363b52852b1cebeae2', geriatric_priority: true },
-                    { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f8b63953af49fb9e464354e40c058bb0' },
-                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c42775c49b990b23950ba99830ea5fb5' }
+                    { name: 'Turn Around Band Overhead Extensions', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/003023b65c981969585473b52e71b544' },
+                    { name: 'Band Pushdown to Turn Around Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/724635587faa56e1f7e1a5293c4b9821' },
+                    { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c3e1d5d28875edbde346306bac55ecb0', geriatric_priority: true },
+                    { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d9c131c51073368c11295f328dc89a7a' },
+                    { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca2c4c97aed9d1e25e56f116cc357fe1', geriatric_priority: true },
+                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true }
                 ]
             }
         }
@@ -948,10 +913,20 @@ export const exerciseCategories = {
                 label: "Upper",
                 exercises: [
                     // --- CF Video exercises ---
+                    { name: 'Full Plate Sit Ups No Foot Support', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/50d5dec302833ad1ecf17c1ae5fb285c' },
+                    { name: 'Full Sit Ups No Support', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/19b223ae29861fdd27c4d0a828d8d9d3' },
+                    { name: 'Plate Crunches', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a451fb1d44fb8fdd44577448669f3f69' },
+                    { name: 'Plate on Shins Trunk Crunch', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/50c3b75c6c38caa2514da44943834c44' },
+                    { name: 'Single Dumbbell Crunch', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02e3950daccc9166d028447338746555' },
+                    { name: 'Single Dumbbell Full Situp', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/50471316411f92c5ac957c71a945e724' },
+                    { name: 'Weighted Crunches Feet Support', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/123082145b9fddbb867db47415fd4bce' },
+                    { name: 'Weighted Plank on Elbows', movement: ['Core'], intent: ['Stability'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4ac79b077c98e02ca14f7656dec0fd43' },
+                    { name: 'Weighted Plank on Hands', movement: ['Core'], intent: ['Stability'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0319b45243e352010ce6f755a4995acd' },
+                    { name: 'Weighted Sit Ups Feet Supported', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/01e5255483e2758e552def76e20781ff' },
                     { name: 'Decline Sit Ups', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a6e1ca1ad81696f1b8df9c97c31a7bda' },
                     { name: 'Dragonfly', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4073df1f82f34e9bb964ac0748e5fb1c' },
                     { name: 'Figure 4 Crunch', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cd80995dfdbb366fb939760fc2f5cdfe' },
-                    { name: 'Hollow Hold', movement: ['Core', 'Upper Abs'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/facbbceb33b7bb89ac2e877f082f2f0d' },
+                    { name: 'Hollow Hold', movement: ['Core', 'Upper Abs'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/80af743732259cf4499e1e4b3ec06fbf' },
                     { name: 'Med Ball Slams', movement: ['Core', 'Upper Abs'], intent: ['Power'], equipment: ['Medicine Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3371a5abe506a4ca8176f53ed75f0b5d' },
                     { name: 'One Knee to Chest Crunch', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e18dee45eeab3f3c94b5d72be5ca4dc7' },
                     { name: 'Plank Ab Wheel Rollout', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Ab Wheel'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d340e470ef46bd1b9082f26e24e8e774' },
@@ -962,17 +937,17 @@ export const exerciseCategories = {
                     { name: 'Stability Ball Plank', movement: ['Core', 'Upper Abs'], intent: ['Stability'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8a06d797374125f05fe8e3f6fc427cc5' },
                     { name: 'Sugar Rays', movement: ['Core', 'Upper Abs', 'Push'], intent: ['Stability', 'Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6fcae85108245503a4e2d5f44eb583ff' },
                     { name: 'Toe Touches', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/333dec4e141b48fe571cf242ea5f7ad3' },
+                    { name: 'Bird Dogs', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eef7aae6507635b7370daf5e956185b1', geriatric_priority: true },
+                    { name: 'Crunches', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/156bfc29402c52f6582c962b35059d1d' },
                     // --- No video ---
                     { name: 'Planks', movement: ['Core'], intent: ['Stability', 'Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Bird Dogs', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Bear Crawl', movement: ['Core'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Bear Crawl Hold', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Mountain Climbers', movement: ['Core'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Plank Shoulder Taps', movement: ['Core', 'Anti-Rotation'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Mountain Climbers', movement: ['Core'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/910a8db0149c2fc7478fb87cfc1e58e4' },
+                    { name: 'Plank Shoulder Taps', movement: ['Core', 'Anti-Rotation'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6af86c48584db8eb0d1b65b6536f2d59' },
                     { name: 'Plank March', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Hollow Rocks', movement: ['Core'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Hollow Rocks', movement: ['Core'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/67d3728107b311ef9138b6908b6adad9' },
                     { name: 'Isometric Hollow Hold March', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Crunches', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Sit-Ups', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Cable Crunches (Kneeling)', movement: ['Core', 'Upper Abs'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' },
                     { name: 'Jackknife Sit-Ups', movement: ['Core', 'Upper Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
@@ -1014,7 +989,7 @@ export const exerciseCategories = {
                     { name: 'McGill Big 3', movement: ['Core'], intent: ['Stability', 'Rehabilitation'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Diaphragmatic Breathing', movement: ['Core'], intent: ['Recovery', 'Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Supine Breathing with 90/90', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Crocodile Breathing', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
+                    { name: 'Crocodile Breathing', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4c0db1c85efa19392b2b5e65de567c17', geriatric_priority: true },
                     { name: 'Quadruped Rock Back', movement: ['Core'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Quadruped Hover Hold', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Tall Kneeling Breathing', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
@@ -1027,6 +1002,21 @@ export const exerciseCategories = {
                 label: "Oblique",
                 exercises: [
                     // --- CF Video exercises ---
+                    { name: 'Assisted Copenhagen Hold Knee on Bench', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/68261ce884ce17ab28a395a457eeb3a8' },
+                    { name: 'Copenhagen Hold Knee Bent', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f92be07631667ce99039e3c8dddc92f5' },
+                    { name: 'Copenhagen Hold Legs Straight', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/98b7ba7a84e35fe9e3dc3a112ab9e542' },
+                    { name: 'Figure 4 Leg in Air Crunch', movement: ['Core', 'Obliques'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/876a6784e2c71f68ac3b81ca4487802d' },
+                    { name: 'Hand Knee Plank with Leg Raise', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bf4f5149214e10981bd5cb8cf32e3f58' },
+                    { name: 'Hand Side Plank Copenhagen on Floor', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2a654b4aa4087458c1de45b345d008a0' },
+                    { name: 'Jack Knife Knees to Chest', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3697a248d14f3e979e0ae7a25ee1909e' },
+                    { name: 'Jack Knife Legs Straight', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e079dc097dfba220ce5d0f57a45e5d18' },
+                    { name: 'Leg Crossover Crunch', movement: ['Core', 'Obliques'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/22eae52a2aa58a6d9de46a8291f709fd' },
+                    { name: 'Plate Russian Twists', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/deaf8ef343d667fcad9bf95d26612dce' },
+                    { name: 'Quadruped Diaphragmatic Breathing', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d84ef25780d24e386bbc5d7e0866cf6d' },
+                    { name: 'Russian Twists Bodyweight', movement: ['Core', 'Obliques'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ef218c93b6ac1da354de5a03f7df40dd' },
+                    { name: 'Side Knee Plank on Hand', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cb4607fcda36cedb9d430a051743e854' },
+                    { name: 'Side Plank Copenhagen', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/60c980ebdc01035bc34a3bb365381790' },
+                    { name: 'Side Plank on Knees', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fab65dc25595d39a296ac30847e253b9' },
                     { name: 'Band Side Rotation', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b76acff13c0e2989c54ae46e187702b6' },
                     { name: 'Bar Tic Tocs', movement: ['Core', 'Obliques'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e8a93b49d6c94c38015eb18fc66f7080' },
                     { name: 'Bi Lateral Plank', movement: ['Core', 'Obliques'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/00ace4334dbecf9eaaa3061581dacdcf' },
@@ -1046,8 +1036,8 @@ export const exerciseCategories = {
                     { name: 'Suitcase Carry', movement: ['Carry', 'Core', 'Obliques'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/61ecc60a9b8f55d1e77262e2543c112f', geriatric_priority: true },
                     { name: 'Weighted Tic Tocs', movement: ['Core', 'Obliques'], intent: ['Hypertrophy', 'Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c98a3b1d56b4ae8fa681adb38e9f5668' },
                     { name: 'Kneeling Rope Rotational Chop', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7d6b2ef1e145ea9e357e5907d7a8c953' },
+                    { name: 'Side Plank Reach Through', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b5423dd8bbb2aa2c6de7043ddd505c9b' },
                     // --- No video ---
-                    { name: 'Side Plank Reach Through', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Standing Cable Chop (High to Low)', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Cable'], contraindications: [], youtube: '' },
                     { name: 'Standing Cable Lift (Low to High)', movement: ['Core', 'Obliques'], intent: ['Strength'], equipment: ['Cable'], contraindications: [], youtube: '' },
                     { name: 'Wood Choppers', movement: ['Core', 'Obliques'], intent: ['Power'], equipment: ['Cable', 'Dumbbell'], contraindications: [], youtube: '' },
@@ -1076,6 +1066,31 @@ export const exerciseCategories = {
                 label: "Lower",
                 exercises: [
                     // --- CF Video exercises ---
+                    { name: 'Ball Exchange Stability Ball', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/823bf5f4195dab73d9419e603cee6f63' },
+                    { name: 'Crocodile Breathing', movement: ['Core'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4c0db1c85efa19392b2b5e65de567c17' },
+                    { name: 'Hands Behind Head Legs Raise to Sides', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7fe8fb996947b20591cbc33888a5b6b7' },
+                    { name: 'Hands Under Butt Leg Raises', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cfdbbacd595f8129749f16c441207876' },
+                    { name: 'Hands Under Butt Side to Side Leg Raise', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/101322a3ec8255b7a517bc46f94e4c16' },
+                    { name: 'Hollow Hold', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/80af743732259cf4499e1e4b3ec06fbf' },
+                    { name: 'Hollow Rock', movement: ['Core', 'Lower Abs'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/67d3728107b311ef9138b6908b6adad9' },
+                    { name: 'Leg Raise Hands Behind Head', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/298a9deaab9e38ecd17535fb9ad50f49' },
+                    { name: 'Lower Abdominal Bracing', movement: ['Core', 'Lower Abs'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f25698ba79cee634a24e112bcdd9c71d' },
+                    { name: 'Mountain Climbers', movement: ['Core'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/910a8db0149c2fc7478fb87cfc1e58e4' },
+                    { name: 'Plank on Elbows', movement: ['Core'], intent: ['Stability', 'Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/381ff9d6f9391cb89bf0add51750ae35' },
+                    { name: 'Plank on Hands', movement: ['Core'], intent: ['Stability', 'Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6c99645ec5ddd154e399c6c6f4d80a39' },
+                    { name: 'Plank Shoulder Touch', movement: ['Core', 'Anti-Rotation'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6af86c48584db8eb0d1b65b6536f2d59' },
+                    { name: 'Single Leg Slider Knee Tuck', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/62a37f197f32c5c13be677c40769d1cb' },
+                    { name: 'Slider Knees to Chest', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/615fa6d2d8d58f3c93ea920bfe29eb03' },
+                    { name: 'Slider Knees to Chest Side to Side', movement: ['Core', 'Lower Abs', 'Obliques'], intent: ['Strength'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/14edefc42c7cfe8e3d6c02f1a4ee6dd8' },
+                    { name: 'Slider Mountain Climbers', movement: ['Core'], intent: ['Conditioning'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b8d3e169ec507c49774c78e64239478e' },
+                    { name: 'Slider Pike', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/66a0fb57b1adba23fd99491f7fb98fee' },
+                    { name: 'Slider Single Leg Pike', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Sliders'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ced3dadf24af3a24a7d77524cd6a1014' },
+                    { name: 'Stability Ball Knees to Chest', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/be483c1a0979ec9dce315f81bc23ef26' },
+                    { name: 'Stability Ball Pike', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/16bf55f2a3cc84f7f6062ce874d4f3be' },
+                    { name: 'V Sit', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/835fc84dc5792eaafbc1eaf995f42a30' },
+                    { name: 'Weighted Hollow Hold', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02d25a25e8bade0db680a9e190a7df8e' },
+                    { name: 'Weighted Leg Raise', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/626ede5f2c4aaca8d15242a56b0ad21f' },
+                    { name: 'X Brace Low Abs', movement: ['Core', 'Lower Abs'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0272b80d9c8190f02461e93ee1472eb0' },
                     { name: 'Alternating V Ups', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f8bc3a3bd38c49c591649d801e466c8a' },
                     { name: 'Butterfly Crunches', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a23f3587aa4a2f3b739f155fec03b0c5' },
                     { name: 'Dead Bug', movement: ['Core', 'Lower Abs'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7e9a69a081fd03b713f93401d2fd790a', geriatric_priority: true },
@@ -1131,25 +1146,30 @@ export const exerciseCategories = {
             barbell: {
                 label: "Barbell Complexes",
                 exercises: [
-                    { name: 'Bar to Shoulder / Continental Clean', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8e0b092aa5015761ba24378a86fb0540' },
-                    { name: 'Bear Complex', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca50bd9fe14ddfa71accda183041e5ba' },
-                    { name: 'Bent Over Row + Hang Clean + Push Press', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/64acabe9423432724256464e6c511417' },
-                    { name: 'Deadlift + Shrug + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b6142b36040e4712c4484a65de7fe4fc' },
-                    { name: 'Front Squat to Push Press', movement: ['Full Body'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4b78b568e7d907fb452d07ad98055736' },
-                    { name: 'Front Squat to Press + Back Squat to Press', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2ed2fd477233bcae976751d44380d8a1' },
-                    { name: 'Full Clean to Split Jerk', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/a30365049eb697168b376ab5b34365d9' },
-                    { name: 'Full Clean to Thruster', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/1b7c7a12e9e694bf71046450faa25920' },
-                    { name: 'Hang Clean + Power Clean + Front Squat', movement: ['Olympic', 'Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/26a01037eef630b3a62de9bf5b69df61' },
-                    { name: 'Power Clean to Push Press', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/016b0eae5da523617a81c98ca24e7d7f' },
-                    { name: 'Power Clean + Push Press + Overhead Squat', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/1fde0e7f4693665d6901e1405ad42b73' },
-                    { name: 'Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/0175af6d02cdc32c4eab0ed0364abe8d' },
-                    { name: 'Power Clean to Push Press (Alt)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/290ca5b9c095b7b285b29485ffe2f8e7' },
-                    { name: 'Power Clean to Thruster', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/69fd1b726dcc93246ad1b0ccefa594d9' },
-                    { name: 'Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b7e29f4e2f17c5d954552d6c37b3203e' },
-                    { name: 'Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a9143b55b78c248da5957f794e63aa94' },
-                    { name: 'Pull + Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/dcb7d9d0a69054e06564ebce08c0a67c' },
-                    { name: 'Pulls + Hang Cleans + Push Presses', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b88c3ca0466beae87f1956c5fbdc500e' },
-                    { name: 'RDLs + Rows + Hang Clean', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/96e8b6fb00f6ba413abd9e50597a488c' }
+                    { name: 'Clean and Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Snatch', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Clean Complex (Hang + Power + Front Squat)', movement: ['Olympic', 'Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Bear Complex', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Complex (RDL + Row + Hang Clean)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Grace Complex (Clean + Push Jerk)', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'DT Complex', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Cluster (Clean + Thruster)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Ground to Overhead', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Complex (Deadlift + Hang Clean + Push Press)', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Devil Press', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Squat Clean Thruster', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Front Squat + Push Jerk', movement: ['Full Body'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Overhead Walking Lunge', movement: ['Full Body'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Clean Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Snatch Pull + Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Clean + Overhead Squat', movement: ['Olympic'], intent: ['Mobility', 'Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Complex (Row + Clean + Push Press)', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Squat Clean + Split Jerk', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Complex (Deadlift + Shrug + Clean)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Ground to Shoulder', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Complex (Front Squat + Push Press + Back Squat)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
                 ]
             },
             dumbbell: {
@@ -1176,7 +1196,26 @@ export const exerciseCategories = {
                     { name: 'Dumbbell Step-Up to Press', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Squat Clean + Push Press', movement: ['Full Body'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Ground Flow Complex', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Burpee Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    { name: 'Dumbbell Burpee Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
+                    // --- Kettlebell ---
+                    { name: 'Kettlebell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7dcbd62bf1aff7c91d662d05914534c0' },
+                    { name: 'Single Arm Kettlebell Swing', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c796f3cc721a66e07ca3f4b11af06783' },
+                    { name: 'Alternating Kettlebell Swings', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/65537c0c9626aed18e7f32997c260154' },
+                    { name: 'Single Arm Kettlebell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1582547d1bd6423b5a66bf5f5e572883' },
+                    { name: 'Single Arm Kettlebell Clean', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/20fb38d4ae2d6606140eecda28f1a869' },
+                    { name: 'Kettlebell Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/026888a77adef2bac78abef90b81897c' },
+                    { name: 'Kettlebell Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/726d2344e2f63206cf7d6966aae9e542' },
+                    { name: 'Single Arm Kettlebell Flip', movement: ['Power'], intent: ['Power', 'Coordination'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a31771ca989b686f1a3343a0e44eae9e' },
+                    // --- Barbell ---
+                    { name: 'Barbell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4b1499afcb2e46ed853b531ad93277e0' },
+                    { name: 'Single Arm Barbell Snatch', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/d310e3554f70e7c9f814d933c2fa3e39' },
+                    // --- Burpees ---
+                    { name: '8 Count Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/564d2a366e76ee46af19620499d2411f' },
+                    { name: 'Clean and Jerk 8 Count Burpee', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2bdc7109679ccf376321717c6a42173a' },
+                    { name: 'Burpee Clean Jump Over Bar', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/199b11f8e29518ca4bc3dde52f495ef8' },
+                    // --- Locomotion ---
+                    { name: 'Bear Walk Straight Legs', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f90d94374a9dda5f0eba2e4f63bf4811' },
+                    { name: 'Monkey Hops', movement: ['Full Body', 'Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/02a383b06abac5374ccb12e0f642169f' }
                 ]
             },
             functional: {
@@ -1211,32 +1250,27 @@ export const exerciseCategories = {
             corrective: {
                 label: "Technique Work",
                 exercises: [
-                    // --- CF Video exercises ---
                     { name: 'Hip Flexor to Hamstring', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/588cd9d5cd58db8ea61ec9e9a61708b8' },
-                    // --- No video ---
-                    { name: 'Tall Cleans', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Drop Snatches', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch Grip Jump Shrugs', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Tall Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Tall Clean + Front Rack Hold', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Grip Push Press', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Grip Push Press', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Catch Position Hold', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Catch Position Hold', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Turnover Drill', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean Turnover Drill', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Grip RDL + Shrug', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean Grip RDL + Shrug', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Paused Overhead Squat (Bottom)', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Paused Front Squat (Clean Grip)', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Balance + OHS', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Muscle Snatch + OHS', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Muscle Clean + Front Squat', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Press from Split', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Rack Mobility Holds', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Overhead Mobility Squat Flow', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Snatch Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/edf3cdb8942a61379600f67bc468a38c' },
+                    { name: 'Clean Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/81b579606be7be406686e22c2861822d' },
+                    { name: 'Full Snatch Catch Pause', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/effd2087e91b6fda29b7acf23cb932d0' },
+                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/917cdb2a9b1dcc0a36b45ddc1cb0b9b1' },
+                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3ce03748c34559bab6acc11fdb31f7b2' },
+                    { name: 'Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4ee5bd14a736e3410350494a7bf17d0c' },
+                    { name: 'Pause Below Knee Hang Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b3a9d76f37acbbfd705f42277147bf52' },
+                    { name: 'Pause Below Knee Hang Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c8a55fb918de378a38972ff61578c93c' },
+                    { name: 'Hang Clean Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b0135596b56338158a9bd14420a39a11' },
+                    { name: 'Hang Dip Drive Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/ad2786d6265b32ca5da4d92442b5c0ba' },
+                    { name: 'Clean Grip Block Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f16b3c3a81bd45b3d743c11fec5d9809' },
+                    { name: 'Barbell Muscle Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6dae6a3e7177c32e4fa903d2b3266d74' },
+                    { name: 'PVC Muscle Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: [], youtube: 'https://iframe.videodelivery.net/53ad9624b4473a3f0d3043765488d402' },
+                    { name: 'PVC Muscle Clean Teaching', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cf1908ed91b59d8418bfc7e4aff5e8f3' },
+                    { name: 'PVC Muscle Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/823f65bf9bb33bb266cebbc806421fa0' },
+                    { name: 'Muscle Snatch Teaching PVC', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/ea8b04ee007c3078b5169c8436986137' },
+                    { name: 'PVC Overhead Squat Teaching', movement: ['Olympic'], intent: ['Technique', 'Mobility'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e2ba33c17ba6514b08921aa675617674' },
+                    { name: 'Barbell Overhead Squat (Heels Elevated)', movement: ['Olympic'], intent: ['Technique', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2080100028c90b578d4457df2479d8aa' },
+                    { name: 'Snatch Grip Barbell Shrugs', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/523628dbb34ad9525f7c816e514e22b9' },
+                    { name: 'Overhead Reverse Snatch Shrugs', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e139e2705bcf5e6caabd7c346c2e2b4c' }
                 ]
             }
         }
@@ -1249,67 +1283,43 @@ export const exerciseCategories = {
             barbell: {
                 label: "Olympic Lifts",
                 exercises: [
-                    { name: 'Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Squat Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    // --- CF Video exercises ---
+                    { name: 'Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fd18a5c14868f872bc5a9dd4afd1e986' },
+                    { name: 'Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/24532f09aa140d2cae76a23005a7b95c' },
+                    { name: 'Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/65592773cf4889527cad39bf4743ce97' },
+                    { name: 'Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/3f02ccf9ddbd029566639cff86dc2154' },
+                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1d385316464882f2c39a2a3dd97f3e09' },
+                    { name: 'Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0a38da737bf9947cc4afa34ab0c2db3f' },
+                    { name: 'Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/50fbe85ac065560bfc5203086ec2177e' },
+                    { name: 'Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/cfb6e19659f0f1b5d20861f6cceee284' },
+                    { name: 'Hang Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a3474a1a868aba6cdc3fa504656db05f' },
+                    { name: 'Hang Full Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/7831b4227fea936a7fc2785516179a0a' },
+                    { name: 'Full Clean to Push Jerk', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b75892acbf27698717a5735d3e9e5bd1' },
                     { name: 'Block Full Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3a7724f8b6302d3a436013ca78445d02' },
                     { name: 'Block Full-Squat Clean', movement: ['Olympic'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/45a3bb0f04d43b054b2ecb1bd98f93a0' },
                     { name: 'Block Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/61a3d8073a50037bd4265593ed2bdc46' },
                     { name: 'Block Power Clean to Jerk', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c8f980cc47e82f158665c236ee2cd39f' },
-                    // --- No video ---
-                    { name: 'Block Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Deficit Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Deficit Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch High Pull', movement: ['Olympic', 'Pull'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean High Pull', movement: ['Olympic', 'Pull'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Pull to Knee', movement: ['Olympic', 'Pull'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean Pull to Knee', movement: ['Olympic', 'Pull'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Pull + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Pull + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Heaving Snatch Balance', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean from Power Position', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch from Power Position', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Pause Clean (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Pause Snatch (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Block Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4640b11eaa598848dcb9d23dc65421e4' },
+                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/85cdaa513f2d8f6629d12ba7618dd6ec' },
+                    { name: 'Pause Clean (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a4ed2c0ea2b984144686b6c8d4f43a94' },
+                    { name: 'Pause Snatch (Below Knee)', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/dffb0a0ea6111754c75c96af3aa563af' }
                 ]
             },
             dumbbell: {
                 label: "Dumbbell Variations",
                 exercises: [
-                    // --- CF Video exercises ---
                     { name: 'Dumbbell Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/42c7669e324befa2121d0b4b7ca9fce4' },
-                    // --- No video ---
-                    { name: 'Dumbbell Clean', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch (Single Arm)', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Hang Clean (Dumbbell)', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Alternating Dumbbell Power Clean', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Squat Clean', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Clean Pull', movement: ['Power'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch Pull', movement: ['Power'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell High Pull', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Clean + Front Squat', movement: ['Power'], intent: ['Strength'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch from Hang', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch from Floor', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Double Dumbbell Clean', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Double Dumbbell Snatch', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Power Clean + Push Press', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Clean Pull + Clean', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Hang Power Snatch', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch Balance', movement: ['Power'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Overhead Squat (Snatch Grip)', movement: ['Power'], intent: ['Mobility'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Tall Clean', movement: ['Power'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Tall Snatch', movement: ['Power'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Jump Shrug', movement: ['Power'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Clean Catch Hold', movement: ['Power'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Snatch Catch Hold', movement: ['Power'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: '' }
+                    { name: 'Dumbbell Devil Press', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f7b434ada7425c18742cde4d8dc6d5c8' },
+                    { name: 'DB Single Arm Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5532da24b7a8b17d206910aa3ba02372' },
+                    { name: 'DB Single Arm Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cdd9ddbdfb9b62f9aeedbe6bb04d6e71' },
+                    { name: 'DB Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/03b0306453eb5ce2ba0813acd07112c7' },
+                    { name: 'DB Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f79505c9d98fca4ee833893a8d0fc493' },
+                    { name: 'DB Alternating Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/29f17e2771d5ae974dcff6425e5ea5fa' },
+                    { name: 'Neutral Grip DB Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0ca10b534ed62cc1b68824948371882c' },
+                    { name: 'Neutral Grip Alternating Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1663a7350096b9007ed25fa4f4053713' },
+                    { name: 'Seated DB Clean', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8c8c0596d200ac6a03866882dec2b91b' },
+                    { name: 'Seated DB Snatch', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f5febb7f29c17bfd6efd469dfeeaeee5' },
+                    { name: 'Seated DB Shrugs', movement: ['Olympic'], intent: ['Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b80700c47798ef629232cfb2f307de55' },
+                    { name: 'Seated DB Shrug + Clean', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c98d0f7a53b9633ed852bcec26e21538' }
                 ]
             },
             functional: {
@@ -1318,13 +1328,18 @@ export const exerciseCategories = {
                     // --- CF Video exercises ---
                     { name: 'Pull + RDL + Hang Clean + Front Squat + Push Press', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6ae5c5f0bd99c196e84c5d6e55def666' },
                     { name: 'Pull + RDL + Hang Clean + Front Squat + Thruster', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/afebb5ef41ba38bc7efc5e68edf8cda3' },
+                    // --- CF Video exercises (new uploads) ---
+                    { name: 'Pull + RDL + Hang Clean + Front Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c6839e2575fc191f6756f9b1d22c6443' },
+                    { name: 'Pull + RDL + Hang Clean + Front Squat (Singles)', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f36ac18290eb2d73daf559db2ab9224a' },
+                    { name: 'Snatch Pull + RDL + Hang Snatch + Squat + Overhead Squat (Singles)', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/5d650aabc3ab7c0e7d3d4677b580d762' },
+                    { name: 'Snatch Pull + RDL + Hang Snatch + Squat + Overhead Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/68f99024b34743732ea0d20d717449c9' },
+                    { name: 'Pull + Hang Clean + Push Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4f70697b38c5e855a9c0b75e5c30585b' },
                     // --- No video ---
-                    { name: 'Pull + RDL + Hang Clean + Front Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Pull + RDL + Hang Snatch + Back Squat to Press + Overhead Squat', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Pull + Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean + Front Squat + Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch + OHS', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Snatch + OHS', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/8b4e2e7f596ac8d3233d9c9fd7d4bc28' },
                     { name: 'Clean High Pull + Power Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Clean + Front Squat + Clean', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch + OHS + Snatch', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
@@ -1334,8 +1349,8 @@ export const exerciseCategories = {
                     { name: 'Snatch + Pause OHS', movement: ['Olympic'], intent: ['Mobility', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean from Blocks + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Snatch from Blocks + OHS', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Hang Clean + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Hang Snatch + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Hang Clean + Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dab9848d73a68319d9ca7630b489567c' },
+                    { name: 'Hang Snatch + Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/6888dbd0ee951fce85f7eacebe312866' },
                     { name: 'Clean + Jerk + Split Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Snatch + Snatch Balance', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Clean Pull + Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
@@ -1351,32 +1366,27 @@ export const exerciseCategories = {
             corrective: {
                 label: "Technique Work",
                 exercises: [
-                    // --- CF Video exercises ---
                     { name: 'Hip Flexor to Hamstring', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/588cd9d5cd58db8ea61ec9e9a61708b8' },
-                    // --- No video ---
-                    { name: 'Tall Cleans', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Drop Snatches', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch Grip Jump Shrugs', movement: ['Olympic', 'Power'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Tall Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Tall Clean + Front Rack Hold', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Grip Push Press', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Grip Push Press', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Catch Position Hold', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Catch Position Hold', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Turnover Drill', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean Turnover Drill', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Grip RDL + Shrug', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Clean Grip RDL + Shrug', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Paused Overhead Squat (Bottom)', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Paused Front Squat (Clean Grip)', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Balance + OHS', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Muscle Snatch + OHS', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Muscle Clean + Front Squat', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Snatch Press from Split', movement: ['Olympic'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Rack Mobility Holds', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Overhead Mobility Squat Flow', movement: ['Olympic'], intent: ['Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Snatch Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/edf3cdb8942a61379600f67bc468a38c' },
+                    { name: 'Clean Triple Extension Pause to Catch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/81b579606be7be406686e22c2861822d' },
+                    { name: 'Full Snatch Catch Pause', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/effd2087e91b6fda29b7acf23cb932d0' },
+                    { name: 'Snatch Balance', movement: ['Olympic'], intent: ['Power', 'Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/917cdb2a9b1dcc0a36b45ddc1cb0b9b1' },
+                    { name: 'Clean Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3ce03748c34559bab6acc11fdb31f7b2' },
+                    { name: 'Snatch Pull', movement: ['Olympic', 'Pull'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4ee5bd14a736e3410350494a7bf17d0c' },
+                    { name: 'Pause Below Knee Hang Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b3a9d76f37acbbfd705f42277147bf52' },
+                    { name: 'Pause Below Knee Hang Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/c8a55fb918de378a38972ff61578c93c' },
+                    { name: 'Hang Clean Dip Drive', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b0135596b56338158a9bd14420a39a11' },
+                    { name: 'Hang Dip Drive Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/ad2786d6265b32ca5da4d92442b5c0ba' },
+                    { name: 'Clean Grip Block Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f16b3c3a81bd45b3d743c11fec5d9809' },
+                    { name: 'Barbell Muscle Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6dae6a3e7177c32e4fa903d2b3266d74' },
+                    { name: 'PVC Muscle Clean', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: [], youtube: 'https://iframe.videodelivery.net/53ad9624b4473a3f0d3043765488d402' },
+                    { name: 'PVC Muscle Clean Teaching', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: [], youtube: 'https://iframe.videodelivery.net/cf1908ed91b59d8418bfc7e4aff5e8f3' },
+                    { name: 'PVC Muscle Snatch', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/823f65bf9bb33bb266cebbc806421fa0' },
+                    { name: 'Muscle Snatch Teaching PVC', movement: ['Olympic'], intent: ['Technique'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/ea8b04ee007c3078b5169c8436986137' },
+                    { name: 'PVC Overhead Squat Teaching', movement: ['Olympic'], intent: ['Technique', 'Mobility'], equipment: ['PVC Pipe'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e2ba33c17ba6514b08921aa675617674' },
+                    { name: 'Barbell Overhead Squat (Heels Elevated)', movement: ['Olympic'], intent: ['Technique', 'Mobility'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2080100028c90b578d4457df2479d8aa' },
+                    { name: 'Snatch Grip Barbell Shrugs', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/523628dbb34ad9525f7c816e514e22b9' },
+                    { name: 'Overhead Reverse Snatch Shrugs', movement: ['Olympic'], intent: ['Technique'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/e139e2705bcf5e6caabd7c346c2e2b4c' }
                 ]
             }
         }
@@ -1768,6 +1778,15 @@ export const exerciseCategories = {
                     { name: 'Massage Gun Biceps and Serratus and Teres Minor', movement: ['Recovery'], intent: ['Recovery'], equipment: ['Massage Gun'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f330857f436433768d82b6d0db2e3ea0' },
                     // --- No video ---
                 ]
+            },
+            stretching: {
+                label: "Stretching",
+                exercises: [
+                    // --- CF Video exercises ---
+                    { name: 'Stretching Preset 1', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
+                    { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' },
+                    // --- No video ---
+                ]
             }
         }
     },
@@ -1811,6 +1830,10 @@ export const exerciseCategories = {
             },
             massage_gun: {
                 label: "Massage Gun",
+                exercises: []
+            },
+            stretching: {
+                label: "Stretching",
                 exercises: []
             }
         }

@@ -7,7 +7,7 @@ import BulkActions from './components/clients/BulkActions';
 import DeleteModal from './components/modals/DeleteModal';
 
 export default function App() {
-  const { fetchClients, fetchStats, fetchClientDetails, deleteClient } = useDashboardAPI();
+  const { fetchClients, fetchStats, fetchClientDetails, deleteClient, updateClientMaxes } = useDashboardAPI();
 
   const [clients, setClients] = useState([]);
   const [stats, setStats] = useState({
@@ -185,6 +185,22 @@ export default function App() {
     }
   }, [deleteLoading]);
 
+  const handleUpdateMaxes = useCallback(
+    async (client, maxes) => {
+      try {
+        await updateClientMaxes(client.access_code, client.user_email, maxes);
+        // Refresh clients to get updated data
+        const clientsData = await fetchClients();
+        if (clientsData) setClients(clientsData);
+        return true;
+      } catch (err) {
+        console.error('Failed to update maxes:', err);
+        return false;
+      }
+    },
+    [updateClientMaxes, fetchClients],
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -223,6 +239,7 @@ export default function App() {
             setExpandedClient(null);
             setClientDetails(null);
           }}
+          onUpdateMaxes={handleUpdateMaxes}
         />
 
         <BulkActions
