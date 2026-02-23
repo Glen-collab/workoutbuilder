@@ -6,7 +6,8 @@ A dashboard for fitness trainers to view/manage clients, track their progress, e
 **Stack:** React 19, Vite 7, Tailwind 4, Chart.js 4.5
 **Build:** `npm run build` -> `dist/dashboard.js` + `dist/dashboard.css`
 **Mount:** `#td-react-root` (WordPress) or `#root` (standalone)
-**Netlify:** SPA redirect only (no API proxy here - uses direct fetch or WordPress AJAX)
+**Netlify:** `bsa-trainer-dashboard.netlify.app` — API proxy `/api/*` -> `bestrongagain.com` + SPA redirect
+**Netlify config:** `netlify.toml` has both `/api/*` proxy and `/*` SPA redirect
 
 ---
 
