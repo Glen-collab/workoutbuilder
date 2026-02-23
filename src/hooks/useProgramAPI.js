@@ -124,6 +124,38 @@ export default function useProgramAPI() {
     [request]
   );
 
+  // ── Travel workout endpoints ──
+
+  const saveTravelWorkout = useCallback(
+    (data) => {
+      if (isLocal()) {
+        console.log('[Mock] saveTravelWorkout', data);
+        return Promise.resolve({ success: true });
+      }
+      return request('save-travel-workout.php', data);
+    },
+    [request]
+  );
+
+  const getTravelWorkouts = useCallback(
+    (email) => {
+      if (isLocal()) return Promise.resolve(getMockTravelWorkouts());
+      return request('get-travel-workouts.php', { trainerEmail: email });
+    },
+    [request]
+  );
+
+  const deleteTravelWorkout = useCallback(
+    (equipmentType, dayNumber) => {
+      if (isLocal()) {
+        console.log('[Mock] deleteTravelWorkout', { equipmentType, dayNumber });
+        return Promise.resolve({ success: true });
+      }
+      return request('delete-travel-workout.php', { equipmentType, dayNumber });
+    },
+    [request]
+  );
+
   return {
     saveProgram,
     updateProgram,
@@ -132,6 +164,9 @@ export default function useProgramAPI() {
     loadUserOverride,
     saveUserOverride,
     deleteUserOverride,
+    saveTravelWorkout,
+    getTravelWorkouts,
+    deleteTravelWorkout,
     loading,
     error,
   };
@@ -220,6 +255,53 @@ function getMockProgramByCode(accessCode, email) {
         },
       },
     },
+  };
+}
+
+function getMockTravelWorkouts() {
+  return {
+    success: true,
+    data: [
+      {
+        id: 1,
+        equipment_type: 'bodyweight',
+        day_number: 1,
+        workout_name: 'BW Day 1 - Upper',
+        workout_data: [
+          { id: 501, type: 'straight-set', collapsed: false, exercises: [
+            { id: 5010, name: 'Push-ups', sets: [], setsCount: '4', reps: '15' },
+            { id: 5011, name: 'Pike Push-ups', sets: [], setsCount: '3', reps: '10' },
+          ]},
+        ],
+        created_at: '2025-06-01 10:00:00',
+      },
+      {
+        id: 2,
+        equipment_type: 'bodyweight',
+        day_number: 2,
+        workout_name: 'BW Day 2 - Lower',
+        workout_data: [
+          { id: 502, type: 'circuit', circuitType: 'rounds', rounds: 3, collapsed: false, exercises: [
+            { id: 5020, name: 'Air Squats', sets: [], setsCount: '3', reps: '20' },
+            { id: 5021, name: 'Lunges', sets: [], setsCount: '3', reps: '12 each' },
+          ]},
+        ],
+        created_at: '2025-06-01 10:05:00',
+      },
+      {
+        id: 3,
+        equipment_type: 'hotel_gym',
+        day_number: 1,
+        workout_name: 'Hotel Day 1 - Full Body',
+        workout_data: [
+          { id: 503, type: 'straight-set', collapsed: false, exercises: [
+            { id: 5030, name: 'Dumbbell Bench Press', sets: [], setsCount: '4', reps: '10', weight: '50' },
+            { id: 5031, name: 'Dumbbell Row', sets: [], setsCount: '4', reps: '10', weight: '40' },
+          ]},
+        ],
+        created_at: '2025-06-01 10:10:00',
+      },
+    ],
   };
 }
 
