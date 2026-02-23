@@ -1,0 +1,55 @@
+stretching|Stretching Preset 1|c56ea8baf3b7f312b8c7dece4d605232
+stretching|Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle|FAILED
+core_lower|Ball Exchange Stability Ball|823bf5f4195dab73d9419e603cee6f63
+core_lower|Crocodile Breathing|4c0db1c85efa19392b2b5e65de567c17
+core_lower|Hands Behind Head Legs Raise to Sides|7fe8fb996947b20591cbc33888a5b6b7
+core_lower|Hands Under Butt Leg Raises|cfdbbacd595f8129749f16c441207876
+core_lower|Hands Under Butt Side to Side Leg Raise|101322a3ec8255b7a517bc46f94e4c16
+core_lower|Hollow Hold|80af743732259cf4499e1e4b3ec06fbf
+core_lower|Hollow Rock|67d3728107b311ef9138b6908b6adad9
+core_lower|Leg Raise Hands Behind Head|298a9deaab9e38ecd17535fb9ad50f49
+core_lower|Lower Abdominal Bracing|f25698ba79cee634a24e112bcdd9c71d
+core_lower|Mountain Climbers|910a8db0149c2fc7478fb87cfc1e58e4
+core_lower|Plank on Elbows|381ff9d6f9391cb89bf0add51750ae35
+core_lower|Plank on Hands|6c99645ec5ddd154e399c6c6f4d80a39
+core_lower|Plank Shoulder Touch|6af86c48584db8eb0d1b65b6536f2d59
+core_lower|Single Leg Slider Knee Tuck|62a37f197f32c5c13be677c40769d1cb
+core_lower|Slider Knees to Chest|615fa6d2d8d58f3c93ea920bfe29eb03
+core_lower|Slider Knees to Chest Side to Side|14edefc42c7cfe8e3d6c02f1a4ee6dd8
+core_lower|Slider Mountain Climbers|b8d3e169ec507c49774c78e64239478e
+core_lower|Slider Pike|66a0fb57b1adba23fd99491f7fb98fee
+core_lower|Slider Single Leg Pike|ced3dadf24af3a24a7d77524cd6a1014
+core_lower|Stability Ball Knees to Chest|be483c1a0979ec9dce315f81bc23ef26
+core_lower|Stability Ball Pike|16bf55f2a3cc84f7f6062ce874d4f3be
+core_lower|V Sit|835fc84dc5792eaafbc1eaf995f42a30
+core_lower|Weighted Hollow Hold|02d25a25e8bade0db680a9e190a7df8e
+core_lower|Weighted Leg Raise|626ede5f2c4aaca8d15242a56b0ad21f
+core_lower|X Brace Low Abs|0272b80d9c8190f02461e93ee1472eb0
+core_oblique|Assisted Copenhagen Hold Knee on Bench|68261ce884ce17ab28a395a457eeb3a8
+core_oblique|Copenhagen Hold Knee Bent|f92be07631667ce99039e3c8dddc92f5
+core_oblique|Copenhagen Hold Legs Straight|98b7ba7a84e35fe9e3dc3a112ab9e542
+core_oblique|Figure 4 Leg in Air Crunch|876a6784e2c71f68ac3b81ca4487802d
+core_oblique|Hand Knee Plank with Leg Raise|bf4f5149214e10981bd5cb8cf32e3f58
+core_oblique|Hand Side Plank Copenhagen on Floor|2a654b4aa4087458c1de45b345d008a0
+core_oblique|Jack Knife Knees to Chest|3697a248d14f3e979e0ae7a25ee1909e
+core_oblique|Jack Knife Legs Straight|e079dc097dfba220ce5d0f57a45e5d18
+core_oblique|Leg Crossover Crunch|22eae52a2aa58a6d9de46a8291f709fd
+core_oblique|Plate Russian Twists|deaf8ef343d667fcad9bf95d26612dce
+core_oblique|Quadruped Diaphragmatic Breathing|d84ef25780d24e386bbc5d7e0866cf6d
+core_oblique|Russian Twists Bodyweight|ef218c93b6ac1da354de5a03f7df40dd
+core_oblique|Side Knee Plank on Hand|cb4607fcda36cedb9d430a051743e854
+core_oblique|Side Plank Copenhagen|60c980ebdc01035bc34a3bb365381790
+core_oblique|Side Plank on Knees|fab65dc25595d39a296ac30847e253b9
+core_oblique|Side Plank Reach Through|b5423dd8bbb2aa2c6de7043ddd505c9b
+core_upper|Bird Dogs|eef7aae6507635b7370daf5e956185b1
+core_upper|Crunches|156bfc29402c52f6582c962b35059d1d
+core_upper|Full Plate Sit Ups No Foot Support|50d5dec302833ad1ecf17c1ae5fb285c
+core_upper|Full Sit Ups No Support|19b223ae29861fdd27c4d0a828d8d9d3
+core_upper|Plate Crunches|a451fb1d44fb8fdd44577448669f3f69
+core_upper|Plate on Shins Trunk Crunch|50c3b75c6c38caa2514da44943834c44
+core_upper|Single Dumbbell Crunch|02e3950daccc9166d028447338746555
+core_upper|Single Dumbbell Full Situp|50471316411f92c5ac957c71a945e724
+core_upper|Weighted Crunches Feet Support|123082145b9fddbb867db47415fd4bce
+core_upper|Weighted Plank on Elbows|4ac79b077c98e02ca14f7656dec0fd43
+core_upper|Weighted Plank on Hands|0319b45243e352010ce6f755a4995acd
+core_upper|Weighted Sit Ups Feet Supported|01e5255483e2758e552def76e20781ff

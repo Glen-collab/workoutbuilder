@@ -18,9 +18,6 @@ const QUALIFIER_MULTIPLIER = {
   'each side': 2,
   'all one arm first': 2,
   'all one leg first': 2,
-  'x2 combo': 2,
-  'x3 combo': 3,
-  'x4 combo': 4,
 };
 
 function getQualifierMultiplier(qualifier) {
@@ -90,32 +87,14 @@ export function calculateWeight(percentage, baseMax) {
 // Calculate tonnage for a single exercise
 export function calculateExerciseTonnage(exercise, mainMaxes) {
   const multiplier = getQualifierMultiplier(exercise.qualifier);
-  const isDropSet = exercise.qualifier === 'drop set';
-  const isStripSet = exercise.qualifier === 'strip set';
 
   // Percentage-based exercise with sets array
   if (exercise.isPercentageBased && Array.isArray(exercise.sets) && exercise.baseMax) {
     const baseMax = mainMaxes[exercise.baseMax] || 0;
     return exercise.sets.reduce((total, set) => {
       if (set.isWarmup) return total;
-
-      // Main set tonnage
       const weight = set.manualWeight || calculateWeight(set.percentage || 0, baseMax);
-      let setTonnage = (set.reps || 0) * weight;
-
-      // Add drop set tonnage (for drop set and strip set)
-      if ((isDropSet || isStripSet) && set.dropPercentage && set.dropReps) {
-        const dropWeight = calculateWeight(set.dropPercentage, baseMax);
-        setTonnage += set.dropReps * dropWeight;
-      }
-
-      // Add strip set tonnage (third drop, only for strip set)
-      if (isStripSet && set.stripPercentage && set.stripReps) {
-        const stripWeight = calculateWeight(set.stripPercentage, baseMax);
-        setTonnage += set.stripReps * stripWeight;
-      }
-
-      return total + setTonnage;
+      return total + ((set.reps || 0) * weight);
     }, 0) * multiplier;
   }
 
@@ -168,17 +147,14 @@ function parseDuration(str) {
   return parseFloat(s) || 0; // assume minutes
 }
 
-function convertToMiles(distance, unit) {
-  const dist = parseFloat(distance) || 0;
-  if (!dist) return 0;
-  switch (unit) {
-    case 'yd': return dist / 1760;        // yards to miles
-    case 'ft': return dist / 5280;        // feet to miles
-    case 'km': return dist * 0.621371;    // km to miles
-    case 'mi': return dist;               // already miles
-    case 'm':                             // meters to miles
-    default: return dist / 1609.34;       // default to meters (matches UI default)
-  }
+function parseDistance(str) {
+  if (!str) return 0;
+  const s = String(str).trim().toLowerCase();
+  // "2 miles", "400m", "1.5mi", "800"
+  if (s.includes('mi')) return parseFloat(s) || 0;
+  if (s.includes('km')) return (parseFloat(s) || 0) * 0.621371;
+  if (s.includes('m') && !s.includes('mi')) return (parseFloat(s) || 0) / 1609.34; // meters to miles
+  return parseFloat(s) || 0; // assume miles
 }
 
 export function calculateCardioTotals(blocks) {
@@ -188,7 +164,7 @@ export function calculateCardioTotals(blocks) {
     for (const exercise of (block.exercises || [])) {
       const sets = parseInt(exercise.setsCount) || 1;
       totalMinutes += parseDuration(exercise.duration || exercise.time) * sets;
-      totalMiles += convertToMiles(exercise.distance, exercise.distanceUnit) * sets;
+      totalMiles += parseDistance(exercise.distance) * sets;
     }
   }
   return { totalMinutes: Math.round(totalMinutes * 10) / 10, totalMiles: Math.round(totalMiles * 100) / 100 };
@@ -228,9 +204,7 @@ export const baseMaxLabels = {
   bench: 'Bench',
   squat: 'Squat',
   powerClean: 'Clean',
-  deadlift: 'Deadlift',
-  bodyweight: 'Body Weight',
-  manual: 'Manual Weight'
+  deadlift: 'Deadlift'
 };
 
 // Base max color classes
@@ -238,7 +212,5 @@ export const baseMaxColors = {
   bench: { bg: '#3b82f6', light: '#dbeafe', text: '#1e40af' },
   squat: { bg: '#22c55e', light: '#dcfce7', text: '#166534' },
   powerClean: { bg: '#f97316', light: '#ffedd5', text: '#9a3412' },
-  deadlift: { bg: '#a855f7', light: '#f3e8ff', text: '#6b21a8' },
-  bodyweight: { bg: '#6b7280', light: '#f3f4f6', text: '#374151' },
-  manual: { bg: '#ec4899', light: '#fce7f3', text: '#9d174d' }
+  deadlift: { bg: '#a855f7', light: '#f3e8ff', text: '#6b21a8' }
 };

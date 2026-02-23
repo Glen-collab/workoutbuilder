@@ -11,12 +11,6 @@ function createEmptyDay() {
   return [];
 }
 
-// Collapse all blocks when loading a day
-function collapseAllBlocks(blocks) {
-  if (!blocks || !Array.isArray(blocks)) return [];
-  return blocks.map(b => ({ ...b, collapsed: true }));
-}
-
 function createBlock(id, type = 'straight-set') {
   return {
     id,
@@ -28,8 +22,6 @@ function createBlock(id, type = 'straight-set') {
     rounds: '',
     timeLimit: '',
     restBetweenRounds: '',
-    workInterval: '',
-    restInterval: '',
     themeText: '',
   };
 }
@@ -71,7 +63,7 @@ export default function useWorkoutState() {
   const loadDay = useCallback((week, day) => {
     const key = `${week}-${day}`;
     const saved = allWorkoutsRef.current[key];
-    setWorkoutBlocks(saved ? collapseAllBlocks(saved) : createEmptyDay());
+    setWorkoutBlocks(saved ? [...saved] : createEmptyDay());
   }, []);
 
   const switchDay = useCallback((day) => {
@@ -82,7 +74,7 @@ export default function useWorkoutState() {
       const savedKey = getWorkoutKey();
       const updated = { ...prev, [savedKey]: [...workoutBlocksRef.current] };
       const key = `${currentWeekRef.current}-${day}`;
-      setWorkoutBlocks(updated[key] ? collapseAllBlocks(updated[key]) : createEmptyDay());
+      setWorkoutBlocks(updated[key] ? [...updated[key]] : createEmptyDay());
       return updated;
     });
   }, [saveCurrent, getWorkoutKey]);
@@ -93,7 +85,7 @@ export default function useWorkoutState() {
       const savedKey = getWorkoutKey();
       const updated = { ...prev, [savedKey]: [...workoutBlocksRef.current] };
       const key = `${week}-1`;
-      setWorkoutBlocks(updated[key] ? collapseAllBlocks(updated[key]) : createEmptyDay());
+      setWorkoutBlocks(updated[key] ? [...updated[key]] : createEmptyDay());
       return updated;
     });
     setCurrentWeek(week);
@@ -271,51 +263,6 @@ export default function useWorkoutState() {
     }
   }, [saveCurrent, loadDay]);
 
-  // Insert a new empty week at the specified position, shifting existing weeks forward
-  const insertWeekAt = useCallback((insertPosition) => {
-    saveCurrent();
-    setAllWorkouts((prev) => {
-      // First, save current blocks
-      const updated = { ...prev, [getWorkoutKey()]: [...workoutBlocksRef.current] };
-      const newWorkouts = {};
-
-      // Shift all weeks >= insertPosition forward by 1
-      Object.entries(updated).forEach(([key, blocks]) => {
-        const [weekStr, dayStr] = key.split('-');
-        const week = parseInt(weekStr, 10);
-        const day = parseInt(dayStr, 10);
-
-        if (week >= insertPosition) {
-          // Shift this week forward
-          newWorkouts[`${week + 1}-${day}`] = blocks;
-        } else {
-          // Keep week as is
-          newWorkouts[key] = blocks;
-        }
-      });
-
-      return newWorkouts;
-    });
-
-    // Increment total weeks
-    setTotalWeeksState((prev) => prev + 1);
-
-    // Navigate to the new empty week
-    setCurrentWeek(insertPosition);
-    setCurrentDay(1);
-    setWorkoutBlocks([]);
-  }, [saveCurrent, getWorkoutKey]);
-
-  // Add multiple empty weeks at the end of the program
-  const addWeeksToEnd = useCallback((count) => {
-    saveCurrent();
-    setAllWorkouts((prev) => ({
-      ...prev,
-      [getWorkoutKey()]: [...workoutBlocksRef.current]
-    }));
-    setTotalWeeksState((prev) => prev + count);
-  }, [saveCurrent, getWorkoutKey]);
-
   const loadProgram = useCallback((program) => {
     if (!program) return;
     setLoadedProgram({ id: program.id, accessCode: program.accessCode, name: program.name });
@@ -337,7 +284,7 @@ export default function useWorkoutState() {
 
     setCurrentWeek(1);
     setCurrentDay(1);
-    setWorkoutBlocks(workouts['1-1'] ? collapseAllBlocks(workouts['1-1']) : []);
+    setWorkoutBlocks(workouts['1-1'] ? [...workouts['1-1']] : []);
   }, []);
 
   const clearAll = useCallback(() => {
@@ -388,8 +335,6 @@ export default function useWorkoutState() {
     duplicateSet,
     copyWeekToNext,
     copyWeekToAll,
-    insertWeekAt,
-    addWeeksToEnd,
     setDaysPerWeek,
     setTotalWeeks,
     setMainMaxes,

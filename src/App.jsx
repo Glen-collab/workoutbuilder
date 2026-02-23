@@ -10,8 +10,6 @@ import CircuitTypeSelector from './components/builder/CircuitTypeSelector';
 import ExerciseModal from './components/exercises/ExerciseModal';
 import SaveProgramModal from './components/programs/SaveProgramModal';
 import ManagePrograms from './components/programs/ManagePrograms';
-import TravelSaveModal from './components/programs/TravelSaveModal';
-import ManageTravelWorkouts from './components/programs/ManageTravelWorkouts';
 import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
 
 export default function App() {
@@ -36,9 +34,6 @@ export default function App() {
   const [savedAccessCode, setSavedAccessCode] = useState(null);
   const [showManageModal, setShowManageModal] = useState(false);
   const [showPreMadePicker, setShowPreMadePicker] = useState(false);
-  const [showTravelSaveModal, setShowTravelSaveModal] = useState(false);
-  const [showManageTravelModal, setShowManageTravelModal] = useState(false);
-  const [travelSaveStatus, setTravelSaveStatus] = useState(null); // 'saved' | null
   const [insertPosition, setInsertPosition] = useState(null);
 
   // ── Detect override mode from URL params ──
@@ -187,25 +182,13 @@ export default function App() {
     };
 
     try {
-      if (workoutState.loadedProgram && !programInfo.saveAsNew) {
+      if (workoutState.loadedProgram) {
         payload.programId = workoutState.loadedProgram.id;
         payload.accessCode = workoutState.loadedProgram.accessCode;
-        const result = await programAPI.updateProgram(payload);
-        // Check if a new code was generated
-        const newCode = result?.accessCode || result?.data?.accessCode || workoutState.loadedProgram.accessCode;
-        const codeRegenerated = result?.codeRegenerated || result?.data?.codeRegenerated;
-        if (codeRegenerated) {
-          // Update the loaded program with new access code
-          workoutState.loadProgram({
-            ...workoutState.loadedProgram,
-            accessCode: newCode,
-          });
-        }
+        await programAPI.updateProgram(payload);
         setShowSaveModal(false);
-        setSavedAccessCode(newCode);
+        setSavedAccessCode(workoutState.loadedProgram.accessCode);
       } else {
-        // New program OR "Save as New" from an existing program
-        delete payload.saveAsNew;
         const result = await programAPI.saveProgram(payload);
         console.log('Save result:', JSON.stringify(result));
         const programId = result?.programId || result?.data?.programId;
@@ -297,7 +280,7 @@ export default function App() {
     const isLocal = window.location.hostname === 'localhost';
     const dashboardUrl = isLocal
       ? 'http://localhost:5175/'
-      : (window.gwbConfig?.dashboardUrl || 'https://bsa-trainer-dashboard.netlify.app');
+      : (window.gwbConfig?.dashboardUrl || '/trainer-dashboard/');
     // Open in new tab so builder state is preserved
     window.open(dashboardUrl, '_blank');
   };
@@ -312,51 +295,6 @@ export default function App() {
     url.searchParams.delete('email');
     url.searchParams.delete('mode');
     window.history.replaceState({}, '', url);
-  };
-
-  // ── Travel Workouts ──
-  const handleOpenTravelSave = () => setShowTravelSaveModal(true);
-
-  const handleSaveTravelWorkout = async (travelInfo) => {
-    const data = workoutState.getAllWorkoutsForSave();
-    const dayKey = `${workoutState.currentWeek}-${workoutState.currentDay}`;
-    const currentBlocks = data.allWorkouts?.[dayKey] || workoutState.workoutBlocks;
-
-    try {
-      await programAPI.saveTravelWorkout({
-        trainerEmail: 'wisco.barbell@gmail.com',
-        equipmentType: travelInfo.equipmentType,
-        dayNumber: travelInfo.dayNumber,
-        workoutName: travelInfo.workoutName,
-        workoutData: currentBlocks,
-      });
-      setShowTravelSaveModal(false);
-      setTravelSaveStatus('saved');
-      setTimeout(() => setTravelSaveStatus(null), 3000);
-    } catch (err) {
-      console.error('Save travel workout failed:', err);
-      alert('Failed to save travel workout: ' + (err.message || 'Unknown error'));
-    }
-  };
-
-  const handleLoadTravelWorkout = (travelWorkout) => {
-    // Load travel workout blocks into the builder for editing
-    const blocks = Array.isArray(travelWorkout.workout_data)
-      ? travelWorkout.workout_data
-      : JSON.parse(travelWorkout.workout_data || '[]');
-
-    // Reset to a single day/week view with the travel blocks
-    workoutState.loadProgram({
-      id: null,
-      accessCode: null,
-      name: travelWorkout.workout_name || `Travel: ${travelWorkout.equipment_type} Day ${travelWorkout.day_number}`,
-      allWorkouts: { '1-1': blocks },
-      mainMaxes: workoutState.mainMaxes,
-      daysPerWeek: 1,
-      totalWeeks: 1,
-    });
-    setShowManageTravelModal(false);
-    setScreen('builder');
   };
 
   // ── Manage Programs ──
@@ -392,8 +330,6 @@ export default function App() {
     switchWeek: workoutState.switchWeek,
     copyWeek: workoutState.copyWeekToNext,
     copyAllWeeks: workoutState.copyWeekToAll,
-    insertWeek: workoutState.insertWeekAt,
-    addWeeks: workoutState.addWeeksToEnd,
     addBlock: handleAddBlock,
     deleteBlock: workoutState.removeBlock,
     toggleCollapse: (blockId) =>
@@ -421,7 +357,7 @@ export default function App() {
   return (
     <>
       {screen === 'welcome' && (
-        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} />
+        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} />
       )}
 
       {screen === 'profile' && (
@@ -449,17 +385,7 @@ export default function App() {
           onRevertOverride={overrideContext ? handleRevertOverride : null}
           onGoToDashboard={handleGoToDashboard}
           onExitOverrideMode={overrideContext ? handleExitOverrideMode : null}
-          onSaveTravel={overrideContext ? null : handleOpenTravelSave}
         />
-      )}
-
-      {/* Travel Save Toast */}
-      {travelSaveStatus === 'saved' && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] bg-white rounded-xl shadow-2xl border border-orange-200 px-6 py-4 max-w-sm w-full">
-          <div className="text-center">
-            <div className="text-[13px] font-semibold text-orange-600">Travel workout saved!</div>
-          </div>
-        </div>
       )}
 
       {/* Access Code Toast */}
@@ -523,20 +449,6 @@ export default function App() {
         isOpen={showManageModal}
         onClose={() => setShowManageModal(false)}
         onLoadProgram={handleLoadProgram}
-        apiHook={programAPI}
-      />
-
-      <TravelSaveModal
-        isOpen={showTravelSaveModal}
-        onClose={() => setShowTravelSaveModal(false)}
-        onSave={handleSaveTravelWorkout}
-        loading={programAPI.loading}
-      />
-
-      <ManageTravelWorkouts
-        isOpen={showManageTravelModal}
-        onClose={() => setShowManageTravelModal(false)}
-        onLoadWorkout={handleLoadTravelWorkout}
         apiHook={programAPI}
       />
 
