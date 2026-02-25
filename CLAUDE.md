@@ -1,7 +1,7 @@
 # React Workout Builder
 
 ## What This Is
-A React app for trainers to build multi-week workout programs. Trainers create programs with blocks of exercises, set percentages, and share access codes with clients. Clients load programs in the **WorkoutTracker** (separate repo). Also contains the **Cloudflare Video / Interactive Chatbot** system (in progress).
+A React app for trainers to build multi-week workout programs. Trainers create programs with blocks of exercises, set percentages, and share access codes with clients. Clients load programs in the **WorkoutTracker** (separate repo). Also contains the **Cloudflare Video / Interactive Chatbot** system (in progress). The **Trainer Dashboard** was extracted to its own repo (`Glen-collab/react-trainer-dashboard`).
 
 **Repo:** `Glen-collab/workoutbuilder`
 **Stack:** React 19, Vite 7, Tailwind 4, Chart.js 4.5
@@ -80,7 +80,6 @@ Interactive_video_chatbot.md # Chatbot spec: 10-node decision tree for Day 1 coa
 video_uids.txt               # Cloudflare Stream video UIDs (56 videos, pipe-delimited)
 themeselector.jsx            # Theme selector component (standalone)
 themeselectordemo.jsx        # Theme selector demo
-react-trainer-dashboard/     # Separate sub-project (see its own CLAUDE.md)
 ```
 
 ---
