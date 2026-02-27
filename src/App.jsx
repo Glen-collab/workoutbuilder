@@ -79,6 +79,8 @@ export default function App() {
 
   // ── Profile Setup ──
   const handleProfileComplete = (profile) => {
+    // Clear stale data from any previous program/travel workout load
+    workoutState.clearAll();
     workoutState.setDaysPerWeek(profile.daysPerWeek || 3);
     workoutState.setTotalWeeks(profile.totalWeeks || 4);
     if (profile.mainMaxes) {

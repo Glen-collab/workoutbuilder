@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Modal from '../shared/Modal';
 
 export default function TravelSaveModal({ isOpen, onClose, onSave, loading, daysPerWeek, getAllWorkouts }) {
@@ -7,6 +7,17 @@ export default function TravelSaveModal({ isOpen, onClose, onSave, loading, days
   const [saving, setSaving] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
   const [result, setResult] = useState(null); // { success: true, count } | { success: false, saved, failed, error }
+
+  // Reset all form state when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setEquipmentType('bodyweight');
+      setNameTemplate('');
+      setSaving(false);
+      setProgress({ current: 0, total: 0 });
+      setResult(null);
+    }
+  }, [isOpen]);
 
   const equipLabels = { bodyweight: 'Bodyweight', hotel_gym: 'Hotel Gym', bands_bodyweight: 'Bands & Bodyweight' };
   const equipLabel = equipLabels[equipmentType] || 'Bodyweight';
