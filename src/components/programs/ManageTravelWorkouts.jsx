@@ -49,7 +49,17 @@ export default function ManageTravelWorkouts({ isOpen, onClose, onLoadWorkout, a
     if (items.length === 0) return null;
     return (
       <div className="mb-5">
-        <h3 className="text-sm font-bold text-orange-400 uppercase tracking-wide mb-2">{title}</h3>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-bold text-orange-400 uppercase tracking-wide">{title}</h3>
+          {items.length > 1 && (
+            <button
+              className="py-1 px-3 text-[11px] font-bold bg-gradient-to-br from-orange-500 to-orange-600 text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+              onClick={() => onLoadWorkout(items)}
+            >
+              Load All ({items.length} days)
+            </button>
+          )}
+        </div>
         <div className="flex flex-col gap-2">
           {items.map((w) => {
             const deleteKey = `${w.equipment_type}-${w.day_number}`;
@@ -67,7 +77,7 @@ export default function ManageTravelWorkouts({ isOpen, onClose, onLoadWorkout, a
                 <div className="flex gap-2 shrink-0">
                   <button
                     className="py-1.5 px-3.5 text-[12px] font-bold bg-gradient-to-br from-orange-500 to-orange-600 text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                    onClick={() => onLoadWorkout(w)}
+                    onClick={() => onLoadWorkout([w])}
                   >
                     Load
                   </button>

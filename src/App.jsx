@@ -38,7 +38,6 @@ export default function App() {
   const [showPreMadePicker, setShowPreMadePicker] = useState(false);
   const [showTravelSaveModal, setShowTravelSaveModal] = useState(false);
   const [showManageTravelModal, setShowManageTravelModal] = useState(false);
-  const [travelSaveStatus, setTravelSaveStatus] = useState(null); // 'saved' | null
   const [insertPosition, setInsertPosition] = useState(null);
 
   // ── Detect override mode from URL params ──
@@ -318,41 +317,42 @@ export default function App() {
   const handleOpenTravelSave = () => setShowTravelSaveModal(true);
 
   const handleSaveTravelWorkout = async (travelInfo) => {
-    const data = workoutState.getAllWorkoutsForSave();
-    const dayKey = `${workoutState.currentWeek}-${workoutState.currentDay}`;
-    const currentBlocks = data.allWorkouts?.[dayKey] || workoutState.workoutBlocks;
-
-    try {
-      await programAPI.saveTravelWorkout({
-        trainerEmail: 'wisco.barbell@gmail.com',
-        equipmentType: travelInfo.equipmentType,
-        dayNumber: travelInfo.dayNumber,
-        workoutName: travelInfo.workoutName,
-        workoutData: currentBlocks,
-      });
-      setShowTravelSaveModal(false);
-      setTravelSaveStatus('saved');
-      setTimeout(() => setTravelSaveStatus(null), 3000);
-    } catch (err) {
-      console.error('Save travel workout failed:', err);
-      alert('Failed to save travel workout: ' + (err.message || 'Unknown error'));
+    // Modal passes complete payload including workoutData per day
+    const result = await programAPI.saveTravelWorkout(travelInfo);
+    // Check PHP response — throw if API returned success: false
+    if (result && result.success === false) {
+      throw new Error(result.message || 'Save failed');
     }
+    return result;
   };
 
-  const handleLoadTravelWorkout = (travelWorkout) => {
-    // Load travel workout blocks into the builder for editing
-    const blocks = Array.isArray(travelWorkout.workout_data)
-      ? travelWorkout.workout_data
-      : JSON.parse(travelWorkout.workout_data || '[]');
+  const handleLoadTravelWorkout = (travelWorkouts) => {
+    // Accepts an array of travel workout objects (1 or more days)
+    // Normalize day_number to integer (PHP fetch_assoc returns strings)
+    const sorted = [...travelWorkouts]
+      .map((tw) => ({ ...tw, day_number: Number(tw.day_number) }))
+      .sort((a, b) => a.day_number - b.day_number);
+    const allWorkouts = {};
+    for (const tw of sorted) {
+      const blocks = Array.isArray(tw.workout_data)
+        ? tw.workout_data
+        : JSON.parse(tw.workout_data || '[]');
+      const dayKey = `1-${tw.day_number}`;
+      allWorkouts[dayKey] = blocks;
+    }
+    const daysCount = sorted.length > 0 ? Math.max(...sorted.map((tw) => tw.day_number)) : 1;
+    const first = sorted[0] || {};
+    const name = sorted.length === 1
+      ? (first.workout_name || `Travel: ${first.equipment_type} Day ${first.day_number}`)
+      : `Travel: ${first.equipment_type} (${sorted.length} days)`;
 
-    // Reset to a single day/week view with the travel blocks
     workoutState.loadProgram({
       id: null,
       accessCode: null,
-      name: travelWorkout.workout_name || `Travel: ${travelWorkout.equipment_type} Day ${travelWorkout.day_number}`,
-      allWorkouts: { '1-1': blocks },
+      name,
+      allWorkouts,
       mainMaxes: workoutState.mainMaxes,
-      daysPerWeek: 1,
+      daysPerWeek: daysCount,
       totalWeeks: 1,
     });
     setShowManageTravelModal(false);
@@ -453,15 +453,6 @@ export default function App() {
         />
       )}
 
-      {/* Travel Save Toast */}
-      {travelSaveStatus === 'saved' && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] bg-white rounded-xl shadow-2xl border border-orange-200 px-6 py-4 max-w-sm w-full">
-          <div className="text-center">
-            <div className="text-[13px] font-semibold text-orange-600">Travel workout saved!</div>
-          </div>
-        </div>
-      )}
-
       {/* Access Code Toast */}
       {savedAccessCode && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] bg-white rounded-xl shadow-2xl border border-gray-200 px-6 py-4 max-w-sm w-full">
@@ -531,6 +522,8 @@ export default function App() {
         onClose={() => setShowTravelSaveModal(false)}
         onSave={handleSaveTravelWorkout}
         loading={programAPI.loading}
+        daysPerWeek={workoutState.daysPerWeek}
+        getAllWorkouts={workoutState.getAllWorkoutsForSave}
       />
 
       <ManageTravelWorkouts
