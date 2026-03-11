@@ -64,7 +64,7 @@ src/
     QuestionBlock.jsx         # Mario-style ? block button for video chatbot (ACTIVE)
 
   data/
-    exerciseLibrary.js       # 1000+ exercises: chest/back/shoulders/legs/arms/core (with Cloudflare video URLs)
+    exerciseLibrary.js       # 1850+ lines, 1000+ exercises with ~950 Cloudflare video URLs across all muscle groups
     preMadeWorkouts.js       # Template workouts (Arms, GPP, Back Day, Chest Day)
     warmupExercises.js       # Myofascial release, dynamic warmup, joint mobility, stretching
     mobilityExercises.js     # Hip, ankle, shoulder, thoracic, wrist, spinal mobility
@@ -77,7 +77,7 @@ src/
     schemePresets.js          # 16 pre-built set/rep schemes (3x10, 5x5, waves, GVT, etc.)
 
 Interactive_video_chatbot.md # Chatbot spec: 10-node decision tree for Day 1 coaching flow
-video_uids.txt               # Cloudflare Stream video UIDs (56 videos, pipe-delimited)
+video_uids.txt               # Cloudflare Stream video UIDs (legacy reference file from first batch)
 themeselector.jsx            # Theme selector component (standalone)
 themeselectordemo.jsx        # Theme selector demo
 ```
@@ -204,10 +204,10 @@ All POST to `{apiBase}/{endpoint}`:
 ```
 
 ### Tonnage Calculation
-- **Percentage-based:** For each non-warmup set: `weight × reps`, plus drop set/strip set weights
-- **Drop set support:** Main set + drop percentage × drop reps
-- **Strip set support:** Main set + drop + strip percentage × strip reps
-- **Non-percentage:** `totalReps × weight × qualifierMultiplier`
+- **Percentage-based:** For each non-warmup set: `weight x reps`, plus drop set/strip set weights
+- **Drop set support:** Main set + drop percentage x drop reps
+- **Strip set support:** Main set + drop + strip percentage x strip reps
+- **Non-percentage:** `totalReps x weight x qualifierMultiplier`
 
 ### Base Max Display
 ```js
@@ -219,16 +219,44 @@ baseMaxColors: { bench: blue, squat: green, powerClean: orange,
 
 ---
 
-## Cloudflare Video System (IN PROGRESS)
+## Cloudflare Video System
 
-### video_uids.txt Format
-```
-category|exercise_name|cloudflare_video_uid
-core_lower|Hollow Hold|80af743732259cf4499e1e4b3ec06fbf
-```
-**Categories so far:** stretching, core_lower (25), core_oblique (16), core_upper (11)
-**Upload script:** `upload_videos.sh` (gitignored, has API tokens in `.env`)
+### Overview
+~950 unique Cloudflare Stream videos are embedded directly in `exerciseLibrary.js` via the `youtube` field on each exercise object. Videos are hosted on Cloudflare Stream and embedded as iframes.
+
 **Embed URL pattern:** `https://iframe.videodelivery.net/{uid}`
+**Cloudflare Account ID:** `3a007b6233a4089a87f73fda6292684b`
+
+### Video Coverage by Category (exerciseLibrary.js)
+- **Chest:** Barbell, Dumbbell, Machine subcategories
+- **Back:** Barbell, Dumbbell, Machine, Corrective, Functional subcategories
+- **Shoulders:** Barbell, Dumbbell, Machine, Corrective, Functional subcategories
+- **Legs:** Barbell (incl. overhead lunges), Machine (incl. pause drop/single-single-double variations), Corrective (hip mobility, ankle, balance)
+- **Arms:** Biceps, Triceps (Barbell, Cable, Dumbbell, Other)
+- **Core:** Upper, Lower, Oblique
+- **Olympic:** Lifts, Complexes, Dumbbell Variations, Technique Work
+- **Tactical:** Barbell tactical exercises
+- **Functional:** General functional movements
+- **Stretching:** Stretching presets
+
+### Video Coverage (mobilityExercises.js + warmupExercises.js)
+- **Hip Mobility:** 90/90, pigeon, couch stretch, CARs, hip rotations (incl. assisted internal rotation drills)
+- **Ankle Mobility:** Circles, calf stretches, dorsiflexion
+- **Shoulder Mobility:** Band dislocates, wall slides, CARs
+- **Warmup:** Myofascial release (foam roll, lacrosse ball, massage gun), dynamic warmup, joint mobility
+
+### Upload Process
+Upload scripts (`upload_videos.sh`, `upload_new_videos.sh`) are gitignored. They use:
+```bash
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/stream" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -F "file=@$filepath" \
+  -F "meta={\"name\":\"$name\"}"
+```
+Response UID is extracted with Python and saved to a `_uids.txt` file, then manually added to exerciseLibrary.js/mobilityExercises.js.
+
+### Video source files
+Located at `D:/Cloudflare video/` with subfolders: Back, Biceps, Chest, Core, Functional, Legs, Mobility, Olympic, Shoulders, Stretching, Tactical, Triceps
 
 ### QuestionBlock.jsx
 Mario-style floating `?` button (gold, 50x50px, top-right). On click: bounces, gold coins animate out, triggers `onClick` callback. Intended to open a video library modal.
@@ -248,12 +276,12 @@ Mario-style floating `?` button (gold, 50x50px, top-right). On click: bounces, g
 **Hidden branching:** Nervous -> slower, Confident -> tighter, Pain -> reduced intensity
 
 ### TODO - Cloudflare Videos
-- [ ] Upload remaining exercise categories (upper body, lower body, cardio)
 - [ ] Build VideoLibraryModal component
-- [ ] Connect QuestionBlock -> VideoLibraryModal -> video_uids.txt mapping
+- [ ] Connect QuestionBlock -> VideoLibraryModal -> exercise video mapping
 - [ ] Implement chatbot decision tree nodes with video playback
 - [ ] Add state persistence across sessions
 - [ ] Build Day 2+ chatbot flows
+- [ ] Fill remaining exercises that still have empty youtube fields
 
 ---
 
@@ -265,7 +293,8 @@ Mario-style floating `?` button (gold, 50x50px, top-right). On click: bounces, g
 
 ## Git / Deployment Notes
 
-- `.env` and `upload_videos.sh` are gitignored (contain Cloudflare API tokens)
+- `.env`, `upload_videos.sh`, `upload_new_videos.sh`, `new_video_uids.txt` are gitignored (contain Cloudflare API tokens)
 - `.claude/` directory is gitignored
 - WordPress plugin loads `dist/builder.js` + `dist/builder.css` and passes `window.gwbConfig.apiBase`
 - Netlify config: SPA redirect + `/api/*` proxy to bestrongagain.com
+- Netlify auto-deploys on push to `main` branch

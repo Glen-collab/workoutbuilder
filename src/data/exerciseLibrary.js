@@ -696,6 +696,8 @@ export const exerciseCategories = {
                     { name: 'Barbell Single Leg Step Up', movement: ['Squat', 'Lunge'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/1eb4a5286f57e047d1c97856ea07f129' },
                     { name: 'Barbell Step Ups', movement: ['Squat', 'Lunge'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/a73a79178b197203ec097441f3804a96' },
                     { name: 'Barbell Walking Lunges', movement: ['Lunge'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['Lower Body Load Limited'], youtube: 'https://iframe.videodelivery.net/3bfceffac7847afa83854cbcc892d2a9' },
+                    { name: 'Barbell Overhead Front Lunge', movement: ['Lunge'], intent: ['Strength', 'Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'No Axial Loading'], youtube: 'https://iframe.videodelivery.net/a3d04b3924a90ee6b6f84ed96aaade89' },
+                    { name: 'Barbell Overhead Reverse Lunge', movement: ['Lunge'], intent: ['Strength', 'Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading', 'No Axial Loading'], youtube: 'https://iframe.videodelivery.net/96ab91914ebc23c4c2b69f37a3eba44e' },
                     { name: 'Block/Rack Pull Deadlift', movement: ['Hinge'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/3eb2fe1d49439a6730887750aea1587c' },
                     { name: 'Box Back Squats', movement: ['Squat'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/93d15d901bd5e795bb08d201958f3b91' },
                     { name: 'Box Squat', movement: ['Squat'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/4c56c45c0f6b6d96c89c2420a6dfa0e1' },
@@ -865,7 +867,14 @@ export const exerciseCategories = {
                     { name: 'Machine Calf Raise (Seated)', movement: ['Plantarflexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Smith Machine Squat', movement: ['Squat'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
                     { name: 'Smith Machine Lunge', movement: ['Lunge'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
-                    { name: 'Machine Glute Kickback', movement: ['Hip'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' }
+                    { name: 'Machine Glute Kickback', movement: ['Hip'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' },
+                    // --- CF Video exercises (technique variations) ---
+                    { name: 'Leg Curl Pause Drop 2 Times', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f30f126ef8448c7944dfd35e85d4bb67' },
+                    { name: 'Leg Curl Pause Drop Set', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/44c5c69aadd134b6a4060e7060fa8f32' },
+                    { name: 'Leg Curl Single Single Double', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0e24e1f0456d206c12309f264eff553b' },
+                    { name: 'Leg Extension Pause Drop Set', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aea184f32bbb6dd45b4afe42497b118' },
+                    { name: 'Leg Extension Single Single Double', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2da6ce58ccec32f0954edecd485db2ce' },
+                    { name: 'Leg Extension Pause Twice x3 Reps', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/383bbc667f259a4072f783affd337b60' }
                 ]
             },
             corrective: {
@@ -899,7 +908,10 @@ export const exerciseCategories = {
                     { name: 'Shortfoot', movement: ['Foot'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e79d3876461cc3f6e1a9ca7afc70802d' },
                     { name: 'Standing Hip Circles', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fd63fb4b80307643fc23d692b4b655ca', geriatric_priority: true },
                     { name: 'Tibialis Anterior Raises', movement: ['Dorsiflexion'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d19240c7edb39d797f4bfc3892993494', geriatric_priority: true },
-                    { name: 'Ankle and Calf Stretches', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fada35c576694458b40c9700e68c0397', geriatric_priority: true }
+                    { name: 'Ankle and Calf Stretches', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fada35c576694458b40c9700e68c0397', geriatric_priority: true },
+                    { name: '90/90 Assisted Internal Hip Rotation', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/72432894188c7ca1444a767a939e33a4', geriatric_priority: true },
+                    { name: 'Assisted Box Internal Hip Rotator', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3381f9eb747cc225705e01e17b28c562', geriatric_priority: true },
+                    { name: 'Seated Box Internal Hip Rotation', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a30519dee183ea4db989d07c357f123c', geriatric_priority: true }
                 ]
             }
         }

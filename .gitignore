@@ -4,4 +4,6 @@ dist/
 *.local
 .env
 upload_videos.sh
+upload_new_videos.sh
+new_video_uids.txt
 .claude/

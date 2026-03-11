@@ -34,7 +34,10 @@ export const mobilityCategories = {
             { name: 'Hip Flexor Stretch (Kneeling)', duration: '60s each side', description: 'Hip flexor lengthening', youtube: 'https://iframe.videodelivery.net/288a754fa8de14636203f1e55de57a3b' },
             { name: 'Adductor Stretch (Seated)', duration: '60s', description: 'Inner thigh stretch', youtube: '' },
             { name: 'Leg Swings (Front-Back)', duration: '10 each leg', description: 'Dynamic hip flexion/extension', youtube: '' },
-            { name: 'Leg Swings (Side-Side)', duration: '10 each leg', description: 'Dynamic hip abduction/adduction', youtube: '' }
+            { name: 'Leg Swings (Side-Side)', duration: '10 each leg', description: 'Dynamic hip abduction/adduction', youtube: '' },
+            { name: '90/90 Assisted Internal Hip Rotation', duration: '10 reps each side', description: 'Assisted internal hip rotation from 90/90 position', youtube: 'https://iframe.videodelivery.net/72432894188c7ca1444a767a939e33a4' },
+            { name: 'Assisted Box Internal Hip Rotator', duration: '10 reps each side', description: 'Box-assisted internal hip rotation drill', youtube: 'https://iframe.videodelivery.net/3381f9eb747cc225705e01e17b28c562' },
+            { name: 'Seated Box Internal Hip Rotation', duration: '10 reps each side', description: 'Seated internal hip rotation on box', youtube: 'https://iframe.videodelivery.net/a30519dee183ea4db989d07c357f123c' }
         ]
     },
 
