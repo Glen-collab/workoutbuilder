@@ -50,27 +50,32 @@ export default function App() {
     if (accessCode && email && mode === 'override') {
       setOverrideContext({ accessCode, email });
       setOverrideLoading(true);
-      programAPI
-        .loadProgramByCode(accessCode, email)
-        .then((result) => {
-          if (result && result.success && result.data) {
-            const prog = result.data;
-            workoutState.loadProgram({
-              id: prog.id || prog.programId,
-              accessCode: prog.accessCode || accessCode,
-              name: prog.name || prog.programName || 'Client Program',
-              allWorkouts: prog.programData?.allWorkouts || prog.allWorkouts || {},
-              mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
-              daysPerWeek: prog.programData?.daysPerWeek || prog.daysPerWeek || 3,
-              totalWeeks: prog.programData?.totalWeeks || prog.totalWeeks || 4,
-            });
-            setScreen('builder');
+      // Retry up to 3 times on failure (first load after deploy can fail due to cold start)
+      (async () => {
+        for (let attempt = 0; attempt < 3; attempt++) {
+          try {
+            const result = await programAPI.loadProgramByCode(accessCode, email);
+            if (result && result.success && result.data) {
+              const prog = result.data;
+              workoutState.loadProgram({
+                id: prog.id || prog.programId,
+                accessCode: prog.accessCode || accessCode,
+                name: prog.name || prog.programName || 'Client Program',
+                allWorkouts: prog.programData?.allWorkouts || prog.allWorkouts || {},
+                mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
+                daysPerWeek: prog.programData?.daysPerWeek || prog.daysPerWeek || 3,
+                totalWeeks: prog.programData?.totalWeeks || prog.totalWeeks || 4,
+              });
+              setScreen('builder');
+            }
+            break; // success, stop retrying
+          } catch (err) {
+            console.error(`Failed to load program for override (attempt ${attempt + 1}):`, err);
+            if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
           }
-        })
-        .catch((err) => {
-          console.error('Failed to load program for override:', err);
-        })
-        .finally(() => setOverrideLoading(false));
+        }
+        setOverrideLoading(false);
+      })();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
