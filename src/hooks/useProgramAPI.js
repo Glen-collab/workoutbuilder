@@ -15,25 +15,35 @@ export default function useProgramAPI() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const request = useCallback(async (endpoint, body) => {
+  const request = useCallback(async (endpoint, body, maxRetries = 2) => {
     setLoading(true);
     setError(null);
-    try {
-      const res = await fetch(`${getApiBase()}${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        throw new Error(`API error: ${res.status}`);
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
+        const res = await fetch(`${getApiBase()}${endpoint}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          signal: controller.signal,
+        });
+        clearTimeout(timeout);
+        if (!res.ok) {
+          throw new Error(`API error: ${res.status}`);
+        }
+        const data = await res.json();
+        setLoading(false);
+        return data;
+      } catch (err) {
+        if (attempt < maxRetries) {
+          await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+          continue;
+        }
+        setError(err.message || 'An error occurred');
+        setLoading(false);
+        throw err;
       }
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      setError(err.message || 'An error occurred');
-      throw err;
-    } finally {
-      setLoading(false);
     }
   }, []);
 

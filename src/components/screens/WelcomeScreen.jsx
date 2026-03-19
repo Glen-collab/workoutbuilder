@@ -1,4 +1,11 @@
+import { useEffect } from 'react';
+
 export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts }) {
+  // Wake up the backend while the user browses (cold-start mitigation)
+  useEffect(() => {
+    fetch('/api/load-program.php', { method: 'POST', body: '{}' }).catch(() => {});
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-5 py-10">
       <div className="bg-white rounded-2xl shadow-lg px-8 py-12 max-w-md w-full text-center">
