@@ -13,19 +13,9 @@ wordpress-plugin/
       frontend.js              ← checkout form JS
 ```
 
-## Step 1: Add Stripe Keys to wp-config.php
+## Step 1: Upload the Plugin
 
-Open your WordPress `wp-config.php` (usually at the root of your WordPress install) and add these lines **above** the line that says `/* That's all, stop editing! */`:
-
-```php
-define('BSA_STRIPE_SECRET_KEY',      'sk_live_YOUR_KEY_HERE');
-define('BSA_STRIPE_PUBLISHABLE_KEY', 'pk_live_YOUR_KEY_HERE');
-define('BSA_STRIPE_WEBHOOK_SECRET',  'whsec_YOUR_SECRET_HERE');
-```
-
-> **Your keys are in** `C:\Users\big_g\Desktop\polly-connect\.env` — copy them from there.
-
-## Step 2: Upload the Plugin
+Stripe keys are already baked into the plugin file — no wp-config.php editing needed.
 
 1. Zip the `bsa-workout-builder/` folder
 2. In WordPress admin: **Plugins → Add New → Upload Plugin**
@@ -33,7 +23,7 @@ define('BSA_STRIPE_WEBHOOK_SECRET',  'whsec_YOUR_SECRET_HERE');
 
 Or manually: FTP/SFTP the `bsa-workout-builder/` folder into `wp-content/plugins/`
 
-## Step 3: Create the Two Pages
+## Step 2: Create the Two Pages
 
 ### Page 1: Landing Page
 - **WordPress Admin → Pages → Add New**
@@ -49,7 +39,7 @@ Or manually: FTP/SFTP the `bsa-workout-builder/` folder into `wp-content/plugins
 - Add a **Shortcode block** with: `[bsa_workout_builder_success]`
 - Publish
 
-## Step 4: Add to Navigation Menu
+## Step 3: Add to Navigation Menu
 
 - **WordPress Admin → Appearance → Menus** (or the Full Site Editor if using block theme)
 - Add a **Custom Link**:
@@ -58,7 +48,7 @@ Or manually: FTP/SFTP the `bsa-workout-builder/` folder into `wp-content/plugins
 - Place it in the Primary/Header menu
 - Save
 
-## Step 5: Set Up Stripe Webhook
+## Step 4: Set Up Stripe Webhook
 
 1. Go to https://dashboard.stripe.com/webhooks
 2. Click **Add endpoint**
@@ -71,11 +61,11 @@ Or manually: FTP/SFTP the `bsa-workout-builder/` folder into `wp-content/plugins
    - `invoice.paid`
 5. Click **Add endpoint**
 6. Copy the **Signing secret** (starts with `whsec_`)
-7. Update the `BSA_STRIPE_WEBHOOK_SECRET` in `wp-config.php` with this new secret
+7. Update the `BSA_STRIPE_WEBHOOK_SECRET` in `wp-content/plugins/bsa-workout-builder/bsa-workout-builder.php` with this new secret
 
 **Important:** This is a NEW webhook endpoint (separate from Polly Connect). You need a new signing secret for this endpoint. Your existing Polly webhook stays as-is.
 
-## Step 6: Plug In Access Codes (when ready)
+## Step 5: Plug In Access Codes (when ready)
 
 Once you've built the 3 starter programs in the workout builder and saved them:
 

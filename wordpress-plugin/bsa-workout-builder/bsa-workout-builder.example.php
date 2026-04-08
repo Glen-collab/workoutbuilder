@@ -9,16 +9,11 @@
 
 if (!defined('ABSPATH')) exit;
 
-// ─── Configuration ───────────────────────────────────────────────────────────
-// Set these in wp-config.php:
-//   define('BSA_STRIPE_SECRET_KEY',      'sk_live_...');
-//   define('BSA_STRIPE_PUBLISHABLE_KEY', 'pk_live_...');
-//   define('BSA_STRIPE_WEBHOOK_SECRET',  'whsec_...');
-//
-// Or they fall back to these constants (update before going live):
-if (!defined('BSA_STRIPE_SECRET_KEY'))      define('BSA_STRIPE_SECRET_KEY',      '');
-if (!defined('BSA_STRIPE_PUBLISHABLE_KEY')) define('BSA_STRIPE_PUBLISHABLE_KEY', '');
-if (!defined('BSA_STRIPE_WEBHOOK_SECRET'))  define('BSA_STRIPE_WEBHOOK_SECRET',  '');
+// ─── Stripe Configuration ────────────────────────────────────────────────────
+// Your Stripe keys — same account as Polly Connect.
+define('BSA_STRIPE_SECRET_KEY',      'sk_live_YOUR_KEY_HERE');
+define('BSA_STRIPE_PUBLISHABLE_KEY', 'pk_live_YOUR_KEY_HERE');
+define('BSA_STRIPE_WEBHOOK_SECRET',  'whsec_YOUR_SECRET_HERE'); // Update after creating the new webhook endpoint in Stripe dashboard
 
 // ─── Starter Program Access Codes ────────────────────────────────────────────
 // Plug these in once you've built the programs in the workout builder.
