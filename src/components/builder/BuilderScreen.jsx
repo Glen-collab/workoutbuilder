@@ -14,6 +14,7 @@ export default function BuilderScreen({
   onGoToDashboard,
   onExitOverrideMode,
   onSaveTravel,
+  onProgressions,
 }) {
   const {
     currentWeek,
@@ -82,14 +83,24 @@ export default function BuilderScreen({
               Week {currentWeek} &middot; Day {currentDay}
             </p>
           </div>
-          {onGoToDashboard && (
-            <button
-              onClick={onGoToDashboard}
-              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
-            >
-              Trainer Dashboard
-            </button>
-          )}
+          <div className="flex gap-2">
+            {onProgressions && (
+              <button
+                onClick={onProgressions}
+                className="px-4 py-2 text-[13px] font-semibold bg-gray-800 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-700 transition-colors duration-200"
+              >
+                Progressions
+              </button>
+            )}
+            {onGoToDashboard && (
+              <button
+                onClick={onGoToDashboard}
+                className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
+              >
+                Trainer Dashboard
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

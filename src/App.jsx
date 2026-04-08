@@ -13,6 +13,7 @@ import ManagePrograms from './components/programs/ManagePrograms';
 import TravelSaveModal from './components/programs/TravelSaveModal';
 import ManageTravelWorkouts from './components/programs/ManageTravelWorkouts';
 import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
+import ProgressionView from './components/builder/ProgressionView';
 
 export default function App() {
   const workoutState = useWorkoutState();
@@ -295,6 +296,8 @@ export default function App() {
     }
   };
 
+  const handleGoToProgressions = () => setScreen('progressions');
+
   const handleGoToDashboard = () => {
     const isLocal = window.location.hostname === 'localhost';
     const dashboardUrl = isLocal
@@ -453,6 +456,16 @@ export default function App() {
           onGoToDashboard={handleGoToDashboard}
           onExitOverrideMode={overrideContext ? handleExitOverrideMode : null}
           onSaveTravel={overrideContext ? null : handleOpenTravelSave}
+          onProgressions={handleGoToProgressions}
+        />
+      )}
+
+      {screen === 'progressions' && (
+        <ProgressionView
+          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          totalWeeks={workoutState.totalWeeks}
+          daysPerWeek={workoutState.daysPerWeek}
+          onBack={() => setScreen('builder')}
         />
       )}
 
