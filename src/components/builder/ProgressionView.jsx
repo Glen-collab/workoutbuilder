@@ -13,11 +13,6 @@ const BLOCK_LABELS = {
   theme: 'Theme',
 };
 
-/**
- * Summarise sets + reps into a single short string per column.
- * Percentage-based exercises store sets in exercise.sets[].
- * Non-percentage exercises use exercise.setsCount / exercise.reps.
- */
 function summariseSets(exercise) {
   if (exercise.isPercentageBased && exercise.sets?.length) {
     const count = exercise.sets.filter((s) => !s.isWarmup).length;
@@ -52,13 +47,7 @@ function summariseExtra(exercise) {
   return parts.join(' ');
 }
 
-/**
- * Build a structured array for one day across all weeks:
- * [{ blockLabel, exercises: [{ name, weeks: { [weekNum]: { sets, reps, extra } } }] }]
- */
 function buildDayProgression(day, totalWeeks, allWorkouts) {
-  // First pass: collect all blocks across all weeks for this day to build a canonical row order
-  // Use week 1 as the template, then fill in from other weeks
   const canonicalBlocks = [];
   const seen = new Set();
 
@@ -69,7 +58,6 @@ function buildDayProgression(day, totalWeeks, allWorkouts) {
       if (EXCLUDED_TYPES.has(block.type)) continue;
       if (!block.exercises?.length && block.type !== 'theme') continue;
 
-      // Build a fingerprint for this block position
       const exerciseNames = (block.exercises || []).map((e) => e.name).join('|');
       const fp = `${block.type}::${exerciseNames}`;
 
@@ -85,7 +73,6 @@ function buildDayProgression(day, totalWeeks, allWorkouts) {
     }
   }
 
-  // Second pass: fill in sets/reps per week
   const result = canonicalBlocks.map((cb) => ({
     ...cb,
     exerciseData: cb.exercises.map((name) => ({
@@ -103,7 +90,6 @@ function buildDayProgression(day, totalWeeks, allWorkouts) {
       if (EXCLUDED_TYPES.has(block.type)) continue;
       if (!block.exercises?.length && block.type !== 'theme') continue;
 
-      // Match to canonical block by index within filtered blocks
       if (blockIdx >= result.length) break;
       const target = result[blockIdx];
       blockIdx++;
@@ -115,7 +101,7 @@ function buildDayProgression(day, totalWeeks, allWorkouts) {
             sets: summariseSets(ex),
             reps: summariseReps(ex),
             extra: summariseExtra(ex),
-            name: ex.name, // actual name this week (may differ)
+            name: ex.name,
           };
         }
       }
@@ -140,45 +126,50 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
   const weekNums = Array.from({ length: totalWeeks }, (_, i) => i + 1);
 
   return (
-    <div className="progression-view">
+    <div className="progression-view" style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <style>{`
         @media print {
           body * { visibility: hidden; }
           .progression-view, .progression-view * { visibility: visible; }
-          .progression-view { position: absolute; left: 0; top: 0; width: 100%; }
+          .progression-view { position: absolute; left: 0; top: 0; width: 100%; height: auto !important; }
           .progression-view .no-print { display: none !important; }
-          .progression-view table { font-size: 8px; }
-          .progression-view th, .progression-view td { padding: 2px 4px; }
+          .progression-view .scroll-viewport { overflow: visible !important; height: auto !important; flex: none !important; }
+          .progression-view table { font-size: 7px; }
+          .progression-view th, .progression-view td { padding: 1px 3px; }
+          .progression-view .frozen-col { position: static !important; }
         }
         .progression-view table {
-          border-collapse: collapse;
-          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
           table-layout: auto;
         }
         .progression-view th, .progression-view td {
           border: 1px solid #d1d5db;
-          padding: 4px 8px;
+          padding: 3px 6px;
           text-align: left;
-          font-size: 12px;
+          font-size: 11px;
           white-space: nowrap;
         }
-        .progression-view th {
-          background: #f3f4f6;
-          font-weight: 600;
+        .progression-view .frozen-col {
           position: sticky;
-          top: 0;
-          z-index: 2;
+          left: 0;
+          z-index: 3;
+          background: white;
+          border-right: 2px solid #9ca3af;
+        }
+        .progression-view th.frozen-col {
+          z-index: 4;
         }
         .progression-view .day-header {
           background: linear-gradient(135deg, #667eea, #764ba2);
           color: white;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 700;
-          padding: 8px;
+          padding: 6px 8px;
         }
         .progression-view .block-label {
           background: #eef2ff;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 600;
           color: #4338ca;
           text-transform: uppercase;
@@ -186,57 +177,67 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
         }
         .progression-view .exercise-name {
           font-weight: 500;
-          max-width: 180px;
+          min-width: 160px;
+          max-width: 200px;
           overflow: hidden;
           text-overflow: ellipsis;
         }
+        .progression-view .changed-name {
+          font-size: 9px;
+          color: #dc2626;
+          font-weight: 600;
+          display: block;
+          line-height: 1.1;
+        }
         .progression-view .spacer-col {
-          width: 8px;
-          min-width: 8px;
-          background: #f9fafb;
-          border-left: 2px solid #e5e7eb;
-          border-right: 2px solid #e5e7eb;
+          width: 6px;
+          min-width: 6px;
+          max-width: 6px;
+          background: #e5e7eb;
+          padding: 0 !important;
+          border-left: none;
+          border-right: none;
         }
         .progression-view .week-header {
           text-align: center;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 700;
           background: #1f2937;
           color: white;
         }
         .progression-view .sub-header {
           text-align: center;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 600;
           background: #374151;
           color: #d1d5db;
         }
-        .progression-view .sets-col { text-align: center; min-width: 40px; }
-        .progression-view .reps-col { text-align: center; min-width: 50px; }
-        .progression-view .extra-col { text-align: center; min-width: 60px; font-size: 10px; color: #6b7280; }
+        .progression-view .sets-col { text-align: center; min-width: 32px; }
+        .progression-view .reps-col { text-align: center; min-width: 40px; }
+        .progression-view .extra-col { text-align: center; min-width: 50px; font-size: 9px; color: #6b7280; }
       `}</style>
 
-      {/* Header */}
-      <div className="max-w-full mx-auto px-4 py-4 no-print">
-        <div className="flex justify-between items-center mb-4">
+      {/* Header — fixed at top */}
+      <div className="no-print" style={{ flexShrink: 0, padding: '12px 16px', borderBottom: '1px solid #e5e7eb', background: 'white' }}>
+        <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-[22px] font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-1">
+            <h2 className="text-[20px] font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-0">
               Program Progressions
             </h2>
-            <p className="text-[13px] text-gray-400 m-0">
+            <p className="text-[12px] text-gray-400 m-0">
               {totalWeeks} weeks &middot; {daysPerWeek} days/week
             </p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => window.print()}
-              className="px-4 py-2 text-[13px] font-semibold bg-gray-800 text-white border-none rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-200"
+              className="px-3 py-1.5 text-[12px] font-semibold bg-gray-800 text-white border-none rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-200"
             >
               Print
             </button>
             <button
               onClick={onBack}
-              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity duration-200"
+              className="px-3 py-1.5 text-[12px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity duration-200"
             >
               Back to Builder
             </button>
@@ -244,21 +245,19 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
         </div>
       </div>
 
-      {/* Scrollable table container */}
-      <div className="overflow-x-auto px-2 pb-8">
+      {/* Scrollable viewport — both axes, fills remaining screen */}
+      <div className="scroll-viewport" style={{ flex: 1, overflow: 'auto', padding: '8px' }}>
         {progression.map(({ day, blocks }) => {
           if (!blocks.length) return null;
 
-          // Count total columns: exercise col + (sets + reps + extra) per week + spacers between weeks
           const weekColCount = 3; // sets, reps, extra
 
           return (
-            <div key={day} className="mb-8">
+            <div key={day} style={{ marginBottom: '24px' }}>
               <table>
                 <thead>
-                  {/* Week number header row */}
                   <tr>
-                    <th className="day-header" rowSpan={2}>Day {day}</th>
+                    <th className="day-header frozen-col" rowSpan={2}>Day {day}</th>
                     {weekNums.map((w, wi) => (
                       <Fragment key={w}>
                         {wi > 0 && <th className="spacer-col" rowSpan={2}></th>}
@@ -266,11 +265,10 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
                       </Fragment>
                     ))}
                   </tr>
-                  {/* Sub-header row: Sets / Reps / Info */}
                   <tr>
                     {weekNums.map((w, wi) => (
                       <Fragment key={w}>
-                        {wi > 0 && null /* spacer already placed */}
+                        {wi > 0 && null}
                         <th className="sub-header">Sets</th>
                         <th className="sub-header">Reps</th>
                         <th className="sub-header">Info</th>
@@ -281,9 +279,8 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
                 <tbody>
                   {blocks.map((block, bi) => (
                     <Fragment key={bi}>
-                      {/* Block type label row */}
                       <tr>
-                        <td className="block-label">
+                        <td className="block-label frozen-col">
                           {block.label}
                           {block.circuitType ? ` (${block.circuitType})` : ''}
                         </td>
@@ -294,18 +291,31 @@ export default function ProgressionView({ allWorkouts, totalWeeks, daysPerWeek, 
                           </Fragment>
                         ))}
                       </tr>
-                      {/* Exercise rows */}
                       {block.exerciseData.map((ex, ei) => (
                         <tr key={ei}>
-                          <td className="exercise-name" title={ex.name}>{ex.name}</td>
+                          <td className="exercise-name frozen-col" title={ex.name}>{ex.name}</td>
                           {weekNums.map((w, wi) => {
                             const data = ex.weeks[w];
+                            const nameChanged = data && data.name && data.name !== ex.name;
                             return (
                               <Fragment key={w}>
                                 {wi > 0 && <td className="spacer-col"></td>}
-                                <td className="sets-col">{data?.sets || '-'}</td>
-                                <td className="reps-col">{data?.reps || '-'}</td>
-                                <td className="extra-col">{data?.extra || ''}</td>
+                                {nameChanged ? (
+                                  <>
+                                    <td colSpan={weekColCount} style={{ textAlign: 'center', padding: '2px 4px' }}>
+                                      <span className="changed-name">{data.name}</span>
+                                      <span style={{ fontSize: '9px', color: '#6b7280' }}>
+                                        {data.sets}s x {data.reps}r {data.extra}
+                                      </span>
+                                    </td>
+                                  </>
+                                ) : (
+                                  <>
+                                    <td className="sets-col">{data?.sets || '-'}</td>
+                                    <td className="reps-col">{data?.reps || '-'}</td>
+                                    <td className="extra-col">{data?.extra || ''}</td>
+                                  </>
+                                )}
                               </Fragment>
                             );
                           })}
