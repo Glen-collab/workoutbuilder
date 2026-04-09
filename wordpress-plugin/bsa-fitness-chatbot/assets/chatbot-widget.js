@@ -103,14 +103,15 @@
   function createPanel() {
     panel = document.createElement('div');
     panel.id = 'bsa-chat-panel';
+    var isWide = window.innerWidth > 480;
     Object.assign(panel.style, {
       position: 'fixed',
       bottom: '76px',
-      right: '8px',
-      left: '8px',
-      width: 'auto',
+      right: isWide ? '16px' : '8px',
+      left: isWide ? 'auto' : '8px',
+      width: isWide ? '340px' : 'auto',
       maxWidth: '340px',
-      height: '400px',
+      height: isWide ? '500px' : '450px',
       maxHeight: 'calc(100vh - 90px)',
       background: '#fff',
       borderRadius: '16px',
@@ -122,14 +123,6 @@
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       boxSizing: 'border-box',
     });
-    // On wider screens, pin to right side instead of stretching
-    if (window.innerWidth > 480) {
-      panel.style.left = 'auto';
-      panel.style.right = '16px';
-      panel.style.bottom = '76px';
-      panel.style.height = '480px';
-      panel.style.maxHeight = 'calc(100vh - 100px)';
-    }
     document.body.appendChild(panel);
   }
 
@@ -160,7 +153,7 @@
 
   function renderIntro() {
     panel.innerHTML = ''
-      + '<div style="background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;padding:20px;text-align:center;">'
+      + '<div style="background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;padding:20px;text-align:center;flex-shrink:0;">'
       + '  <div style="font-size:32px;margin-bottom:8px;">&#128170;</div>'
       + '  <div style="font-size:18px;font-weight:700;margin-bottom:4px;">Hey! I\'m Glen.</div>'
       + '  <div style="font-size:13px;opacity:0.9;">25+ years of coaching. Ask me anything about training.</div>'
@@ -238,7 +231,7 @@
   function renderChat() {
     panel.innerHTML = ''
       // Header
-      + '<div style="background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">'
+      + '<div style="background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">'
       + '  <div>'
       + '    <div style="font-size:15px;font-weight:700;">Glen</div>'
       + '    <div style="font-size:11px;opacity:0.8;">Be Strong Again</div>'
@@ -246,9 +239,9 @@
       + '  <button id="bsa-cb-reset" style="background:rgba(255,255,255,0.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;">New Chat</button>'
       + '</div>'
       // Messages
-      + '<div id="bsa-cb-messages" style="flex:1;overflow-y:auto;overflow-x:hidden;padding:10px;"></div>'
+      + '<div id="bsa-cb-messages" style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:10px;"></div>'
       // Input
-      + '<div style="padding:8px 10px;border-top:1px solid #e5e7eb;display:flex;gap:6px;box-sizing:border-box;">'
+      + '<div style="padding:8px 10px;border-top:1px solid #e5e7eb;display:flex;gap:6px;box-sizing:border-box;flex-shrink:0;">'
       + '  <input id="bsa-cb-input" type="text" placeholder="Ask me anything..." style="flex:1;min-width:0;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" />'
       + '  <button id="bsa-cb-send" style="padding:10px 14px;border:none;border-radius:10px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">Send</button>'
       + '</div>';
@@ -275,7 +268,10 @@
       render();
     });
 
-    chatInput.focus();
+    // Don't auto-focus on mobile — prevents keyboard from pushing layout
+    if (window.innerWidth > 480) {
+      chatInput.focus();
+    }
   }
 
   function renderMessages() {
