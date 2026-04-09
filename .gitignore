@@ -8,3 +8,4 @@ upload_new_videos.sh
 new_video_uids.txt
 .claude/
 wordpress-plugin/bsa-workout-builder/bsa-workout-builder.php
+wordpress-plugin/bsa-fitness-chatbot/bsa-fitness-chatbot.php
