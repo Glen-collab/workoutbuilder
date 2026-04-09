@@ -19,41 +19,81 @@
     createPanel();
   });
 
-  // ── Floating Action Button (Mario ? Block) ──
+  // ── Floating Action Button (3D Mario ? Block with glow) ──
   function createFAB() {
+    // Inject keyframe animations
+    var styleEl = document.createElement('style');
+    styleEl.textContent = ''
+      + '@keyframes bsa-cube-float { 0%,100% { transform: translateY(0) rotateX(-8deg) rotateY(12deg); } 50% { transform: translateY(-6px) rotateX(-8deg) rotateY(12deg); } }'
+      + '@keyframes bsa-cube-glow { 0%,100% { box-shadow: 0 4px 20px rgba(245,158,11,0.5), 0 0 30px rgba(245,158,11,0.2), inset 0 -4px 8px rgba(146,64,14,0.4); } 50% { box-shadow: 0 4px 30px rgba(245,158,11,0.8), 0 0 50px rgba(245,158,11,0.35), inset 0 -4px 8px rgba(146,64,14,0.4); } }'
+      + '@keyframes bsa-sparkle { 0%,100% { opacity: 0; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(180deg); } }'
+      + '#bsa-chat-fab:hover { animation: none !important; transform: translateY(-4px) rotateX(-5deg) rotateY(8deg) scale(1.08) !important; }'
+      + '#bsa-chat-fab .bsa-sparkle { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fef3c7; pointer-events: none; }'
+      + '#bsa-chat-fab .bsa-sparkle:nth-child(2) { top: -4px; right: 6px; animation: bsa-sparkle 2s ease-in-out infinite 0.3s; }'
+      + '#bsa-chat-fab .bsa-sparkle:nth-child(3) { bottom: 2px; left: -2px; animation: bsa-sparkle 2.5s ease-in-out infinite 0.8s; width: 4px; height: 4px; }'
+      + '#bsa-chat-fab .bsa-sparkle:nth-child(4) { top: 8px; right: -3px; animation: bsa-sparkle 1.8s ease-in-out infinite 1.2s; width: 5px; height: 5px; }'
+      + '#bsa-chat-fab .bsa-sparkle:nth-child(5) { bottom: -3px; right: 12px; animation: bsa-sparkle 2.2s ease-in-out infinite 0.5s; width: 3px; height: 3px; }';
+    document.head.appendChild(styleEl);
+
     fab = document.createElement('div');
     fab.id = 'bsa-chat-fab';
-    fab.innerHTML = '?';
     fab.title = 'Chat with Glen';
     Object.assign(fab.style, {
       position: 'fixed',
       bottom: '24px',
       right: '24px',
-      width: '56px',
-      height: '56px',
-      borderRadius: '14px',
-      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+      width: '58px',
+      height: '58px',
+      borderRadius: '12px',
+      // 3D cube: top-lit gold gradient with depth
+      background: 'linear-gradient(145deg, #fbbf24 0%, #f59e0b 40%, #d97706 70%, #92400e 100%)',
       color: '#fff',
-      fontSize: '28px',
+      fontSize: '30px',
       fontWeight: '900',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      boxShadow: '0 4px 20px rgba(217,119,6,0.4)',
       zIndex: '99999',
-      transition: 'transform 0.2s, box-shadow 0.2s',
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: '"Arial Black", Arial, sans-serif',
       userSelect: 'none',
-      border: '3px solid #92400e',
+      // 3D borders: light top/left, dark bottom/right
+      borderTop: '3px solid #fde68a',
+      borderLeft: '3px solid #fcd34d',
+      borderRight: '3px solid #92400e',
+      borderBottom: '4px solid #78350f',
+      // Inner shadow for depth + outer glow
+      boxShadow: '0 4px 20px rgba(245,158,11,0.5), 0 0 30px rgba(245,158,11,0.2), inset 0 -4px 8px rgba(146,64,14,0.4)',
+      // Subtle 3D rotation
+      transform: 'rotateX(-8deg) rotateY(12deg)',
+      transformStyle: 'preserve-3d',
+      perspective: '200px',
+      // Animations
+      animation: 'bsa-cube-float 3s ease-in-out infinite, bsa-cube-glow 2s ease-in-out infinite',
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      // Text shadow for engraved look
+      textShadow: '0 2px 4px rgba(120,53,15,0.6), 0 -1px 0 rgba(253,230,138,0.3)',
     });
+
+    // ? text
+    var qMark = document.createElement('span');
+    qMark.textContent = '?';
+    qMark.style.position = 'relative';
+    qMark.style.zIndex = '2';
+    fab.appendChild(qMark);
+
+    // Sparkle dots
+    for (var i = 0; i < 4; i++) {
+      var sparkle = document.createElement('span');
+      sparkle.className = 'bsa-sparkle';
+      fab.appendChild(sparkle);
+    }
+
     fab.addEventListener('mouseenter', function () {
-      fab.style.transform = 'scale(1.1)';
-      fab.style.boxShadow = '0 6px 24px rgba(217,119,6,0.5)';
+      fab.style.boxShadow = '0 6px 30px rgba(245,158,11,0.8), 0 0 60px rgba(245,158,11,0.4), inset 0 -4px 8px rgba(146,64,14,0.4)';
     });
     fab.addEventListener('mouseleave', function () {
-      fab.style.transform = 'scale(1)';
-      fab.style.boxShadow = '0 4px 20px rgba(217,119,6,0.4)';
+      fab.style.boxShadow = '0 4px 20px rgba(245,158,11,0.5), 0 0 30px rgba(245,158,11,0.2), inset 0 -4px 8px rgba(146,64,14,0.4)';
     });
     fab.addEventListener('click', togglePanel);
     document.body.appendChild(fab);
@@ -87,13 +127,15 @@
     isOpen = !isOpen;
     if (isOpen) {
       panel.style.display = 'flex';
-      fab.innerHTML = '&times;';
-      fab.style.fontSize = '24px';
+      fab.querySelector('span').textContent = '\u00D7';
+      fab.style.animation = 'none';
+      fab.style.transform = 'rotateX(0) rotateY(0)';
       render();
     } else {
       panel.style.display = 'none';
-      fab.innerHTML = '?';
-      fab.style.fontSize = '28px';
+      fab.querySelector('span').textContent = '?';
+      fab.style.animation = 'bsa-cube-float 3s ease-in-out infinite, bsa-cube-glow 2s ease-in-out infinite';
+      fab.style.transform = '';
     }
   }
 
