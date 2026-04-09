@@ -103,24 +103,41 @@
   function createPanel() {
     panel = document.createElement('div');
     panel.id = 'bsa-chat-panel';
+    var isMobile = window.innerWidth <= 480;
     Object.assign(panel.style, {
       position: 'fixed',
-      bottom: '90px',
-      right: '24px',
-      width: '360px',
-      maxWidth: 'calc(100vw - 48px)',
-      height: '520px',
-      maxHeight: 'calc(100vh - 120px)',
+      bottom: isMobile ? '0' : '90px',
+      right: isMobile ? '0' : '24px',
+      left: isMobile ? '0' : 'auto',
+      width: isMobile ? '100%' : '340px',
+      maxWidth: '100vw',
+      height: isMobile ? '100%' : '500px',
+      maxHeight: isMobile ? '100vh' : 'calc(100vh - 120px)',
       background: '#fff',
-      borderRadius: '16px',
-      boxShadow: '0 12px 40px rgba(0,0,0,0.2)',
+      borderRadius: isMobile ? '0' : '16px',
+      boxShadow: isMobile ? 'none' : '0 12px 40px rgba(0,0,0,0.2)',
       zIndex: '99998',
       display: 'none',
       flexDirection: 'column',
       overflow: 'hidden',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      boxSizing: 'border-box',
     });
     document.body.appendChild(panel);
+
+    // Re-layout on resize
+    window.addEventListener('resize', function () {
+      if (!isOpen) return;
+      var m = window.innerWidth <= 480;
+      panel.style.bottom = m ? '0' : '90px';
+      panel.style.right = m ? '0' : '24px';
+      panel.style.left = m ? '0' : 'auto';
+      panel.style.width = m ? '100%' : '340px';
+      panel.style.height = m ? '100%' : '500px';
+      panel.style.maxHeight = m ? '100vh' : 'calc(100vh - 120px)';
+      panel.style.borderRadius = m ? '0' : '16px';
+      panel.style.boxShadow = m ? 'none' : '0 12px 40px rgba(0,0,0,0.2)';
+    });
   }
 
   function togglePanel() {
@@ -155,21 +172,21 @@
       + '  <div style="font-size:18px;font-weight:700;margin-bottom:4px;">Hey! I\'m Glen.</div>'
       + '  <div style="font-size:13px;opacity:0.9;">25+ years of coaching. Ask me anything about training.</div>'
       + '</div>'
-      + '<div style="padding:20px;flex:1;overflow-y:auto;">'
-      + '  <div style="margin-bottom:20px;">'
+      + '<div style="padding:16px;flex:1;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;">'
+      + '  <div style="margin-bottom:16px;">'
       + '    <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Quick — what describes you best?</div>'
-      + '    <div style="display:flex;gap:8px;margin-bottom:12px;">'
-      + '      <button class="bsa-cb-opt" data-gender="Female" style="flex:1;padding:12px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;">Female</button>'
-      + '      <button class="bsa-cb-opt" data-gender="Male" style="flex:1;padding:12px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;">Male</button>'
+      + '    <div style="display:flex;gap:6px;margin-bottom:10px;">'
+      + '      <button class="bsa-cb-opt" data-gender="Female" style="flex:1;min-width:0;padding:10px 4px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;box-sizing:border-box;">Female</button>'
+      + '      <button class="bsa-cb-opt" data-gender="Male" style="flex:1;min-width:0;padding:10px 4px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;box-sizing:border-box;">Male</button>'
       + '    </div>'
-      + '    <div style="display:flex;gap:8px;">'
-      + '      <button class="bsa-cb-opt" data-age="18-30" style="flex:1;padding:10px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">18–30</button>'
-      + '      <button class="bsa-cb-opt" data-age="30-45" style="flex:1;padding:10px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">30–45</button>'
-      + '      <button class="bsa-cb-opt" data-age="45+" style="flex:1;padding:10px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;">45+</button>'
+      + '    <div style="display:flex;gap:6px;">'
+      + '      <button class="bsa-cb-opt" data-age="18-30" style="flex:1;min-width:0;padding:8px 4px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:12px;font-weight:500;transition:all 0.2s;box-sizing:border-box;">18–30</button>'
+      + '      <button class="bsa-cb-opt" data-age="30-45" style="flex:1;min-width:0;padding:8px 4px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:12px;font-weight:500;transition:all 0.2s;box-sizing:border-box;">30–45</button>'
+      + '      <button class="bsa-cb-opt" data-age="45+" style="flex:1;min-width:0;padding:8px 4px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;cursor:pointer;font-size:12px;font-weight:500;transition:all 0.2s;box-sizing:border-box;">45+</button>'
       + '    </div>'
       + '  </div>'
-      + '  <button id="bsa-cb-start" style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:15px;font-weight:600;cursor:pointer;opacity:0.4;pointer-events:none;transition:opacity 0.2s;">Let\'s Talk</button>'
-      + '  <div style="text-align:center;margin-top:12px;font-size:11px;color:#999;">No sign-up required. Just a quick chat.</div>'
+      + '  <button id="bsa-cb-start" style="width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:14px;font-weight:600;cursor:pointer;opacity:0.4;pointer-events:none;transition:opacity 0.2s;box-sizing:border-box;">Let\'s Talk</button>'
+      + '  <div style="text-align:center;margin-top:10px;font-size:11px;color:#999;">No sign-up required. Just a quick chat.</div>'
       + '</div>';
 
     // Wire up selection buttons
@@ -236,11 +253,11 @@
       + '  <button id="bsa-cb-reset" style="background:rgba(255,255,255,0.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;">New Chat</button>'
       + '</div>'
       // Messages
-      + '<div id="bsa-cb-messages" style="flex:1;overflow-y:auto;padding:12px;"></div>'
+      + '<div id="bsa-cb-messages" style="flex:1;overflow-y:auto;overflow-x:hidden;padding:10px;"></div>'
       // Input
-      + '<div style="padding:10px 12px;border-top:1px solid #e5e7eb;display:flex;gap:8px;">'
-      + '  <input id="bsa-cb-input" type="text" placeholder="Ask me anything..." style="flex:1;padding:10px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;" />'
-      + '  <button id="bsa-cb-send" style="padding:10px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:14px;font-weight:600;cursor:pointer;">Send</button>'
+      + '<div style="padding:8px 10px;border-top:1px solid #e5e7eb;display:flex;gap:6px;box-sizing:border-box;">'
+      + '  <input id="bsa-cb-input" type="text" placeholder="Ask me anything..." style="flex:1;min-width:0;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" />'
+      + '  <button id="bsa-cb-send" style="padding:10px 14px;border:none;border-radius:10px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">Send</button>'
       + '</div>';
 
     chatBody = document.getElementById('bsa-cb-messages');
