@@ -40,10 +40,10 @@
     fab.title = 'Chat with Glen';
     Object.assign(fab.style, {
       position: 'fixed',
-      bottom: '24px',
-      right: '24px',
-      width: '58px',
-      height: '58px',
+      bottom: '16px',
+      right: '16px',
+      width: '50px',
+      height: '50px',
       borderRadius: '12px',
       // 3D cube: top-lit gold gradient with depth
       background: 'linear-gradient(145deg, #fbbf24 0%, #f59e0b 40%, #d97706 70%, #92400e 100%)',
@@ -103,19 +103,18 @@
   function createPanel() {
     panel = document.createElement('div');
     panel.id = 'bsa-chat-panel';
-    var isMobile = window.innerWidth <= 480;
     Object.assign(panel.style, {
       position: 'fixed',
-      bottom: isMobile ? '0' : '90px',
-      right: isMobile ? '0' : '24px',
-      left: isMobile ? '0' : 'auto',
-      width: isMobile ? '100%' : '340px',
-      maxWidth: '100vw',
-      height: isMobile ? '100%' : '500px',
-      maxHeight: isMobile ? '100vh' : 'calc(100vh - 120px)',
+      bottom: '76px',
+      right: '8px',
+      left: '8px',
+      width: 'auto',
+      maxWidth: '340px',
+      height: '400px',
+      maxHeight: 'calc(100vh - 90px)',
       background: '#fff',
-      borderRadius: isMobile ? '0' : '16px',
-      boxShadow: isMobile ? 'none' : '0 12px 40px rgba(0,0,0,0.2)',
+      borderRadius: '16px',
+      boxShadow: '0 12px 40px rgba(0,0,0,0.2)',
       zIndex: '99998',
       display: 'none',
       flexDirection: 'column',
@@ -123,21 +122,15 @@
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       boxSizing: 'border-box',
     });
+    // On wider screens, pin to right side instead of stretching
+    if (window.innerWidth > 480) {
+      panel.style.left = 'auto';
+      panel.style.right = '16px';
+      panel.style.bottom = '76px';
+      panel.style.height = '480px';
+      panel.style.maxHeight = 'calc(100vh - 100px)';
+    }
     document.body.appendChild(panel);
-
-    // Re-layout on resize
-    window.addEventListener('resize', function () {
-      if (!isOpen) return;
-      var m = window.innerWidth <= 480;
-      panel.style.bottom = m ? '0' : '90px';
-      panel.style.right = m ? '0' : '24px';
-      panel.style.left = m ? '0' : 'auto';
-      panel.style.width = m ? '100%' : '340px';
-      panel.style.height = m ? '100%' : '500px';
-      panel.style.maxHeight = m ? '100vh' : 'calc(100vh - 120px)';
-      panel.style.borderRadius = m ? '0' : '16px';
-      panel.style.boxShadow = m ? 'none' : '0 12px 40px rgba(0,0,0,0.2)';
-    });
   }
 
   function togglePanel() {
