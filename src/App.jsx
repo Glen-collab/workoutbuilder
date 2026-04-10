@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useWorkoutState from './hooks/useWorkoutState';
 import useProgramAPI from './hooks/useProgramAPI';
 import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
+import { applyExerciseDefaults } from './data/exerciseDefaults';
 import WelcomeScreen from './components/screens/WelcomeScreen';
 import ProfileSetup from './components/screens/ProfileSetup';
 import BuilderScreen from './components/builder/BuilderScreen';
@@ -163,10 +164,10 @@ export default function App() {
       };
       workoutState.addExerciseToBlock(exerciseModalBlockId, enrichedExercise);
     } else {
-      workoutState.addExerciseToBlock(exerciseModalBlockId, {
+      workoutState.addExerciseToBlock(exerciseModalBlockId, applyExerciseDefaults({
         ...exercise,
         sets: [],
-      });
+      }));
     }
 
     setShowExerciseModal(false);
