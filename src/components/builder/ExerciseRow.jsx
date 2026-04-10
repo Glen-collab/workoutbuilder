@@ -422,6 +422,7 @@ export default function ExerciseRow({
               placeholder="6.0"
               units={SPEED_UNITS}
             />
+            <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
             <FieldInput label="Incline" value={exercise.incline} onChange={(v) => onUpdate({ incline: v })} placeholder="5%" width="56px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
           </div>
