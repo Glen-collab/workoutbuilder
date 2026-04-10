@@ -134,14 +134,32 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     nonStrengthTitle = 'Conditioning';
   }
 
-  // Search filtering
+  // Search filtering — strength blocks search ALL exercise pools so you can
+  // add mobility, conditioning, or warmup exercises into supersets/trisets
   const searchResults = useMemo(() => {
     if (!searchTerm || searchTerm.length < 2) return null;
     const term = searchTerm.toLowerCase();
     let pool = [];
 
     if (isStrength) {
+      // Search strength exercises + warmup + mobility + conditioning + general movements
       pool = getAllStrengthExercises();
+      // Add warmup/cooldown exercises
+      const wuCat = exerciseCategories['warm_up'];
+      if (wuCat?.subcategories) {
+        Object.values(wuCat.subcategories).forEach((sub) => {
+          const exs = Array.isArray(sub) ? sub : (sub.exercises || []);
+          pool.push(...exs);
+        });
+      }
+      // Add mobility exercises
+      if (mobilityCategories) {
+        pool.push(...getAllExercisesFromCategories(mobilityCategories));
+      }
+      // Add general movements (conditioning, cardio equipment, etc.)
+      if (generalMovements) {
+        pool.push(...getAllExercisesFromCategories(generalMovements));
+      }
     } else if (isWarmupCooldown && warmupCooldownKey) {
       const wuCat = exerciseCategories[warmupCooldownKey];
       if (wuCat?.subcategories) {
@@ -154,7 +172,15 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       pool = getAllExercisesFromCategories(nonStrengthCategories);
     }
 
-    return pool.filter((ex) => ex.name && ex.name.toLowerCase().includes(term));
+    // Deduplicate by name
+    const seen = new Set();
+    pool = pool.filter((ex) => {
+      if (!ex.name || seen.has(ex.name)) return false;
+      seen.add(ex.name);
+      return true;
+    });
+
+    return pool.filter((ex) => ex.name.toLowerCase().includes(term));
   }, [searchTerm, blockType]);
 
   if (!isOpen) return null;
