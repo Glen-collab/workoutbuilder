@@ -1257,7 +1257,9 @@ export const exerciseCategories = {
                     { name: 'Tire Flip + Jump In', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Tire'], contraindications: [], youtube: '' },
                     { name: 'Stair Sprint Intervals', movement: ['Locomotion'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Farmer Carry Medley', movement: ['Carry'], intent: ['Work Capacity'], equipment: ['Implements'], contraindications: [], youtube: '' },
-                    { name: 'Burpee + Box Jump', movement: ['Full Body', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' }
+                    { name: 'Burpee + Box Jump', movement: ['Full Body', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
+                    { name: 'Jog', movement: ['Locomotion'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Slow Sprint/Fast Jog', movement: ['Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' }
                 ]
             },
             corrective: {
