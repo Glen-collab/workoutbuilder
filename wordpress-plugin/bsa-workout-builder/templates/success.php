@@ -1,5 +1,5 @@
 <?php
-$fitness_level = sanitize_text_field($_GET['fitness_level'] ?? 'bodyweight');
+$fitness_level = sanitize_text_field($_GET['level'] ?? $_GET['fitness_level'] ?? 'bodyweight');
 $codes         = BSA_WB_CODES;
 $access_code   = $codes[$fitness_level] ?? '';
 $app_url       = BSA_WB_APP_URL;
@@ -170,5 +170,13 @@ $level_label = $level_labels[$fitness_level] ?? 'Starter';
 <a href="<?php echo esc_url($app_url); ?>" target="_blank" class="bsa-wb-app-btn">
     Open Workout App
 </a>
+
+<div style="text-align:center;margin-top:24px;border-top:1px solid #e5e7eb;padding-top:20px;">
+    <p style="font-size:13px;color:#999;margin:0 0 8px;">Need to manage or cancel your subscription?</p>
+    <form style="display:inline-flex;gap:8px;align-items:center;" onsubmit="window.location.href='<?php echo esc_url(rest_url('bsa-wb/v1/manage')); ?>?email='+encodeURIComponent(this.email.value);return false;">
+        <input name="email" type="email" placeholder="Your email" style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;" required />
+        <button type="submit" style="padding:8px 14px;border:none;border-radius:6px;background:#666;color:#fff;font-size:13px;cursor:pointer;">Manage</button>
+    </form>
+</div>
 
 </div>

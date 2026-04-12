@@ -17,6 +17,58 @@
   document.addEventListener('DOMContentLoaded', function () {
     createFAB();
     createPanel();
+
+    // Auto-open on workout builder page after a short delay
+    var isBuilderPage = window.location.pathname.indexOf('workout-builder') !== -1;
+    if (isBuilderPage) {
+      setTimeout(function () {
+        // Show a tooltip bubble above the FAB
+        var tooltip = document.createElement('div');
+        tooltip.id = 'bsa-chat-tooltip';
+        Object.assign(tooltip.style, {
+          position: 'fixed',
+          bottom: '76px',
+          right: '16px',
+          background: '#1a1a2e',
+          color: '#fff',
+          padding: '12px 16px',
+          borderRadius: '12px',
+          fontSize: '14px',
+          fontWeight: '500',
+          maxWidth: '240px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+          zIndex: '99997',
+          lineHeight: '1.4',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        });
+        tooltip.innerHTML = 'Have questions about training? <strong>Tap here</strong> to chat with your coach!';
+        // Arrow pointing down
+        var arrow = document.createElement('div');
+        Object.assign(arrow.style, {
+          position: 'absolute',
+          bottom: '-8px',
+          right: '24px',
+          width: '0',
+          height: '0',
+          borderLeft: '8px solid transparent',
+          borderRight: '8px solid transparent',
+          borderTop: '8px solid #1a1a2e',
+        });
+        tooltip.appendChild(arrow);
+        document.body.appendChild(tooltip);
+
+        // Dismiss tooltip on click anywhere or after 8 seconds
+        var dismissTooltip = function () {
+          if (tooltip.parentNode) tooltip.parentNode.removeChild(tooltip);
+        };
+        tooltip.addEventListener('click', function () {
+          dismissTooltip();
+          togglePanel();
+        });
+        fab.addEventListener('click', dismissTooltip, { once: true });
+        setTimeout(dismissTooltip, 8000);
+      }, 2000);
+    }
   });
 
   // ── Floating Action Button (3D Mario ? Block with glow) ──

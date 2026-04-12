@@ -263,7 +263,12 @@
         Custom-built workout programs designed for your goals, your equipment, and your schedule.
         Guided by exercise videos and progressive programming that adapts as you get stronger.
     </p>
-    <div class="bsa-wb-price-badge">$20 <span>/month</span></div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+        <div class="bsa-wb-price-badge">$20 <span>/mo Basic</span></div>
+        <div class="bsa-wb-price-badge" style="background:linear-gradient(135deg,#667eea,#764ba2);">$200 <span>/mo Coached</span></div>
+        <div class="bsa-wb-price-badge" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">$400 <span>/mo Elite</span></div>
+    </div>
+    <p style="font-size:13px;color:#8a7550;margin-top:12px;">Start with a free 2-week trial. No payment required.</p>
 </div>
 
 <!-- Features -->
@@ -315,11 +320,13 @@
 
     <div class="bsa-wb-field">
         <label for="bsa-wb-email">Your Email</label>
+        <p style="font-size:11px;color:#8a7550;margin:0 0 6px;line-height:1.3;">We'll send your access code and program updates here. No spam, ever.</p>
         <input type="email" id="bsa-wb-email" placeholder="you@example.com" required />
     </div>
 
     <div class="bsa-wb-field">
         <label>Choose Your Starting Level</label>
+        <p style="font-size:11px;color:#8a7550;margin:0 0 8px;line-height:1.3;">Not sure? Pick the one closest to your situation. Your trainer will adjust from there.</p>
         <div class="bsa-wb-levels">
             <label class="bsa-wb-level selected" data-level="bodyweight">
                 <input type="radio" name="fitness_level" value="bodyweight" checked />
@@ -342,12 +349,36 @@
         </div>
     </div>
 
-    <button class="bsa-wb-submit" id="bsa-wb-submit">
-        Subscribe — $20/month
+    <button class="bsa-wb-submit" id="bsa-wb-trial" style="background:linear-gradient(135deg,#16a34a,#15803d);">
+        Start Free 2-Week Trial
     </button>
 
+    <div style="display:flex;align-items:center;gap:12px;margin:16px 0;">
+        <div style="flex:1;height:1px;background:#d4c4a0;"></div>
+        <span style="font-size:12px;color:#8a7550;font-weight:600;">OR SUBSCRIBE NOW</span>
+        <div style="flex:1;height:1px;background:#d4c4a0;"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;">
+        <button class="bsa-wb-submit" id="bsa-wb-submit" data-tier="basic">
+            Basic — $20/month
+        </button>
+        <button class="bsa-wb-submit" id="bsa-wb-coached" data-tier="coached" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+            Coached — $200/month
+        </button>
+        <button class="bsa-wb-submit" id="bsa-wb-elite" data-tier="elite" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+            Elite — $400/month
+        </button>
+    </div>
+
+    <div style="margin-top:12px;font-size:11px;color:#8a7550;line-height:1.5;">
+        <strong>Basic:</strong> Workout programs + video library<br>
+        <strong>Coached:</strong> Everything in Basic + dedicated personal coach + custom programs<br>
+        <strong>Elite:</strong> Everything in Coached + 1-on-1 programming + unlimited video reviews
+    </div>
+
     <p class="bsa-wb-fine-print">
-        Cancel anytime. After subscribing you'll receive your starter program access code immediately.
+        Try free for 2 weeks with a starter program. Subscribe anytime for a fully personalized plan.
     </p>
 </div>
 </div>
