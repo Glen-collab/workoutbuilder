@@ -11,6 +11,8 @@ export default function WeekDaySelector({
   onCopyAllWeeks,
   onInsertWeek,
   onAddWeeks,
+  onAddDay,
+  onRemoveDay,
 }) {
   const [copyMenuOpen, setCopyMenuOpen] = useState(false);
   const [insertMenuOpen, setInsertMenuOpen] = useState(false);
@@ -140,7 +142,7 @@ export default function WeekDaySelector({
         )}
       </div>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap items-center">
         {Array.from({ length: daysPerWeek }, (_, i) => (
           <button
             key={i + 1}
@@ -154,6 +156,20 @@ export default function WeekDaySelector({
             Day {i + 1}
           </button>
         ))}
+        {onAddDay && (
+          <button
+            className="w-[34px] h-[34px] text-[18px] font-bold rounded-lg cursor-pointer bg-green-500 text-white border-none hover:bg-green-600 transition-colors flex items-center justify-center"
+            onClick={onAddDay}
+            title="Add a day"
+          >+</button>
+        )}
+        {onRemoveDay && (
+          <button
+            className="w-[34px] h-[34px] text-[18px] font-bold rounded-lg cursor-pointer bg-red-400 text-white border-none hover:bg-red-500 transition-colors flex items-center justify-center"
+            onClick={onRemoveDay}
+            title="Remove last day"
+          >&minus;</button>
+        )}
       </div>
     </div>
   );

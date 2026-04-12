@@ -31,6 +31,7 @@ export default function BuilderScreen({
     copyAllWeeks,
     insertWeek,
     addWeeks,
+    setDaysPerWeek,
     addBlock,
     deleteBlock,
     toggleCollapse,
@@ -120,6 +121,8 @@ export default function BuilderScreen({
         onCopyAllWeeks={copyAllWeeks}
         onInsertWeek={insertWeek}
         onAddWeeks={addWeeks}
+        onAddDay={() => setDaysPerWeek(daysPerWeek + 1)}
+        onRemoveDay={daysPerWeek > 1 ? () => { if (confirm(`Remove Day ${daysPerWeek}? Any workouts on that day will be hidden.`)) setDaysPerWeek(daysPerWeek - 1); } : null}
       />
 
       <BlockList

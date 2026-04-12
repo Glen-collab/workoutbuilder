@@ -401,6 +401,7 @@ export default function App() {
     copyAllWeeks: workoutState.copyWeekToAll,
     insertWeek: workoutState.insertWeekAt,
     addWeeks: workoutState.addWeeksToEnd,
+    setDaysPerWeek: workoutState.setDaysPerWeek,
     addBlock: handleAddBlock,
     deleteBlock: workoutState.removeBlock,
     toggleCollapse: (blockId) =>
