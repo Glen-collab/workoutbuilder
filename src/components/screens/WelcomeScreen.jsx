@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts }) {
+export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts, builderUser, onLogout }) {
   // Wake up the backend while the user browses (cold-start mitigation)
   useEffect(() => {
     fetch('/api/load-program.php', { method: 'POST', body: '{}' }).catch(() => {});
@@ -9,6 +9,12 @@ export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManage
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-5 py-10">
       <div className="bg-white rounded-2xl shadow-lg px-8 py-12 max-w-md w-full text-center">
+        {builderUser && (
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-sm text-gray-500">{builderUser.first_name} ({builderUser.role})</span>
+            {onLogout && <button onClick={onLogout} className="text-sm text-gray-400 hover:text-gray-600 cursor-pointer bg-transparent border-none">Logout</button>}
+          </div>
+        )}
         <h1 className="text-3xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-3">
           Workout Program Builder
         </h1>

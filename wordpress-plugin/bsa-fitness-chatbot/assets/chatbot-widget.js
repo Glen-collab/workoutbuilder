@@ -6,7 +6,7 @@
   var messages = [];
   var gender = '';
   var ageRange = '';
-  var phase = 'intro'; // intro | chat
+  var phase = 'intro'; // intro | chat | contact
   var loading = false;
   var activeVideo = null;
 
@@ -198,6 +198,8 @@
   function render() {
     if (phase === 'intro') {
       renderIntro();
+    } else if (phase === 'contact') {
+      renderContact();
     } else {
       renderChat();
     }
@@ -292,6 +294,10 @@
       + '</div>'
       // Messages
       + '<div id="bsa-cb-messages" style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:10px;"></div>'
+      // Talk to Glen button
+      + '<div style="padding:4px 10px 0;flex-shrink:0;">'
+      + '  <button id="bsa-cb-contact" style="width:100%;padding:8px;border:1px solid #B37602;border-radius:8px;background:transparent;color:#B37602;font-size:12px;font-weight:600;cursor:pointer;">Want to talk to Glen directly?</button>'
+      + '</div>'
       // Input
       + '<div style="padding:8px 10px;border-top:1px solid #e5e7eb;display:flex;gap:6px;box-sizing:border-box;flex-shrink:0;">'
       + '  <input id="bsa-cb-input" type="text" placeholder="Ask me anything..." style="flex:1;min-width:0;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" />'
@@ -310,6 +316,10 @@
         e.preventDefault();
         sendMessage();
       }
+    });
+    document.getElementById('bsa-cb-contact').addEventListener('click', function () {
+      phase = 'contact';
+      render();
     });
     document.getElementById('bsa-cb-reset').addEventListener('click', function () {
       messages = [];
@@ -483,4 +493,88 @@
         renderMessages();
       });
   }
+
+  // ── Contact Form ──
+  function renderContact() {
+    // Build a summary of the conversation
+    var convoSummary = messages.map(function (m) {
+      return (m.isBot ? 'Glen: ' : 'User: ') + m.text;
+    }).join('\n');
+
+    panel.innerHTML = ''
+      + '<div style="background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;padding:16px;text-align:center;flex-shrink:0;">'
+      + '  <div style="font-size:20px;margin-bottom:4px;">&#9993;</div>'
+      + '  <div style="font-size:16px;font-weight:700;">Talk to Glen Directly</div>'
+      + '  <div style="font-size:12px;opacity:0.85;">Leave your info and I\'ll get back to you personally.</div>'
+      + '</div>'
+      + '<div style="padding:16px;flex:1;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;">'
+      + '  <div id="bsa-cb-contact-form">'
+      + '    <label style="display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:4px;">Name</label>'
+      + '    <input id="bsa-cb-contact-name" type="text" placeholder="Your name" style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;margin-bottom:12px;outline:none;box-sizing:border-box;font-family:inherit;" />'
+      + '    <label style="display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:4px;">Email</label>'
+      + '    <input id="bsa-cb-contact-email" type="email" placeholder="your@email.com" style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;margin-bottom:12px;outline:none;box-sizing:border-box;font-family:inherit;" />'
+      + '    <label style="display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:4px;">What can I help with?</label>'
+      + '    <textarea id="bsa-cb-contact-msg" placeholder="Tell me a bit about your goals or questions..." style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;margin-bottom:12px;outline:none;box-sizing:border-box;font-family:inherit;min-height:80px;resize:vertical;"></textarea>'
+      + '    <div id="bsa-cb-contact-error" style="display:none;background:#fdecea;color:#b71c1c;padding:8px 12px;border-radius:8px;font-size:13px;margin-bottom:10px;text-align:center;"></div>'
+      + '    <button id="bsa-cb-contact-send" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#B37602,#8a5b00);color:#fff;font-size:15px;font-weight:600;cursor:pointer;">Send to Glen</button>'
+      + '  </div>'
+      + '  <div id="bsa-cb-contact-success" style="display:none;text-align:center;padding:24px 0;">'
+      + '    <div style="font-size:40px;margin-bottom:8px;">&#10003;</div>'
+      + '    <div style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:8px;">Message Sent!</div>'
+      + '    <div style="font-size:14px;color:#666;">Glen will get back to you personally. Usually within 24 hours.</div>'
+      + '  </div>'
+      + '</div>'
+      + '<div style="padding:8px 10px;flex-shrink:0;">'
+      + '  <button id="bsa-cb-back-to-chat" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#888;font-size:12px;cursor:pointer;">Back to chat</button>'
+      + '</div>';
+
+    document.getElementById('bsa-cb-back-to-chat').addEventListener('click', function () {
+      phase = 'chat';
+      render();
+    });
+
+    document.getElementById('bsa-cb-contact-send').addEventListener('click', function () {
+      var name = document.getElementById('bsa-cb-contact-name').value.trim();
+      var email = document.getElementById('bsa-cb-contact-email').value.trim();
+      var msg = document.getElementById('bsa-cb-contact-msg').value.trim();
+      var errEl = document.getElementById('bsa-cb-contact-error');
+
+      if (!name || !email || email.indexOf('@') === -1) {
+        errEl.textContent = 'Please enter your name and a valid email.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      var btn = document.getElementById('bsa-cb-contact-send');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      errEl.style.display = 'none';
+
+      // Send via the WordPress REST API
+      fetch(bsaChatbot.apiUrl.replace('/chat', '/contact'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': bsaChatbot.nonce },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: msg,
+          gender: gender,
+          age_range: ageRange,
+          conversation: convoSummary,
+        }),
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          document.getElementById('bsa-cb-contact-form').style.display = 'none';
+          document.getElementById('bsa-cb-contact-success').style.display = 'block';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send to Glen';
+          errEl.textContent = 'Something went wrong. Try again.';
+          errEl.style.display = 'block';
+        });
+    });
+  }
 })();
+

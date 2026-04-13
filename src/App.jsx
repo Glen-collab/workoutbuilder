@@ -3,6 +3,7 @@ import useWorkoutState from './hooks/useWorkoutState';
 import useProgramAPI from './hooks/useProgramAPI';
 import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
 import { applyExerciseDefaults } from './data/exerciseDefaults';
+import { BuilderAuthProvider, useBuilderAuth, BuilderLoginScreen } from './components/auth/BuilderAuth';
 import WelcomeScreen from './components/screens/WelcomeScreen';
 import ProfileSetup from './components/screens/ProfileSetup';
 import BuilderScreen from './components/builder/BuilderScreen';
@@ -17,6 +18,27 @@ import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
 import ProgressionView from './components/builder/ProgressionView';
 
 export default function App() {
+  return (
+    <BuilderAuthProvider>
+      <AuthGate />
+    </BuilderAuthProvider>
+  );
+}
+
+function AuthGate() {
+  const { user, loading, login, logout } = useBuilderAuth();
+
+  // Allow override mode without login (trainer dashboard opens builder in override mode)
+  const params = new URLSearchParams(window.location.search);
+  const isOverrideMode = params.get('mode') === 'override';
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '60px', color: '#666' }}>Loading...</div>;
+  if (!user && !isOverrideMode) return <BuilderLoginScreen onLogin={login} />;
+
+  return <BuilderApp builderUser={user} onLogout={logout} />;
+}
+
+function BuilderApp({ builderUser, onLogout }) {
   const workoutState = useWorkoutState();
   const programAPI = useProgramAPI();
 
@@ -429,7 +451,7 @@ export default function App() {
   return (
     <>
       {screen === 'welcome' && (
-        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} />
+        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} builderUser={builderUser} onLogout={onLogout} />
       )}
 
       {screen === 'profile' && (
@@ -525,6 +547,7 @@ export default function App() {
         onClose={() => setShowSaveModal(false)}
         onSave={handleSave}
         loadedProgram={workoutState.loadedProgram}
+        builderUser={builderUser}
         loading={programAPI.loading}
       />
 
@@ -533,6 +556,7 @@ export default function App() {
         onClose={() => setShowManageModal(false)}
         onLoadProgram={handleLoadProgram}
         apiHook={programAPI}
+        builderUser={builderUser}
       />
 
       <TravelSaveModal

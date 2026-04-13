@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Modal from '../shared/Modal';
 
-export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook }) {
-  const [email, setEmail] = useState('wisco.barbell@gmail.com');
+export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook, builderUser }) {
+  const [email, setEmail] = useState(builderUser?.email || 'wisco.barbell@gmail.com');
   const [programs, setPrograms] = useState([]);
   const [searched, setSearched] = useState(false);
 

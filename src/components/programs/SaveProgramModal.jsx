@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Modal from '../shared/Modal';
 
-export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgram, loading }) {
+export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgram, loading, builderUser }) {
   const [programName, setProgramName] = useState('');
   const [programNickname, setProgramNickname] = useState('');
-  const [trainerEmail, setTrainerEmail] = useState('wisco.barbell@gmail.com');
+  const [trainerEmail, setTrainerEmail] = useState(builderUser?.email || 'wisco.barbell@gmail.com');
   const [optionalTrainerEmail, setOptionalTrainerEmail] = useState('');
   const [regenerateCode, setRegenerateCode] = useState(false);
 
