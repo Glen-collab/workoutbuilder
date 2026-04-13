@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Modal from '../shared/Modal';
 
 export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook, builderUser }) {
   const [email, setEmail] = useState(builderUser?.email || 'wisco.barbell@gmail.com');
   const [programs, setPrograms] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [sortBy, setSortBy] = useState('recent');
 
   const { listPrograms, loading, error } = apiHook;
 
@@ -20,13 +21,28 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
     }
   };
 
+  // Auto-search on open if user is logged in
+  useEffect(() => {
+    if (isOpen && builderUser?.email && !searched) {
+      handleSearch();
+    }
+  }, [isOpen]);
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleSearch();
   };
 
+  const sortedPrograms = useMemo(() => {
+    const sorted = [...programs];
+    if (sortBy === 'name') sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    else if (sortBy === 'oldest') sorted.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+    else sorted.sort((a, b) => new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0));
+    return sorted;
+  }, [programs, sortBy]);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Manage Programs" maxWidth="560px">
-      <div className="flex gap-2.5 mb-5">
+      <div className="flex gap-2.5 mb-3">
         <input
           className="flex-1 px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none focus:border-[#667eea] transition-colors"
           type="email"
@@ -43,6 +59,24 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
           {loading ? 'Searching...' : 'Search'}
         </button>
       </div>
+      {programs.length > 0 && (
+        <div className="flex gap-2 mb-4">
+          {['recent', 'name', 'oldest'].map((s) => (
+            <button
+              key={s}
+              onClick={() => setSortBy(s)}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors ${
+                sortBy === s
+                  ? 'bg-[#667eea] text-white border-[#667eea]'
+                  : 'bg-transparent text-gray-400 border-white/10 hover:border-[#667eea]'
+              }`}
+            >
+              {s === 'recent' ? 'Recent' : s === 'name' ? 'A-Z' : 'Oldest'}
+            </button>
+          ))}
+          <span className="text-xs text-gray-500 self-center ml-auto">{programs.length} programs</span>
+        </div>
+      )}
 
       {error && <div className="px-4 py-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-300 text-[13px] mb-4">{error}</div>}
 
@@ -52,9 +86,9 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
         <div className="text-center text-gray-500 py-8 text-sm">No programs found for this email.</div>
       )}
 
-      {!loading && programs.length > 0 && (
+      {!loading && sortedPrograms.length > 0 && (
         <div className="flex flex-col gap-2.5">
-          {programs.map((program) => (
+          {sortedPrograms.map((program) => (
             <div key={program.id || program.accessCode} className="flex items-center justify-between py-3.5 px-4 rounded-[10px] bg-white/[0.04] border border-white/[0.08]">
               <div className="flex-1">
                 <div className="text-[15px] font-bold text-gray-200 mb-1">{program.name}</div>
