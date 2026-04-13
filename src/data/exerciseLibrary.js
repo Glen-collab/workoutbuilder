@@ -133,7 +133,9 @@ export const exerciseCategories = {
                     { name: 'Cable Fly Low to High', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b68cbcb54c5a560a40e92da69201a747' },
                     { name: 'Cable Chest Fly Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6e30bcb8edf3e6e1d1bd9ebe795fa3ed' },
                     { name: 'Split Stance Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/38b867dd7800f4aee0573dbf852e648b' },
-                    { name: 'Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/90e6fd39abd4255a4781cf7dea9e37b0' }
+                    { name: 'Cable Chest Press Mid', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/90e6fd39abd4255a4781cf7dea9e37b0' },
+                    { name: 'Incline Smith Machine Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Smith Machine'], contraindications: ['Upper Body Load Limited'], youtube: '' },
+                    { name: 'Pec Dec', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '' }
                 ]
             },
             corrective: {
@@ -267,7 +269,8 @@ export const exerciseCategories = {
                     { name: 'Straight Bar Squat Row', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/98743695a0eb62b0325f6c64027b4822' },
                     { name: 'Seated Face Pulls (Rope)', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0dae6fd800b9813a70cf3fe7e51ab555' },
                     { name: 'Squat Position Face Pull', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/93e27c56feb8090d192baa6adfea0d0d' },
-                    { name: 'Vogopohl Pulldown V Bar', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ed63eac35aa2d4a35aac966d3d2ab992' }
+                    { name: 'Vogopohl Pulldown V Bar', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ed63eac35aa2d4a35aac966d3d2ab992' },
+                    { name: 'Lat Pulldown', movement: ['Pull'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '' }
                 ]
             },
             corrective: {
@@ -418,7 +421,8 @@ export const exerciseCategories = {
                     { name: 'Cable Y Lateral Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/efc78cfafd089f9bcfa5ba0cec57cdc3' },
                     { name: 'Lateral Cable Raise', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/445b0622e2065da87b04d897c57c4f09', geriatric_priority: true },
                     { name: 'Cable Standing Shoulder Press (Inside Grip)', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Cable'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/fc85afbdc81c0d06ca626544c939a74e' },
-                    { name: 'Rope External Rotator', movement: ['Stability'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5bac72738eda7850b94488ad4f929413' }
+                    { name: 'Rope External Rotator', movement: ['Stability'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5bac72738eda7850b94488ad4f929413' },
+                    { name: 'Shoulder Press Machine', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: ['No Overhead Loading'], youtube: '' }
                 ]
             },
             corrective: {
@@ -571,7 +575,8 @@ export const exerciseCategories = {
                     { name: 'Stability Ball Preacher Broken Wrist Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5c58071e73932d9a8ef3dc5435348fd2' },
                     { name: 'Stability Ball Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a64d26ec7c9c82e872fe2bb714a7ceac' },
                     { name: 'Stability Ball Single Arm Hammer Curl', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball', 'Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/15c5622fb69d081962823f99aced0b97' },
-                    { name: 'TRX Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c0ee18e9b0b781e49802eae48126f54c' }
+                    { name: 'TRX Curls', movement: ['Pull'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c0ee18e9b0b781e49802eae48126f54c' },
+                    { name: 'Cable Forearm Curls', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: '' }
                 ]
             }
         }
