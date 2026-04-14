@@ -239,6 +239,16 @@ export default function ExerciseRow({
                   placeholder="30"
                   units={DURATION_UNITS}
                 />
+                <FieldWithUnit
+                  label="Distance"
+                  value={exercise.distance}
+                  unit={exercise.distanceUnit}
+                  onChangeValue={(v) => onUpdate({ distance: v })}
+                  onChangeUnit={(v) => onUpdate({ distanceUnit: v })}
+                  placeholder="40"
+                  units={DISTANCE_UNITS}
+                />
+                <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
               </div>
 
