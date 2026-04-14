@@ -1,0 +1,4 @@
+  File "<stdin>", line 3
+    conn = psycopg2.connect(postgresql://bsa_admin:Wibar33be!!@bestrongagain.cdqaq4sg2r1g.us-east-2.rds.amazonaws.com:5432/bestrongagain)
+                                                                                                   ^
+SyntaxError: invalid decimal literal
