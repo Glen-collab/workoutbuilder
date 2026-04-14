@@ -143,6 +143,7 @@ export default function ExerciseRow({
   exerciseIndex,
   blockType,
   onRemove,
+  onReplace,
   onUpdate,
   onUpdateSet,
   onAddSet,
@@ -187,7 +188,10 @@ export default function ExerciseRow({
             </button>
           )}
         </div>
-        <button onClick={onRemove} className="bg-red-100 text-red-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Remove</button>
+        <div className="flex gap-1.5">
+          <button onClick={onReplace} className="bg-blue-100 text-blue-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Replace</button>
+          <button onClick={onRemove} className="bg-red-100 text-red-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Remove</button>
+        </div>
       </div>
 
       {/* Inline Cloudflare Stream video player */}

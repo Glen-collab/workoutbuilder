@@ -39,6 +39,7 @@ export default function BuilderScreen({
     insertBelow,
     updateBlock,
     addExercise,
+    replaceExercise,
     removeExercise,
     updateExercise,
     updateSet,
@@ -134,6 +135,7 @@ export default function BuilderScreen({
         onInsertBelow={insertBelow}
         onUpdateBlock={updateBlock}
         onAddExercise={addExercise}
+        onReplaceExercise={replaceExercise}
         onRemoveExercise={removeExercise}
         onUpdateExercise={updateExercise}
         onUpdateSet={updateSet}

@@ -41,6 +41,7 @@ export default function BlockCard({
   onUpdateBlock,
   onAddExercise,
   onRemoveExercise,
+  onReplaceExercise,
   onUpdateExercise,
   onUpdateSet,
   onAddSet,
@@ -197,6 +198,7 @@ export default function BlockCard({
               exerciseIndex={idx}
               blockType={block.type}
               onRemove={() => onRemoveExercise(block.id, idx)}
+              onReplace={() => onReplaceExercise(block.id, idx, block.type)}
               onUpdate={(updates) => onUpdateExercise(block.id, idx, updates)}
               onUpdateSet={(setId, updates) => onUpdateSet(block.id, idx, setId, updates)}
               onAddSet={() => onAddSet(block.id, idx)}

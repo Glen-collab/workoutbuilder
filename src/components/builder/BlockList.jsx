@@ -9,6 +9,7 @@ export default function BlockList({
   onInsertBelow,
   onUpdateBlock,
   onAddExercise,
+  onReplaceExercise,
   onRemoveExercise,
   onUpdateExercise,
   onUpdateSet,
@@ -47,6 +48,7 @@ export default function BlockList({
           onInsertBelow={onInsertBelow}
           onUpdateBlock={onUpdateBlock}
           onAddExercise={onAddExercise}
+          onReplaceExercise={onReplaceExercise}
           onRemoveExercise={onRemoveExercise}
           onUpdateExercise={onUpdateExercise}
           onUpdateSet={onUpdateSet}

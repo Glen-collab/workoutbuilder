@@ -56,6 +56,7 @@ function BuilderApp({ builderUser, onLogout }) {
   const [showExerciseModal, setShowExerciseModal] = useState(false);
   const [exerciseModalBlockId, setExerciseModalBlockId] = useState(null);
   const [exerciseModalBlockType, setExerciseModalBlockType] = useState(null);
+  const [replaceExerciseIndex, setReplaceExerciseIndex] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [savedAccessCode, setSavedAccessCode] = useState(null);
   const [showManageModal, setShowManageModal] = useState(false);
@@ -166,15 +167,24 @@ function BuilderApp({ builderUser, onLogout }) {
   const handleOpenExerciseModal = (blockId, blockType) => {
     setExerciseModalBlockId(blockId);
     setExerciseModalBlockType(blockType);
+    setReplaceExerciseIndex(null);
+    setShowExerciseModal(true);
+  };
+
+  const handleReplaceExercise = (blockId, exerciseIndex, blockType) => {
+    setExerciseModalBlockId(blockId);
+    setExerciseModalBlockType(blockType);
+    setReplaceExerciseIndex(exerciseIndex);
     setShowExerciseModal(true);
   };
 
   const handleSelectExercise = (exercise) => {
     if (!exerciseModalBlockId) return;
 
+    let newExercise;
     if (isStrengthBlock(exerciseModalBlockType)) {
       const now = Date.now();
-      const enrichedExercise = {
+      newExercise = {
         ...exercise,
         baseMax: suggestBaseMax(exercise.name),
         isPercentageBased: true,
@@ -184,17 +194,22 @@ function BuilderApp({ builderUser, onLogout }) {
           { id: now + 2, reps: 10, percentage: 70, isWarmup: false, manualWeight: null },
         ],
       };
-      workoutState.addExerciseToBlock(exerciseModalBlockId, enrichedExercise);
     } else {
-      workoutState.addExerciseToBlock(exerciseModalBlockId, applyExerciseDefaults({
-        ...exercise,
-        sets: [],
-      }));
+      newExercise = applyExerciseDefaults({ ...exercise, sets: [] });
+    }
+
+    if (replaceExerciseIndex !== null) {
+      // Replace: keep the position, swap the exercise
+      workoutState.updateExerciseInBlock(exerciseModalBlockId, replaceExerciseIndex, newExercise);
+    } else {
+      // Add: append to end
+      workoutState.addExerciseToBlock(exerciseModalBlockId, newExercise);
     }
 
     setShowExerciseModal(false);
     setExerciseModalBlockId(null);
     setExerciseModalBlockType(null);
+    setReplaceExerciseIndex(null);
   };
 
   // ── Save Program ──
@@ -440,6 +455,7 @@ function BuilderApp({ builderUser, onLogout }) {
     },
     updateBlock: workoutState.updateBlock,
     addExercise: handleOpenExerciseModal,
+    replaceExercise: handleReplaceExercise,
     removeExercise: workoutState.removeExerciseFromBlock,
     updateExercise: workoutState.updateExerciseInBlock,
     updateSet: workoutState.updateExerciseSet,
