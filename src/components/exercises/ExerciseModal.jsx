@@ -2,10 +2,23 @@ import { useState, useMemo } from 'react';
 import { exerciseCategories } from '../../data/exerciseLibrary';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
+import { martialArtsCategories } from '../../data/martialArtsLibrary';
 import MuscleGroupGrid from './MuscleGroupGrid';
 import SubcategoryTabs from './SubcategoryTabs';
 import ExerciseList from './ExerciseList';
 import MovementCategoryList from './MovementCategoryList';
+
+// Martial arts category grid items
+const maGroups = [
+  { key: 'kicks', emoji: '🥋', label: 'Kicks' },
+  { key: 'handTechniques', emoji: '👊', label: 'Hand Techniques' },
+  { key: 'blocks', emoji: '🛡️', label: 'Blocks' },
+  { key: 'stances', emoji: '🧍', label: 'Stances' },
+  { key: 'sparring', emoji: '⚔️', label: 'Sparring' },
+  { key: 'conditioning', emoji: '🔥', label: 'MA Conditioning' },
+  { key: 'oneStep', emoji: '🎯', label: 'One-Step Sparring' },
+  { key: 'breaking', emoji: '🪵', label: 'Board Breaking' },
+];
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
 const warmupCooldownTypes = ['warmup', 'cooldown'];
@@ -86,6 +99,9 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('strength'); // 'strength' | 'martialArts'
+  const [maCategory, setMaCategory] = useState(null); // selected MA category key
+  const [maSubcategory, setMaSubcategory] = useState(null); // selected MA subcategory key
 
   const isStrength = strengthTypes.includes(blockType);
   const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
@@ -105,6 +121,9 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     setSelectedSubcategory(null);
     setSelectedCategory(null);
     setSearchTerm('');
+    setActiveTab('strength');
+    setMaCategory(null);
+    setMaSubcategory(null);
     onClose();
   };
 
@@ -142,7 +161,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     let pool = [];
 
     if (isStrength) {
-      // Search strength exercises + warmup + mobility + conditioning + general movements
+      // Search strength exercises + warmup + mobility + conditioning + general movements + martial arts
       pool = getAllStrengthExercises();
       // Add warmup/cooldown exercises
       const wuCat = exerciseCategories['warm_up'];
@@ -159,6 +178,10 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       // Add general movements (conditioning, cardio equipment, etc.)
       if (generalMovements) {
         pool.push(...getAllExercisesFromCategories(generalMovements));
+      }
+      // Add martial arts exercises
+      if (martialArtsCategories) {
+        pool.push(...getAllExercisesFromCategories(martialArtsCategories));
       }
     } else if (isWarmupCooldown && warmupCooldownKey) {
       const wuCat = exerciseCategories[warmupCooldownKey];
@@ -223,6 +246,65 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
+    // Martial Arts tab
+    if (activeTab === 'martialArts') {
+      // Showing exercises in a subcategory
+      if (maCategory && maSubcategory) {
+        const cat = martialArtsCategories[maCategory];
+        const sub = cat?.subcategories?.[maSubcategory];
+        const exercises = sub?.exercises || [];
+        const title = sub?.label || maSubcategory.replace(/_/g, ' ');
+        return (
+          <ExerciseList
+            exercises={exercises}
+            onSelect={handleSelect}
+            onBack={() => setMaSubcategory(null)}
+            title={title}
+          />
+        );
+      }
+      // Showing subcategories within a category
+      if (maCategory) {
+        const cat = martialArtsCategories[maCategory];
+        const subcats = cat?.subcategories || {};
+        return (
+          <div className="p-4">
+            <div className="flex items-center gap-3 mb-4">
+              <button className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition" onClick={() => setMaCategory(null)}>←</button>
+              <h3 className="text-lg font-bold text-gray-700 m-0">{cat?.label || maCategory}</h3>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              {Object.entries(subcats).map(([key, sub]) => (
+                <button
+                  key={key}
+                  className="py-3 px-5 bg-white border-2 border-gray-200 rounded-[10px] cursor-pointer text-sm font-semibold text-gray-600 shadow-sm transition-all duration-150 hover:border-[#667eea] hover:text-[#667eea] hover:shadow-md"
+                  onClick={() => setMaSubcategory(key)}
+                >
+                  {sub.label || key.replace(/_/g, ' ')}
+                  <span className="ml-2 text-xs text-gray-400">({(sub.exercises || []).length})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+      // Showing MA category grid
+      return (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4">
+          {maGroups.map((mg) => (
+            <button
+              key={mg.key}
+              className="flex flex-col items-center justify-center py-5 px-3 bg-white border-none rounded-xl shadow-sm cursor-pointer transition-all duration-150 min-h-[90px] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#667eea]/30"
+              onClick={() => setMaCategory(mg.key)}
+            >
+              <span className="text-[28px] mb-2">{mg.emoji}</span>
+              <span className="text-sm font-semibold text-gray-700">{mg.label}</span>
+            </button>
+          ))}
+        </div>
+      );
+    }
+
     if (!isStrength) {
       if (selectedCategory && nonStrengthCategories && nonStrengthCategories[selectedCategory]) {
         const cat = nonStrengthCategories[selectedCategory];
@@ -280,11 +362,30 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
           <h3 className="text-white text-lg font-bold m-0">Select Exercise</h3>
           <button className="bg-white/20 border-none text-white text-lg w-[34px] h-[34px] rounded-full cursor-pointer flex items-center justify-center hover:bg-white/30 transition" onClick={handleClose}>✕</button>
         </div>
+        {/* Tab switcher — Strength | Martial Arts */}
+        {isStrength && (
+          <div className="flex bg-gray-100 border-b border-gray-200">
+            <button
+              className={`flex-1 py-2.5 text-sm font-bold border-none cursor-pointer transition-colors ${activeTab === 'strength' ? 'bg-white text-[#667eea] border-b-2 border-[#667eea]' : 'bg-transparent text-gray-500 hover:text-gray-700'}`}
+              style={activeTab === 'strength' ? { borderBottom: '3px solid #667eea' } : {}}
+              onClick={() => { setActiveTab('strength'); setMaCategory(null); setMaSubcategory(null); }}
+            >
+              💪 Strength
+            </button>
+            <button
+              className={`flex-1 py-2.5 text-sm font-bold border-none cursor-pointer transition-colors ${activeTab === 'martialArts' ? 'bg-white text-[#667eea]' : 'bg-transparent text-gray-500 hover:text-gray-700'}`}
+              style={activeTab === 'martialArts' ? { borderBottom: '3px solid #667eea' } : {}}
+              onClick={() => { setActiveTab('martialArts'); setSelectedMuscleGroup(null); setSelectedSubcategory(null); }}
+            >
+              🥋 Martial Arts
+            </button>
+          </div>
+        )}
         <div className="px-4 py-3 bg-white border-b border-gray-200">
           <input
             className="w-full px-3.5 py-2.5 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-[#667eea] transition-colors"
             type="text"
-            placeholder="Search exercises..."
+            placeholder={activeTab === 'martialArts' ? 'Search kicks, combos, techniques...' : 'Search exercises...'}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
