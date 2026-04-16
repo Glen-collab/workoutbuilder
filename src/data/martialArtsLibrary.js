@@ -467,6 +467,61 @@ export const martialArtsCategories = {
       },
     },
   },
+
+  // ═══════════════════════════════════════════
+  // STRETCHING & YOGA POSES
+  // ═══════════════════════════════════════════
+  stretching: {
+    label: 'Stretching & Yoga',
+    subcategories: {
+      standingPoses1: {
+        label: 'Standing Poses 1',
+        exercises: [
+          { name: 'Downward Dog', sets: 1, reps: '30 sec', notes: 'Hands shoulder width, press heels toward floor, flat back' },
+          { name: 'Pushup Seal Stretch', sets: 1, reps: '30 sec', notes: 'From pushup position, drop hips, press chest up, arms straight' },
+          { name: 'Mountain Pose', sets: 1, reps: '30 sec', notes: 'Stand tall, feet together, arms at sides, shoulders back and down' },
+          { name: 'Warrior I', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Keep hips forward, arms overhead. Lunge position, back foot angled.' },
+          { name: 'Warrior II', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Open hips up. Arms parallel to floor, gaze over front hand.' },
+          { name: 'Extended Side Angle', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Triangle but bend knee. Hand on ground or thigh, reach overhead.' },
+        ],
+      },
+      standingPoses2: {
+        label: 'Standing Poses 2',
+        exercises: [
+          { name: 'Low Lunge', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Hands straddle front foot. Stretch hip flexor of back leg.' },
+          { name: 'Praying Hands Twist', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Lunge position, palms together, rotate and hook elbow outside knee.' },
+          { name: 'Pyramid Pose', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Straight legs lunge. Hands straddle feet. Hamstring stretch.' },
+          { name: 'Triangle Pose', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Reach toward arch inside your knee. Straight legs, open chest.' },
+          { name: 'Half Forward Bend', sets: 1, reps: '30 sec', notes: 'Touch your toes but back flat. Hinge at hips, not spine.' },
+          { name: 'Full Squat (A to G)', sets: 1, reps: '30 sec', notes: 'Deep squat, elbows inside knees pressing out. Open hips.' },
+        ],
+      },
+      balancingBending: {
+        label: 'Balancing & Bending Poses',
+        exercises: [
+          { name: 'Raise Hands Pose (Standing)', sets: 1, reps: '30 sec', notes: 'Stand tall, reach arms overhead, slight back bend' },
+          { name: 'Tree Pose (Balancing)', sets: 1, reps: '30 sec', qualifier: 'each leg', notes: 'Left leg then right leg. Foot on inner thigh or calf, never the knee.' },
+          { name: 'Plank Pose', sets: 1, reps: '30 sec', notes: 'Straight line from head to heels. Core tight.' },
+          { name: 'Cobra Pose (Back Bend)', sets: 1, reps: '30 sec', notes: 'Lie face down, press chest up, hips stay on ground' },
+          { name: 'Cat Cow', sets: 1, reps: '10', notes: 'Alternate arching and rounding spine. Breath with movement.' },
+          { name: 'Child\'s Pose (Shoulder Stretch)', sets: 1, reps: '30 sec', notes: 'Knees wide or together, arms extended, forehead on ground' },
+          { name: 'Knees Wide Chinese Splits', sets: 1, reps: '30 sec', notes: 'On knees, spread wide, lower hips toward ground. Go to your edge.' },
+        ],
+      },
+      seatedPoses: {
+        label: 'Seated Poses',
+        exercises: [
+          { name: 'Staff Pose', sets: 1, reps: '30 sec', notes: 'Sit straight up with legs straight in front. Back tall, hands by hips.' },
+          { name: 'Seated Forward Bend (Hamstring)', sets: 1, reps: '30 sec', notes: 'Reach for toes, fold from hips not spine. Keep back as flat as possible.' },
+          { name: 'Modified Hurdle Stretch', sets: 1, reps: '30 sec', qualifier: 'each leg', notes: 'One leg straight, other bent to side. Reach for straight leg toes.' },
+          { name: 'Seated V Sit (Middle, Side, Side)', sets: 1, reps: '30 sec', notes: 'Legs in V, reach center then to each side. Straddle stretch.' },
+          { name: 'Seated Elbow to Knee Back Twist', sets: 1, reps: '30 sec', qualifier: 'each side', notes: 'Leg across, elbow to outside of knee, twist and look behind you.' },
+          { name: 'Butterfly Stretch', sets: 1, reps: '30 sec', notes: 'Soles of feet together, knees out. Press knees down gently.' },
+          { name: 'Cross Legged Stretch (Indian Style)', sets: 1, reps: '30 sec', notes: 'Sit cross legged, fold forward. Switch which leg is in front.' },
+        ],
+      },
+    },
+  },
 };
 
 // ── Training Format Templates ──

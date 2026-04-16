@@ -18,6 +18,7 @@ const maGroups = [
   { key: 'conditioning', emoji: '🔥', label: 'MA Conditioning' },
   { key: 'oneStep', emoji: '🎯', label: 'One-Step Sparring' },
   { key: 'breaking', emoji: '🪵', label: 'Board Breaking' },
+  { key: 'stretching', emoji: '🧘', label: 'Stretching & Yoga' },
 ];
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
