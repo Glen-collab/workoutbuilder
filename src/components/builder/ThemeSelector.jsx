@@ -407,6 +407,159 @@ const themeMessages = {
         "Cut phase, [name]. Nutrition tightens up while training stays consistent. Discipline and patience."
       ]
     }
+  },
+  martial_arts: {
+    label: "Martial Arts",
+    sublabel: "TKD \u2022 Karate \u2022 MMA",
+    themes: {
+      foundation: [
+        "[name], Shi-jak! Every master was once a beginner. Focus on form, not speed. Control your body, control your mind.",
+        "[name], Charyeot! Your journey begins with a single stance. Stand tall. Breathe. Your body will remember what it once knew.",
+        "[name], the basics are not boring\u2014they are the foundation of everything advanced. Master the chamber. Master the retract. The kick takes care of itself."
+      ],
+      power: [
+        "[name], Him! Power is not about strength\u2014it is about timing, rotation, and commitment. Drive through the target.",
+        "[name], every kick should have intent behind it. Not just motion\u2014purpose. Hit like you mean it.",
+        "[name], the hip is the engine. If your hip does not turn, your kick does not hurt. Rotate. Commit. Follow through."
+      ],
+      speed: [
+        "[name], speed comes from relaxation, not tension. Stay loose until the moment of impact. Snap and retract.",
+        "[name], fast hands set up fast feet. Your jab opens the door\u2014your kick walks through it. Flow between weapons.",
+        "[name], do not rush\u2014be quick. There is a difference. Rushing is sloppy. Quick is controlled explosiveness."
+      ],
+      spirit: [
+        "[name], Jeong-shin! Your spirit drives your technique. Push through fatigue with discipline. The belt does not make the fighter\u2014the training does.",
+        "[name], KIHAP! Your yell is your intent made audible. Every technique should have the energy of your kihap behind it.",
+        "[name], martial arts is not about fighting\u2014it is about becoming someone who does not need to. Train with purpose."
+      ],
+      form_practice: [
+        "[name], the form is the soul of your art. Each move tells a story. Learn it. Feel it. Own it.",
+        "[name], practice the form until you do not think about it. Then practice it more until it becomes part of you.",
+        "[name], stances, blocks, strikes\u2014the form connects them all. Precision overrides speed. Control overrides power."
+      ],
+      belt_test: [
+        "[name], Wan-seong! Everything you have trained for comes together. Combos at full speed. Form from memory. Spirit on display.",
+        "[name], this is your test. Show what weeks of discipline built. Charyeot. Kyeong-nye. Shi-jak! Aja aja hwaiting!",
+        "[name], you are not preparing for a test\u2014you ARE the test. Every kick, every block, every punch with full spirit."
+      ],
+      sparring: [
+        "[name], sparring teaches you to read and react. Do not think\u2014your body knows what to do. Trust your training.",
+        "[name], distance management wins fights. Control the space. Make them come to you. Then counter.",
+        "[name], offense and defense are the same thing. Every block is a setup. Every attack creates an opening. Flow."
+      ],
+      conditioning: [
+        "[name], a fighter who gasses out cannot fight. Conditioning is the separator. When technique is equal, stamina wins.",
+        "[name], burnouts build mental toughness as much as physical. When your legs are screaming and you keep kicking\u2014that is where warriors are made.",
+        "[name], 30 seconds of nonstop kicks. Your lungs will burn. Your legs will shake. Keep going. This is the price of excellence."
+      ],
+      flexibility: [
+        "[name], a martial artist without flexibility is a car without a steering wheel. Power without range is wasted potential.",
+        "[name], high kicks start with high flexibility. Every stretch today is a kick tomorrow. Invest in your range of motion.",
+        "[name], your hips are the key to everything. Open hips mean higher kicks, faster switches, and better balance. Stretch deep."
+      ]
+    }
+  },
+  boxing: {
+    label: "Boxing",
+    sublabel: "Western Boxing \u2022 Sweet Science",
+    themes: {
+      foundation: [
+        "[name], hands up, chin down. Boxing starts with the stance. Everything else is built on this foundation. Protect yourself at all times.",
+        "[name], the jab is the most important punch in boxing. It measures distance, sets up everything, and keeps your opponent honest. Perfect it.",
+        "[name], boxing is the sweet science. It is not about who hits hardest\u2014it is about who hits smartest. Think, then throw."
+      ],
+      power: [
+        "[name], power comes from the ground up. Feet, legs, hips, core, shoulder, fist. The whole chain fires or nothing fires.",
+        "[name], your cross is your power hand. Full hip rotation, push off the back foot, extend through the target. Make it count.",
+        "[name], a punch without power is a touch. Drive through. Your fist should go THROUGH the target, not TO it."
+      ],
+      speed: [
+        "[name], speed kills in boxing. A fast jab you cannot see coming beats a slow cross you can. Snap and retract\u2014be a whip, not a push.",
+        "[name], hand speed comes from relaxation. Stay loose, stay ready. Tension slows you down. Snap from zero to full speed and back.",
+        "[name], double jab. The first one is to measure. The second one is to score. Speed sets up power."
+      ],
+      combinations: [
+        "[name], your jab is your question. Your cross is your answer. Ask and answer\u2014that is boxing.",
+        "[name], a single punch is a warning. A combination is a statement. Jab-cross-hook\u2014the holy trinity of boxing.",
+        "[name], flow through your combinations. Do not think punch by punch\u2014think in phrases. The combo is one motion with multiple impacts."
+      ],
+      defense: [
+        "[name], the best fighters do not get hit. Slip, parry, roll\u2014make them miss, make them pay.",
+        "[name], defense is not passive. Every slip creates an angle. Every parry opens a counter. Defense IS offense.",
+        "[name], head movement saves careers. Move your head off the centerline. Be where your opponent does not expect."
+      ],
+      form_practice: [
+        "[name], the I-pattern is your shadow fight. Every pivot has purpose. Every step creates an angle. Own the pattern.",
+        "[name], boxing form is about structure under pressure. When you are tired, your form saves you. Practice it until it is automatic.",
+        "[name], shadow boxing is not just warming up\u2014it is programming your nervous system. Every round makes you sharper."
+      ],
+      belt_test: [
+        "[name], 8 weeks. You move different now. Show them what discipline looks like. Touch gloves. Let us go.",
+        "[name], test day. Full form, full combos, full power. You have done the work\u2014now perform. Ding ding.",
+        "[name], everything you have drilled\u2014jab, cross, hook, pivot, step\u2014it all comes together today. Show them a boxer."
+      ],
+      bag_work: [
+        "[name], the bag does not lie. If your form is off, you feel it. If your power is there, you hear it. Listen to the bag.",
+        "[name], heavy bag rounds build power and conditioning simultaneously. Hit hard, recover fast, hit hard again.",
+        "[name], speed bag develops rhythm, timing, and shoulder endurance. Find the rhythm\u2014then never lose it."
+      ],
+      conditioning: [
+        "[name], boxing conditioning is unlike anything else. 3 minutes of sustained output. Rest 1. Repeat. That is the fight.",
+        "[name], jump rope is a boxer's best friend. Footwork, timing, cardio\u2014all in one tool. Get comfortable being uncomfortable.",
+        "[name], if you gas out in the ring, technique does not matter. Build your engine. Outlast your opponent."
+      ]
+    }
+  },
+  hybrid: {
+    label: "Hybrid",
+    sublabel: "Strength + Martial Arts",
+    themes: {
+      foundation: [
+        "[name], iron and discipline. The barbell builds your body. The kicks sharpen your weapon. Today we do both.",
+        "[name], you are not just training\u2014you are forging something. Strong AND skilled. That combination is rare. Embrace it.",
+        "[name], the gym makes you powerful. The dojang makes you dangerous. Together, you are unstoppable."
+      ],
+      power: [
+        "[name], Him-nae-se-yo! Power transfers. The hip drive in your deadlift is the same hip drive in your roundhouse. Train them together. Dominate both.",
+        "[name], a heavy squat makes your kicks explosive. A strong bench makes your punches land harder. Strength is the multiplier.",
+        "[name], today we lift heavy then kick hard. Your muscles do not know the difference between a barbell and an opponent. Train them for both."
+      ],
+      speed: [
+        "[name], cleans build explosive speed. Roundhouse kicks build rotational speed. Today we train the full spectrum of fast.",
+        "[name], a fast athlete who is also strong is terrifying. That is what we are building. Power + speed = force.",
+        "[name], lift explosive, kick explosive. The nervous system does not care which tool you use\u2014it just learns to fire faster."
+      ],
+      spirit: [
+        "[name], you are not just strong. You are dangerous. Muscle without skill is wasted. Skill without strength is limited. You have both.",
+        "[name], Jeong-shin! Spirit does not just apply to martial arts. Attack the barbell with the same intensity you attack the pads.",
+        "[name], most people are strong OR skilled. You are building both. That is warrior strength. That is what sets you apart."
+      ],
+      upper_body: [
+        "[name], bench builds chest power. Rows build back strength. Kicks need both\u2014your upper body is the counterbalance to every kick you throw.",
+        "[name], strong shoulders protect you in sparring. A strong back keeps your guard up when you are tired. The iron serves the art.",
+        "[name], upper body day plus kick combos. After pressing heavy, your body finds new power in the rotation. Feel the difference."
+      ],
+      lower_body: [
+        "[name], squat heavy, kick harder. Your legs are the foundation of both the barbell and the martial art. Build them for both.",
+        "[name], leg day is kick day. Every squat rep makes your roundhouse more explosive. Every lunge makes your side kick more stable.",
+        "[name], strong legs do not just look good\u2014they generate the force that breaks boards and moves barbells. Train them hard today."
+      ],
+      full_body: [
+        "[name], full body strength plus full body martial arts. This is the complete athlete session. Nothing left untrained.",
+        "[name], cleans, squats, presses, kicks, combos\u2014today everything works together. This is what a warrior's training looks like.",
+        "[name], today is the day where lifting and fighting merge into one. Every exercise feeds the other. Full spectrum training."
+      ],
+      belt_test: [
+        "[name], warrior strength. 8 weeks of building a machine that lifts heavy and kicks hard. This is what a complete athlete looks like.",
+        "[name], you can deadlift AND you can fight. That is not common. Show what hybrid training produces. Full power. Full skill.",
+        "[name], test day. Lift with intent. Kick with power. Perform the form with spirit. You are the complete package."
+      ],
+      conditioning: [
+        "[name], the finisher combines core and kicks. When your abs are burning and you are still kicking\u2014that is mental toughness.",
+        "[name], conditioning after lifting is where fighters are separated from lifters. You are both. Prove it in the finisher.",
+        "[name], planks and roundhouse burnouts. Your core connects your upper and lower body\u2014both in the gym and in the dojang."
+      ]
+    }
   }
 };
 
@@ -425,7 +578,21 @@ const themeLabels = {
   time_under_tension: "Time Under Tension",
   focus: "Focus / Technique",
   bulk: "Bulk / Growth",
-  cut: "Cut / Lean Out"
+  cut: "Cut / Lean Out",
+  foundation: "Foundation",
+  power: "Power",
+  speed: "Speed",
+  spirit: "Spirit / Mindset",
+  form_practice: "Form Practice",
+  belt_test: "Belt Test",
+  sparring: "Sparring",
+  combinations: "Combinations",
+  defense: "Defense",
+  bag_work: "Bag Work",
+  upper_body: "Upper Body",
+  lower_body: "Lower Body",
+  full_body: "Full Body",
+  conditioning: "Conditioning"
 };
 
 // Day-specific theme messages that coordinate with the weekly theme
