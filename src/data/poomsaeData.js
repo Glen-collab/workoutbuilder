@@ -245,3 +245,463 @@ export const poomsaeData = {
     ],
   },
 };
+
+
+// ═══════════════════════════════════════════════════════════════════
+// BOXING FORMS (I-Pattern System)
+// Rules: ONLY punches + pivots + angles. No kicks, no clinch.
+// Every turn = 90 or 180 degrees. Minimal language.
+// ═══════════════════════════════════════════════════════════════════
+
+export const boxingForms = {
+
+  boxingKicho: {
+    name: "Boxing Kicho",
+    belt: "white",
+    beltLabel: "White Belt",
+    meaning: "Line Basics",
+    combos: [
+      "Jab",
+      "Cross",
+      "Turn 180 — Jab, Cross",
+      "Step left — Jab, Cross",
+      "Pivot right — Cross, Jab",
+      "Step back — Jab, Cross",
+    ],
+    sections: [
+      { name: "Boxing Kicho — First Half", video: null },
+      { name: "Boxing Kicho — Second Half", video: null },
+      { name: "Boxing Kicho — Whole Form", video: null },
+    ],
+  },
+
+  boxingIlJang: {
+    name: "Boxing Il Jang",
+    belt: "high-white",
+    beltLabel: "High White Belt",
+    meaning: "Distance Control",
+    combos: [
+      "Jab, Jab, Cross",
+      "Cross, Hook, Cross",
+      "Turn 180 — Jab, Cross, Hook",
+      "Step left — Jab, Cross, Cross",
+      "Pivot right — Jab, Hook, Cross",
+    ],
+    sections: [
+      { name: "Boxing Il Jang — First Half", video: null },
+      { name: "Boxing Il Jang — Second Half", video: null },
+      { name: "Boxing Il Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingEeJang: {
+    name: "Boxing Ee Jang",
+    belt: "yellow",
+    beltLabel: "Yellow Belt",
+    meaning: "Angle Entry",
+    combos: [
+      "Jab, Cross, Hook",
+      "Jab, Pivot, Cross, Hook",
+      "Turn 180 — Jab, Cross, Uppercut",
+      "Step left — Hook, Cross, Jab",
+      "Pivot right — Cross, Hook, Cross",
+    ],
+    sections: [
+      { name: "Boxing Ee Jang — First Half", video: null },
+      { name: "Boxing Ee Jang — Second Half", video: null },
+      { name: "Boxing Ee Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingSamJang: {
+    name: "Boxing Sam Jang",
+    belt: "high-yellow",
+    beltLabel: "High Yellow Belt",
+    meaning: "Combination Flow",
+    combos: [
+      "Double Jab, Cross, Hook",
+      "Jab, Cross, Hook, Cross",
+      "Turn 180 — Jab, Hook, Uppercut, Cross",
+      "Step left — Jab, Cross, Hook, Uppercut",
+    ],
+    sections: [
+      { name: "Boxing Sam Jang — First Half", video: null },
+      { name: "Boxing Sam Jang — Second Half", video: null },
+      { name: "Boxing Sam Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingSaJang: {
+    name: "Boxing Sa Jang",
+    belt: "green",
+    beltLabel: "Green Belt",
+    meaning: "Broken Rhythm",
+    combos: [
+      "Jab, Pause, Cross, Hook",
+      "Cross, Hook, Cross, Hook",
+      "Turn 180 — Jab, Cross, Hook, Cross",
+      "Pivot right — Jab, Hook, Cross, Jab",
+    ],
+    sections: [
+      { name: "Boxing Sa Jang — First Half", video: null },
+      { name: "Boxing Sa Jang — Second Half", video: null },
+      { name: "Boxing Sa Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingOhJang: {
+    name: "Boxing Oh Jang",
+    belt: "high-green",
+    beltLabel: "High Green Belt",
+    meaning: "Counter Timing",
+    combos: [
+      "Slip, Jab, Cross, Hook",
+      "Jab, Cross, Slip, Cross, Hook",
+      "Turn 180 — Cross, Hook, Jab, Cross",
+      "Pivot right — Hook, Cross, Uppercut, Cross",
+    ],
+    sections: [
+      { name: "Boxing Oh Jang — First Half", video: null },
+      { name: "Boxing Oh Jang — Second Half", video: null },
+      { name: "Boxing Oh Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingYookJang: {
+    name: "Boxing Yook Jang",
+    belt: "blue",
+    beltLabel: "Blue Belt",
+    meaning: "Pressure Boxing",
+    combos: [
+      "Jab, Jab, Cross, Hook, Cross",
+      "Cross, Hook, Cross, Jab, Hook",
+      "Turn 180 — Jab, Cross, Hook, Uppercut, Cross",
+    ],
+    sections: [
+      { name: "Boxing Yook Jang — First Half", video: null },
+      { name: "Boxing Yook Jang — Second Half", video: null },
+      { name: "Boxing Yook Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingChilJang: {
+    name: "Boxing Chil Jang",
+    belt: "high-blue",
+    beltLabel: "High Blue Belt",
+    meaning: "Inside Fighting",
+    combos: [
+      "Jab, Cross, Hook, Uppercut, Hook",
+      "Hook, Cross, Hook, Cross, Jab",
+      "Turn 180 — Cross, Hook, Uppercut, Hook, Cross",
+    ],
+    sections: [
+      { name: "Boxing Chil Jang — First Half", video: null },
+      { name: "Boxing Chil Jang — Second Half", video: null },
+      { name: "Boxing Chil Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingPalJang: {
+    name: "Boxing Pal Jang",
+    belt: "red",
+    beltLabel: "Red Belt",
+    meaning: "Fight Simulation",
+    combos: [
+      "Jab, Cross, Hook, Cross, Uppercut, Hook",
+      "Pivot — Jab, Hook, Cross, Hook, Cross",
+      "Turn 180 — Cross, Hook, Jab, Uppercut, Cross, Hook",
+    ],
+    sections: [
+      { name: "Boxing Pal Jang — First Half", video: null },
+      { name: "Boxing Pal Jang — Second Half", video: null },
+      { name: "Boxing Pal Jang — Whole Form", video: null },
+    ],
+  },
+
+  boxingKoryo: {
+    name: "Boxing Koryo",
+    belt: "high-red",
+    beltLabel: "High Red Belt / 1st Dan",
+    meaning: "Control Boxing",
+    combos: [
+      "Jab, Cross, Hook, Cross, Hook, Cross",
+      "Turn 180 — Jab, Cross, Hook, Uppercut, Hook, Cross",
+      "Step left — Cross, Hook, Jab, Cross, Hook",
+    ],
+    sections: [
+      { name: "Boxing Koryo — First Half", video: null },
+      { name: "Boxing Koryo — Second Half", video: null },
+      { name: "Boxing Koryo — Whole Form", video: null },
+    ],
+  },
+
+  boxingKeumgang: {
+    name: "Boxing Keumgang",
+    belt: "deputy",
+    beltLabel: "2nd Dan",
+    meaning: "Power + Structure",
+    combos: [
+      "Jab, Cross, Hook, Cross, Uppercut, Hook, Cross",
+      "Pivot — Cross, Hook, Cross, Jab, Hook, Uppercut",
+      "Turn 180 — Hook, Cross, Jab, Cross, Hook, Cross",
+    ],
+    sections: [
+      { name: "Boxing Keumgang — First Half", video: null },
+      { name: "Boxing Keumgang — Second Half", video: null },
+      { name: "Boxing Keumgang — Whole Form", video: null },
+    ],
+  },
+
+  boxingTaebaek: {
+    name: "Boxing Taebaek",
+    belt: "black",
+    beltLabel: "3rd Dan",
+    meaning: "Master Flow",
+    combos: [
+      "Free I-pattern chain — no repeats allowed",
+    ],
+    requirements: [
+      "Jab entry",
+      "Hook rotation",
+      "Uppercut inside",
+      "Pivot exit",
+    ],
+    sections: [
+      { name: "Boxing Taebaek — First Half", video: null },
+      { name: "Boxing Taebaek — Second Half", video: null },
+      { name: "Boxing Taebaek — Whole Form", video: null },
+    ],
+  },
+};
+
+
+// ═══════════════════════════════════════════════════════════════════
+// KICKBOXING / MUAY THAI FORMS (I-Pattern System)
+// Rules: punches + kicks + knees + elbows (later levels)
+// Clinch only at advanced levels. Same I-pattern structure.
+// ═══════════════════════════════════════════════════════════════════
+
+export const kickboxingForms = {
+
+  kickboxingKicho: {
+    name: "Kickboxing Kicho",
+    belt: "white",
+    beltLabel: "White Belt",
+    meaning: "Basics",
+    combos: [
+      "Jab",
+      "Cross",
+      "Front Kick",
+      "Turn 180 — Jab, Cross, Front Kick",
+      "Step left — Round Kick",
+      "Pivot right — Jab, Cross",
+    ],
+    sections: [
+      { name: "Kickboxing Kicho — First Half", video: null },
+      { name: "Kickboxing Kicho — Second Half", video: null },
+      { name: "Kickboxing Kicho — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingIlJang: {
+    name: "Kickboxing Il Jang",
+    belt: "high-white",
+    beltLabel: "High White Belt",
+    meaning: "Punch + Kick Integration",
+    combos: [
+      "Jab, Cross, Round Kick",
+      "Jab, Cross, Front Kick, Cross",
+      "Turn 180 — Jab, Cross, Round Kick",
+      "Step left — Hook, Cross, Front Kick",
+    ],
+    sections: [
+      { name: "Kickboxing Il Jang — First Half", video: null },
+      { name: "Kickboxing Il Jang — Second Half", video: null },
+      { name: "Kickboxing Il Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingEeJang: {
+    name: "Kickboxing Ee Jang",
+    belt: "yellow",
+    beltLabel: "Yellow Belt",
+    meaning: "Low Kick + Angles",
+    combos: [
+      "Jab, Cross, Hook, Low Kick",
+      "Jab, Cross, Round Kick, Cross",
+      "Turn 180 — Jab, Hook, Round Kick",
+      "Pivot — Cross, Hook, Low Kick, Jab",
+    ],
+    sections: [
+      { name: "Kickboxing Ee Jang — First Half", video: null },
+      { name: "Kickboxing Ee Jang — Second Half", video: null },
+      { name: "Kickboxing Ee Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingSamJang: {
+    name: "Kickboxing Sam Jang",
+    belt: "high-yellow",
+    beltLabel: "High Yellow Belt",
+    meaning: "Knee + Elbow Introduction",
+    combos: [
+      "Jab, Cross, Hook, Knee",
+      "Cross, Hook, Round Kick, Knee",
+      "Turn 180 — Jab, Cross, Elbow, Knee",
+      "Step left — Hook, Cross, Round Kick",
+    ],
+    sections: [
+      { name: "Kickboxing Sam Jang — First Half", video: null },
+      { name: "Kickboxing Sam Jang — Second Half", video: null },
+      { name: "Kickboxing Sam Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingSaJang: {
+    name: "Kickboxing Sa Jang",
+    belt: "green",
+    beltLabel: "Green Belt",
+    meaning: "Mixed Weapon Chains",
+    combos: [
+      "Jab, Cross, Low Kick, Cross",
+      "Hook, Cross, Knee, Elbow",
+      "Turn 180 — Cross, Hook, Knee, Round Kick",
+    ],
+    sections: [
+      { name: "Kickboxing Sa Jang — First Half", video: null },
+      { name: "Kickboxing Sa Jang — Second Half", video: null },
+      { name: "Kickboxing Sa Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingOhJang: {
+    name: "Kickboxing Oh Jang",
+    belt: "high-green",
+    beltLabel: "High Green Belt",
+    meaning: "Clinch Introduction",
+    combos: [
+      "Jab, Cross, Clinch, Knee, Knee",
+      "Hook, Cross, Elbow, Knee, Kick",
+      "Turn 180 — Jab, Cross, Hook, Knee, Elbow",
+    ],
+    sections: [
+      { name: "Kickboxing Oh Jang — First Half", video: null },
+      { name: "Kickboxing Oh Jang — Second Half", video: null },
+      { name: "Kickboxing Oh Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingYookJang: {
+    name: "Kickboxing Yook Jang",
+    belt: "blue",
+    beltLabel: "Blue Belt",
+    meaning: "Switch Kicks + Flow",
+    combos: [
+      "Jab, Cross, Switch Kick, Cross",
+      "Hook, Cross, Knee, Elbow, Knee",
+      "Turn 180 — Round Kick, Cross, Hook, Knee",
+    ],
+    sections: [
+      { name: "Kickboxing Yook Jang — First Half", video: null },
+      { name: "Kickboxing Yook Jang — Second Half", video: null },
+      { name: "Kickboxing Yook Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingChilJang: {
+    name: "Kickboxing Chil Jang",
+    belt: "high-blue",
+    beltLabel: "High Blue Belt",
+    meaning: "Inside Fighting",
+    combos: [
+      "Jab, Cross, Elbow, Knee, Hook",
+      "Cross, Hook, Clinch, Knee, Elbow",
+      "Turn 180 — Switch Kick, Knee, Elbow, Cross",
+    ],
+    sections: [
+      { name: "Kickboxing Chil Jang — First Half", video: null },
+      { name: "Kickboxing Chil Jang — Second Half", video: null },
+      { name: "Kickboxing Chil Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingPalJang: {
+    name: "Kickboxing Pal Jang",
+    belt: "red",
+    beltLabel: "Red Belt",
+    meaning: "Full Arsenal",
+    combos: [
+      "Jab, Cross, Hook, Elbow, Knee, Kick",
+      "Clinch, Knee, Elbow, Cross, Hook",
+      "Turn 180 — Kick, Cross, Knee, Elbow, Hook",
+    ],
+    sections: [
+      { name: "Kickboxing Pal Jang — First Half", video: null },
+      { name: "Kickboxing Pal Jang — Second Half", video: null },
+      { name: "Kickboxing Pal Jang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingKoryo: {
+    name: "Kickboxing Koryo",
+    belt: "high-red",
+    beltLabel: "High Red Belt / 1st Dan",
+    meaning: "Full Flow Combat Chain",
+    combos: [
+      "Full flow combat chain",
+    ],
+    requirements: [
+      "Punch entry",
+      "Kick response",
+      "Knee clinch",
+      "Elbow exit",
+      "Pivot escape",
+    ],
+    sections: [
+      { name: "Kickboxing Koryo — First Half", video: null },
+      { name: "Kickboxing Koryo — Second Half", video: null },
+      { name: "Kickboxing Koryo — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingKeumgang: {
+    name: "Kickboxing Keumgang",
+    belt: "deputy",
+    beltLabel: "2nd Dan",
+    meaning: "Pressure Fighting",
+    combos: [
+      "Pressure fighting I-pattern",
+    ],
+    requirements: [
+      "Broken rhythm mandatory",
+      "No fixed combo allowed",
+    ],
+    sections: [
+      { name: "Kickboxing Keumgang — First Half", video: null },
+      { name: "Kickboxing Keumgang — Second Half", video: null },
+      { name: "Kickboxing Keumgang — Whole Form", video: null },
+    ],
+  },
+
+  kickboxingTaebaek: {
+    name: "Kickboxing Taebaek",
+    belt: "black",
+    beltLabel: "3rd Dan",
+    meaning: "Free Combat Poomsae",
+    combos: [
+      "Free combat poomsae",
+    ],
+    requirements: [
+      "Offense",
+      "Defense",
+      "Clinch",
+      "Exit",
+      "Counter",
+    ],
+    sections: [
+      { name: "Kickboxing Taebaek — First Half", video: null },
+      { name: "Kickboxing Taebaek — Second Half", video: null },
+      { name: "Kickboxing Taebaek — Whole Form", video: null },
+    ],
+  },
+};
