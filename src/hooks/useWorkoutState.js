@@ -324,16 +324,24 @@ export default function useWorkoutState() {
     if (program.totalWeeks) setTotalWeeksState(program.totalWeeks);
 
     const workouts = program.allWorkouts || {};
-    setAllWorkouts(workouts);
 
-    // Find highest block ID
-    let maxId = 0;
+    // Ensure every block has a unique ID (API-created programs may lack IDs)
+    let nextId = 1;
     Object.values(workouts).forEach((blocks) => {
       blocks.forEach((b) => {
-        if (b.id > maxId) maxId = b.id;
+        if (b.id > nextId) nextId = b.id;
       });
     });
-    setBlockIdCounter(maxId + 1);
+    Object.values(workouts).forEach((blocks) => {
+      blocks.forEach((b) => {
+        if (!b.id && b.id !== 0) {
+          b.id = nextId++;
+        }
+      });
+    });
+
+    setAllWorkouts(workouts);
+    setBlockIdCounter(nextId + 1);
 
     setCurrentWeek(1);
     setCurrentDay(1);
