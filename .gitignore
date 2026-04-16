@@ -5,7 +5,9 @@ dist/
 .env
 upload_videos.sh
 upload_new_videos.sh
+upload_ma_videos.sh
 new_video_uids.txt
+ma_video_uids.txt
 .claude/
 wordpress-plugin/bsa-workout-builder/bsa-workout-builder.php
 wordpress-plugin/bsa-fitness-chatbot/bsa-fitness-chatbot.php
