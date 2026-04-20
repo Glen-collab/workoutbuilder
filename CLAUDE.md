@@ -10,6 +10,15 @@ A React app for trainers to build multi-week workout programs. Trainers create p
 
 ---
 
+## Related Repos (BSA Ecosystem)
+
+- **`Glen-collab/bsa-coach-platform`** — Central Flask backend + React coach/admin/member dashboards. All other repos hit its API at `app.bestrongagain.com/api/*`. Cross-repo architecture: `bsa-coach-platform/docs/ARCHITECTURE.md`.
+- **`Glen-collab/workoutbuilder`** — (this repo) Coach-facing program builder. Owns the 4 bundled exercise libraries — the coach platform's `exercise_manifest.json` is generated from here.
+- **`Glen-collab/WorkoutTracker`** — Client-facing workout logging PWA. Reads programs from `/api/workout/*` + video overrides from `/api/media/tracker-overrides`. Includes the `/tv` kiosk for gym TVs.
+- **`Glen-collab/react-trainer-dashboard`** — Coach management dashboard (send access codes, view client progress, open this builder in override mode).
+
+---
+
 ## Project Structure
 
 ```
