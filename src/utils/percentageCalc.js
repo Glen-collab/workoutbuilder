@@ -213,13 +213,23 @@ export function isPercentageBasedLift(exerciseName) {
   return false;
 }
 
-// Suggest which base max to use for a given exercise name
-export function suggestBaseMax(exerciseName) {
-  if (!exerciseName) return 'bench';
-  const name = exerciseName.toLowerCase();
-  if (name.includes('squat') || name.includes('lunge') || name.includes('leg press') || name.includes('step')) return 'squat';
-  if (name.includes('deadlift') || name.includes('rdl') || name.includes('romanian') || name.includes('hip thrust') || name.includes('good morning')) return 'deadlift';
-  if (name.includes('clean') || name.includes('snatch') || name.includes('jerk')) return 'powerClean';
+// Suggest which base max to use. Accepts either an exercise object or a name string.
+// Martial arts content always returns 'bodyweight' — detected by structural
+// markers (beltMin/korean/tier/attacker) or distinctive MA name patterns.
+export function suggestBaseMax(exerciseOrName) {
+  if (!exerciseOrName) return 'bench';
+  const ex = typeof exerciseOrName === 'object' ? exerciseOrName : null;
+  const name = ex ? (ex.name || '') : String(exerciseOrName);
+
+  // Structural MA markers
+  if (ex && (ex.beltMin || ex.korean || ex.tier || ex.attacker)) return 'bodyweight';
+  // MA name patterns (kicks, boxing bag work, form names)
+  if (/\b(kick|roundhouse|uppercut|kicho|poomsae|taegeuk|koryo|keumgang|taebaek)\b|heavy bag|speed bag/i.test(name)) return 'bodyweight';
+
+  const lower = name.toLowerCase();
+  if (lower.includes('squat') || lower.includes('lunge') || lower.includes('leg press') || lower.includes('step')) return 'squat';
+  if (lower.includes('deadlift') || lower.includes('rdl') || lower.includes('romanian') || lower.includes('hip thrust') || lower.includes('good morning')) return 'deadlift';
+  if (lower.includes('clean') || lower.includes('snatch') || lower.includes('jerk')) return 'powerClean';
   return 'bench';
 }
 

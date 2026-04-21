@@ -325,7 +325,7 @@ export default function ExerciseRow({
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
                 <button
                   onClick={() => {
-                    const suggested = suggestBaseMax(exercise.name);
+                    const suggested = suggestBaseMax(exercise);
                     onUpdate({
                       isPercentageBased: true,
                       baseMax: exercise.baseMax || suggested,

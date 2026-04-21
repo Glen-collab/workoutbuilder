@@ -180,7 +180,7 @@ function BuilderApp({ builderUser, onLogout }) {
       const now = Date.now();
       newExercise = {
         ...exercise,
-        baseMax: suggestBaseMax(exercise.name),
+        baseMax: suggestBaseMax(exercise),
         isPercentageBased: true,
         sets: [
           { id: now, reps: 10, percentage: 70, isWarmup: false, manualWeight: null },

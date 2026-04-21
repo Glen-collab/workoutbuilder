@@ -53,6 +53,7 @@ function getTkdCurriculumForBelt(beltKey) {
     (f.sections || []).forEach((sec) => {
       result.form.push({
         name: sec.name,
+        beltMin: beltKey, // structural marker so suggestBaseMax returns 'bodyweight'
         sets: 3,
         reps: '1',
         notes: f.coachingNotes?.[0] || 'Perform full form, clean technique',
