@@ -3,6 +3,7 @@ import { exerciseCategories } from '../../data/exerciseLibrary';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
 import { martialArtsCategories } from '../../data/martialArtsLibrary';
+import { poomsaeData } from '../../data/poomsaeData';
 import MuscleGroupGrid from './MuscleGroupGrid';
 import SubcategoryTabs from './SubcategoryTabs';
 import ExerciseList from './ExerciseList';
@@ -10,6 +11,7 @@ import MovementCategoryList from './MovementCategoryList';
 
 // Martial arts category grid items
 const maGroups = [
+  { key: 'tkdCurriculum', emoji: '🎓', label: 'TKD Curriculum' },
   { key: 'kicks', emoji: '🥋', label: 'Kicks' },
   { key: 'handTechniques', emoji: '👊', label: 'Hand Techniques' },
   { key: 'blocks', emoji: '🛡️', label: 'Blocks' },
@@ -21,6 +23,65 @@ const maGroups = [
   { key: 'boxing', emoji: '🥊', label: 'Boxing' },
   { key: 'stretching', emoji: '🧘', label: 'Stretching & Yoga' },
 ];
+
+// TKD belt ladder — matches poomsaeData.js keys
+const TKD_BELT_LADDER = [
+  { key: 'white',      label: 'White Belt' },
+  { key: 'high-white', label: 'High White Belt' },
+  { key: 'yellow',     label: 'Yellow Belt' },
+  { key: 'high-yellow',label: 'High Yellow Belt' },
+  { key: 'green',      label: 'Green Belt' },
+  { key: 'high-green', label: 'High Green Belt' },
+  { key: 'blue',       label: 'Blue Belt' },
+  { key: 'high-blue',  label: 'High Blue Belt' },
+  { key: 'red',        label: 'Red Belt' },
+  { key: 'high-red',   label: 'High Red Belt' },
+  { key: 'deputy',     label: 'Deputy Black Belt' },
+  { key: 'black',      label: 'Black Belt (1st Dan)' },
+  { key: 'dan2',       label: '2nd Dan' },
+  { key: 'dan3',       label: '3rd Dan' },
+];
+
+// Build curriculum payload for a given belt:
+// { form:[], oneStep:[], defense:[], breaks:[] } — each exercise shape matches ExerciseList
+function getTkdCurriculumForBelt(beltKey) {
+  const result = { form: [], oneStep: [], defense: [], breaks: [] };
+
+  // Forms from poomsaeData — match by `belt` field, emit one exercise per section
+  Object.values(poomsaeData).forEach((f) => {
+    if (f.belt !== beltKey) return;
+    (f.sections || []).forEach((sec) => {
+      result.form.push({
+        name: sec.name,
+        sets: 3,
+        reps: '1',
+        notes: f.coachingNotes?.[0] || 'Perform full form, clean technique',
+        youtube: sec.video || '',
+      });
+    });
+  });
+
+  // One-step sparring — martialArtsCategories.oneStep across all subcategories
+  Object.values(martialArtsCategories.oneStep?.subcategories || {}).forEach((sub) => {
+    (sub.exercises || []).forEach((ex) => {
+      if (ex.beltMin === beltKey) result.oneStep.push(ex);
+    });
+  });
+
+  // Defense — martialArtsCategories.sparring.defensive
+  const defSub = martialArtsCategories.sparring?.subcategories?.defensive;
+  (defSub?.exercises || []).forEach((ex) => {
+    if (ex.beltMin === beltKey) result.defense.push(ex);
+  });
+
+  // Breaks — martialArtsCategories.breaking.techniques
+  const brkSub = martialArtsCategories.breaking?.subcategories?.techniques;
+  (brkSub?.exercises || []).forEach((ex) => {
+    if (ex.beltMin === beltKey) result.breaks.push(ex);
+  });
+
+  return result;
+}
 
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
 const warmupCooldownTypes = ['warmup', 'cooldown'];
@@ -104,6 +165,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [activeTab, setActiveTab] = useState('strength'); // 'strength' | 'martialArts'
   const [maCategory, setMaCategory] = useState(null); // selected MA category key
   const [maSubcategory, setMaSubcategory] = useState(null); // selected MA subcategory key
+  const [tkdBelt, setTkdBelt] = useState(null); // selected belt for TKD Curriculum view
 
   const isStrength = strengthTypes.includes(blockType);
   const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
@@ -126,6 +188,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     setActiveTab('strength');
     setMaCategory(null);
     setMaSubcategory(null);
+    setTkdBelt(null);
     onClose();
   };
 
@@ -250,6 +313,68 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
 
     // Martial Arts tab
     if (activeTab === 'martialArts') {
+      // ── TKD Curriculum (belt-first nav) ──
+      if (maCategory === 'tkdCurriculum') {
+        // Belt detail: show 4 sections for selected belt
+        if (tkdBelt) {
+          const curr = getTkdCurriculumForBelt(tkdBelt);
+          const beltLabel = TKD_BELT_LADDER.find((b) => b.key === tkdBelt)?.label || tkdBelt;
+          const renderSection = (title, items) => (
+            <div key={title} className="mb-4">
+              <h4 className="text-sm font-bold text-gray-700 mb-2 mt-3 uppercase tracking-wide">{title}</h4>
+              {items.length === 0 ? (
+                <p className="text-xs italic text-gray-400 ml-1">No entries yet — film to populate.</p>
+              ) : (
+                <div className="flex flex-col gap-1.5">
+                  {items.map((ex, i) => (
+                    <button
+                      key={`${title}-${i}`}
+                      className="text-left bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 hover:border-[#667eea] hover:text-[#667eea] transition-colors"
+                      onClick={() => handleSelect(ex)}
+                    >
+                      {ex.name}
+                      {ex.notes && <span className="block text-xs text-gray-400 mt-0.5">{ex.notes}</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+          return (
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-3">
+                <button className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition" onClick={() => setTkdBelt(null)}>←</button>
+                <h3 className="text-lg font-bold text-gray-700 m-0">{beltLabel}</h3>
+              </div>
+              {renderSection('Form', curr.form)}
+              {renderSection('One-Step Sparring', curr.oneStep)}
+              {renderSection('Defense', curr.defense)}
+              {renderSection('Breaks', curr.breaks)}
+            </div>
+          );
+        }
+        // Belt grid
+        return (
+          <div className="p-4">
+            <div className="flex items-center gap-3 mb-4">
+              <button className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition" onClick={() => { setMaCategory(null); setTkdBelt(null); }}>←</button>
+              <h3 className="text-lg font-bold text-gray-700 m-0">TKD Curriculum — Pick a Belt</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {TKD_BELT_LADDER.map((b) => (
+                <button
+                  key={b.key}
+                  className="py-3 px-3 bg-white border-2 border-gray-200 rounded-[10px] cursor-pointer text-sm font-semibold text-gray-700 shadow-sm transition-all duration-150 hover:border-[#667eea] hover:text-[#667eea] hover:shadow-md"
+                  onClick={() => setTkdBelt(b.key)}
+                >
+                  {b.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
       // Showing exercises in a subcategory
       if (maCategory && maSubcategory) {
         const cat = martialArtsCategories[maCategory];
@@ -370,7 +495,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
             <button
               className={`flex-1 py-2.5 text-sm font-bold border-none cursor-pointer transition-colors ${activeTab === 'strength' ? 'bg-white text-[#667eea] border-b-2 border-[#667eea]' : 'bg-transparent text-gray-500 hover:text-gray-700'}`}
               style={activeTab === 'strength' ? { borderBottom: '3px solid #667eea' } : {}}
-              onClick={() => { setActiveTab('strength'); setMaCategory(null); setMaSubcategory(null); }}
+              onClick={() => { setActiveTab('strength'); setMaCategory(null); setMaSubcategory(null); setTkdBelt(null); }}
             >
               💪 Strength
             </button>
