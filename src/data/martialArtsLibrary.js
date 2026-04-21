@@ -536,6 +536,80 @@ export const martialArtsCategories = {
       },
     },
   },
+
+  // ═══════════════════════════════════════════
+  // BOXING
+  // ═══════════════════════════════════════════
+  // Organized per Glen's folder layout in D:/Cloudflare video/Boxing/
+  // Videos to be wired after Mac-side Cloudflare upload → upload_log.txt.
+  boxing: {
+    label: 'Boxing',
+    subcategories: {
+      punches: {
+        label: 'Heavy Bag Punches',
+        exercises: [
+          { name: 'Heavy Bag Jab', youtube: 'https://iframe.videodelivery.net/f5334f451f7724319931d9bd2898be09', sets: 3, reps: '30 sec', notes: 'Snap jab on bag. Return fast.' },
+          { name: 'Heavy Bag Cross', youtube: 'https://iframe.videodelivery.net/f0d5ecc769996251a27afb79f9cbbb2b', sets: 3, reps: '30 sec', notes: 'Full hip rotation behind the cross.' },
+          { name: 'Heavy Bag Hook', youtube: 'https://iframe.videodelivery.net/f33c1c68d9984fe31642ad70a427f039', sets: 3, reps: '30 sec', qualifier: 'each side', notes: 'Elbow level with fist, horizontal path.' },
+          { name: 'Heavy Bag Uppercut', youtube: 'https://iframe.videodelivery.net/146aa7be821a70d7dd824fd825ab95a3', sets: 3, reps: '30 sec', qualifier: 'each side', notes: 'Drop, rise, drive upward through the chin line.' },
+          { name: 'Heavy Bag High-Low Cross', youtube: 'https://iframe.videodelivery.net/03230c4b4d056d28cbf15f22670098f6', sets: 3, reps: '30 sec', notes: 'Cross to head, cross to body — level change.' },
+        ],
+      },
+      combos: {
+        label: 'Heavy Bag Combos (Numbered + Named)',
+        exercises: [
+          { name: 'Heavy Bag Combo 1: Jab-Cross', youtube: 'https://iframe.videodelivery.net/ad2e28e05dd28a48e02d0dc096b84e1e', sets: 3, reps: '8-10', notes: 'The foundation — 1-2.' },
+          { name: 'Heavy Bag Combo 2: Jab-Cross-Hook', youtube: 'https://iframe.videodelivery.net/545596e05071902229cbeb8230bfa2a1', sets: 3, reps: '8', notes: '1-2-3.' },
+          { name: 'Heavy Bag Combo 3: Jab-Cross-Hook-Uppercut', youtube: 'https://iframe.videodelivery.net/1679524fac763d12a87cfb1e15cfb84e', sets: 3, reps: '6-8', notes: '1-2-3-uppercut finisher.' },
+          { name: 'Heavy Bag Combo 4: Jab-Cross-Hook-Cross', youtube: 'https://iframe.videodelivery.net/00074503fc84ac3bb695b171c46ce253', sets: 3, reps: '6-8', notes: '1-2-3-2, classic.' },
+          { name: 'Heavy Bag Combo 5: Cross-Hook-Cross-Hook', youtube: 'https://iframe.videodelivery.net/1c86638db0263d00669fa161c66ffa7e', sets: 3, reps: '6', notes: 'Power chain — no jab, all hips.' },
+          { name: 'Heavy Bag Double Jab Combo', youtube: 'https://iframe.videodelivery.net/0845f4376a8f007bec3ed9b08ed995eb', sets: 3, reps: '8', notes: 'Two jabs to close distance, set up power.' },
+          { name: 'Heavy Bag Jab-Hook Combo', youtube: 'https://iframe.videodelivery.net/1da2e47e33c5c46f6003150af28e3165', sets: 3, reps: '8', notes: 'Jab then lead hook — same hand, different path.' },
+          { name: 'Heavy Bag Jab-Hook (Body)', youtube: 'https://iframe.videodelivery.net/ffe2ea61ca74d1e4a77c98cdda9fe453', sets: 3, reps: '8', notes: 'Jab high, hook to the body.' },
+          { name: 'Heavy Bag Jab-Uppercut Combo', youtube: 'https://iframe.videodelivery.net/7246e72ac9d3eae671ebebef83b99e2c', sets: 3, reps: '8', notes: 'Jab sets up the uppercut from underneath.' },
+          { name: 'Heavy Bag High-Low Jab Combo', youtube: 'https://iframe.videodelivery.net/a12fc5c618eb15a072a55277e85f28b0', sets: 3, reps: '8', notes: 'Jab head, jab body — level change.' },
+          { name: 'Heavy Bag Cross-Over Combo', youtube: 'https://iframe.videodelivery.net/fe6b99947d8fc52ba3ca771750055182', sets: 3, reps: '8', notes: 'Cross over technique — change lead mid-combo.' },
+          { name: 'Heavy Bag Body Hook - Head Hook - Cross', youtube: 'https://iframe.videodelivery.net/6aee07ce0d803e8a1466ce555762aca2', sets: 3, reps: '6-8', notes: 'Dig body, come up high, finish with cross.' },
+        ],
+      },
+      footwork: {
+        label: 'Footwork & Pivots',
+        exercises: [
+          { name: 'Heavy Bag Pivot Left', youtube: 'https://iframe.videodelivery.net/5ae853905b5cb0d2bb3b4a60b18761a6', sets: 3, reps: '30 sec', notes: 'Pivot on lead foot, face the new angle.' },
+          { name: 'Heavy Bag Pivot Right', youtube: 'https://iframe.videodelivery.net/850509eb4b7c264655efcfe0ad1f4771', sets: 3, reps: '30 sec', notes: 'Pivot right, cut off the ring.' },
+          { name: 'Heavy Bag Pivot Left + Combo', youtube: 'https://iframe.videodelivery.net/26b876bae124c6a4f28e8c0f67ca8aa4', sets: 3, reps: '6-8', notes: 'Pivot then fire a punch chain.' },
+          { name: 'Heavy Bag Step-Through Combo', youtube: 'https://iframe.videodelivery.net/4df50795808a665f966f3dc11c159240', sets: 3, reps: '6-8', notes: 'Step through the bag — full body forward drive.' },
+        ],
+      },
+      defense: {
+        label: 'Defense (Slip / Roll)',
+        exercises: [
+          { name: 'Heavy Bag Slip + Combo', youtube: 'https://iframe.videodelivery.net/d0fbf32ce6417633bd90f4d8ad891594', sets: 3, reps: '6-8', notes: 'Slip an imagined punch, counter with combo.' },
+          { name: 'Heavy Bag Roll + Combo', youtube: 'https://iframe.videodelivery.net/1254151eef8ea666dde70f4840466518', sets: 3, reps: '6-8', notes: 'Roll under imagined hook, come up with counter combo.' },
+        ],
+      },
+      conditioning: {
+        label: 'Boxing Conditioning',
+        exercises: [
+          { name: 'Shadow Boxing with 3lb Weights', youtube: 'https://iframe.videodelivery.net/89bb831e6a4152bf47325a81183e518c', sets: 3, duration: '3', durationUnit: 'min', notes: 'Light weights in hand, full shadow boxing. Keep form.' },
+          { name: 'Heavy Bag Burpee Combo', youtube: 'https://iframe.videodelivery.net/e89e249cf819b1e9e1f781c28a0d097f', sets: 4, reps: '30 sec', notes: 'Punch combo → burpee → back to bag.' },
+          { name: 'Heavy Bag Hop-Hop-Squat Combo', youtube: 'https://iframe.videodelivery.net/e50488c0ec987a2c612408c9cd1b2861', sets: 4, reps: '30 sec', notes: 'Hop twice, squat, back to combo.' },
+          { name: 'Heavy Bag Split-Jump Combo', youtube: 'https://iframe.videodelivery.net/dc80a55b2f286db4ee2b25a61c268f71', sets: 4, reps: '30 sec', notes: 'Split jumps into bag combo — legs + punches.' },
+          { name: 'Heavy Bag Ride the Bike', youtube: 'https://iframe.videodelivery.net/c4f675af190281c7b54e7f548213134b', sets: 3, duration: '1', durationUnit: 'min', notes: 'Cardio drill on the bag — constant stepping.' },
+        ],
+      },
+      speedBag: {
+        label: 'Speed Bag',
+        exercises: [
+          { name: 'Speed Bag (Boxing)', youtube: 'https://iframe.videodelivery.net/22c265f6b95239132291a5909cba3172', sets: 3, duration: '3', durationUnit: 'min', notes: 'Classic rhythm — small circles, keep hands high.' },
+          { name: 'Speed Bag Paw (Learning)', youtube: 'https://iframe.videodelivery.net/d9048f62a5e6154be8ef7f0bd278cf2a', sets: 3, duration: '3', durationUnit: 'min', notes: 'Beginner drill — use paw/open hand to build timing.' },
+          { name: 'Speed Bag Rapid Fire', youtube: 'https://iframe.videodelivery.net/84af3d6a6a288d05203fc314a268ee94', sets: 3, reps: '30 sec', notes: 'Max speed interval — bursts of punches.' },
+          { name: 'Speed Bag with Back Fist', youtube: 'https://iframe.videodelivery.net/24b860fce7c020e041f72e925e95fb1c', sets: 3, duration: '3', durationUnit: 'min', notes: 'Traditional rhythm + back-fist variation.' },
+          { name: 'Speed Bag with Elbow', youtube: 'https://iframe.videodelivery.net/0efef15b0bf5293f1721fee25a3fe9c8', sets: 3, duration: '3', durationUnit: 'min', notes: 'Mixed rhythm: punch + horizontal elbow.' },
+        ],
+      },
+    },
+  },
 };
 
 // ── Training Format Templates ──
