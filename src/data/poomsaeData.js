@@ -5,41 +5,41 @@
 
 export const poomsaeData = {
 
-  kichoIl: {
-    name: "Kicho Il Jang",
-    korean: "기본 일장",
+  kichoOne: {
+    name: "Kicho I (Blocks, Balance)",
+    korean: null,
     belt: "white",
     beltLabel: "White Belt",
     trigram: null,
-    meaning: "Foundation — Blocks",
+    meaning: "Foundation — Blocks + Balance",
     totalMoves: 20,
     coachingNotes: [
       "Low block, middle block, high block in front stance — chamber visible every time, no floating hands.",
-      "Stance length and width must stay consistent — Kicho is a stance test disguised as a form.",
-      "Slow is correct, fast is earned — pauses between techniques should look deliberate, not tired.",
+      "Stance length and width must stay consistent — this form is a stance test disguised as a form.",
+      "Balance is the theme — controlled pauses in transitions are as important as the techniques themselves.",
     ],
     sections: [
-      { name: "Kicho Il Jang — First Half", video: null },
-      { name: "Kicho Il Jang — Whole Form", video: null },
+      { name: "Kicho I — First Half", video: null },
+      { name: "Kicho I — Whole Form", video: null },
     ],
   },
 
-  kichoEe: {
-    name: "Kicho Ee Jang",
-    korean: "기본 이장",
+  kichoTwo: {
+    name: "Kicho II (Kicks, Control)",
+    korean: null,
     belt: "high-white",
     beltLabel: "High White Belt",
     trigram: null,
-    meaning: "Foundation — Kicks",
+    meaning: "Foundation — Kicks + Control",
     totalMoves: 20,
     coachingNotes: [
       "Front kick chamber must be tight and visible — knee up first, then snap. No round motion.",
       "Recovery stance after the kick matters more than the kick itself — return to front stance cleanly.",
-      "Hands stay chambered while kicking — do not collapse the upper body during leg work.",
+      "Control is the theme — hands stay chambered while kicking, no collapsing the upper body during leg work.",
     ],
     sections: [
-      { name: "Kicho Ee Jang — First Half", video: null },
-      { name: "Kicho Ee Jang — Whole Form", video: null },
+      { name: "Kicho II — First Half", video: null },
+      { name: "Kicho II — Whole Form", video: null },
     ],
   },
 
