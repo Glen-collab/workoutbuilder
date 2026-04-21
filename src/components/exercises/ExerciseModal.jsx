@@ -166,6 +166,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [maCategory, setMaCategory] = useState(null); // selected MA category key
   const [maSubcategory, setMaSubcategory] = useState(null); // selected MA subcategory key
   const [tkdBelt, setTkdBelt] = useState(null); // selected belt for TKD Curriculum view
+  const [curriculumPreviewKey, setCurriculumPreviewKey] = useState(null); // `${section}-${idx}` of previewed video
 
   const isStrength = strengthTypes.includes(blockType);
   const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
@@ -189,6 +190,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     setMaCategory(null);
     setMaSubcategory(null);
     setTkdBelt(null);
+    setCurriculumPreviewKey(null);
     onClose();
   };
 
@@ -325,17 +327,43 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
               {items.length === 0 ? (
                 <p className="text-xs italic text-gray-400 ml-1">No entries yet — film to populate.</p>
               ) : (
-                <div className="flex flex-col gap-1.5">
-                  {items.map((ex, i) => (
-                    <button
-                      key={`${title}-${i}`}
-                      className="text-left bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 hover:border-[#667eea] hover:text-[#667eea] transition-colors"
-                      onClick={() => handleSelect(ex)}
-                    >
-                      {ex.name}
-                      {ex.notes && <span className="block text-xs text-gray-400 mt-0.5">{ex.notes}</span>}
-                    </button>
-                  ))}
+                <div className="flex flex-col gap-2">
+                  {items.map((ex, i) => {
+                    const pkey = `${title}-${i}`;
+                    const isPreviewing = curriculumPreviewKey === pkey;
+                    return (
+                      <div key={pkey}>
+                        <div
+                          className="flex items-center justify-between py-3 px-4 bg-white rounded-[10px] shadow-sm cursor-pointer transition-all duration-150 hover:bg-purple-50 hover:shadow-md"
+                        >
+                          <div className="flex-1" onClick={() => handleSelect(ex)}>
+                            <p className="text-[14px] font-semibold text-gray-700 m-0">{ex.name}</p>
+                            {ex.notes && <p className="text-xs text-gray-400 mt-0.5 mb-0">{ex.notes}</p>}
+                          </div>
+                          {ex.youtube && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); setCurriculumPreviewKey(isPreviewing ? null : pkey); }}
+                              className="border-none rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold text-white ml-2 shrink-0 transition-colors"
+                              style={{ background: isPreviewing ? 'linear-gradient(135deg, #1565c0, #42a5f5)' : 'linear-gradient(135deg, #f5851f, #f6a623)' }}
+                              title={isPreviewing ? 'Hide preview' : 'Preview video'}
+                            >
+                              {isPreviewing ? '✖' : '📹'}
+                            </button>
+                          )}
+                        </div>
+                        {isPreviewing && ex.youtube && (
+                          <div className="mt-1 mb-1 rounded-lg overflow-hidden bg-black" style={{ position: 'relative', paddingTop: '56.25%' }}>
+                            <iframe
+                              src={`${ex.youtube}?preload=metadata`}
+                              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
