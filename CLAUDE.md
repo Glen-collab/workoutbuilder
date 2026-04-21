@@ -64,7 +64,8 @@ src/
 
     screens/
       WelcomeScreen.jsx       # Landing: New Program, Manage Programs, Manage Travel Workouts
-      ProfileSetup.jsx        # Program config: days/week, total weeks, 1RM entry
+                              # (ProfileSetup.jsx removed 2026-04-21 — coaches enter via dashboard,
+                              # Build Program jumps straight to builder with 4×4 defaults)
 
     shared/
       Modal.jsx               # Reusable modal wrapper
@@ -134,7 +135,7 @@ bench, squat, powerClean, deadlift, bodyweight, manual
 ## App Screens & Flow
 
 ```
-WelcomeScreen -> ProfileSetup -> BuilderScreen
+WelcomeScreen -> BuilderScreen
                   |
                   ManagePrograms (load existing)
                   ManageTravelWorkouts (load travel workout into builder)
