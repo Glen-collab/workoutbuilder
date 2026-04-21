@@ -19,7 +19,7 @@ export const poomsaeData = {
       "Balance is the theme — controlled pauses in transitions are as important as the techniques themselves.",
     ],
     sections: [
-      { name: "Kicho I — Whole Form", video: null },
+      { name: "Kicho I — Whole Form", video: "https://iframe.videodelivery.net/f2ccdbe7db446d3405ac5b1b513dc8ee" },
     ],
   },
 
@@ -37,7 +37,7 @@ export const poomsaeData = {
       "Control is the theme — hands stay chambered while kicking, no collapsing the upper body during leg work.",
     ],
     sections: [
-      { name: "Kicho II — Whole Form", video: null },
+      { name: "Kicho II — Whole Form", video: "https://iframe.videodelivery.net/3edae06528b36b66fd3bceb477381f72" },
     ],
   },
 

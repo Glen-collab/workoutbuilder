@@ -164,8 +164,10 @@ export const warmupCategories = {
             { name: 'Cardio Preset 3 - Jump Rope Circuit', duration: '3-5 min', description: 'Jump Rope Single Unders, Jumping Jacks, High Knees, Jump Rope Single Unders', youtube: '' },
 
             // Individual exercises
-            { name: 'Jump Rope (Single Unders)', duration: '2 min', description: 'Basic jump rope', youtube: '' },
-            { name: 'Jump Rope (Double Unders)', duration: '30-60s', description: 'Advanced jump rope', youtube: '' },
+            { name: 'Jump Rope (Single Unders)', duration: '2 min', description: 'Basic jump rope', youtube: 'https://iframe.videodelivery.net/99f2c34db01830ea112caf2b8c5bcbe2' },
+            { name: 'Jump Rope (Double Unders)', duration: '30-60s', description: 'Advanced jump rope', youtube: 'https://iframe.videodelivery.net/87446322ea33a456369df6008ca54e66' },
+            { name: 'Jump Rope (High Knees)', duration: '30-60s', description: 'Jump rope while driving knees high', youtube: 'https://iframe.videodelivery.net/2d9695af9fab0252c692ab575b072422' },
+            { name: 'Jump Rope (Single Leg Hop)', duration: '30s each leg', description: 'One-leg jump rope — ankle + calf conditioning', youtube: 'https://iframe.videodelivery.net/0455070d06e075fdc7e84d87b7721208' },
             { name: 'Treadmill Walk or Jog', duration: '5-10 min', description: 'Light pace warm-up', youtube: '' },
             { name: 'Treadmill Incline Walk', duration: '5 min', description: '3-5% incline', youtube: '' },
             { name: 'Elliptical', duration: '5-10 min', description: 'Low impact cardio', youtube: '' },
@@ -352,6 +354,20 @@ export const warmupCategories = {
             { name: 'Diagonal Run', duration: '2-3 passes', description: 'Multi - Diagonal movement pattern', youtube: '' },
             { name: 'Crossover Hop', duration: '2-3 passes', description: 'Multi - Cross-body hop pattern', youtube: '' },
             { name: 'Zig-Zag Forward-Backward', duration: '2-3 passes', description: 'Multi - Combined directional changes', youtube: '' }
+        ]
+    },
+
+    tire_drills: {
+        label: "Tire Drills",
+        exercises: [
+            { name: 'Tire Double Taps', duration: '30s', description: 'Fast two-foot taps on the tire — ankle snap + rhythm', youtube: 'https://iframe.videodelivery.net/a671409ac999b06f2bf5e2dead1eded0' },
+            { name: 'Tire Jump Shuffle', duration: '30s', description: 'Jump-shuffle in and out of the tire — change direction on the beat', youtube: 'https://iframe.videodelivery.net/181fe5bf9c56bb3fbe72594dd98a85fc' },
+            { name: 'Tire Pushup (Feet on Tire)', duration: '8-10 reps', description: 'Pushup with feet elevated on tire — upper body emphasis', youtube: 'https://iframe.videodelivery.net/0674ed7665948ccc7df37596f86307f6' },
+            { name: 'Tire Pushup (Hands on Tire)', duration: '8-10 reps', description: 'Pushup with hands on tire — decline, chest emphasis', youtube: 'https://iframe.videodelivery.net/d4d6a961d8505d317ee5415fc889c823' },
+            { name: 'Tire Switch Feet', duration: '30s', description: 'Switch lead foot tapping tire — lateral coordination', youtube: 'https://iframe.videodelivery.net/11495ec6de2603c624f22b6a0f0d5e65' },
+            { name: 'Tire Switch Hop Flip', duration: '30s', description: 'Switch hop + flip motion — explosive hip drive', youtube: 'https://iframe.videodelivery.net/0fcc738b9d76bf8a2cc9fbf7814cdd9d' },
+            { name: 'Tire Switch Hops', duration: '30s', description: 'Hop from one side to the other clearing tire each rep', youtube: 'https://iframe.videodelivery.net/a0807af16e6fe368e90586e6de60b02e' },
+            { name: 'Tire Walk Ups', duration: '30s', description: 'Step up onto tire, alternating lead foot — leg warm-up', youtube: 'https://iframe.videodelivery.net/ad3dde8f03cd6a2802232745e4eff658' }
         ]
     },
 

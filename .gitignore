@@ -10,6 +10,9 @@ upload_boxing_videos.sh
 upload_batch2.py
 batch2_uids.txt
 batch2_upload.log
+upload_batch3.py
+batch3_uids.txt
+batch3_upload.log
 new_video_uids.txt
 ma_video_uids.txt
 boxing_video_uids.txt
