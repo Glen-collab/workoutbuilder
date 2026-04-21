@@ -335,9 +335,6 @@ export const martialArtsCategories = {
         label: 'Defensive Combinations',
         exercises: [
           // White belt level
-          { name: 'Step Back, Check Kick', tier: 1, beltMin: 'white', notes: 'Lift knee to block incoming kick' },
-          { name: 'Step Back, Counter Roundhouse', tier: 1, beltMin: 'white', notes: 'Evade then fire' },
-          { name: 'Catch Front Kick, Counter Roundhouse', tier: 1, beltMin: 'white', notes: 'Catch and punish' },
           { name: 'Step Back, Down Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Most basic defense + counter' },
           { name: 'Step Back, Middle Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Block center, counter center' },
           { name: 'Step Back, High Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Block high, counter center' },
