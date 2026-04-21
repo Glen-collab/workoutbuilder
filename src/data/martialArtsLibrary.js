@@ -338,6 +338,9 @@ export const martialArtsCategories = {
           { name: 'Step Back, Check Kick', tier: 1, beltMin: 'white', notes: 'Lift knee to block incoming kick' },
           { name: 'Step Back, Counter Roundhouse', tier: 1, beltMin: 'white', notes: 'Evade then fire' },
           { name: 'Catch Front Kick, Counter Roundhouse', tier: 1, beltMin: 'white', notes: 'Catch and punish' },
+          { name: 'Step Back, Down Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Most basic defense + counter' },
+          { name: 'Step Back, Middle Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Block center, counter center' },
+          { name: 'Step Back, High Block, Reverse Punch', tier: 1, beltMin: 'white', attacker: 'Middle punch', notes: 'Block high, counter center' },
           // Yellow belt level
           { name: 'Angle Step (45°), Counter Side Kick', tier: 1, beltMin: 'yellow', notes: 'Off-angle counter' },
           { name: 'Block + Immediate Counter', tier: 1, beltMin: 'yellow', notes: 'No delay between block and attack' },
@@ -424,9 +427,14 @@ export const martialArtsCategories = {
       basic: {
         label: 'Basic One-Step',
         exercises: [
-          { name: 'Step Back, Down Block, Reverse Punch', beltMin: 'white', attacker: 'Middle punch', notes: 'Most basic defense + counter' },
-          { name: 'Step Back, Middle Block, Reverse Punch', beltMin: 'white', attacker: 'Middle punch', notes: 'Block center, counter center' },
-          { name: 'Step Back, High Block, Reverse Punch', beltMin: 'white', attacker: 'Middle punch', notes: 'Block high, counter center' },
+          // White belt — back-leg kick, land front, reverse punch
+          { name: 'Fighting Stance, Back Leg Front Snap Kick, Reverse Punch', beltMin: 'white', notes: 'Back leg front snap kick — land front, reverse punch' },
+          { name: 'Fighting Stance, Back Leg Roundhouse, Reverse Punch', beltMin: 'white', notes: 'Back leg roundhouse — land front, reverse punch' },
+          { name: 'Fighting Stance, Back Leg Side Kick, Reverse Punch', beltMin: 'white', notes: 'Back leg side kick — land front, reverse punch' },
+          // High white belt — front-leg kick, reverse punch
+          { name: 'Fighting Stance, Front Snap Kick, Reverse Punch', beltMin: 'high-white', notes: 'Front leg front snap kick, reverse punch' },
+          { name: 'Fighting Stance, Roundhouse, Reverse Punch', beltMin: 'high-white', notes: 'Front leg roundhouse, reverse punch' },
+          { name: 'Fighting Stance, Front Side Kick, Reverse Punch', beltMin: 'high-white', notes: 'Front leg side kick, reverse punch' },
         ],
       },
       intermediate: {
@@ -460,6 +468,8 @@ export const martialArtsCategories = {
           { name: 'Hammer Fist Break', beltMin: 'white', type: 'hand', notes: 'First break — downward strike' },
           { name: 'Front Snap Kick Break', beltMin: 'yellow', type: 'kick', notes: 'Ball of foot through board' },
           { name: 'Step Behind Side Kick Break', beltMin: 'white', type: 'kick', notes: 'Entry + side kick power' },
+          { name: 'Front Leg Front Snap Kick Break', beltMin: 'high-white', type: 'kick', notes: 'Front leg snap — ball of foot through board' },
+          { name: 'Cross Punch Break', beltMin: 'high-white', type: 'hand', notes: 'Rear-hand cross punch — power through board' },
           { name: 'Step-in Axe Kick Break', beltMin: 'yellow', type: 'kick', notes: 'Height + downward power' },
           { name: 'Skipping Side Kick Break', beltMin: 'green', type: 'kick', notes: 'Forward momentum + thrust' },
           { name: 'Slide-in Side Kick Break', beltMin: 'green', type: 'kick', notes: 'Slide forward, power through' },
