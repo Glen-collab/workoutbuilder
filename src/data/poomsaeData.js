@@ -5,30 +5,49 @@
 
 export const poomsaeData = {
 
-  kicho: {
-    name: "Kicho",
-    korean: "기본",
+  kichoIl: {
+    name: "Kicho Il Jang",
+    korean: "기본 일장",
     belt: "white",
     beltLabel: "White Belt",
     trigram: null,
-    meaning: "Basics / Foundation",
-    totalMoves: 18,
+    meaning: "Foundation — Blocks",
+    totalMoves: 20,
     coachingNotes: [
-      "Stance integrity first, technique second — if the stance is not stable, everything else is noise. Front stance length and width must stay consistent.",
-      "Chambers must be visible and deliberate — every block and punch starts from a clear chamber (hip or shoulder). No floating hands.",
-      "Slow is correct, fast is earned — beginners rush. Correct forms are intentionally controlled with clean pauses in transitions.",
+      "Low block, middle block, high block in front stance — chamber visible every time, no floating hands.",
+      "Stance length and width must stay consistent — Kicho is a stance test disguised as a form.",
+      "Slow is correct, fast is earned — pauses between techniques should look deliberate, not tired.",
     ],
     sections: [
-      { name: "Kicho — First Half", video: null },
-      { name: "Kicho — Whole Form", video: null },
+      { name: "Kicho Il Jang — First Half", video: null },
+      { name: "Kicho Il Jang — Whole Form", video: null },
+    ],
+  },
+
+  kichoEe: {
+    name: "Kicho Ee Jang",
+    korean: "기본 이장",
+    belt: "high-white",
+    beltLabel: "High White Belt",
+    trigram: null,
+    meaning: "Foundation — Kicks",
+    totalMoves: 20,
+    coachingNotes: [
+      "Front kick chamber must be tight and visible — knee up first, then snap. No round motion.",
+      "Recovery stance after the kick matters more than the kick itself — return to front stance cleanly.",
+      "Hands stay chambered while kicking — do not collapse the upper body during leg work.",
+    ],
+    sections: [
+      { name: "Kicho Ee Jang — First Half", video: null },
+      { name: "Kicho Ee Jang — Whole Form", video: null },
     ],
   },
 
   taegeukIlJang: {
     name: "Taegeuk Il Jang",
     korean: "태극 일장",
-    belt: "high-white",
-    beltLabel: "High White Belt",
+    belt: "yellow",
+    beltLabel: "Yellow Belt",
     trigram: "Geon (Heaven)",
     meaning: "Heaven / Beginnings",
     totalMoves: 18,
@@ -46,8 +65,8 @@ export const poomsaeData = {
   taegeukEeJang: {
     name: "Taegeuk Ee Jang",
     korean: "태극 이장",
-    belt: "yellow",
-    beltLabel: "Yellow Belt",
+    belt: "high-yellow",
+    beltLabel: "High Yellow Belt",
     trigram: "Tae (Lake)",
     meaning: "Joy / Controlled Energy",
     totalMoves: 18,
@@ -65,8 +84,8 @@ export const poomsaeData = {
   taegeukSamJang: {
     name: "Taegeuk Sam Jang",
     korean: "태극 삼장",
-    belt: "high-yellow",
-    beltLabel: "High Yellow Belt",
+    belt: "green",
+    beltLabel: "Green Belt",
     trigram: "Ri (Fire/Sun)",
     meaning: "Fire / Power Development",
     totalMoves: 20,
@@ -84,8 +103,8 @@ export const poomsaeData = {
   taegeukSaJang: {
     name: "Taegeuk Sa Jang",
     korean: "태극 사장",
-    belt: "green",
-    beltLabel: "Green Belt",
+    belt: "high-green",
+    beltLabel: "High Green Belt",
     trigram: "Jin (Thunder)",
     meaning: "Wind / Complexity and Control",
     totalMoves: 20,
@@ -103,8 +122,8 @@ export const poomsaeData = {
   taegeukOhJang: {
     name: "Taegeuk Oh Jang",
     korean: "태극 오장",
-    belt: "high-green",
-    beltLabel: "High Green Belt",
+    belt: "blue",
+    beltLabel: "Blue Belt",
     trigram: "Son (Wind)",
     meaning: "Wind / External Application Begins",
     totalMoves: 20,
@@ -122,8 +141,8 @@ export const poomsaeData = {
   taegeukYookJang: {
     name: "Taegeuk Yook Jang",
     korean: "태극 육장",
-    belt: "blue",
-    beltLabel: "Blue Belt",
+    belt: "high-blue",
+    beltLabel: "High Blue Belt",
     trigram: "Gam (Water)",
     meaning: "Water / Adaptability",
     totalMoves: 19,
@@ -141,8 +160,8 @@ export const poomsaeData = {
   taegeukChilJang: {
     name: "Taegeuk Chil Jang",
     korean: "태극 칠장",
-    belt: "high-blue",
-    beltLabel: "High Blue Belt",
+    belt: "red",
+    beltLabel: "Red Belt",
     trigram: "Gan (Mountain)",
     meaning: "Mountain / Heaviness and Grounding",
     totalMoves: 25,
@@ -160,8 +179,8 @@ export const poomsaeData = {
   taegeukPalJang: {
     name: "Taegeuk Pal Jang",
     korean: "태극 팔장",
-    belt: "red",
-    beltLabel: "Red Belt",
+    belt: "high-red",
+    beltLabel: "High Red Belt",
     trigram: "Gon (Earth/Yin)",
     meaning: "Earth / Culmination of Basics",
     totalMoves: 24,
@@ -176,11 +195,27 @@ export const poomsaeData = {
     ],
   },
 
+  review: {
+    name: "Review",
+    korean: null,
+    belt: "deputy",
+    beltLabel: "Deputy Black Belt",
+    trigram: null,
+    meaning: "Review of all prior forms before Black Belt test",
+    totalMoves: null,
+    coachingNotes: [
+      "No new form at this level — demonstrate every Taegeuk + Kicho from memory, clean and controlled.",
+      "Judges look for integration: what was raw at each earlier belt should now look unified and effortless.",
+      "This is where weaknesses in early forms become obvious — use this belt to fix them before Koryo.",
+    ],
+    sections: [],
+  },
+
   koryo: {
     name: "Koryo",
     korean: "고려",
-    belt: "high-red",
-    beltLabel: "High Red Belt / 1st Dan",
+    belt: "black",
+    beltLabel: "Black Belt / 1st Dan",
     trigram: null,
     meaning: "Centering Power / Black Belt Foundation",
     totalMoves: 30,
@@ -198,8 +233,8 @@ export const poomsaeData = {
   keumgang: {
     name: "Keumgang",
     korean: "금강",
-    belt: "deputy",
-    beltLabel: "Deputy Black Belt / 2nd Dan",
+    belt: "dan2",
+    beltLabel: "2nd Dan",
     trigram: null,
     meaning: "Diamond / Immovable Strength",
     totalMoves: 27,
@@ -217,8 +252,8 @@ export const poomsaeData = {
   taebaek: {
     name: "Taebaek",
     korean: "태백",
-    belt: "black",
-    beltLabel: "Black Belt / 3rd Dan",
+    belt: "dan3",
+    beltLabel: "3rd Dan",
     trigram: null,
     meaning: "Sacred Mountain / Refined Intent",
     totalMoves: 26,
