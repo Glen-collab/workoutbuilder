@@ -1729,6 +1729,28 @@ export const exerciseCategories = {
                     // --- No video ---
                 ]
             },
+            cardio: {
+                label: "Cardio",
+                exercises: [
+                    { name: 'Jump Rope (Single Unders)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99f2c34db01830ea112caf2b8c5bcbe2' },
+                    { name: 'Jump Rope (Double Unders)', movement: ['Cardio', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/87446322ea33a456369df6008ca54e66' },
+                    { name: 'Jump Rope (High Knees)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2d9695af9fab0252c692ab575b072422' },
+                    { name: 'Jump Rope (Single Leg Hop)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0455070d06e075fdc7e84d87b7721208' },
+                ]
+            },
+            tire_drills: {
+                label: "Tire Drills",
+                exercises: [
+                    { name: 'Tire Double Taps', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a671409ac999b06f2bf5e2dead1eded0' },
+                    { name: 'Tire Jump Shuffle', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/181fe5bf9c56bb3fbe72594dd98a85fc' },
+                    { name: 'Tire Pushup (Feet on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0674ed7665948ccc7df37596f86307f6' },
+                    { name: 'Tire Pushup (Hands on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d4d6a961d8505d317ee5415fc889c823' },
+                    { name: 'Tire Switch Feet', movement: ['Agility'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/11495ec6de2603c624f22b6a0f0d5e65' },
+                    { name: 'Tire Switch Hop Flip', movement: ['Agility', 'Power'], intent: ['Activation', 'Power'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0fcc738b9d76bf8a2cc9fbf7814cdd9d' },
+                    { name: 'Tire Switch Hops', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a0807af16e6fe368e90586e6de60b02e' },
+                    { name: 'Tire Walk Ups', movement: ['Lower Body'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ad3dde8f03cd6a2802232745e4eff658' },
+                ]
+            },
             low_impact_agility: {
                 label: "Low Impact Agility",
                 exercises: [
