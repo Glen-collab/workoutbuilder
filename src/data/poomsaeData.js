@@ -1,6 +1,6 @@
 // poomsaeData.js — Form library with video sections and coaching notes
 // No move-by-move text — forms are taught via video demonstration
-// Each form has: first half, second half, whole form video slots
+// Each form has: first half + whole form video slots (full form reinforces first half)
 // Coaching notes from Glen's curriculum for instructor reference
 
 export const poomsaeData = {
@@ -20,7 +20,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Kicho — First Half", video: null },
-      { name: "Kicho — Second Half", video: null },
       { name: "Kicho — Whole Form", video: null },
     ],
   },
@@ -40,7 +39,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Il Jang — First Half", video: null },
-      { name: "Taegeuk Il Jang — Second Half", video: null },
       { name: "Taegeuk Il Jang — Whole Form", video: null },
     ],
   },
@@ -60,7 +58,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Ee Jang — First Half", video: null },
-      { name: "Taegeuk Ee Jang — Second Half", video: null },
       { name: "Taegeuk Ee Jang — Whole Form", video: null },
     ],
   },
@@ -80,7 +77,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Sam Jang — First Half", video: null },
-      { name: "Taegeuk Sam Jang — Second Half", video: null },
       { name: "Taegeuk Sam Jang — Whole Form", video: null },
     ],
   },
@@ -100,7 +96,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Sa Jang — First Half", video: null },
-      { name: "Taegeuk Sa Jang — Second Half", video: null },
       { name: "Taegeuk Sa Jang — Whole Form", video: null },
     ],
   },
@@ -120,7 +115,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Oh Jang — First Half", video: null },
-      { name: "Taegeuk Oh Jang — Second Half", video: null },
       { name: "Taegeuk Oh Jang — Whole Form", video: null },
     ],
   },
@@ -140,7 +134,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Yook Jang — First Half", video: null },
-      { name: "Taegeuk Yook Jang — Second Half", video: null },
       { name: "Taegeuk Yook Jang — Whole Form", video: null },
     ],
   },
@@ -160,7 +153,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Chil Jang — First Half", video: null },
-      { name: "Taegeuk Chil Jang — Second Half", video: null },
       { name: "Taegeuk Chil Jang — Whole Form", video: null },
     ],
   },
@@ -180,7 +172,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taegeuk Pal Jang — First Half", video: null },
-      { name: "Taegeuk Pal Jang — Second Half", video: null },
       { name: "Taegeuk Pal Jang — Whole Form", video: null },
     ],
   },
@@ -200,7 +191,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Koryo — First Half", video: null },
-      { name: "Koryo — Second Half", video: null },
       { name: "Koryo — Whole Form", video: null },
     ],
   },
@@ -220,7 +210,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Keumgang — First Half", video: null },
-      { name: "Keumgang — Second Half", video: null },
       { name: "Keumgang — Whole Form", video: null },
     ],
   },
@@ -240,7 +229,6 @@ export const poomsaeData = {
     ],
     sections: [
       { name: "Taebaek — First Half", video: null },
-      { name: "Taebaek — Second Half", video: null },
       { name: "Taebaek — Whole Form", video: null },
     ],
   },
@@ -270,7 +258,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Kicho — First Half", video: null },
-      { name: "Boxing Kicho — Second Half", video: null },
       { name: "Boxing Kicho — Whole Form", video: null },
     ],
   },
@@ -289,7 +276,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Il Jang — First Half", video: null },
-      { name: "Boxing Il Jang — Second Half", video: null },
       { name: "Boxing Il Jang — Whole Form", video: null },
     ],
   },
@@ -308,7 +294,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Ee Jang — First Half", video: null },
-      { name: "Boxing Ee Jang — Second Half", video: null },
       { name: "Boxing Ee Jang — Whole Form", video: null },
     ],
   },
@@ -326,7 +311,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Sam Jang — First Half", video: null },
-      { name: "Boxing Sam Jang — Second Half", video: null },
       { name: "Boxing Sam Jang — Whole Form", video: null },
     ],
   },
@@ -344,7 +328,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Sa Jang — First Half", video: null },
-      { name: "Boxing Sa Jang — Second Half", video: null },
       { name: "Boxing Sa Jang — Whole Form", video: null },
     ],
   },
@@ -362,7 +345,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Oh Jang — First Half", video: null },
-      { name: "Boxing Oh Jang — Second Half", video: null },
       { name: "Boxing Oh Jang — Whole Form", video: null },
     ],
   },
@@ -379,7 +361,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Yook Jang — First Half", video: null },
-      { name: "Boxing Yook Jang — Second Half", video: null },
       { name: "Boxing Yook Jang — Whole Form", video: null },
     ],
   },
@@ -396,7 +377,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Chil Jang — First Half", video: null },
-      { name: "Boxing Chil Jang — Second Half", video: null },
       { name: "Boxing Chil Jang — Whole Form", video: null },
     ],
   },
@@ -413,7 +393,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Pal Jang — First Half", video: null },
-      { name: "Boxing Pal Jang — Second Half", video: null },
       { name: "Boxing Pal Jang — Whole Form", video: null },
     ],
   },
@@ -430,7 +409,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Koryo — First Half", video: null },
-      { name: "Boxing Koryo — Second Half", video: null },
       { name: "Boxing Koryo — Whole Form", video: null },
     ],
   },
@@ -447,7 +425,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Keumgang — First Half", video: null },
-      { name: "Boxing Keumgang — Second Half", video: null },
       { name: "Boxing Keumgang — Whole Form", video: null },
     ],
   },
@@ -468,7 +445,6 @@ export const boxingForms = {
     ],
     sections: [
       { name: "Boxing Taebaek — First Half", video: null },
-      { name: "Boxing Taebaek — Second Half", video: null },
       { name: "Boxing Taebaek — Whole Form", video: null },
     ],
   },
@@ -498,7 +474,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Kicho — First Half", video: null },
-      { name: "Kickboxing Kicho — Second Half", video: null },
       { name: "Kickboxing Kicho — Whole Form", video: null },
     ],
   },
@@ -516,7 +491,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Il Jang — First Half", video: null },
-      { name: "Kickboxing Il Jang — Second Half", video: null },
       { name: "Kickboxing Il Jang — Whole Form", video: null },
     ],
   },
@@ -534,7 +508,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Ee Jang — First Half", video: null },
-      { name: "Kickboxing Ee Jang — Second Half", video: null },
       { name: "Kickboxing Ee Jang — Whole Form", video: null },
     ],
   },
@@ -552,7 +525,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Sam Jang — First Half", video: null },
-      { name: "Kickboxing Sam Jang — Second Half", video: null },
       { name: "Kickboxing Sam Jang — Whole Form", video: null },
     ],
   },
@@ -569,7 +541,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Sa Jang — First Half", video: null },
-      { name: "Kickboxing Sa Jang — Second Half", video: null },
       { name: "Kickboxing Sa Jang — Whole Form", video: null },
     ],
   },
@@ -586,7 +557,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Oh Jang — First Half", video: null },
-      { name: "Kickboxing Oh Jang — Second Half", video: null },
       { name: "Kickboxing Oh Jang — Whole Form", video: null },
     ],
   },
@@ -603,7 +573,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Yook Jang — First Half", video: null },
-      { name: "Kickboxing Yook Jang — Second Half", video: null },
       { name: "Kickboxing Yook Jang — Whole Form", video: null },
     ],
   },
@@ -620,7 +589,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Chil Jang — First Half", video: null },
-      { name: "Kickboxing Chil Jang — Second Half", video: null },
       { name: "Kickboxing Chil Jang — Whole Form", video: null },
     ],
   },
@@ -637,7 +605,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Pal Jang — First Half", video: null },
-      { name: "Kickboxing Pal Jang — Second Half", video: null },
       { name: "Kickboxing Pal Jang — Whole Form", video: null },
     ],
   },
@@ -659,7 +626,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Koryo — First Half", video: null },
-      { name: "Kickboxing Koryo — Second Half", video: null },
       { name: "Kickboxing Koryo — Whole Form", video: null },
     ],
   },
@@ -678,7 +644,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Keumgang — First Half", video: null },
-      { name: "Kickboxing Keumgang — Second Half", video: null },
       { name: "Kickboxing Keumgang — Whole Form", video: null },
     ],
   },
@@ -700,7 +665,6 @@ export const kickboxingForms = {
     ],
     sections: [
       { name: "Kickboxing Taebaek — First Half", video: null },
-      { name: "Kickboxing Taebaek — Second Half", video: null },
       { name: "Kickboxing Taebaek — Whole Form", video: null },
     ],
   },
