@@ -5,7 +5,6 @@ import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
 import { applyExerciseDefaults } from './data/exerciseDefaults';
 import { BuilderAuthProvider, useBuilderAuth, BuilderLoginScreen } from './components/auth/BuilderAuth';
 import WelcomeScreen from './components/screens/WelcomeScreen';
-import ProfileSetup from './components/screens/ProfileSetup';
 import BuilderScreen from './components/builder/BuilderScreen';
 import BlockTypeSelector from './components/builder/BlockTypeSelector';
 import CircuitTypeSelector from './components/builder/CircuitTypeSelector';
@@ -101,17 +100,12 @@ function BuilderApp({ builderUser, onLogout }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Welcome Screen ──
-  const handleBuildNew = () => setScreen('profile');
-
-  // ── Profile Setup ──
-  const handleProfileComplete = (profile) => {
-    // Clear stale data from any previous program/travel workout load
+  // Coaches enter via their dashboard — skip profile setup, jump straight
+  // to builder with sensible defaults. Days/weeks are editable inside the builder.
+  const handleBuildNew = () => {
     workoutState.clearAll();
-    workoutState.setDaysPerWeek(profile.daysPerWeek || 3);
-    workoutState.setTotalWeeks(profile.totalWeeks || 4);
-    if (profile.mainMaxes) {
-      workoutState.setMainMaxes(profile.mainMaxes);
-    }
+    workoutState.setDaysPerWeek(4);
+    workoutState.setTotalWeeks(4);
     setScreen('builder');
   };
 
@@ -468,13 +462,6 @@ function BuilderApp({ builderUser, onLogout }) {
     <>
       {screen === 'welcome' && (
         <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} builderUser={builderUser} onLogout={onLogout} />
-      )}
-
-      {screen === 'profile' && (
-        <ProfileSetup
-          onComplete={handleProfileComplete}
-          onBack={() => setScreen('welcome')}
-        />
       )}
 
       {overrideLoading && (
