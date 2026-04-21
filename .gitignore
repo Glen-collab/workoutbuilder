@@ -7,6 +7,9 @@ upload_videos.sh
 upload_new_videos.sh
 upload_ma_videos.sh
 upload_boxing_videos.sh
+upload_batch2.py
+batch2_uids.txt
+batch2_upload.log
 new_video_uids.txt
 ma_video_uids.txt
 boxing_video_uids.txt

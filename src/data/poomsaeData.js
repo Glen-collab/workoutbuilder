@@ -38,8 +38,8 @@ export const poomsaeData = {
       "Directional clarity matters more than speed — turns should be crisp at 90/180 degrees with no drifting feet.",
     ],
     sections: [
-      { name: "Taegeuk Il Jang — First Half", video: null },
-      { name: "Taegeuk Il Jang — Whole Form", video: null },
+      { name: "Taegeuk Il Jang — First Half", video: "https://iframe.videodelivery.net/954e1d2a049eb37956e4003516fbd1b5" },
+      { name: "Taegeuk Il Jang — Whole Form", video: "https://iframe.videodelivery.net/4d208457c2749cf74badf2f678619c92" },
     ],
   },
 
@@ -57,8 +57,8 @@ export const poomsaeData = {
       "Kick mechanics must not break stance integrity — even when kicking is introduced, the base stance recovery must be immediate and stable.",
     ],
     sections: [
-      { name: "Taegeuk Ee Jang — First Half", video: null },
-      { name: "Taegeuk Ee Jang — Whole Form", video: null },
+      { name: "Taegeuk Ee Jang — First Half", video: "https://iframe.videodelivery.net/9a8e042109f7db2efb3a4342c821d792" },
+      { name: "Taegeuk Ee Jang — Whole Form", video: "https://iframe.videodelivery.net/ea55d5a70ee0327c99f75153ca661063" },
     ],
   },
 
@@ -76,8 +76,8 @@ export const poomsaeData = {
       "Do not over-rotate hips during punches — over-rotation kills balance. Keep structure over torque.",
     ],
     sections: [
-      { name: "Taegeuk Sam Jang — First Half", video: null },
-      { name: "Taegeuk Sam Jang — Whole Form", video: null },
+      { name: "Taegeuk Sam Jang — First Half", video: "https://iframe.videodelivery.net/b62ee13904f3167592c18ef07b861680" },
+      { name: "Taegeuk Sam Jang — Whole Form", video: "https://iframe.videodelivery.net/c8f1b2baf4bad5c327d1806c30bff1eb" },
     ],
   },
 
@@ -95,8 +95,8 @@ export const poomsaeData = {
       "Transitions define quality more than techniques — judges see movement between moves more than the strikes themselves.",
     ],
     sections: [
-      { name: "Taegeuk Sa Jang — First Half", video: null },
-      { name: "Taegeuk Sa Jang — Whole Form", video: null },
+      { name: "Taegeuk Sa Jang — First Half", video: "https://iframe.videodelivery.net/871b9b8a28f8c53f263f5714116cdf60" },
+      { name: "Taegeuk Sa Jang — Whole Form", video: "https://iframe.videodelivery.net/e490dfbea24547955b23828dae0c9295" },
     ],
   },
 
@@ -114,8 +114,8 @@ export const poomsaeData = {
       "Direction changes must reset posture instantly — no leaning or momentum carryover between sequences.",
     ],
     sections: [
-      { name: "Taegeuk Oh Jang — First Half", video: null },
-      { name: "Taegeuk Oh Jang — Whole Form", video: null },
+      { name: "Taegeuk Oh Jang — First Half", video: "https://iframe.videodelivery.net/5e11f6d0c10d9838abfb709e7fb4fed7" },
+      { name: "Taegeuk Oh Jang — Whole Form", video: "https://iframe.videodelivery.net/ae7782c97b309a8ea15807f05ef2a59a" },
     ],
   },
 
@@ -133,8 +133,8 @@ export const poomsaeData = {
       "Balance recovery speed is a scoring factor — judges look for instant stabilization after dynamic movement.",
     ],
     sections: [
-      { name: "Taegeuk Yook Jang — First Half", video: null },
-      { name: "Taegeuk Yook Jang — Whole Form", video: null },
+      { name: "Taegeuk Yook Jang — First Half", video: "https://iframe.videodelivery.net/9f2d54d0ec2e634fc164de10f7835433" },
+      { name: "Taegeuk Yook Jang — Whole Form", video: "https://iframe.videodelivery.net/0367c37252c88458590eac5ada69ff9e" },
     ],
   },
 
@@ -152,8 +152,8 @@ export const poomsaeData = {
       "Breathing becomes part of execution — exhale timing should align with power moments.",
     ],
     sections: [
-      { name: "Taegeuk Chil Jang — First Half", video: null },
-      { name: "Taegeuk Chil Jang — Whole Form", video: null },
+      { name: "Taegeuk Chil Jang — First Half", video: "https://iframe.videodelivery.net/c5961793179caca8a2ca4fcd108c6b58" },
+      { name: "Taegeuk Chil Jang — Whole Form", video: "https://iframe.videodelivery.net/983f06b59d33b75ae94c20d5ac3311d4" },
     ],
   },
 
@@ -171,8 +171,8 @@ export const poomsaeData = {
       "No technique should look isolated anymore — everything should feel like one continuous system.",
     ],
     sections: [
-      { name: "Taegeuk Pal Jang — First Half", video: null },
-      { name: "Taegeuk Pal Jang — Whole Form", video: null },
+      { name: "Taegeuk Pal Jang — First Half", video: "https://iframe.videodelivery.net/32e8a2c5a17914ed8e89d70471b6939f" },
+      { name: "Taegeuk Pal Jang — Whole Form", video: "https://iframe.videodelivery.net/3abbacf24ea795459d2fde0df7e3aa44" },
     ],
   },
 
@@ -190,8 +190,8 @@ export const poomsaeData = {
       "Power must be calm, not aggressive — judges look for controlled force, not emotional force.",
     ],
     sections: [
-      { name: "Koryo — First Half", video: null },
-      { name: "Koryo — Whole Form", video: null },
+      { name: "Koryo — First Half", video: "https://iframe.videodelivery.net/a2f4a2d89c42ca18c4722ad38c7a2b12" },
+      { name: "Koryo — Whole Form", video: "https://iframe.videodelivery.net/36ae799f03312118b595d9d90a9386c1" },
     ],
   },
 
@@ -209,8 +209,8 @@ export const poomsaeData = {
       "Dual-arm techniques must be symmetrical and equal force — any imbalance is highly visible here.",
     ],
     sections: [
-      { name: "Keumgang — First Half", video: null },
-      { name: "Keumgang — Whole Form", video: null },
+      { name: "Keumgang — First Half", video: "https://iframe.videodelivery.net/821f27d3bfbf34fb463321552a7b483f" },
+      { name: "Keumgang — Whole Form", video: "https://iframe.videodelivery.net/07ac52d07a95da0277ab19839cc645a9" },
     ],
   },
 
@@ -228,8 +228,8 @@ export const poomsaeData = {
       "Stillness between actions becomes a scoring factor — controlled pauses are as important as motion.",
     ],
     sections: [
-      { name: "Taebaek — First Half", video: null },
-      { name: "Taebaek — Whole Form", video: null },
+      { name: "Taebaek — First Half", video: "https://iframe.videodelivery.net/11bfb092f7f5372f62f9515a0f22d85b" },
+      { name: "Taebaek — Whole Form", video: "https://iframe.videodelivery.net/7afa0f1f0ec7ef553f72cb6d6711fd3b" },
     ],
   },
 };

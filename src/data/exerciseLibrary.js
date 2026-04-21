@@ -1246,6 +1246,7 @@ export const exerciseCategories = {
                     { name: 'Air Squat + Push-Up + Jump', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
                     { name: 'Shuttle Sprint + Push-Ups', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Sandbag Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Sandbag'], contraindications: [], youtube: '' },
+                    { name: 'Sandbag Lunge Walks', movement: ['Single Leg'], intent: ['Conditioning'], equipment: ['Sandbag'], contraindications: [], youtube: 'https://iframe.videodelivery.net/be707467d456dfd35c8a238b5110bf27' },
                     { name: 'Sandbag Clean and Carry', movement: ['Full Body'], intent: ['Work Capacity'], equipment: ['Sandbag'], contraindications: [], youtube: '' },
                     { name: 'Bear Crawl + Sprint', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Wall Ball + Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
