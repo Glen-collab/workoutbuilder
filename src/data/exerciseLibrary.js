@@ -879,7 +879,7 @@ export const exerciseCategories = {
                     { name: 'Leg Curl Single Single Double', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0e24e1f0456d206c12309f264eff553b' },
                     { name: 'Leg Extension Pause Drop Set', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aea184f32bbb6dd45b4afe42497b118' },
                     { name: 'Leg Extension Single Single Double', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2da6ce58ccec32f0954edecd485db2ce' },
-                    { name: 'Leg Extension Pause Twice x3 Reps', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/383bbc667f259a4072f783affd337b60' }
+                    { name: 'Leg Extension Pause x45 reps', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/383bbc667f259a4072f783affd337b60' }
                 ]
             },
             corrective: {
