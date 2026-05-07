@@ -435,6 +435,7 @@ function BuilderApp({ builderUser, onLogout }) {
     setDaysPerWeek: workoutState.setDaysPerWeek,
     addBlock: handleAddBlock,
     importBlocks: workoutState.importBlocks,
+    importMultiDay: workoutState.importMultiDay,
     deleteBlock: workoutState.removeBlock,
     toggleCollapse: (blockId) =>
       workoutState.updateBlock(blockId, {

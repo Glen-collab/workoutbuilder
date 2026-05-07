@@ -19,14 +19,33 @@ const HINTS = `Tip: tag your blocks so they convert cleanly.
     - 15 KB swings
   WARMUP / COOLDOWN / MOBILITY  -> use these for non-strength blocks
 
-You can also paste raw text from GPT, a PDF screenshot summary,
-or a magazine page — the parser will do its best.`;
+For multi-day paste, label each day:
+  Day 1 - Push:     ...
+  Day 2 - Pull:     ...
+  Day 3 - Legs:     ...
 
-export default function SmartImportModal({ isOpen, onClose, onImport, currentMaxes }) {
+For "auto-fill complementary days" — paste ONE template day,
+pick a split style, and we'll design the rest of the week.`;
+
+const SPLIT_OPTIONS = [
+  { value: 'auto',         label: 'Auto-detect from template' },
+  { value: 'ppl',          label: 'Push / Pull / Legs' },
+  { value: 'upper-lower',  label: 'Upper / Lower' },
+  { value: 'body-part',    label: 'Body part split (chest/back/legs/etc)' },
+];
+
+export default function SmartImportModal({
+  isOpen, onClose, onImportSingle, onImportMulti, currentMaxes,
+  currentWeek = 1, currentDay = 1,
+}) {
   const [text, setText] = useState('');
-  const [mode, setMode] = useState('append');     // append | replace
+  const [parseMode, setParseMode] = useState('single');     // single | multi-day | expand
+  const [expandToDays, setExpandToDays] = useState(4);
+  const [splitStyle, setSplitStyle] = useState('auto');
+  const [appendOrReplace, setAppendOrReplace] = useState('replace');
   const [busy, setBusy] = useState(false);
-  const [result, setResult] = useState(null);     // { blocks, unmapped, warnings, tokens_used }
+  const [result, setResult] = useState(null);
+  const [activeDayIdx, setActiveDayIdx] = useState(0);
   const [error, setError] = useState('');
 
   if (!isOpen) return null;
@@ -36,8 +55,8 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
     setResult(null);
     setError('');
     setBusy(false);
+    setActiveDayIdx(0);
   };
-
   const close = () => { reset(); onClose(); };
 
   const parse = async () => {
@@ -52,13 +71,20 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
       const r = await fetch(`${API_BASE}/workout/parse-import`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ raw_text: text, current_maxes: currentMaxes || null }),
+        body: JSON.stringify({
+          raw_text: text,
+          mode: parseMode,
+          expand_to_days: parseMode === 'expand' ? expandToDays : 1,
+          split_style: parseMode === 'expand' ? splitStyle : 'auto',
+          current_maxes: currentMaxes || null,
+        }),
       });
       const data = await r.json();
       if (!r.ok || !data.success) {
         setError(data.error || `Parse failed (${r.status}).`);
       } else {
         setResult(data);
+        setActiveDayIdx(0);
       }
     } catch (e) {
       setError(`Network error: ${e.message}`);
@@ -69,7 +95,12 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
 
   const accept = () => {
     if (!result) return;
-    onImport(result.blocks, mode);
+    const days = result.days || [];
+    if (days.length <= 1) {
+      onImportSingle(days[0]?.blocks || result.blocks || [], appendOrReplace);
+    } else {
+      onImportMulti(days, currentWeek, currentDay, appendOrReplace);
+    }
     close();
   };
 
@@ -82,11 +113,11 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
         className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200 sticky top-0 bg-white rounded-t-2xl">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200 sticky top-0 bg-white rounded-t-2xl z-10">
           <div>
             <h3 className="text-xl font-bold text-gray-800">Smart Import</h3>
             <p className="text-[12px] text-gray-500 mt-0.5">
-              Paste a workout — Claude maps every exercise to your library.
+              Paste a workout — Claude maps it to your library and (optionally) generates the rest of the week.
             </p>
           </div>
           <button
@@ -100,13 +131,72 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
         <div className="p-6 space-y-4">
           {!result && (
             <>
+              {/* Mode picker */}
+              <div className="flex flex-col gap-2">
+                <label className="text-[13px] font-semibold text-gray-700">What did you paste?</label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <ModeCard
+                    active={parseMode === 'single'}
+                    title="Single day"
+                    sub="One workout — drops into the current day."
+                    onClick={() => setParseMode('single')}
+                  />
+                  <ModeCard
+                    active={parseMode === 'multi-day'}
+                    title="Multi-day paste"
+                    sub="Day 1 / Day 2 / etc. — split into successive days."
+                    onClick={() => setParseMode('multi-day')}
+                  />
+                  <ModeCard
+                    active={parseMode === 'expand'}
+                    title="Auto-fill week"
+                    sub="One template day — Claude designs the rest."
+                    onClick={() => setParseMode('expand')}
+                  />
+                </div>
+              </div>
+
+              {parseMode === 'expand' && (
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[12px] font-semibold text-emerald-900">Total days</label>
+                    <select
+                      value={expandToDays}
+                      onChange={(e) => setExpandToDays(Number(e.target.value))}
+                      className="text-[13px] px-2 py-2 rounded-lg border border-emerald-300 bg-white"
+                    >
+                      {[2,3,4,5,6,7].map(n => <option key={n} value={n}>{n} days</option>)}
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[12px] font-semibold text-emerald-900">Split style</label>
+                    <select
+                      value={splitStyle}
+                      onChange={(e) => setSplitStyle(e.target.value)}
+                      className="text-[13px] px-2 py-2 rounded-lg border border-emerald-300 bg-white"
+                    >
+                      {SPLIT_OPTIONS.map(opt => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Paste a workout here (GPT response, magazine page, your own scribbles)…"
-                className="w-full min-h-[260px] p-3 border border-gray-300 rounded-xl text-[14px] font-mono leading-snug focus:outline-none focus:border-[#667eea] focus:ring-2 focus:ring-[#667eea]/20"
+                placeholder={
+                  parseMode === 'multi-day'
+                    ? "Day 1 - Push:\n  Bench 5x5 @75%\n  ...\n\nDay 2 - Pull:\n  Deadlift 5x3 @80%\n  ..."
+                    : parseMode === 'expand'
+                    ? "Paste ONE template day. Claude will use it as the seed and design the rest of the week to match."
+                    : "Paste a workout here (GPT response, magazine page, your own scribbles)…"
+                }
+                className="w-full min-h-[220px] p-3 border border-gray-300 rounded-xl text-[14px] font-mono leading-snug focus:outline-none focus:border-[#667eea] focus:ring-2 focus:ring-[#667eea]/20"
                 disabled={busy}
               />
+
               <details className="text-[12px] text-gray-600">
                 <summary className="cursor-pointer font-semibold text-[#667eea]">Formatting hints</summary>
                 <pre className="whitespace-pre-wrap mt-2 bg-gray-50 p-3 rounded-lg">{HINTS}</pre>
@@ -131,7 +221,9 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
                   onClick={parse}
                   disabled={busy || !text.trim()}
                 >
-                  {busy ? 'Parsing…' : 'Parse Workout'}
+                  {busy
+                    ? (parseMode === 'expand' ? 'Designing the week…' : 'Parsing…')
+                    : (parseMode === 'expand' ? 'Generate Week' : 'Parse Workout')}
                 </button>
               </div>
             </>
@@ -140,8 +232,12 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
           {result && (
             <ImportPreview
               result={result}
-              mode={mode}
-              setMode={setMode}
+              activeDayIdx={activeDayIdx}
+              setActiveDayIdx={setActiveDayIdx}
+              appendOrReplace={appendOrReplace}
+              setAppendOrReplace={setAppendOrReplace}
+              currentWeek={currentWeek}
+              currentDay={currentDay}
               onBack={() => setResult(null)}
               onAccept={accept}
             />
@@ -152,25 +248,70 @@ export default function SmartImportModal({ isOpen, onClose, onImport, currentMax
   );
 }
 
-function ImportPreview({ result, mode, setMode, onBack, onAccept }) {
-  const { blocks, unmapped = [], warnings = [], tokens_used } = result;
-  const unmatched = blocks.flatMap((b, bi) =>
-    (b.exercises || [])
-      .map((ex, ei) => ({ ex, bi, ei }))
-      .filter(({ ex }) => ex.matched === false)
+function ModeCard({ active, title, sub, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={
+        "text-left p-3 rounded-xl border transition-all " +
+        (active
+          ? "border-[#667eea] bg-indigo-50 ring-2 ring-[#667eea]/20"
+          : "border-gray-200 bg-white hover:border-gray-300")
+      }
+    >
+      <div className="text-[13px] font-semibold text-gray-800">{title}</div>
+      <div className="text-[11px] text-gray-500 mt-1 leading-tight">{sub}</div>
+    </button>
   );
+}
+
+function ImportPreview({
+  result, activeDayIdx, setActiveDayIdx,
+  appendOrReplace, setAppendOrReplace,
+  currentWeek, currentDay, onBack, onAccept,
+}) {
+  const days = result.days || [];
+  const isMulti = days.length > 1;
+  const day = days[activeDayIdx] || { name: '', blocks: [] };
+
+  const totalUnmatched = days.reduce((acc, d) => {
+    return acc + (d.blocks || []).filter(b => (b.exercises || []).some(ex => ex.matched === false)).length;
+  }, 0);
 
   return (
     <>
       <div className="bg-emerald-50 border border-emerald-200 px-4 py-3 rounded-xl text-[13px] text-emerald-900">
-        <span className="font-semibold">Parsed {blocks.length} block{blocks.length !== 1 ? 's' : ''}.</span>
-        {unmatched.length > 0 && (
-          <span> {unmatched.length} exercise{unmatched.length !== 1 ? 's' : ''} need a manual library match (highlighted yellow below).</span>
+        <span className="font-semibold">
+          Parsed {days.length} day{days.length !== 1 ? 's' : ''}
+          {' · '}
+          {days.reduce((a, d) => a + (d.blocks || []).length, 0)} total blocks.
+        </span>
+        {totalUnmatched > 0 && (
+          <span> {totalUnmatched} block{totalUnmatched !== 1 ? 's' : ''} contain exercises needing a manual library match (highlighted yellow).</span>
         )}
       </div>
 
-      <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1">
-        {blocks.map((b, i) => (
+      {isMulti && (
+        <div className="flex gap-1 overflow-x-auto pb-1 -mx-1 px-1">
+          {days.map((d, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveDayIdx(i)}
+              className={
+                "px-3 py-1.5 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-colors " +
+                (i === activeDayIdx
+                  ? "bg-[#667eea] text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200")
+              }
+            >
+              {d.name || `Day ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+        {(day.blocks || []).map((b, i) => (
           <div key={i} className="border border-gray-200 rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
               <span className="font-semibold text-[13px] text-[#667eea] uppercase tracking-wide">
@@ -208,54 +349,51 @@ function ImportPreview({ result, mode, setMode, onBack, onAccept }) {
         ))}
       </div>
 
-      {warnings.length > 0 && (
+      {(result.warnings || []).length > 0 && (
         <div className="bg-amber-50 border border-amber-200 px-3 py-2 rounded-lg text-[12px] text-amber-900">
           <div className="font-semibold mb-1">Notes from the parser:</div>
           <ul className="list-disc list-inside space-y-0.5">
-            {warnings.map((w, i) => <li key={i}>{w}</li>)}
+            {result.warnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
 
-      {unmapped.length > 0 && (
-        <details className="text-[12px] text-gray-600">
-          <summary className="cursor-pointer font-semibold">Suggested matches for unmapped items ({unmapped.length})</summary>
-          <ul className="mt-2 space-y-1.5">
-            {unmapped.map((u, i) => (
-              <li key={i} className="bg-gray-50 px-2 py-1.5 rounded">
-                <span className="font-medium">"{u.user_text}"</span>
-                {u.guesses && u.guesses.length > 0 && (
-                  <span className="text-gray-500"> &rarr; {u.guesses.join(', ')}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </details>
-      )}
-
-      <div className="flex items-center gap-3 pt-2 border-t border-gray-200">
-        <label className="text-[13px] text-gray-700 flex items-center gap-1.5 cursor-pointer">
-          <input
-            type="radio"
-            checked={mode === 'append'}
-            onChange={() => setMode('append')}
-          />
-          Append to current day
-        </label>
-        <label className="text-[13px] text-gray-700 flex items-center gap-1.5 cursor-pointer">
-          <input
-            type="radio"
-            checked={mode === 'replace'}
-            onChange={() => setMode('replace')}
-          />
-          Replace current day
-        </label>
-        {tokens_used && (
-          <span className="ml-auto text-[10px] text-gray-400">
-            {tokens_used.input}+{tokens_used.output} tokens
-          </span>
+      <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 space-y-2">
+        <div className="text-[12px] font-semibold text-gray-700">
+          {isMulti
+            ? `Where should the ${days.length} days land?`
+            : 'How should this drop into the current day?'}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] text-gray-700 flex items-center gap-2 cursor-pointer">
+            <input type="radio" checked={appendOrReplace === 'replace'} onChange={() => setAppendOrReplace('replace')} />
+            <span>
+              {isMulti
+                ? `Replace days starting at W${currentWeek} D${currentDay}`
+                : 'Replace current day'}
+            </span>
+          </label>
+          <label className="text-[13px] text-gray-700 flex items-center gap-2 cursor-pointer">
+            <input type="radio" checked={appendOrReplace === 'append'} onChange={() => setAppendOrReplace('append')} />
+            <span>
+              {isMulti
+                ? 'Append to existing days (each parsed day adds to its target day)'
+                : 'Append to current day'}
+            </span>
+          </label>
+        </div>
+        {isMulti && (
+          <div className="text-[11px] text-gray-500 mt-1">
+            Lands at W{currentWeek} D{currentDay}. If the week runs out of days, it rolls into next week (program length expands automatically).
+          </div>
         )}
       </div>
+
+      {result.tokens_used && (
+        <div className="text-[10px] text-gray-400 text-right">
+          {result.tokens_used.input}+{result.tokens_used.output} tokens
+        </div>
+      )}
 
       <div className="flex gap-2 justify-end pt-1">
         <button
@@ -268,7 +406,7 @@ function ImportPreview({ result, mode, setMode, onBack, onAccept }) {
           className="px-5 py-2.5 text-[14px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white rounded-xl hover:opacity-90 transition-opacity"
           onClick={onAccept}
         >
-          {mode === 'replace' ? 'Replace Day' : 'Add Blocks'}
+          {isMulti ? `Add ${days.length} Days` : (appendOrReplace === 'replace' ? 'Replace Day' : 'Add Blocks')}
         </button>
       </div>
     </>

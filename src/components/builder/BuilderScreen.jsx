@@ -36,6 +36,7 @@ export default function BuilderScreen({
     setDaysPerWeek,
     addBlock,
     importBlocks,
+    importMultiDay,
     deleteBlock,
     toggleCollapse,
     insertAbove,
@@ -240,7 +241,10 @@ export default function BuilderScreen({
         isOpen={smartImportOpen}
         onClose={() => setSmartImportOpen(false)}
         currentMaxes={mainMaxes}
-        onImport={(blocks, mode) => importBlocks(blocks, mode)}
+        currentWeek={currentWeek}
+        currentDay={currentDay}
+        onImportSingle={(blocks, mode) => importBlocks(blocks, mode)}
+        onImportMulti={(days, startWeek, startDay, mode) => importMultiDay(days, startWeek, startDay, mode)}
       />
     </div>
   );

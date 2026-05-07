@@ -128,6 +128,52 @@ export default function useWorkoutState() {
     setWorkoutBlocks((prev) => (mode === 'replace' ? stamped : [...prev, ...stamped]));
   }, [blockIdCounter]);
 
+  // Drop multiple days of parsed blocks into consecutive day slots.
+  // days: [{ name, blocks }, ...]
+  // Starts at startWeek/startDay, walks day by day. Auto-expands totalWeeks
+  // and daysPerWeek if the run goes past the current program size.
+  // mode='replace' overwrites existing blocks per day; 'append' adds.
+  const importMultiDay = useCallback((days, startWeek = 1, startDay = 1, mode = 'replace') => {
+    if (!Array.isArray(days) || days.length === 0) return;
+    let nextId = blockIdCounter;
+    const stampDay = (blocks) => blocks.map((b) => {
+      const id = nextId++;
+      return { ...b, id, collapsed: false };
+    });
+
+    // Save the currently-open day so its edits aren't lost
+    setAllWorkouts((prev) => {
+      const updated = { ...prev, [`${currentWeek}-${currentDay}`]: [...workoutBlocksRef.current] };
+      let week = startWeek;
+      let day = startDay;
+      let maxWeek = totalWeeks;
+      let maxDay = daysPerWeek;
+      for (const d of days) {
+        const stamped = stampDay(d.blocks || []);
+        const key = `${week}-${day}`;
+        const existing = updated[key] || [];
+        updated[key] = mode === 'replace' ? stamped : [...existing, ...stamped];
+        if (week > maxWeek) maxWeek = week;
+        if (day > maxDay) maxDay = day;
+        day += 1;
+        if (day > daysPerWeek) {
+          day = 1;
+          week += 1;
+        }
+      }
+      // Bump totals if we wrote past the current program span
+      if (maxWeek > totalWeeks) setTotalWeeksState(maxWeek);
+      if (maxDay > daysPerWeek) setDaysPerWeekState(maxDay);
+      // Surface the first imported day so the coach sees it immediately
+      const firstKey = `${startWeek}-${startDay}`;
+      setCurrentWeek(startWeek);
+      setCurrentDay(startDay);
+      setWorkoutBlocks(updated[firstKey] || []);
+      return updated;
+    });
+    setBlockIdCounter(nextId);
+  }, [blockIdCounter, currentWeek, currentDay, totalWeeks, daysPerWeek]);
+
   const removeBlock = useCallback((blockId) => {
     setWorkoutBlocks((prev) => prev.filter((b) => b.id !== blockId));
   }, []);
@@ -400,6 +446,7 @@ export default function useWorkoutState() {
     switchWeek,
     addBlock,
     importBlocks,
+    importMultiDay,
     removeBlock,
     updateBlock,
     addExerciseToBlock,
