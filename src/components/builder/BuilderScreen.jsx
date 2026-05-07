@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import WeekDaySelector from './WeekDaySelector';
 import BlockList from './BlockList';
 import PercentageMaxInputs from '../shared/PercentageMaxInputs';
 import DailySummary from './DailySummary';
+import SmartImportModal from './SmartImportModal';
 
 export default function BuilderScreen({
   workoutState,
@@ -33,6 +35,7 @@ export default function BuilderScreen({
     addWeeks,
     setDaysPerWeek,
     addBlock,
+    importBlocks,
     deleteBlock,
     toggleCollapse,
     insertAbove,
@@ -47,6 +50,8 @@ export default function BuilderScreen({
     removeSet,
     duplicateSet,
   } = workoutState;
+
+  const [smartImportOpen, setSmartImportOpen] = useState(false);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-5">
@@ -85,7 +90,14 @@ export default function BuilderScreen({
               Week {currentWeek} &middot; Day {currentDay}
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => setSmartImportOpen(true)}
+              className="px-4 py-2 text-[13px] font-semibold bg-emerald-500 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-emerald-600 transition-colors duration-200"
+              title="Paste a workout from anywhere — Claude maps it to your library"
+            >
+              ✨ Smart Import
+            </button>
             {onProgressions && (
               <button
                 onClick={onProgressions}
@@ -223,6 +235,13 @@ export default function BuilderScreen({
           </>
         )}
       </div>
+
+      <SmartImportModal
+        isOpen={smartImportOpen}
+        onClose={() => setSmartImportOpen(false)}
+        currentMaxes={mainMaxes}
+        onImport={(blocks, mode) => importBlocks(blocks, mode)}
+      />
     </div>
   );
 }

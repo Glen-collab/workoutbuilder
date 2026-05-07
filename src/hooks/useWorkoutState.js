@@ -114,6 +114,20 @@ export default function useWorkoutState() {
     });
   }, [blockIdCounter]);
 
+  // Bulk-insert parsed blocks from the Smart Import modal.
+  // mode='replace' wipes the current day; mode='append' adds at the end.
+  // Each incoming block gets a fresh local id so existing edit handlers work.
+  const importBlocks = useCallback((incomingBlocks, mode = 'append') => {
+    if (!Array.isArray(incomingBlocks) || incomingBlocks.length === 0) return;
+    let nextId = blockIdCounter;
+    const stamped = incomingBlocks.map((b) => {
+      const id = nextId++;
+      return { ...b, id, collapsed: false };
+    });
+    setBlockIdCounter(nextId);
+    setWorkoutBlocks((prev) => (mode === 'replace' ? stamped : [...prev, ...stamped]));
+  }, [blockIdCounter]);
+
   const removeBlock = useCallback((blockId) => {
     setWorkoutBlocks((prev) => prev.filter((b) => b.id !== blockId));
   }, []);
@@ -385,6 +399,7 @@ export default function useWorkoutState() {
     switchDay,
     switchWeek,
     addBlock,
+    importBlocks,
     removeBlock,
     updateBlock,
     addExerciseToBlock,
