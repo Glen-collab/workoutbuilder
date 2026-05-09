@@ -115,3 +115,12 @@ Unmatched exercises (`matched: false`) keep the user's wording in `name`. They s
 ## API base URL
 
 `SmartImportModal.jsx` reads `window.gwbConfig?.platformApiBase` (when injected by the WordPress plugin) and falls back to `https://app.bestrongagain.com/api`. The endpoint path it hits is `/workout/parse-import`.
+
+---
+
+## Related docs
+
+- **[`bsa-coach-platform/docs/SMART_IMPORT.md`](../../bsa-coach-platform/docs/SMART_IMPORT.md)** — the backend API contract: request/response shapes, the three modes (`single` / `multi-day` / `expand`), the system prompt, exercise-mapping rules, and the gunicorn/nginx timeout requirements.
+- **[`bsa-coach-platform/docs/GYM_ENTITY.md`](../../bsa-coach-platform/docs/GYM_ENTITY.md)** — the gym entity affects which video pool fills in for Smart-Imported exercises (gym partners' uploads layer into the tracker's video resolution).
+- **[`workouttracker/docs/CHATBOT_VOICE_AND_FREE_STARTER.md`](../../workouttracker/docs/CHATBOT_VOICE_AND_FREE_STARTER.md)** — once the coach saves a Smart-Imported program, the tracker resolves the coach's voice from `coachConfig`. This is the chain's next link.
+- **[`bsa-coach-platform/docs/ARCHITECTURE.md`](../../bsa-coach-platform/docs/ARCHITECTURE.md)** — full BSA ecosystem map.
