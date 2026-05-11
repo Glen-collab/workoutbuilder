@@ -42,7 +42,9 @@ export const exerciseCategories = {
                     { name: 'Floor Press (Barbell)', movement: ['Push'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited', 'ROM Restricted'], youtube: 'https://iframe.videodelivery.net/1059b63970964c6d927111d69184587e' },
                     { name: 'American Bar Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdc28fd6ce68ae8ea2a2b333c24945f9' },
                     { name: 'Barbell Band Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Band'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/64a507e40ae3f865530b084f1f935960' },
-                    { name: 'Chain Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Chain'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/4139f25debf1be5a7b543c05fa407676' }
+                    { name: 'Chain Bench Press', movement: ['Push'], intent: ['Power', 'Strength'], equipment: ['Barbell', 'Chain'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/4139f25debf1be5a7b543c05fa407676' },
+                    { name: 'Cambered Bar Barbell Bench', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/cfa03b1495ccba448c6af0522a8517c8' },
+                    { name: 'Cambered Bar Incline Bench Press', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Barbell'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/b9ba02c0e74ecdf9970eac6ea9ed8ca2' }
                 ]
             },
             dumbbell: {
@@ -450,7 +452,8 @@ export const exerciseCategories = {
                     { name: 'Bench Dip Shrugs', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6190775cb3c7e4bce0bfe6e8bf8666a4' },
                     { name: 'Alternating DB Drop and Catch', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aafab424fc0f84a1c2355c41b7c39f1' },
                     { name: 'External DB Release Drops', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dd124c85df2a5fde55b00caf4eb4f390' },
-                    { name: 'Elbow Knee External Rotators', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9cd0652af2db9bc882402ac04cda5c36' }
+                    { name: 'Elbow Knee External Rotators', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9cd0652af2db9bc882402ac04cda5c36' },
+                    { name: 'Band Pull Apart on Rack (Mid + High)', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Band', 'Rack'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5d01c4fa132b7c1565fe4db1df3268c6', geriatric_priority: true }
                 ]
             }
         }
@@ -662,7 +665,8 @@ export const exerciseCategories = {
                     { name: 'Band Triceps Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c3e1d5d28875edbde346306bac55ecb0', geriatric_priority: true },
                     { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d9c131c51073368c11295f328dc89a7a' },
                     { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca2c4c97aed9d1e25e56f116cc357fe1', geriatric_priority: true },
-                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true }
+                    { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true },
+                    { name: 'Dips', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/432beebd80d2eaff4d560e2935e8c6b5' }
                 ]
             }
         }
@@ -757,7 +761,8 @@ export const exerciseCategories = {
                     { name: 'Sumo Deadlift', movement: ['Hinge'], intent: ['Max Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/69d38a9a7bd07858461ae9c8760996bd' },
                     { name: 'Tempo Back Squat', movement: ['Squat'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/b870919041a51d282a067b90e595f3c7' },
                     { name: 'Tempo Deadlift', movement: ['Hinge'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/4f42700b1dbd5871cfb4d3ad6eac93df' },
-                    { name: 'Zercher Squats', movement: ['Squat'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d90f08c9b3a9e94e3627138c9337e768' }
+                    { name: 'Zercher Squats', movement: ['Squat'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d90f08c9b3a9e94e3627138c9337e768' },
+                    { name: 'Squat x10 Pause x10, Squat x10', movement: ['Squat'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/33ee8e451d3021a60dd3271445b0b389' }
                 ]
             },
             dumbbell: {
@@ -879,7 +884,10 @@ export const exerciseCategories = {
                     { name: 'Leg Curl Single Single Double', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0e24e1f0456d206c12309f264eff553b' },
                     { name: 'Leg Extension Pause Drop Set', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aea184f32bbb6dd45b4afe42497b118' },
                     { name: 'Leg Extension Single Single Double', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2da6ce58ccec32f0954edecd485db2ce' },
-                    { name: 'Leg Extension Pause x45 reps', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/383bbc667f259a4072f783affd337b60' }
+                    { name: 'Leg Extension Pause x45 reps', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/383bbc667f259a4072f783affd337b60' },
+                    { name: 'Glute Ham Raise', movement: ['Knee Flexion', 'Hinge'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c537d0ab0cbf74a723f7f04afb0f67ac' },
+                    { name: 'Seated Leg Press', movement: ['Squat'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/458b587c2495647c4b639dd66a50711f', geriatric_priority: true },
+                    { name: 'Seated Single Leg Leg Press', movement: ['Squat'], intent: ['Hypertrophy', 'Stability'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8531e14b012fd9ecc4c30867319f9e2a' }
                 ]
             },
             corrective: {

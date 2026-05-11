@@ -85,7 +85,9 @@ export const mobilityCategories = {
             { name: 'Band Shoulder Dislocates', duration: '10 reps', description: 'Shoulder mobility with band', youtube: 'https://iframe.videodelivery.net/210d4937269e8c06ff0816e553f73ef8' },
             { name: 'Arm Across Chest Stretch', duration: '30s each side', description: 'Shoulder cross-body stretch', youtube: 'https://iframe.videodelivery.net/9a84ab708858b1ae7abf479880fe34c6' },
             { name: 'Child\'s Pose (Lat Stretch)', duration: '60s', description: 'Lat and shoulder stretch', youtube: '' },
-            { name: 'Cat-Cow Stretch', duration: '10 reps', description: 'Shoulder and spine mobility', youtube: 'https://iframe.videodelivery.net/b2007113903d3b11cc57d761bc1f64ac' }
+            { name: 'Cat-Cow Stretch', duration: '10 reps', description: 'Shoulder and spine mobility', youtube: 'https://iframe.videodelivery.net/b2007113903d3b11cc57d761bc1f64ac' },
+            { name: 'Shoulder Mobility Chicken Wing (Band)', duration: '10 reps each side', description: 'Banded chicken wing — internal rotation + scap retraction', youtube: 'https://iframe.videodelivery.net/d19141c61b3772d6c78b716797de6aa4' },
+            { name: 'Shoulder Mobility Chicken Wing + Prisoner', duration: '10 reps each', description: 'Chicken wing combined with prisoner position — pec opener + thoracic', youtube: 'https://iframe.videodelivery.net/c44ded049f1263a6fc61da80224e18ed' }
         ]
     },
 
