@@ -200,10 +200,13 @@ const EXERCISE_DEFAULTS = {
 };
 
 
-// Case-insensitive lookup
+// Case-insensitive + whitespace-insensitive lookup so "Ski Erg" and
+// "SkiErg" both resolve to the same defaults. Mirrors the WorkoutTracker
+// repo's matching exerciseDefaults.js — keep them in sync.
+const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
 const LOOKUP = {};
 for (const [name, defaults] of Object.entries(EXERCISE_DEFAULTS)) {
-  LOOKUP[name.toLowerCase()] = defaults;
+  LOOKUP[normalize(name)] = defaults;
 }
 
 /**
@@ -212,7 +215,7 @@ for (const [name, defaults] of Object.entries(EXERCISE_DEFAULTS)) {
  */
 export function getExerciseDefaults(exerciseName) {
   if (!exerciseName) return {};
-  return LOOKUP[exerciseName.toLowerCase()] || {};
+  return LOOKUP[normalize(exerciseName)] || {};
 }
 
 /**

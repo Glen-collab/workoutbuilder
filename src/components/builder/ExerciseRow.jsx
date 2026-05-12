@@ -252,6 +252,7 @@ export default function ExerciseRow({
                   placeholder="40"
                   units={DISTANCE_UNITS}
                 />
+                <FieldInput label="Calories" value={exercise.calories} onChange={(v) => onUpdate({ calories: v })} placeholder="20" width="64px" />
                 <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
               </div>
@@ -374,6 +375,7 @@ export default function ExerciseRow({
               placeholder="400"
               units={DISTANCE_UNITS}
             />
+            <FieldInput label="Calories" value={exercise.calories} onChange={(v) => onUpdate({ calories: v })} placeholder="20" width="64px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="30s" width="64px" />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
@@ -436,6 +438,7 @@ export default function ExerciseRow({
               placeholder="6.0"
               units={SPEED_UNITS}
             />
+            <FieldInput label="Calories" value={exercise.calories} onChange={(v) => onUpdate({ calories: v })} placeholder="20" width="64px" />
             <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
             <FieldInput label="Incline" value={exercise.incline} onChange={(v) => onUpdate({ incline: v })} placeholder="5%" width="56px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
