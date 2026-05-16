@@ -177,16 +177,13 @@ function BuilderApp({ builderUser, onLogout }) {
 
     let newExercise;
     if (isStrengthBlock(exerciseModalBlockType)) {
-      const now = Date.now();
       newExercise = {
         ...exercise,
         baseMax: suggestBaseMax(exercise),
-        isPercentageBased: true,
-        sets: [
-          { id: now, reps: 10, percentage: 70, isWarmup: false, manualWeight: null },
-          { id: now + 1, reps: 10, percentage: 70, isWarmup: false, manualWeight: null },
-          { id: now + 2, reps: 10, percentage: 70, isWarmup: false, manualWeight: null },
-        ],
+        setsCount: '3',
+        reps: '10',
+        weight: '',
+        sets: [],
       };
     } else {
       newExercise = applyExerciseDefaults({ ...exercise, sets: [] });
