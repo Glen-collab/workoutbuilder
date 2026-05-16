@@ -209,24 +209,43 @@ export default function ExerciseRow({
       {/* STRENGTH BLOCKS */}
       {isStrength && (
         <>
-          {/* Base max selector */}
-          <div className="flex items-center gap-2 mb-2.5 flex-wrap">
-            <span className="text-[13px] text-gray-400">Based on:</span>
-            <select
-              value={exercise.baseMax || 'bench'}
-              onChange={(e) => onUpdate({ baseMax: e.target.value })}
-              className="px-2 py-1 rounded-md border-2 text-[13px] font-semibold cursor-pointer outline-none"
-              style={{
-                borderColor: baseMaxColor.bg,
-                color: baseMaxColor.text,
-                background: baseMaxColor.light,
-              }}
-            >
-              {Object.entries(baseMaxLabels).map(([key, label]) => (
-                <option key={key} value={key}>{label}{key !== 'bodyweight' ? ` (${mainMaxes[key] || 0} lbs)` : ''}</option>
-              ))}
-            </select>
-          </div>
+          {/* Base max selector — only relevant when % is enabled */}
+          {exercise.isPercentageBased && (
+            <div className="flex items-center gap-2 mb-2.5 flex-wrap">
+              <span className="text-[13px] text-gray-400">Based on:</span>
+              <select
+                value={exercise.baseMax || 'bench'}
+                onChange={(e) => onUpdate({ baseMax: e.target.value })}
+                className="px-2 py-1 rounded-md border-2 text-[13px] font-semibold cursor-pointer outline-none"
+                style={{
+                  borderColor: baseMaxColor.bg,
+                  color: baseMaxColor.text,
+                  background: baseMaxColor.light,
+                }}
+              >
+                {Object.entries(baseMaxLabels).map(([key, label]) => (
+                  <option key={key} value={key}>{label}{key !== 'bodyweight' ? ` (${mainMaxes[key] || 0} lbs)` : ''}</option>
+                ))}
+              </select>
+              <button
+                onClick={() => {
+                  const nonWarmupSets = (exercise.sets || []).filter(s => !s.isWarmup);
+                  const repsArr = nonWarmupSets.map(s => s.reps).filter(r => r != null && r !== '');
+                  const uniq = [...new Set(repsArr.map(String))];
+                  const repsStr = uniq.length === 1 ? uniq[0] : repsArr.join(',');
+                  onUpdate({
+                    isPercentageBased: false,
+                    setsCount: exercise.setsCount || String(nonWarmupSets.length || 3),
+                    reps: exercise.reps || repsStr || '',
+                  });
+                }}
+                className="bg-gray-100 text-gray-700 border border-gray-300 rounded-md px-2.5 py-1 text-xs font-semibold cursor-pointer hover:bg-gray-200"
+                title="Switch back to manual sets / reps"
+              >
+                ← Manual
+              </button>
+            </div>
+          )}
 
           {exercise.isPercentageBased && Array.isArray(exercise.sets) ? (
             <div className="mt-2.5">
