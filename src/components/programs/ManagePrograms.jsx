@@ -22,12 +22,37 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
     }
   };
 
-  // Auto-search on open if user is logged in
+  // Re-search every time the modal opens so updates show up immediately.
   useEffect(() => {
-    if (isOpen && builderUser?.email && !searched) {
+    if (isOpen && builderUser?.email) {
       handleSearch();
     }
   }, [isOpen]);
+
+  // After a fresh fetch, auto-expand the most-recently-touched multi-phase
+  // group so a just-updated phase is visible without an extra click.
+  useEffect(() => {
+    if (programs.length === 0) return;
+    const map = new Map();
+    for (const p of programs) {
+      const key = (p.name || '').trim().toLowerCase() || '(untitled)';
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(p);
+    }
+    let topKey = null;
+    let topTime = -Infinity;
+    for (const [key, items] of map) {
+      if (items.length < 2) continue;
+      const t = Math.max(
+        ...items.map((p) => new Date(p.updatedAt || p.createdAt || 0).getTime())
+      );
+      if (t > topTime) {
+        topTime = t;
+        topKey = key;
+      }
+    }
+    if (topKey) setExpandedGroups((prev) => ({ ...prev, [topKey]: true }));
+  }, [programs]);
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleSearch();
