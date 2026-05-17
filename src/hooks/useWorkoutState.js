@@ -378,7 +378,12 @@ export default function useWorkoutState() {
 
   const loadProgram = useCallback((program) => {
     if (!program) return;
-    setLoadedProgram({ id: program.id, accessCode: program.accessCode, name: program.name });
+    setLoadedProgram({
+      id: program.id,
+      accessCode: program.accessCode,
+      name: program.name,
+      nickname: program.nickname || '',
+    });
     if (program.mainMaxes) setMainMaxes(program.mainMaxes);
     if (program.daysPerWeek) setDaysPerWeekState(program.daysPerWeek);
     if (program.totalWeeks) setTotalWeeksState(program.totalWeeks);

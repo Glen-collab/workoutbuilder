@@ -14,6 +14,7 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
   useEffect(() => {
     if (isOpen && loadedProgram) {
       setProgramName(loadedProgram.name || '');
+      setProgramNickname(loadedProgram.nickname || '');
       setRegenerateCode(false); // Reset on open
     }
   }, [isOpen, loadedProgram]);

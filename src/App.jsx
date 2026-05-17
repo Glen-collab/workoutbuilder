@@ -226,13 +226,13 @@ function BuilderApp({ builderUser, onLogout }) {
         // Check if a new code was generated
         const newCode = result?.accessCode || result?.data?.accessCode || workoutState.loadedProgram.accessCode;
         const codeRegenerated = result?.codeRegenerated || result?.data?.codeRegenerated;
-        if (codeRegenerated) {
-          // Update the loaded program with new access code
-          workoutState.loadProgram({
-            ...workoutState.loadedProgram,
-            accessCode: newCode,
-          });
-        }
+        // Always refresh loadedProgram so name/nickname/code stay in sync with the latest submit
+        workoutState.loadProgram({
+          ...workoutState.loadedProgram,
+          accessCode: codeRegenerated ? newCode : workoutState.loadedProgram.accessCode,
+          name: programInfo.programName,
+          nickname: programInfo.programNickname || '',
+        });
         setShowSaveModal(false);
         setSavedAccessCode(newCode);
       } else {
@@ -404,6 +404,7 @@ function BuilderApp({ builderUser, onLogout }) {
       id: program.id,
       accessCode: program.accessCode,
       name: program.name || program.programName,
+      nickname: program.nickname || '',
       allWorkouts: pd.allWorkouts || program.allWorkouts || {},
       mainMaxes: pd.mainMaxes || program.mainMaxes,
       daysPerWeek: pd.daysPerWeek || program.daysPerWeek,
