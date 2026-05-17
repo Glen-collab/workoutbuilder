@@ -226,9 +226,9 @@ function BuilderApp({ builderUser, onLogout }) {
         // Check if a new code was generated
         const newCode = result?.accessCode || result?.data?.accessCode || workoutState.loadedProgram.accessCode;
         const codeRegenerated = result?.codeRegenerated || result?.data?.codeRegenerated;
-        // Always refresh loadedProgram so name/nickname/code stay in sync with the latest submit
-        workoutState.loadProgram({
-          ...workoutState.loadedProgram,
+        // Patch loadedProgram metadata so reopening Update shows the latest
+        // values — without resetting the in-progress workouts state.
+        workoutState.updateLoadedProgramMeta({
           accessCode: codeRegenerated ? newCode : workoutState.loadedProgram.accessCode,
           name: programInfo.programName,
           nickname: programInfo.programNickname || '',

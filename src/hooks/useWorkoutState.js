@@ -413,6 +413,13 @@ export default function useWorkoutState() {
     setWorkoutBlocks(workouts['1-1'] ? collapseAllBlocks(workouts['1-1']) : []);
   }, []);
 
+  // Update just the loadedProgram metadata (name, nickname, accessCode) without
+  // touching workouts state — used after an in-place Update so the in-memory
+  // program reflects the latest submit.
+  const updateLoadedProgramMeta = useCallback((patch) => {
+    setLoadedProgram((prev) => (prev ? { ...prev, ...patch } : prev));
+  }, []);
+
   const clearAll = useCallback(() => {
     setAllWorkouts({});
     setCurrentWeek(1);
@@ -469,6 +476,7 @@ export default function useWorkoutState() {
     setTotalWeeks,
     setMainMaxes,
     loadProgram,
+    updateLoadedProgramMeta,
     clearAll,
     getWorkoutKey,
     getAllWorkoutsForSave,
