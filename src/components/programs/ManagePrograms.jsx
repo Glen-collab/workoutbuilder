@@ -6,6 +6,7 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
   const [programs, setPrograms] = useState([]);
   const [searched, setSearched] = useState(false);
   const [sortBy, setSortBy] = useState('recent');
+  const [expandedGroups, setExpandedGroups] = useState({});
 
   const { listPrograms, loading, error } = apiHook;
 
@@ -32,13 +33,36 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
     if (e.key === 'Enter') handleSearch();
   };
 
-  const sortedPrograms = useMemo(() => {
-    const sorted = [...programs];
-    if (sortBy === 'name') sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
-    else if (sortBy === 'oldest') sorted.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
-    else sorted.sort((a, b) => new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0));
-    return sorted;
+  // Group programs by normalized name. Phases inside each group sort chronologically
+  // (oldest first) so e.g. January -> February -> March reads in phase order.
+  const grouped = useMemo(() => {
+    const map = new Map();
+    for (const p of programs) {
+      const key = (p.name || '').trim().toLowerCase() || '(untitled)';
+      if (!map.has(key)) map.set(key, { key, name: p.name || '(untitled)', items: [] });
+      map.get(key).items.push(p);
+    }
+    const groups = Array.from(map.values()).map((g) => ({
+      ...g,
+      items: [...g.items].sort(
+        (a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0)
+      ),
+    }));
+
+    const recencyOf = (g) =>
+      Math.max(...g.items.map((p) => new Date(p.updatedAt || p.createdAt || 0).getTime()));
+    const oldestOf = (g) =>
+      Math.min(...g.items.map((p) => new Date(p.createdAt || 0).getTime()));
+
+    if (sortBy === 'name') groups.sort((a, b) => a.name.localeCompare(b.name));
+    else if (sortBy === 'oldest') groups.sort((a, b) => oldestOf(a) - oldestOf(b));
+    else groups.sort((a, b) => recencyOf(b) - recencyOf(a));
+
+    return groups;
   }, [programs, sortBy]);
+
+  const toggleGroup = (key) =>
+    setExpandedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Manage Programs" maxWidth="560px">
@@ -74,7 +98,9 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
               {s === 'recent' ? 'Recent' : s === 'name' ? 'A-Z' : 'Oldest'}
             </button>
           ))}
-          <span className="text-xs text-gray-500 self-center ml-auto">{programs.length} programs</span>
+          <span className="text-xs text-gray-500 self-center ml-auto">
+            {programs.length} {programs.length === 1 ? 'program' : 'programs'}
+          </span>
         </div>
       )}
 
@@ -86,26 +112,84 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
         <div className="text-center text-gray-500 py-8 text-sm">No programs found for this email.</div>
       )}
 
-      {!loading && sortedPrograms.length > 0 && (
+      {!loading && grouped.length > 0 && (
         <div className="flex flex-col gap-2.5">
-          {sortedPrograms.map((program) => (
-            <div key={program.id || program.accessCode} className="flex items-center justify-between py-3.5 px-4 rounded-[10px] bg-white/[0.04] border border-white/[0.08]">
-              <div className="flex-1">
-                <div className="text-[15px] font-bold text-gray-200 mb-1">{program.name}</div>
-                <div className="text-xs text-gray-500 flex gap-3">
-                  <span>Code: {program.accessCode}</span>
-                  {program.createdAt && (
-                    <span>{new Date(program.createdAt).toLocaleDateString()}</span>
-                  )}
-                </div>
+          {grouped.map((group) => {
+            // Single-phase groups render flat (no folder chrome).
+            if (group.items.length === 1) {
+              return (
+                <PhaseRow
+                  key={group.items[0].id || group.items[0].accessCode}
+                  program={group.items[0]}
+                  onLoadProgram={onLoadProgram}
+                />
+              );
+            }
+
+            const isExpanded = !!expandedGroups[group.key];
+            return (
+              <div key={group.key}>
+                <button
+                  onClick={() => toggleGroup(group.key)}
+                  className="w-full flex items-center justify-between py-3.5 px-4 rounded-[10px] bg-white/[0.06] border border-white/[0.10] hover:bg-white/[0.09] transition-colors text-left cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-gray-400 text-[11px] w-3 shrink-0">{isExpanded ? '▾' : '▸'}</span>
+                    <span className="text-[15px] font-bold text-gray-200 truncate">{group.name}</span>
+                  </div>
+                  <span className="text-[11px] font-semibold text-[#a78bfa] bg-[#667eea]/15 border border-[#667eea]/30 rounded-full px-2 py-0.5 shrink-0">
+                    {group.items.length} phases
+                  </span>
+                </button>
+                {isExpanded && (
+                  <div className="flex flex-col gap-1.5 mt-1.5 ml-3 pl-3 border-l border-white/[0.08]">
+                    {group.items.map((program) => (
+                      <PhaseRow
+                        key={program.id || program.accessCode}
+                        program={program}
+                        onLoadProgram={onLoadProgram}
+                        compact
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-              <button className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer shrink-0 hover:opacity-90 transition-opacity" onClick={() => onLoadProgram(program)}>
-                Load
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </Modal>
+  );
+}
+
+function PhaseRow({ program, onLoadProgram, compact = false }) {
+  const dateStr = program.createdAt ? new Date(program.createdAt).toLocaleDateString() : null;
+  const primary = compact
+    ? (program.nickname || (dateStr ? `Saved ${dateStr}` : 'Unlabeled phase'))
+    : program.name;
+
+  return (
+    <div className="flex items-center justify-between py-3 px-4 rounded-[10px] bg-white/[0.04] border border-white/[0.08]">
+      <div className="flex-1 min-w-0">
+        <div className="flex items-baseline gap-2 flex-wrap mb-1">
+          <span className={compact ? 'text-[14px] font-semibold text-gray-200' : 'text-[15px] font-bold text-gray-200'}>
+            {primary}
+          </span>
+          {!compact && program.nickname && (
+            <span className="text-[13px] font-medium text-[#a78bfa]">· {program.nickname}</span>
+          )}
+        </div>
+        <div className="text-xs text-gray-500 flex gap-3">
+          <span>Code: {program.accessCode}</span>
+          {dateStr && <span>{dateStr}</span>}
+        </div>
+      </div>
+      <button
+        className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer shrink-0 hover:opacity-90 transition-opacity"
+        onClick={() => onLoadProgram(program)}
+      >
+        Load
+      </button>
+    </div>
   );
 }
