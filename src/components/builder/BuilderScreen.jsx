@@ -17,6 +17,7 @@ export default function BuilderScreen({
   onExitOverrideMode,
   onSaveTravel,
   onProgressions,
+  onVolume,
 }) {
   const {
     currentWeek,
@@ -105,6 +106,14 @@ export default function BuilderScreen({
                 className="px-4 py-2 text-[13px] font-semibold bg-gray-800 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-700 transition-colors duration-200"
               >
                 Progressions
+              </button>
+            )}
+            {onVolume && (
+              <button
+                onClick={onVolume}
+                className="px-4 py-2 text-[13px] font-semibold bg-teal-700 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-teal-800 transition-colors duration-200"
+              >
+                Volume
               </button>
             )}
             {onGoToDashboard && (

@@ -15,6 +15,7 @@ import TravelSaveModal from './components/programs/TravelSaveModal';
 import ManageTravelWorkouts from './components/programs/ManageTravelWorkouts';
 import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
 import ProgressionView from './components/builder/ProgressionView';
+import VolumeView from './components/builder/VolumeView';
 
 export default function App() {
   return (
@@ -326,6 +327,7 @@ function BuilderApp({ builderUser, onLogout }) {
   };
 
   const handleGoToProgressions = () => setScreen('progressions');
+  const handleGoToVolume       = () => setScreen('volume');
 
   const handleGoToDashboard = () => {
     const isLocal = window.location.hostname === 'localhost';
@@ -484,11 +486,21 @@ function BuilderApp({ builderUser, onLogout }) {
           onExitOverrideMode={overrideContext ? handleExitOverrideMode : null}
           onSaveTravel={overrideContext ? null : handleOpenTravelSave}
           onProgressions={handleGoToProgressions}
+          onVolume={handleGoToVolume}
         />
       )}
 
       {screen === 'progressions' && (
         <ProgressionView
+          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          totalWeeks={workoutState.totalWeeks}
+          daysPerWeek={workoutState.daysPerWeek}
+          onBack={() => setScreen('builder')}
+        />
+      )}
+
+      {screen === 'volume' && (
+        <VolumeView
           allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}

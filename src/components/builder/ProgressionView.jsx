@@ -48,21 +48,22 @@ function summariseExtra(exercise) {
 }
 
 function buildDayProgression(day, totalWeeks, allWorkouts) {
+  // Seed the canonical (left-column) block list from the FIRST non-empty week.
+  // Later weeks fill in by position; if an exercise name differs in week N,
+  // the cell renders with the red `.changed-name` highlight so the swap is
+  // obvious without duplicating rows. (Older logic deduped by name+type and
+  // produced repeat rows for programs like Hyrox that rotate exercises.)
   const canonicalBlocks = [];
-  const seen = new Set();
-
+  let seedWeek = 0;
   for (let w = 1; w <= totalWeeks; w++) {
     const key = `${w}-${day}`;
     const blocks = allWorkouts[key] || [];
-    for (const block of blocks) {
-      if (EXCLUDED_TYPES.has(block.type)) continue;
-      if (!block.exercises?.length && block.type !== 'theme') continue;
-
-      const exerciseNames = (block.exercises || []).map((e) => e.name).join('|');
-      const fp = `${block.type}::${exerciseNames}`;
-
-      if (!seen.has(fp)) {
-        seen.add(fp);
+    const usable = blocks.filter(
+      (b) => !EXCLUDED_TYPES.has(b.type) && (b.exercises?.length || b.type === 'theme'),
+    );
+    if (usable.length) {
+      seedWeek = w;
+      for (const block of usable) {
         canonicalBlocks.push({
           type: block.type,
           label: BLOCK_LABELS[block.type] || block.type,
@@ -70,8 +71,10 @@ function buildDayProgression(day, totalWeeks, allWorkouts) {
           exercises: (block.exercises || []).map((e) => e.name),
         });
       }
+      break;
     }
   }
+  if (!seedWeek) return [];
 
   const result = canonicalBlocks.map((cb) => ({
     ...cb,
