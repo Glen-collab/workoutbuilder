@@ -1,10 +1,53 @@
 import { useState, useCallback } from 'react';
+import { getExerciseDefaults } from '../data/exerciseDefaults';
 
 const isLocal = () => window.location.hostname === 'localhost';
 
 function getApiBase() {
   if (isLocal()) return '/api/';
   return 'https://app.bestrongagain.com/api/workout/';
+}
+
+// Walk any payload shape (program data, override data, travel workout, etc.)
+// and backfill missing distanceUnit / durationUnit on cardio-style exercises
+// from the central EXERCISE_DEFAULTS table. Why: trainers can save an entry
+// with `distance: 1000` but no unit selected, which leaves the tracker
+// rendering "1000" with whatever its render-path default is (often `mi`,
+// which is wrong for meter-based machines like SkiErg/Rowing).
+//
+// Conservative: only fills units when the corresponding distance/duration
+// value is truthy AND the unit is empty/missing. Never overwrites a unit
+// the trainer explicitly set, never fills other default fields.
+function fillMissingUnits(node) {
+  if (Array.isArray(node)) {
+    for (const item of node) fillMissingUnits(item);
+    return;
+  }
+  if (node && typeof node === 'object') {
+    if (typeof node.name === 'string') {
+      const defaults = getExerciseDefaults(node.name);
+      if (defaults.distanceUnit && node.distance && !node.distanceUnit) {
+        node.distanceUnit = defaults.distanceUnit;
+      }
+      if (defaults.durationUnit && node.duration && !node.durationUnit) {
+        node.durationUnit = defaults.durationUnit;
+      }
+    }
+    for (const key of Object.keys(node)) {
+      fillMissingUnits(node[key]);
+    }
+  }
+}
+
+// Deep-clone the body so we don't mutate React state in place, then normalize.
+function withNormalizedUnits(body) {
+  try {
+    const cloned = JSON.parse(JSON.stringify(body));
+    fillMissingUnits(cloned);
+    return cloned;
+  } catch {
+    return body;
+  }
 }
 
 export default function useProgramAPI() {
@@ -14,6 +57,7 @@ export default function useProgramAPI() {
   const request = useCallback(async (endpoint, body, maxRetries = 2) => {
     setLoading(true);
     setError(null);
+    const normalizedBody = withNormalizedUnits(body);
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         const controller = new AbortController();
@@ -21,7 +65,7 @@ export default function useProgramAPI() {
         const res = await fetch(`${getApiBase()}${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
+          body: JSON.stringify(normalizedBody),
           signal: controller.signal,
         });
         clearTimeout(timeout);
