@@ -12,7 +12,7 @@ export default function CircuitTypeSelector({ isOpen, onClose, onSelect }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/45 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/45 flex items-center justify-center z-[300]"
       onClick={onClose}
     >
       <div
