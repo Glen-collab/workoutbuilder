@@ -12,12 +12,12 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
   const hasOldCodeFormat = isUpdate && loadedProgram.accessCode && loadedProgram.accessCode.includes('-');
 
   useEffect(() => {
-    if (isOpen && loadedProgram) {
-      setProgramName(loadedProgram.name || '');
-      setProgramNickname(loadedProgram.nickname || '');
-      setRegenerateCode(false); // Reset on open
+    if (isOpen) {
+      setProgramName(loadedProgram?.name || '');
+      setProgramNickname(loadedProgram?.nickname || '');
+      setRegenerateCode(false);
     }
-  }, [isOpen, loadedProgram]);
+  }, [isOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = (e, saveAsNew = false) => {
     e.preventDefault();
