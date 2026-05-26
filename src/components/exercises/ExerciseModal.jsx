@@ -488,6 +488,39 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       return <MuscleGroupGrid onSelect={setSelectedMuscleGroup} />;
     }
 
+    if (selectedMuscleGroup === 'conditioning') {
+      const condCats = {};
+      if (generalMovements) {
+        for (const [k, v] of Object.entries(generalMovements)) {
+          if (k === 'conditioning_general' || k === 'cardio_equipment' || k === 'sprints' || k === 'agility') {
+            condCats[k] = v;
+          }
+        }
+        if (Object.keys(condCats).length === 0) Object.assign(condCats, generalMovements);
+      }
+      if (selectedCategory && condCats[selectedCategory]) {
+        const cat = condCats[selectedCategory];
+        const exercises = Array.isArray(cat) ? cat : (cat.exercises || []);
+        const title = cat?.label || selectedCategory.replace(/_/g, ' ');
+        return (
+          <ExerciseList
+            exercises={exercises}
+            onSelect={handleSelect}
+            onBack={() => setSelectedCategory(null)}
+            title={title}
+          />
+        );
+      }
+      return (
+        <MovementCategoryList
+          categories={condCats}
+          onSelectCategory={setSelectedCategory}
+          title="Conditioning"
+          onBack={() => setSelectedMuscleGroup(null)}
+        />
+      );
+    }
+
     if (!selectedSubcategory) {
       return (
         <SubcategoryTabs

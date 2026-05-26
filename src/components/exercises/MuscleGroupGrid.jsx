@@ -10,6 +10,7 @@ const muscleGroups = [
   { key: 'corrective', emoji: '🔧', label: 'Corrective' },
   { key: 'olympic_lifting', emoji: '🏅', label: 'Olympic' },
   { key: 'first_responder', emoji: '🐸', label: 'Tactical' },
+  { key: 'conditioning', emoji: '🏃', label: 'Conditioning' },
 ];
 
 export default function MuscleGroupGrid({ onSelect }) {

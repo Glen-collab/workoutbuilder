@@ -1,10 +1,13 @@
-export default function MovementCategoryList({ categories, onSelectCategory, title }) {
+export default function MovementCategoryList({ categories, onSelectCategory, title, onBack }) {
   if (!categories) return null;
 
   const keys = Object.keys(categories);
 
   return (
     <div className="p-4">
+      {onBack && (
+        <button className="text-sm text-indigo-500 font-semibold mb-3 bg-transparent border-none cursor-pointer px-0" onClick={onBack}>← Back</button>
+      )}
       {title && <h3 className="text-lg font-bold text-gray-700 mb-4 mt-0">{title}</h3>}
       <div className="flex flex-col gap-2.5">
         {keys.map((key) => {
