@@ -113,7 +113,8 @@ export const warmupCategories = {
             // Other
             { name: 'PVC Pipe Thoracic Extensions', duration: '10 reps', description: 'Upper back mobility', youtube: '' },
             { name: 'PVC Press and Stretch', duration: '8-10 reps', description: 'PVC pipe overhead press and stretch', youtube: '' },
-            { name: 'PVC Y to W', duration: '10 reps', description: 'Shoulder mobility and scapular retraction', youtube: '' }
+            { name: 'PVC Y to W', duration: '10 reps', description: 'Shoulder mobility and scapular retraction', youtube: '' },
+            { name: '90/90 Foam Roller Internal Rotation', duration: '60s each side', description: 'Seated 90/90, foam roller under shin — drive into internal hip rotation', youtube: 'https://iframe.videodelivery.net/743a74f7b34bf0df3f6d4f070c7cd2eb' }
         ]
     },
 
@@ -312,7 +313,8 @@ export const warmupCategories = {
             { name: 'Side Shuffle', duration: '10-20 yards', description: 'Lateral shuffling movement', youtube: '' },
             { name: 'Lunge with Twist', duration: '10-20 yards', description: 'Walking lunge with torso rotation', youtube: '' },
             { name: 'Heel to Butt, Knee to Chest, Lunge', duration: '10-20 yards', description: 'Walking lunge running mechanics', youtube: '' },
-            { name: 'Backward C Skip (Back Up Out Up Out)', duration: '10-20 yards', description: 'Backward C skip pattern', youtube: '' }
+            { name: 'Backward C Skip (Back Up Out Up Out)', duration: '10-20 yards', description: 'Backward C skip pattern', youtube: '' },
+            { name: '90/90 Wall Hamstring Core Activation', duration: '8-10 reps each side', description: 'Feet on wall in 90/90, brace core and press hamstring into wall — hip + core activation', youtube: 'https://iframe.videodelivery.net/a6990869b87c3e5e32c2edc462a9ac77' }
         ]
     },
 
@@ -375,7 +377,9 @@ export const warmupCategories = {
         label: "Stretching",
         exercises: [
             { name: 'Stretching Preset 1', duration: '8-10 min', description: 'Full body stretching routine', youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
-            { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', duration: '10-12 min', description: 'Yoga-based stretching flow: Pyramid, Triangle, Low Lunge, Extended Angle', youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' }
+            { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', duration: '10-12 min', description: 'Yoga-based stretching flow: Pyramid, Triangle, Low Lunge, Extended Angle', youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' },
+            { name: '90/90 Wall Hamstring Core Activation', duration: '8-10 reps each side', description: 'Feet on wall in 90/90, brace core and press hamstring into wall — hip + core activation', youtube: 'https://iframe.videodelivery.net/a6990869b87c3e5e32c2edc462a9ac77' },
+            { name: '90/90 Foam Roller Internal Rotation', duration: '60s each side', description: 'Seated 90/90, foam roller under shin — drive into internal hip rotation', youtube: 'https://iframe.videodelivery.net/743a74f7b34bf0df3f6d4f070c7cd2eb' }
         ]
     }
 };

@@ -251,7 +251,12 @@ export const exerciseCategories = {
                     { name: 'Pullups Jump Assisted Control Down', movement: ['Pull'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/79e7474b683978db4872839d2e96afd6' },
                     { name: 'Kneeling Pallof Press', movement: ['Core'], intent: ['Stability'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6bd68d0b8abeee56212fed711ece292c' },
                     { name: 'Rope Straight Arm Pulldown', movement: ['Pull'], intent: ['Hypertrophy'], equipment: ['Cable'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dee99aea8560aa7489b0eb1679b25ef4' },
-                    { name: 'Pull Ups', movement: ['Pull'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/1248a0392e139d20bbedd1526efb8053' }
+                    { name: 'Pull Ups', movement: ['Pull'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/1248a0392e139d20bbedd1526efb8053' },
+                    { name: 'Inverted Rows Single Arm to Double', movement: ['Pull'], intent: ['Strength', 'Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0fe21e9839170650e4df352dead724d4' },
+                    { name: 'Typewriter Pull-Ups', movement: ['Pull'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/94775c8005cb3b58e8ddc8b7f0abe84e' },
+                    { name: 'Pull-Up Pulses (3+3)', movement: ['Pull'], intent: ['Strength', 'Endurance'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/a3d453d90870bcc6bfe750e8c2f100f1' },
+                    { name: 'Arm Hang Switch Grip', movement: ['Pull'], intent: ['Stability', 'Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/873e9ee3ef3fdca223e4a1f9d2b95ac9' },
+                    { name: 'Handstand Up Down on Plate', movement: ['Push', 'Stability'], intent: ['Stability', 'Strength'], equipment: ['Bodyweight'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/f92802f1decd1b0e356dfa2e2e2b7bfe' }
                 ]
             },
             machine: {
@@ -853,7 +858,9 @@ export const exerciseCategories = {
                     { name: 'Tuck Jumps', movement: ['Jump', 'Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/25fd8cd79e00e1d462bc6b2ad24b6311' },
                     { name: 'Vertical Jumps', movement: ['Jump', 'Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/d5d4077f07f3400cb8f2a02f1c4f7ca2' },
                     { name: 'Wall Sit', movement: ['Squat'], intent: ['Endurance'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/699d7608fad31030d5695395e32872d6', geriatric_priority: true },
-                    { name: 'Stability Ball Single Leg Hip Thrust (Bent)', movement: ['Hip'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ba77294554c442a4bf2d22b6e2a552c1' }
+                    { name: 'Stability Ball Single Leg Hip Thrust (Bent)', movement: ['Hip'], intent: ['Hypertrophy', 'Stability'], equipment: ['Stability Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ba77294554c442a4bf2d22b6e2a552c1' },
+                    { name: 'Slider Lateral Lunge (BW)', movement: ['Lunge', 'Squat'], intent: ['Stability', 'Mobility'], equipment: ['Sliders', 'Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8b55cfc3cb920f8a19750ea6bfad8b90' },
+                    { name: 'Slider Reverse Lunge (BW)', movement: ['Lunge'], intent: ['Stability', 'Strength'], equipment: ['Sliders', 'Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/234ee1e54f2ccac654bfe893c5d2833e' }
                 ]
             },
             machine: {
@@ -866,7 +873,7 @@ export const exerciseCategories = {
                     { name: 'Machine Leg Press', movement: ['Squat'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Machine Hack Squat', movement: ['Squat'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Machine Leg Extension', movement: ['Knee Extension'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
-                    { name: 'Machine Leg Curl (Lying)', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
+                    { name: 'Machine Leg Curl (Lying)', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2b52e817dfcea6d3d89f2b209c7920e9', geriatric_priority: true },
                     { name: 'Double Leg Lying Hamstring Curl', movement: ['Knee Flexion'], intent: ['Hypertrophy', 'Strength'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Machine Leg Curl (Seated)', movement: ['Knee Flexion'], intent: ['Hypertrophy'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
                     { name: 'Single Leg Hamstring Curl (Lying)', movement: ['Knee Flexion'], intent: ['Hypertrophy', 'Stability'], equipment: ['Machine'], contraindications: [], youtube: '', geriatric_priority: true },
@@ -924,7 +931,9 @@ export const exerciseCategories = {
                     { name: 'Ankle and Calf Stretches', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fada35c576694458b40c9700e68c0397', geriatric_priority: true },
                     { name: '90/90 Assisted Internal Hip Rotation', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/72432894188c7ca1444a767a939e33a4', geriatric_priority: true },
                     { name: 'Assisted Box Internal Hip Rotator', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3381f9eb747cc225705e01e17b28c562', geriatric_priority: true },
-                    { name: 'Seated Box Internal Hip Rotation', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a30519dee183ea4db989d07c357f123c', geriatric_priority: true }
+                    { name: 'Seated Box Internal Hip Rotation', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a30519dee183ea4db989d07c357f123c', geriatric_priority: true },
+                    { name: '90/90 Wall Hamstring Core Activation', movement: ['Mobility', 'Hip'], intent: ['Activation', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a6990869b87c3e5e32c2edc462a9ac77', geriatric_priority: true },
+                    { name: '90/90 Foam Roller Internal Rotation', movement: ['Mobility'], intent: ['Mobility', 'Recovery'], equipment: ['Foam Roller'], contraindications: [], youtube: 'https://iframe.videodelivery.net/743a74f7b34bf0df3f6d4f070c7cd2eb', geriatric_priority: true }
                 ]
             }
         }
@@ -1136,6 +1145,7 @@ export const exerciseCategories = {
                     { name: 'V Sit Hold', movement: ['Core', 'Lower Abs'], intent: ['Stability', 'Isometric'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/60fa44b4163a7ec9672694b55ee83b3a' },
                     { name: 'V Ups', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9fac752c41d8d8895dde6c30bb6c88d5' },
                     { name: 'V Ups (Variation)', movement: ['Core', 'Lower Abs'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6030f48bbbdc30195772d8f490d1aa70' },
+                    { name: 'Bar Hang Ins and Outs', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/3282fdc81b493075531139283654b0c1' },
                     // --- No video ---
                     { name: 'Hanging Knee Raises', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Hanging Leg Raises', movement: ['Core', 'Lower Abs'], intent: ['Strength'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
