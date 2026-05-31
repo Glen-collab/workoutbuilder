@@ -458,7 +458,8 @@ export const exerciseCategories = {
                     { name: 'Alternating DB Drop and Catch', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1aafab424fc0f84a1c2355c41b7c39f1' },
                     { name: 'External DB Release Drops', movement: ['Stability'], intent: ['Power', 'Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dd124c85df2a5fde55b00caf4eb4f390' },
                     { name: 'Elbow Knee External Rotators', movement: ['Stability'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9cd0652af2db9bc882402ac04cda5c36' },
-                    { name: 'Band Pull Apart on Rack (Mid + High)', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Band', 'Rack'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5d01c4fa132b7c1565fe4db1df3268c6', geriatric_priority: true }
+                    { name: 'Band Pull Apart on Rack (Mid + High)', movement: ['Pull'], intent: ['Stability', 'Posture'], equipment: ['Band', 'Rack'], contraindications: [], youtube: 'https://iframe.videodelivery.net/5d01c4fa132b7c1565fe4db1df3268c6', geriatric_priority: true },
+                    { name: 'Banded No Money', movement: ['Stability'], intent: ['Stability', 'Posture', 'Corrective'], equipment: ['Band'], contraindications: [], youtube: '', geriatric_priority: true }
                 ]
             }
         }
@@ -766,6 +767,7 @@ export const exerciseCategories = {
                     { name: 'Sumo Deadlift', movement: ['Hinge'], intent: ['Max Strength'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/69d38a9a7bd07858461ae9c8760996bd' },
                     { name: 'Tempo Back Squat', movement: ['Squat'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/b870919041a51d282a067b90e595f3c7' },
                     { name: 'Tempo Deadlift', movement: ['Hinge'], intent: ['Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/4f42700b1dbd5871cfb4d3ad6eac93df' },
+                    { name: 'Trap Bar Deadlift', movement: ['Hinge'], intent: ['Max Strength', 'Hypertrophy'], equipment: ['Barbell'], contraindications: ['No Axial Loading', 'Lower Body Load Limited'], youtube: '' },
                     { name: 'Zercher Squats', movement: ['Squat'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d90f08c9b3a9e94e3627138c9337e768' },
                     { name: 'Squat x10 Pause x10, Squat x10', movement: ['Squat'], intent: ['Hypertrophy', 'Endurance'], equipment: ['Barbell'], contraindications: ['No Axial Loading'], youtube: 'https://iframe.videodelivery.net/33ee8e451d3021a60dd3271445b0b389' }
                 ]
