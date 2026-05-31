@@ -221,46 +221,25 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     nonStrengthTitle = 'Conditioning';
   }
 
-  // Search filtering — strength blocks search ALL exercise pools so you can
-  // add mobility, conditioning, or warmup exercises into supersets/trisets
+  // Search filtering — the search bar is GLOBAL for every block type: it scans
+  // the entire library (strength + warm-up/cool-down + mobility + conditioning/
+  // general movements + martial arts) so e.g. typing "internal" in a Warm Up
+  // block still finds the 90/90 hip drills that live under Mobility/Corrective.
+  // Trade-off: you can pull any exercise into any block — intentional.
   const searchResults = useMemo(() => {
     if (!searchTerm || searchTerm.length < 2) return null;
     const term = searchTerm.toLowerCase();
-    let pool = [];
-
-    if (isStrength) {
-      // Search strength exercises + warmup + mobility + conditioning + general movements + martial arts
-      pool = getAllStrengthExercises();
-      // Add warmup/cooldown exercises
-      const wuCat = exerciseCategories['warm_up'];
-      if (wuCat?.subcategories) {
-        Object.values(wuCat.subcategories).forEach((sub) => {
-          const exs = Array.isArray(sub) ? sub : (sub.exercises || []);
-          pool.push(...exs);
-        });
-      }
-      // Add mobility exercises
-      if (mobilityCategories) {
-        pool.push(...getAllExercisesFromCategories(mobilityCategories));
-      }
-      // Add general movements (conditioning, cardio equipment, etc.)
-      if (generalMovements) {
-        pool.push(...getAllExercisesFromCategories(generalMovements));
-      }
-      // Add martial arts exercises
-      if (martialArtsCategories) {
-        pool.push(...getAllExercisesFromCategories(martialArtsCategories));
-      }
-    } else if (isWarmupCooldown && warmupCooldownKey) {
-      const wuCat = exerciseCategories[warmupCooldownKey];
-      if (wuCat?.subcategories) {
-        Object.values(wuCat.subcategories).forEach((sub) => {
-          const exs = Array.isArray(sub) ? sub : (sub.exercises || []);
-          pool.push(...exs);
-        });
-      }
-    } else if (nonStrengthCategories) {
-      pool = getAllExercisesFromCategories(nonStrengthCategories);
+    // getAllStrengthExercises() already walks every exerciseCategories key,
+    // including warm_up and cool_down, so this covers all strength + warmup pools.
+    let pool = getAllStrengthExercises();
+    if (mobilityCategories) {
+      pool.push(...getAllExercisesFromCategories(mobilityCategories));
+    }
+    if (generalMovements) {
+      pool.push(...getAllExercisesFromCategories(generalMovements));
+    }
+    if (martialArtsCategories) {
+      pool.push(...getAllExercisesFromCategories(martialArtsCategories));
     }
 
     // Deduplicate by name
