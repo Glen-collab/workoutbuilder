@@ -174,6 +174,35 @@ export const mobilityCategories = {
             { name: 'Hurdle Mobility Circuit', duration: '2 rounds', description: 'Forward, lateral, backward sequence', youtube: '' },
             { name: 'Hurdle Sits (Hip Mobility)', duration: '60s each position', description: 'Seated hurdle stretch positions', youtube: '' }
         ]
+    },
+
+    flexibility: {
+        label: "Flexibility",
+        exercises: [
+            // Presets — static-stretch flexibility routines (hold each stretch)
+            { name: 'Flexibility Preset 1 - Full Body Static', duration: '10-12 min', description: 'Standing Forward Fold, Couch Stretch, Pigeon Pose, Doorway Pec Stretch, Cross-Body Shoulder Stretch, Seated Spinal Twist', youtube: '' },
+            { name: 'Flexibility Preset 2 - Lower Body Focus', duration: '8-10 min', description: 'Couch Stretch, Hip Flexor Stretch, Figure 4 Stretch, Butterfly Stretch, Calf Stretch, Lying Quad Stretch', youtube: '' },
+            { name: 'Flexibility Preset 3 - Upper Body Focus', duration: '7-9 min', description: 'Doorway Pec Stretch, Cross-Body Shoulder Stretch, Overhead Triceps Stretch, Child\'s Pose, Seated Spinal Twist', youtube: '' },
+
+            // Individual static stretches (reuses existing clips where available)
+            { name: 'Standing Forward Fold (Hamstrings)', duration: '60-90s', description: 'Passive hamstring + lower back lengthening', youtube: '' },
+            { name: 'Seated Forward Fold', duration: '60-90s', description: 'Hamstring and spine flexibility', youtube: '' },
+            { name: 'Couch Stretch', duration: '90s each side', description: 'Deep hip flexor + quad stretch', youtube: 'https://iframe.videodelivery.net/4785a76eae5933fa8e746be8b71633d1' },
+            { name: 'Hip Flexor Stretch (Kneeling)', duration: '60s each side', description: 'Hip flexor lengthening', youtube: 'https://iframe.videodelivery.net/288a754fa8de14636203f1e55de57a3b' },
+            { name: 'Figure 4 Stretch (Supine)', duration: '60s each side', description: 'Glute and hip flexibility', youtube: 'https://iframe.videodelivery.net/2d9bd9a2d24d6388cbae67f723fd28d0' },
+            { name: 'Pigeon Pose', duration: '60s each side', description: 'Deep glute and hip external rotation', youtube: 'https://iframe.videodelivery.net/6433b2bb526fb3df312278fba14c46d2' },
+            { name: 'Butterfly Stretch', duration: '60s', description: 'Adductor and groin flexibility', youtube: '' },
+            { name: 'Frog Stretch', duration: '90s', description: 'Deep adductor flexibility', youtube: 'https://iframe.videodelivery.net/253c73bfc85d17e580ab2fd15ae0d664' },
+            { name: 'Standing Quad Stretch', duration: '30s each side', description: 'Quad flexibility + balance', youtube: '' },
+            { name: 'Lying Quad Stretch', duration: '45s each side', description: 'Passive quad lengthening', youtube: '' },
+            { name: 'Calf Stretch (Straight Leg)', duration: '30s each side', description: 'Gastrocnemius flexibility', youtube: 'https://iframe.videodelivery.net/964c92c33177508cd4c309a87428ec1d' },
+            { name: 'Doorway Pec Stretch', duration: '60s each side', description: 'Chest and anterior shoulder flexibility', youtube: 'https://iframe.videodelivery.net/0dc5a7ad69cadf1bb7b929ebce285b7f' },
+            { name: 'Cross-Body Shoulder Stretch', duration: '30s each side', description: 'Posterior shoulder flexibility', youtube: '' },
+            { name: 'Overhead Triceps Stretch', duration: '30s each side', description: 'Triceps and lat flexibility', youtube: '' },
+            { name: 'Child\'s Pose', duration: '60s', description: 'Lat, shoulder and lower back release', youtube: '' },
+            { name: 'Seated Spinal Twist', duration: '45s each side', description: 'Spinal rotation flexibility', youtube: '' },
+            { name: 'Cobra Stretch', duration: '30s', description: 'Abdominal and hip flexor lengthening', youtube: '' }
+        ]
     }
 };
 

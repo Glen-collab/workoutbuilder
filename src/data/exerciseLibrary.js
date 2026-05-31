@@ -672,7 +672,8 @@ export const exerciseCategories = {
                     { name: 'TRX Skull Crushers', movement: ['Push'], intent: ['Hypertrophy', 'Stability'], equipment: ['Suspension'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d9c131c51073368c11295f328dc89a7a' },
                     { name: 'Single Arm Triceps Band Pushdown', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca2c4c97aed9d1e25e56f116cc357fe1', geriatric_priority: true },
                     { name: 'Bench Dips', movement: ['Push'], intent: ['Hypertrophy'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/461da49bf1a8d069417632a102bd4cc2', geriatric_priority: true },
-                    { name: 'Dips', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/432beebd80d2eaff4d560e2935e8c6b5' }
+                    { name: 'Dips', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: 'https://iframe.videodelivery.net/432beebd80d2eaff4d560e2935e8c6b5' },
+                    { name: 'Close Grip Pushups', movement: ['Push'], intent: ['Hypertrophy', 'Strength'], equipment: ['Bodyweight'], contraindications: ['Upper Body Load Limited'], youtube: '' }
                 ]
             }
         }
@@ -1850,6 +1851,36 @@ export const exerciseCategories = {
                     { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' },
                     // --- No video ---
                 ]
+            },
+            flexibility: {
+                label: "Flexibility",
+                exercises: [
+                    // Static / passive flexibility holds. Reuses existing stretch
+                    // videos where available; the rest are awaiting Cloudflare clips.
+                    // --- Upper body ---
+                    { name: 'Doorway Pec Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0dc5a7ad69cadf1bb7b929ebce285b7f' },
+                    { name: 'Arm Across Chest Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9a84ab708858b1ae7abf479880fe34c6' },
+                    { name: 'Arms Straight Shoulder/Chest Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/287f290bb886c0c5c0920ac0c6bb1461' },
+                    { name: 'Shoulder Stretch on Bench', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bdad4b4afbc39e1371a819ff631ca1e' },
+                    { name: 'Cross-Body Shoulder Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Overhead Triceps Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Child\'s Pose (Lat Stretch)', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Seated Spinal Twist', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    // --- Lower body ---
+                    { name: 'Standing Forward Fold (Hamstrings)', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Seated Forward Fold', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Hip Flexor Hamstring Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/288a754fa8de14636203f1e55de57a3b' },
+                    { name: 'Couch Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4785a76eae5933fa8e746be8b71633d1' },
+                    { name: 'Figure 4 on Ground Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2d9bd9a2d24d6388cbae67f723fd28d0' },
+                    { name: 'Pigeon Grab Back Foot', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/6433b2bb526fb3df312278fba14c46d2' },
+                    { name: 'Frog Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/253c73bfc85d17e580ab2fd15ae0d664' },
+                    { name: 'Butterfly Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
+                    { name: 'Calf Stretches', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/964c92c33177508cd4c309a87428ec1d' },
+                    { name: 'Walking Heel to Butt Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eac699b9c1d80ed8562519d6442a575b' },
+                    // --- Full body / flows ---
+                    { name: 'Stretching Preset 1', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
+                    { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' }
+                ]
             }
         }
     },
@@ -1897,6 +1928,10 @@ export const exerciseCategories = {
             },
             stretching: {
                 label: "Stretching",
+                exercises: []
+            },
+            flexibility: {
+                label: "Flexibility",
                 exercises: []
             }
         }
