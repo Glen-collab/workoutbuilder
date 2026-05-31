@@ -10,6 +10,9 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
 
   const { listPrograms, deleteProgram, loading, error } = apiHook;
   const [deletingCode, setDeletingCode] = useState(null);
+  // Two-step delete guard: a program must be "armed" (first click) before the
+  // confirm dialog even appears, so Delete is never a one-tap hot button.
+  const [armedCode, setArmedCode] = useState(null);
 
   const handleSearch = async () => {
     if (!email.trim()) return;
@@ -25,9 +28,14 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
 
   const handleDelete = async (program) => {
     const label = program.name || program.accessCode;
+    // Second warning: an explicit confirm dialog naming the program + code.
     if (!window.confirm(
-      `Delete "${label}" (code ${program.accessCode})?\n\nThis removes it from your programs list. Clients using this code will lose access.`
-    )) return;
+      `Are you sure?\n\nPermanently remove "${label}" (code ${program.accessCode}) from your programs list.\n\nAny clients using this code will lose access. This can't be undone here.`
+    )) {
+      setArmedCode(null);
+      return;
+    }
+    setArmedCode(null);
     setDeletingCode(program.accessCode);
     try {
       await deleteProgram(program.accessCode, email.trim());
@@ -167,6 +175,9 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
                   onLoadProgram={onLoadProgram}
                   onDelete={handleDelete}
                   deleting={deletingCode === group.items[0].accessCode}
+                  armed={armedCode === group.items[0].accessCode}
+                  onArm={() => setArmedCode(group.items[0].accessCode)}
+                  onCancelArm={() => setArmedCode(null)}
                 />
               );
             }
@@ -195,6 +206,9 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
                         onLoadProgram={onLoadProgram}
                         onDelete={handleDelete}
                         deleting={deletingCode === program.accessCode}
+                        armed={armedCode === program.accessCode}
+                        onArm={() => setArmedCode(program.accessCode)}
+                        onCancelArm={() => setArmedCode(null)}
                         compact
                       />
                     ))}
@@ -209,7 +223,7 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
   );
 }
 
-function PhaseRow({ program, onLoadProgram, onDelete, deleting = false, compact = false }) {
+function PhaseRow({ program, onLoadProgram, onDelete, deleting = false, armed = false, onArm, onCancelArm, compact = false }) {
   const dateStr = program.createdAt ? new Date(program.createdAt).toLocaleDateString() : null;
   const primary = compact
     ? (program.nickname || (dateStr ? `Saved ${dateStr}` : 'Unlabeled phase'))
@@ -232,21 +246,43 @@ function PhaseRow({ program, onLoadProgram, onDelete, deleting = false, compact 
         </div>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        <button
-          className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-          onClick={() => onLoadProgram(program)}
-        >
-          Load
-        </button>
-        {onDelete && (
-          <button
-            className={`py-2 px-3 text-[13px] font-bold border rounded-lg transition-colors ${deleting ? 'opacity-50 cursor-not-allowed border-white/10 text-gray-500' : 'cursor-pointer border-red-500/40 text-red-400 hover:bg-red-500/15'}`}
-            onClick={() => onDelete(program)}
-            disabled={deleting}
-            title="Delete program"
-          >
-            {deleting ? '…' : 'Delete'}
-          </button>
+        {armed ? (
+          // Step 1 confirm: inline "Are you sure?" — must be deliberately confirmed.
+          <>
+            <span className="text-[12px] font-semibold text-red-300 mr-1">Delete?</span>
+            <button
+              className={`py-2 px-3 text-[13px] font-bold rounded-lg transition-opacity ${deleting ? 'opacity-50 cursor-not-allowed bg-red-600/60 text-white' : 'cursor-pointer bg-red-600 text-white hover:opacity-90'}`}
+              onClick={() => onDelete(program)}
+              disabled={deleting}
+            >
+              {deleting ? '…' : 'Yes, delete'}
+            </button>
+            <button
+              className="py-2 px-3 text-[13px] font-semibold border border-white/15 text-gray-300 rounded-lg cursor-pointer hover:bg-white/[0.06] transition-colors"
+              onClick={onCancelArm}
+              disabled={deleting}
+            >
+              Cancel
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+              onClick={() => onLoadProgram(program)}
+            >
+              Load
+            </button>
+            {onDelete && (
+              <button
+                className="py-2 px-3 text-[13px] font-bold border border-red-500/40 text-red-400 rounded-lg cursor-pointer hover:bg-red-500/15 transition-colors"
+                onClick={onArm}
+                title="Delete program"
+              >
+                Delete
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
