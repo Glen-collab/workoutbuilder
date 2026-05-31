@@ -124,6 +124,19 @@ export const mobilityCategories = {
             { name: 'Yoga Flow (Vinyasa)', duration: '5-10 min', description: 'Dynamic yoga sequence', youtube: '' },
             { name: 'Animal Flow Basics', duration: '5 min', description: 'Ground-based movement patterns', youtube: '' },
             { name: 'Crawling Patterns', duration: '20 yards each', description: 'Bear crawl, crab walk, etc.', youtube: '' },
+
+            // Ground flow / animal locomotion — shoulder, hip + core mobility under load
+            { name: 'Bear Walk (Forward/Backward)', duration: '20 yards each', description: 'Quadruped bear crawl on hands + toes — shoulder, hip and core control', youtube: '' },
+            { name: 'Bear Walk Straight Legs', duration: '15 yards', description: 'Straight-leg bear walk — hamstring + shoulder loaded mobility', youtube: 'https://iframe.videodelivery.net/f90d94374a9dda5f0eba2e4f63bf4811' },
+            { name: 'Lateral Bear Crawl', duration: '10 yards each side', description: 'Side-traveling bear crawl — hip and shoulder mobility', youtube: '' },
+            { name: 'Crab Walk', duration: '20 yards each', description: 'Reverse tabletop crab walk — shoulder extension + hip opener', youtube: '' },
+            { name: 'Crab Reach (Toe Touch)', duration: '8 each side', description: 'Crab position reach to opposite toe — thoracic rotation + shoulder opener', youtube: '' },
+            { name: 'Beast to Crab Transition', duration: '8 reps', description: 'Animal flow transition between bear and crab — shoulder + hip mobility', youtube: '' },
+            { name: 'Duck Walk', duration: '15 yards', description: 'Deep squat walk — hip, knee and ankle mobility', youtube: '' },
+            { name: 'Spiderman Crawl', duration: '10 yards', description: 'Crawl driving knee to elbow — hip flexor and adductor opener', youtube: '' },
+            { name: 'Scorpion Reach (Prone)', duration: '8 each side', description: 'Prone heel-to-opposite-hand reach — thoracic + hip rotation', youtube: '' },
+            { name: 'Scorpion Reach (Supine)', duration: '8 each side', description: 'Supine cross-body reach — lower back and hip rotation', youtube: '' },
+            { name: 'Inchworm Walkout', duration: '8 reps', description: 'Walk hands out to plank and back — hamstring + shoulder mobility', youtube: 'https://iframe.videodelivery.net/c59d2a0bd160f2f78e08ac1c1ade8580' },
             { name: 'Full Body Stretch Sequence', duration: '10 min', description: 'Head to toe stretching', youtube: '' },
             { name: 'Mobility Flow (Ido Portal Style)', duration: '5-10 min', description: 'Creative movement patterns', youtube: '' },
             { name: 'Joint-by-Joint Warm-Up', duration: '5 min', description: 'Ankles to neck mobility', youtube: '' }
