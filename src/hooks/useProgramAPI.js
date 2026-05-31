@@ -70,13 +70,25 @@ export default function useProgramAPI() {
         });
         clearTimeout(timeout);
         if (!res.ok) {
-          throw new Error(`API error: ${res.status}`);
+          // Surface the backend's message (e.g. "Access code 1081 is already
+          // in use") instead of a bare status.
+          let serverMsg = '';
+          try {
+            const body = await res.json();
+            serverMsg = body?.message || '';
+          } catch { /* non-JSON error body */ }
+          const e = new Error(serverMsg || `API error: ${res.status}`);
+          e.status = res.status;
+          throw e;
         }
         const data = await res.json();
         setLoading(false);
         return data;
       } catch (err) {
-        if (attempt < maxRetries) {
+        // Don't retry client errors (4xx): a 409 collision or 400 validation
+        // failure won't resolve by trying again — fail fast with the message.
+        const isClientError = err.status >= 400 && err.status < 500;
+        if (!isClientError && attempt < maxRetries) {
           await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
           continue;
         }
@@ -113,6 +125,19 @@ export default function useProgramAPI() {
     (email) => {
       if (isLocal()) return Promise.resolve(getMockProgramList());
       return request('list-programs.php', { email });
+    },
+    [request]
+  );
+
+  const deleteProgram = useCallback(
+    (accessCode, email) => {
+      if (isLocal()) {
+        console.log('[Mock] deleteProgram', { accessCode, email });
+        return Promise.resolve({ success: true });
+      }
+      // Single attempt: a delete should not auto-retry (avoid double-acting on
+      // a slow-but-successful first call).
+      return request('delete-program.php', { accessCode, email }, 0);
     },
     [request]
   );
@@ -209,6 +234,7 @@ export default function useProgramAPI() {
   return {
     saveProgram,
     updateProgram,
+    deleteProgram,
     listPrograms,
     loadProgramByCode,
     loadUserOverride,

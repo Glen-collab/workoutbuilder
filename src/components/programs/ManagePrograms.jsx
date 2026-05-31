@@ -8,7 +8,8 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
   const [sortBy, setSortBy] = useState('recent');
   const [expandedGroups, setExpandedGroups] = useState({});
 
-  const { listPrograms, loading, error } = apiHook;
+  const { listPrograms, deleteProgram, loading, error } = apiHook;
+  const [deletingCode, setDeletingCode] = useState(null);
 
   const handleSearch = async () => {
     if (!email.trim()) return;
@@ -19,6 +20,23 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
     } catch {
       setSearched(true);
       setPrograms([]);
+    }
+  };
+
+  const handleDelete = async (program) => {
+    const label = program.name || program.accessCode;
+    if (!window.confirm(
+      `Delete "${label}" (code ${program.accessCode})?\n\nThis removes it from your programs list. Clients using this code will lose access.`
+    )) return;
+    setDeletingCode(program.accessCode);
+    try {
+      await deleteProgram(program.accessCode, email.trim());
+      // Drop it locally so the list updates without a full re-fetch.
+      setPrograms((prev) => prev.filter((p) => p.accessCode !== program.accessCode));
+    } catch (err) {
+      alert('Delete failed: ' + (err.message || 'Unknown error'));
+    } finally {
+      setDeletingCode(null);
     }
   };
 
@@ -147,6 +165,8 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
                   key={group.items[0].id || group.items[0].accessCode}
                   program={group.items[0]}
                   onLoadProgram={onLoadProgram}
+                  onDelete={handleDelete}
+                  deleting={deletingCode === group.items[0].accessCode}
                 />
               );
             }
@@ -173,6 +193,8 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
                         key={program.id || program.accessCode}
                         program={program}
                         onLoadProgram={onLoadProgram}
+                        onDelete={handleDelete}
+                        deleting={deletingCode === program.accessCode}
                         compact
                       />
                     ))}
@@ -187,7 +209,7 @@ export default function ManagePrograms({ isOpen, onClose, onLoadProgram, apiHook
   );
 }
 
-function PhaseRow({ program, onLoadProgram, compact = false }) {
+function PhaseRow({ program, onLoadProgram, onDelete, deleting = false, compact = false }) {
   const dateStr = program.createdAt ? new Date(program.createdAt).toLocaleDateString() : null;
   const primary = compact
     ? (program.nickname || (dateStr ? `Saved ${dateStr}` : 'Unlabeled phase'))
@@ -209,12 +231,24 @@ function PhaseRow({ program, onLoadProgram, compact = false }) {
           {dateStr && <span>{dateStr}</span>}
         </div>
       </div>
-      <button
-        className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer shrink-0 hover:opacity-90 transition-opacity"
-        onClick={() => onLoadProgram(program)}
-      >
-        Load
-      </button>
+      <div className="flex items-center gap-2 shrink-0">
+        <button
+          className="py-2 px-[18px] text-[13px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+          onClick={() => onLoadProgram(program)}
+        >
+          Load
+        </button>
+        {onDelete && (
+          <button
+            className={`py-2 px-3 text-[13px] font-bold border rounded-lg transition-colors ${deleting ? 'opacity-50 cursor-not-allowed border-white/10 text-gray-500' : 'cursor-pointer border-red-500/40 text-red-400 hover:bg-red-500/15'}`}
+            onClick={() => onDelete(program)}
+            disabled={deleting}
+            title="Delete program"
+          >
+            {deleting ? '…' : 'Delete'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

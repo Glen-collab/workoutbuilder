@@ -7,27 +7,37 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
   const [trainerEmail, setTrainerEmail] = useState(builderUser?.email || 'wisco.barbell@gmail.com');
   const [optionalTrainerEmail, setOptionalTrainerEmail] = useState('');
   const [regenerateCode, setRegenerateCode] = useState(false);
+  const [desiredCode, setDesiredCode] = useState('');
 
   const isUpdate = !!loadedProgram;
   const hasOldCodeFormat = isUpdate && loadedProgram.accessCode && loadedProgram.accessCode.includes('-');
+
+  // A chosen code is only valid when blank (random) or exactly 4 digits.
+  const codeValid = desiredCode === '' || /^\d{4}$/.test(desiredCode);
 
   useEffect(() => {
     if (isOpen) {
       setProgramName(loadedProgram?.name || '');
       setProgramNickname(loadedProgram?.nickname || '');
       setRegenerateCode(false);
+      setDesiredCode('');
     }
   }, [isOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = (e, saveAsNew = false) => {
     e.preventDefault();
     if (!programName.trim()) return;
+    if (!codeValid) return;
+    // A custom code only applies when creating a record (brand-new save or
+    // "Save as New"). Updating an existing program keeps its own code.
+    const creatingNew = !isUpdate || saveAsNew;
     onSave({
       programName: programName.trim(),
       programNickname: programNickname.trim(),
       trainerEmail: trainerEmail.trim(),
       optionalTrainerEmail: optionalTrainerEmail.trim(),
       regenerateCode: isUpdate && !saveAsNew ? regenerateCode : false,
+      desiredCode: creatingNew ? desiredCode.trim() : '',
       saveAsNew,
     });
   };
@@ -104,12 +114,32 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
           />
         </div>
 
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">
+            {isUpdate ? 'Access Code (only for Save as New)' : 'Access Code'}
+          </label>
+          <input
+            className={`px-3.5 py-3 text-[15px] rounded-lg border bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea] ${codeValid ? 'border-white/[0.12]' : 'border-red-500/60'}`}
+            type="text"
+            inputMode="numeric"
+            maxLength={4}
+            value={desiredCode}
+            onChange={(e) => setDesiredCode(e.target.value.replace(/\D/g, '').slice(0, 4))}
+            placeholder="Leave blank for a random code"
+          />
+          <span className={`text-xs ${codeValid ? 'text-gray-500' : 'text-red-400'}`}>
+            {codeValid
+              ? 'Pick your own 4-digit code, or leave blank to auto-generate.'
+              : 'Code must be exactly 4 digits.'}
+          </span>
+        </div>
+
         <div className="flex flex-col gap-2 mt-2">
           <div className="flex gap-3">
             <button
               type="submit"
-              className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
-              disabled={loading || !programName.trim()}
+              className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() || !codeValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
+              disabled={loading || !programName.trim() || !codeValid}
             >
               {loading ? 'Saving...' : isUpdate ? 'Update Program' : 'Save Program'}
             </button>
@@ -121,8 +151,8 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
             <button
               type="button"
               onClick={(e) => handleSubmit(e, true)}
-              className={`w-full py-3 px-6 text-[14px] font-semibold bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
-              disabled={loading || !programName.trim()}
+              className={`w-full py-3 px-6 text-[14px] font-semibold bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() || !codeValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
+              disabled={loading || !programName.trim() || !codeValid}
             >
               {loading ? 'Saving...' : 'Save as New Program'}
             </button>
