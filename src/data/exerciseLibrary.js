@@ -1850,6 +1850,7 @@ export const exerciseCategories = {
                     { name: 'Stretching Preset 1', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/c56ea8baf3b7f312b8c7dece4d605232' },
                     { name: 'Yoga Stretches - Pyramid, Triangle, Low Lunge, Extended Angle', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/852c6f132a1e324c46061302cabdc3dc' },
                     // --- No video ---
+                    { name: 'Child\'s Pose', movement: ['Flexibility'], intent: ['Recovery', 'Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                 ]
             },
             flexibility: {
