@@ -173,7 +173,13 @@ export const generalMovements = {
         { name: "Run/Walk Intervals", description: "Alternating run and walk periods for endurance building" },
         { name: "Long Run", description: "Sustained distance run at conversational pace" },
         { name: "Timed Mile", description: "Aerobic capacity baseline test" },
-        { name: "Beep Test (Yo-Yo)", description: "Progressive shuttle run test" }
+        { name: "Beep Test (Yo-Yo)", description: "Progressive shuttle run test" },
+        // Combo / loaded conditioning pieces
+        { name: "Sandbag Loads + Farmer Carry", description: "Load sandbag to shoulder, then loaded carry for distance" },
+        { name: "Kettlebell Swing + Sprint", description: "Set of KB swings into a short sprint, repeat" },
+        { name: "Sled Push + Sprint", description: "Heavy sled push into a sprint finish" },
+        { name: "Battle Ropes + Burpees", description: "Rope waves alternated with burpees" },
+        { name: "Wall Ball + Row", description: "Wall ball sets paired with rower intervals" }
     ],
 
     // CARDIO EQUIPMENT - Machine-based conditioning
@@ -192,8 +198,10 @@ export const generalMovements = {
         { name: "Arc Trainer", description: "Variable stride elliptical trainer" },
         { name: "Vertical Climber", description: "Upright climbing machine" },
         { name: "VersaClimber", description: "High-intensity vertical climbing ergometer" },
-        { name: "Jacobâ€™s Ladder", description: "Self-powered ladder climbing" },
-        { name: "TreadClimber", description: "Incline belt walking system" }
+        { name: "Jacob's Ladder", description: "Self-powered ladder climbing" },
+        { name: "TreadClimber", description: "Incline belt walking system" },
+        { name: "Prowler", description: "Weighted prowler push/pull for power-cardio" },
+        { name: "Sled Work", description: "Sled push, pull, and drag conditioning" }
     ]
 };
 
