@@ -42,6 +42,12 @@ export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManage
             Travel Workouts
           </button>
         </div>
+        <a
+          href="https://app.bestrongagain.com"
+          className="inline-block mt-6 text-sm text-gray-400 hover:text-[#667eea] transition-colors duration-200 no-underline"
+        >
+          ← Coach Platform
+        </a>
       </div>
     </div>
   );
