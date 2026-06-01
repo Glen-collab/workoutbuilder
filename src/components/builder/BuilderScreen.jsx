@@ -84,7 +84,7 @@ export default function BuilderScreen({
       )}
 
       <div className="mb-5">
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start">
           <div>
             <h2 className="text-[22px] font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-1">
               Workout Builder
@@ -93,10 +93,11 @@ export default function BuilderScreen({
               Week {currentWeek} &middot; Day {currentDay}
             </p>
           </div>
-          <div className="flex gap-2 flex-wrap">
+          {/* Equal-sized 2x2 action grid (full width on mobile) */}
+          <div className="grid grid-cols-2 gap-2 w-full sm:w-auto">
             <button
               onClick={() => setSmartImportOpen(true)}
-              className="px-4 py-2 text-[13px] font-semibold bg-emerald-500 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-emerald-600 transition-colors duration-200"
+              className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-emerald-500 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-emerald-600 transition-colors duration-200"
               title="Paste a workout from anywhere — Claude maps it to your library"
             >
               ✨ Smart Import
@@ -104,7 +105,7 @@ export default function BuilderScreen({
             {onProgressions && (
               <button
                 onClick={onProgressions}
-                className="px-4 py-2 text-[13px] font-semibold bg-gray-800 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-700 transition-colors duration-200"
+                className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-gray-800 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-700 transition-colors duration-200"
               >
                 Progressions
               </button>
@@ -112,7 +113,7 @@ export default function BuilderScreen({
             {onVolume && (
               <button
                 onClick={onVolume}
-                className="px-4 py-2 text-[13px] font-semibold bg-teal-700 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-teal-800 transition-colors duration-200"
+                className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-teal-700 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-teal-800 transition-colors duration-200"
               >
                 Volume
               </button>
@@ -120,7 +121,7 @@ export default function BuilderScreen({
             {onGoToDashboard && (
               <button
                 onClick={onGoToDashboard}
-                className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
+                className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
               >
                 Trainer Dashboard
               </button>
