@@ -153,7 +153,7 @@ export default function WeekDaySelector({
               Copy Day ▾
             </button>
             {copyDayMenuOpen && (
-              <div className="absolute top-full right-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[220px] overflow-hidden z-[200] max-h-[300px] overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[220px] overflow-hidden z-[200] max-h-[300px] overflow-y-auto">
                 <div className="px-4 py-2 text-xs font-semibold text-gray-400 border-b border-gray-100">
                   Copy Day {currentDay} to…
                 </div>
