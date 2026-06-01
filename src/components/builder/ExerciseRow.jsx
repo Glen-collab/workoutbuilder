@@ -171,6 +171,38 @@ export default function ExerciseRow({
     onUpdate({ notes: current + separator + cue });
   };
 
+  // "Write your own" placeholder — the client names + fills this in the tracker,
+  // so the coach just sees a labeled stub (+ an optional instruction note).
+  if (exercise.isUserDefined) {
+    const isCardioKind = exercise.userDefinedKind === 'cardio';
+    return (
+      <div className="bg-white border border-gray-200 rounded-[10px] p-3.5 mb-2.5">
+        <div className="flex items-center justify-between mb-2.5 flex-wrap gap-2">
+          <span className="font-bold text-[15px] text-gray-900">
+            {isCardioKind ? '🏃 Choose Your Own Cardio' : '✏️ Write Your Own Exercise'}
+          </span>
+          <div className="flex gap-1.5">
+            <button onClick={onReplace} className="bg-blue-100 text-blue-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Replace</button>
+            <button onClick={onRemove} className="bg-red-100 text-red-600 border-none rounded-md px-2.5 py-1.5 text-[13px] cursor-pointer font-semibold">Remove</button>
+          </div>
+        </div>
+        <div className="rounded-lg bg-amber-50 border border-amber-200 px-3 py-2.5 text-[13px] text-amber-800">
+          Your client names this and enters their own {isCardioKind ? 'machine, duration, distance & time' : 'sets, reps, weight & time'} in the tracker.
+        </div>
+        <div className="mt-2.5 flex flex-col gap-0.5">
+          <span className="text-[11px] text-gray-400 font-semibold uppercase">Optional note for client</span>
+          <input
+            type="text"
+            value={exercise.notes || ''}
+            onChange={(e) => onUpdate({ notes: e.target.value })}
+            placeholder="e.g. pick something challenging"
+            className="w-full px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white border border-gray-200 rounded-[10px] p-3.5 mb-2.5">
       {/* Header: name + youtube + remove */}

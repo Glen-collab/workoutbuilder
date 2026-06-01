@@ -557,6 +557,21 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          {/* Write-your-own quick-adds — placeholders the CLIENT names + fills in the tracker */}
+          <div className="flex gap-2 mt-2.5">
+            <button
+              onClick={() => handleSelect({ name: 'Write Your Own Exercise', isUserDefined: true, userDefinedKind: 'strength', equipment: [], movement: [], intent: [], contraindications: [], youtube: '' })}
+              className="flex-1 py-2.5 px-2 text-[12.5px] font-bold rounded-lg border-2 border-[#667eea] text-[#667eea] bg-white cursor-pointer hover:bg-[#667eea] hover:text-white transition-colors"
+            >
+              ✏️ Write Your Own Exercise
+            </button>
+            <button
+              onClick={() => handleSelect({ name: 'Choose Your Own Cardio', isUserDefined: true, userDefinedKind: 'cardio', equipment: [], movement: [], intent: [], contraindications: [], youtube: '' })}
+              className="flex-1 py-2.5 px-2 text-[12.5px] font-bold rounded-lg border-2 border-[#f59e0b] text-[#b45309] bg-white cursor-pointer hover:bg-[#f59e0b] hover:text-white transition-colors"
+            >
+              🏃 Choose Your Own Cardio
+            </button>
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto">
           {renderContent()}
