@@ -9,12 +9,14 @@ export default function WeekDaySelector({
   onSwitchWeek,
   onCopyWeek,
   onCopyAllWeeks,
+  onCopyDay,
   onInsertWeek,
   onAddWeeks,
   onAddDay,
   onRemoveDay,
 }) {
   const [copyMenuOpen, setCopyMenuOpen] = useState(false);
+  const [copyDayMenuOpen, setCopyDayMenuOpen] = useState(false);
   const [insertMenuOpen, setInsertMenuOpen] = useState(false);
   const [addWeeksMenuOpen, setAddWeeksMenuOpen] = useState(false);
 
@@ -49,7 +51,7 @@ export default function WeekDaySelector({
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#22c55e] to-[#16a34a] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => { setInsertMenuOpen(!insertMenuOpen); setCopyMenuOpen(false); setAddWeeksMenuOpen(false); }}
+              onClick={() => { setInsertMenuOpen(!insertMenuOpen); setCopyMenuOpen(false); setCopyDayMenuOpen(false); setAddWeeksMenuOpen(false); }}
             >
               + Insert Week ▾
             </button>
@@ -76,7 +78,7 @@ export default function WeekDaySelector({
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => { setAddWeeksMenuOpen(!addWeeksMenuOpen); setCopyMenuOpen(false); setInsertMenuOpen(false); }}
+              onClick={() => { setAddWeeksMenuOpen(!addWeeksMenuOpen); setCopyMenuOpen(false); setCopyDayMenuOpen(false); setInsertMenuOpen(false); }}
             >
               + Add Weeks ▾
             </button>
@@ -100,7 +102,7 @@ export default function WeekDaySelector({
           <div className="relative">
             <button
               className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
-              onClick={() => { setCopyMenuOpen(!copyMenuOpen); setInsertMenuOpen(false); setAddWeeksMenuOpen(false); }}
+              onClick={() => { setCopyMenuOpen(!copyMenuOpen); setCopyDayMenuOpen(false); setInsertMenuOpen(false); setAddWeeksMenuOpen(false); }}
             >
               Copy Week ▾
             </button>
@@ -136,6 +138,36 @@ export default function WeekDaySelector({
                 >
                   Copy This Day to All Weeks
                 </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Copy Day — copy the current day onto another day in this same week */}
+        {onCopyDay && daysPerWeek > 1 && (
+          <div className="relative">
+            <button
+              className="px-4 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#0ea5e9] to-[#0369a1] text-white border-none rounded-lg cursor-pointer"
+              onClick={() => { setCopyDayMenuOpen(!copyDayMenuOpen); setCopyMenuOpen(false); setInsertMenuOpen(false); setAddWeeksMenuOpen(false); }}
+            >
+              Copy Day ▾
+            </button>
+            {copyDayMenuOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white rounded-[10px] shadow-lg min-w-[220px] overflow-hidden z-[200] max-h-[300px] overflow-y-auto">
+                <div className="px-4 py-2 text-xs font-semibold text-gray-400 border-b border-gray-100">
+                  Copy Day {currentDay} to…
+                </div>
+                {Array.from({ length: daysPerWeek }, (_, i) => i + 1)
+                  .filter((d) => d !== currentDay)
+                  .map((d) => (
+                    <button
+                      key={d}
+                      className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-sky-50"
+                      onClick={() => { setCopyDayMenuOpen(false); onCopyDay(d); }}
+                    >
+                      Copy to Day {d}
+                    </button>
+                  ))}
               </div>
             )}
           </div>

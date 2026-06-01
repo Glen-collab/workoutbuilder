@@ -430,6 +430,7 @@ function BuilderApp({ builderUser, onLogout }) {
     switchWeek: workoutState.switchWeek,
     copyWeek: workoutState.copyWeekToNext,
     copyAllWeeks: workoutState.copyWeekToAll,
+    copyDay: workoutState.copyDayToDay,
     insertWeek: workoutState.insertWeekAt,
     addWeeks: workoutState.addWeeksToEnd,
     setDaysPerWeek: workoutState.setDaysPerWeek,

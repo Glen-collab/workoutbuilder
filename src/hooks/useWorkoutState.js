@@ -312,6 +312,21 @@ export default function useWorkoutState() {
     });
   }, [saveCurrent, getWorkoutKey, totalWeeks]);
 
+  // Copy the CURRENT day's blocks onto another day in the SAME week.
+  const copyDayToDay = useCallback((targetDay) => {
+    if (targetDay === currentDayRef.current) return;
+    saveCurrent();
+    setAllWorkouts((prev) => {
+      const updated = { ...prev, [getWorkoutKey()]: [...workoutBlocksRef.current] };
+      const srcKey = `${currentWeekRef.current}-${currentDayRef.current}`;
+      const destKey = `${currentWeekRef.current}-${targetDay}`;
+      if (updated[srcKey]) {
+        updated[destKey] = JSON.parse(JSON.stringify(updated[srcKey]));
+      }
+      return updated;
+    });
+  }, [saveCurrent, getWorkoutKey]);
+
   const setDaysPerWeek = useCallback((n) => {
     setDaysPerWeekState(n);
     if (currentDayRef.current > n) {
@@ -470,6 +485,7 @@ export default function useWorkoutState() {
     duplicateSet,
     copyWeekToNext,
     copyWeekToAll,
+    copyDayToDay,
     insertWeekAt,
     addWeeksToEnd,
     setDaysPerWeek,

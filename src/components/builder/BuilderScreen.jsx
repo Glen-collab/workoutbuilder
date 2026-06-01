@@ -32,6 +32,7 @@ export default function BuilderScreen({
     switchWeek,
     copyWeek,
     copyAllWeeks,
+    copyDay,
     insertWeek,
     addWeeks,
     setDaysPerWeek,
@@ -142,6 +143,7 @@ export default function BuilderScreen({
         onSwitchWeek={switchWeek}
         onCopyWeek={copyWeek}
         onCopyAllWeeks={copyAllWeeks}
+        onCopyDay={copyDay}
         onInsertWeek={insertWeek}
         onAddWeeks={addWeeks}
         onAddDay={() => setDaysPerWeek(daysPerWeek + 1)}
