@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PercentageSetRow from './PercentageSetRow';
 import CuesPicker from './CuesPicker';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
@@ -77,6 +77,14 @@ const SPEED_UNITS = [
 function FieldWithUnit({ label, value, unit, onChangeValue, onChangeUnit, placeholder, units, valueWidth = '60px', unitWidth = '75px' }) {
   const hasValue = value && value.toString().trim() !== '';
   const activeUnit = unit || units[0].value;
+
+  // The dropdown SHOWS the default unit (units[0]) when none is set, but the
+  // saved value stayed empty unless the coach touched it — so a "60 sec" plank
+  // saved with no durationUnit and read as minutes on the TV. Persist the shown
+  // default once a value exists so the data always matches what's on screen.
+  useEffect(() => {
+    if (hasValue && !unit) onChangeUnit(units[0].value);
+  }, [hasValue, unit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex flex-col gap-0.5">
