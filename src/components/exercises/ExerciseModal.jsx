@@ -162,6 +162,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [movementSub, setMovementSub] = useState(null); // selected sub within a nested movement category (linear/lateral/multi)
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('strength'); // 'strength' | 'martialArts'
   const [maCategory, setMaCategory] = useState(null); // selected MA category key
@@ -186,6 +187,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     setSelectedMuscleGroup(null);
     setSelectedSubcategory(null);
     setSelectedCategory(null);
+    setMovementSub(null);
     setSearchTerm('');
     setActiveTab('strength');
     setMaCategory(null);
@@ -443,21 +445,61 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     if (!isStrength) {
       if (selectedCategory && nonStrengthCategories && nonStrengthCategories[selectedCategory]) {
         const cat = nonStrengthCategories[selectedCategory];
+        const catTitle = (cat && cat.label) ? cat.label : selectedCategory.replace(/_/g, ' ');
+
+        // Nested category (e.g. Movement Drills -> Linear / Lateral / Multi).
+        if (cat && cat.subcategories) {
+          // Drilled into a direction: show its exercises.
+          if (movementSub && cat.subcategories[movementSub]) {
+            const sub = cat.subcategories[movementSub];
+            const subTitle = `${catTitle} — ${sub.label || movementSub.replace(/_/g, ' ')}`;
+            return (
+              <ExerciseList
+                exercises={sub.exercises || []}
+                onSelect={handleSelect}
+                onBack={() => setMovementSub(null)}
+                title={subTitle}
+              />
+            );
+          }
+          // Show the directional buttons.
+          return (
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-4">
+                <button className="bg-transparent border-none text-xl cursor-pointer text-[#667eea] px-2 py-1 rounded-md flex items-center hover:bg-gray-100 transition" onClick={() => setSelectedCategory(null)}>←</button>
+                <h3 className="text-lg font-bold text-gray-700 m-0">{catTitle}</h3>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                {Object.entries(cat.subcategories).map(([key, sub]) => (
+                  <button
+                    key={key}
+                    className="flex items-center justify-between py-4 px-[18px] bg-white border-none rounded-[10px] shadow-sm cursor-pointer w-full text-left transition-all duration-150 hover:bg-purple-50 hover:shadow-md"
+                    onClick={() => setMovementSub(key)}
+                  >
+                    <span className="text-[15px] font-semibold text-gray-700">{sub.label || key.replace(/_/g, ' ')}</span>
+                    <span className="text-[13px] font-medium text-gray-400 bg-purple-50 px-2.5 py-1 rounded-xl">{(sub.exercises || []).length} drills</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
+        // Flat category: straight to the exercise list.
         const exercises = Array.isArray(cat) ? cat : (cat.exercises || []);
-        const title = (cat && cat.label) ? cat.label : selectedCategory.replace(/_/g, ' ');
         return (
           <ExerciseList
             exercises={exercises}
             onSelect={handleSelect}
             onBack={() => setSelectedCategory(null)}
-            title={title}
+            title={catTitle}
           />
         );
       }
       return (
         <MovementCategoryList
           categories={nonStrengthCategories}
-          onSelectCategory={setSelectedCategory}
+          onSelectCategory={(k) => { setMovementSub(null); setSelectedCategory(k); }}
           title={nonStrengthTitle}
         />
       );

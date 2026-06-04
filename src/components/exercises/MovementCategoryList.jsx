@@ -12,7 +12,16 @@ export default function MovementCategoryList({ categories, onSelectCategory, tit
       <div className="flex flex-col gap-2.5">
         {keys.map((key) => {
           const cat = categories[key];
-          const exerciseCount = Array.isArray(cat) ? cat.length : (cat.exercises ? cat.exercises.length : 0);
+          let exerciseCount;
+          if (Array.isArray(cat)) {
+            exerciseCount = cat.length;
+          } else if (cat && cat.subcategories) {
+            // Nested category (e.g. Movement Drills) — sum across directions.
+            exerciseCount = Object.values(cat.subcategories)
+              .reduce((sum, sub) => sum + ((sub && sub.exercises) ? sub.exercises.length : 0), 0);
+          } else {
+            exerciseCount = (cat && cat.exercises) ? cat.exercises.length : 0;
+          }
           const label = (cat && cat.label) ? cat.label : key.replace(/_/g, ' ');
 
           return (
