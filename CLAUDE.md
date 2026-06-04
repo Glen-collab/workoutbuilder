@@ -80,7 +80,7 @@ src/
     mobilityExercises.js     # Hip, ankle, shoulder, thoracic, wrist, spinal mobility
     olympicLifting.js        # Olympic lift library
     firstResponder.js        # First responder specific exercises
-    generalMovements.js      # General movement patterns
+    generalMovements.js      # Movement block: drills/presets (Linear/Lateral/Multi), plyo, conditioning, cardio — see docs/MOVEMENT_DRILLS.md
 
   utils/
     percentageCalc.js        # Weight calc, tonnage, exercise classification, cardio totals, scheme presets
