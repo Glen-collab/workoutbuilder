@@ -177,17 +177,17 @@ export default function WeekDaySelector({
         ))}
         {onAddDay && (
           <button
-            className="w-[34px] h-[34px] text-[18px] font-bold rounded-lg cursor-pointer bg-green-500 text-white border-none hover:bg-green-600 transition-colors flex items-center justify-center"
+            className="px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer text-white border-none bg-gradient-to-br from-[#22c55e] to-[#16a34a] hover:opacity-90 transition-opacity"
             onClick={onAddDay}
-            title="Add a day"
-          >+</button>
+            title="Add a day to the end"
+          >+ Add Day</button>
         )}
         {onRemoveDay && (
           <button
-            className="w-[34px] h-[34px] text-[18px] font-bold rounded-lg cursor-pointer bg-red-400 text-white border-none hover:bg-red-500 transition-colors flex items-center justify-center"
+            className="px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer text-white border-none bg-gradient-to-br from-[#ef4444] to-[#b91c1c] hover:opacity-90 transition-opacity"
             onClick={onRemoveDay}
-            title="Remove last day"
-          >&minus;</button>
+            title="Remove the last day"
+          >&minus; Remove Day</button>
         )}
       </div>
     </div>
