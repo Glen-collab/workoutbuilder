@@ -17,7 +17,7 @@
 // NOTE: keys 'conditioning_general' and 'cardio_equipment' are also read by the
 // Conditioning block type by name — keep those key names if you rename things.
 
-const WARMUP_DRILLS = [
+export const WARMUP_DRILLS = [
   { name: "A-Skip", description: "Hip flexor activation, knee drive, ankle dorsiflexion", youtube: 'https://iframe.videodelivery.net/99ff75f7d5ed0be23ec822b750c64d42' },
   { name: "B-Skip", description: "Pawing motion, hamstring engagement, full leg cycle", youtube: 'https://iframe.videodelivery.net/bd0a62d47d8428d83fc8ce42381d6ef5' },
   { name: "High Knees", description: "Drive knees to hip height, quick ground contact", youtube: 'https://iframe.videodelivery.net/32a500450387d8c74f86c7770fc9fceb' },

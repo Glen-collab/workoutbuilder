@@ -3,7 +3,16 @@
 
 
 
+import { WARMUP_DRILLS } from './generalMovements';
+
 export const mobilityCategories = {
+    // Sprint / dynamic warm-up — shared with the Movement block. Single source
+    // of truth is WARMUP_DRILLS in generalMovements.js: edit once, updates the
+    // Movement Drills directions AND this Mobility tab.
+    sprint_warmup: {
+        label: "Sprint Warmup",
+        exercises: WARMUP_DRILLS,
+    },
     hip_mobility: {
         label: "Hip Mobility",
         exercises: [
