@@ -25,6 +25,7 @@ export const generalMovements = {
             linear: {
                 label: "Linear",
                 exercises: [
+                    { name: "Linear Preset Vargas", duration: "~1 min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
                     { name: "Beginner Linear Preset", duration: "6-8 min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, High Knee Cycle to Run" },
                     { name: "Intermediate Linear Preset", duration: "8-10 min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, Straight Leg to High Knee Cycle, High Knee Cycle to Sprint, 40 Yard Build Ups" },
                     { name: "Advanced Linear Preset", duration: "10-12 min", description: "A Skip, B Skip, Low Ankle Run, Stilt Run + Low Ankle, Stilt Run + Low Ankle Switch Every 3" },
@@ -68,26 +69,26 @@ export const generalMovements = {
                 label: "Linear",
                 exercises: [
                     // -- Running technique --
-                    { name: "A-Skip", description: "Hip flexor activation, knee drive, ankle dorsiflexion" },
-                    { name: "B-Skip", description: "Pawing motion, hamstring engagement, full leg cycle" },
-                    { name: "High Knees", description: "Drive knees to hip height, quick ground contact" },
-                    { name: "Butt Kicks", description: "Heel to glute, fast turnover, hamstring activation" },
-                    { name: "Straight Leg Bounds", description: "Stiff leg, ankle stiffness, glute/hamstring power" },
-                    { name: "Ankling (Fast Feet)", description: "Rapid ankle plantarflexion, ground contact drill" },
+                    { name: "A-Skip", description: "Hip flexor activation, knee drive, ankle dorsiflexion", youtube: 'https://iframe.videodelivery.net/99ff75f7d5ed0be23ec822b750c64d42' },
+                    { name: "B-Skip", description: "Pawing motion, hamstring engagement, full leg cycle", youtube: 'https://iframe.videodelivery.net/bd0a62d47d8428d83fc8ce42381d6ef5' },
+                    { name: "High Knees", description: "Drive knees to hip height, quick ground contact", youtube: 'https://iframe.videodelivery.net/32a500450387d8c74f86c7770fc9fceb' },
+                    { name: "Butt Kicks", description: "Heel to glute, fast turnover, hamstring activation", youtube: 'https://iframe.videodelivery.net/fc83574186c4c3387047433fd53a0c30' },
+                    { name: "Straight Leg Bounds", description: "Stiff leg, ankle stiffness, glute/hamstring power", youtube: 'https://iframe.videodelivery.net/9bb58709324a2a7c8874f531e7374fdf' },
+                    { name: "Ankling (Fast Feet)", description: "Rapid ankle plantarflexion, ground contact drill", youtube: 'https://iframe.videodelivery.net/c74d7b11b89e925f60f5101f5ef5900a' },
                     { name: "High Knee Walk", description: "Slow, controlled knee drive with balance" },
-                    { name: "Backward Running", description: "Proprioception, deceleration mechanics" },
-                    { name: "Power Skips", description: "Explosive vertical skip with single leg drive" },
+                    { name: "Backward Running", description: "Proprioception, deceleration mechanics", youtube: 'https://iframe.videodelivery.net/3774e6583dac978b7ac4a6a7e80737e9' },
+                    { name: "Power Skips", description: "Explosive vertical skip with single leg drive", youtube: 'https://iframe.videodelivery.net/1096aaf99995f0634386f635070da47a' },
                     // -- Acceleration mechanics --
-                    { name: "Wall Drives", description: "45-degree lean, rapid leg turnover against wall" },
-                    { name: "Falling Starts", description: "Forward lean to sprint, acceleration mechanics" },
-                    { name: "3-Point Stance Starts", description: "Explosive starts from athletic position" },
+                    { name: "Wall Drives", description: "45-degree lean, rapid leg turnover against wall", youtube: 'https://iframe.videodelivery.net/ec2fb06903f6de4879d831eaf50bc5ec' },
+                    { name: "Falling Starts", description: "Forward lean to sprint, acceleration mechanics", youtube: 'https://iframe.videodelivery.net/9a2d0651c3c1311f9df2bdb71547bf0a' },
+                    { name: "3-Point Stance Starts", description: "Explosive starts from athletic position", youtube: 'https://iframe.videodelivery.net/1da74394c81ae3731a7896ffeb71d4a8' },
                     { name: "Mountain Climbers (Speed)", description: "Ground contact speed, hip flexor power" },
                     { name: "Partner Resistance Runs", description: "Overspeed training with band/partner" },
                     { name: "Sled Pulls (Light)", description: "10-20% bodyweight, acceleration focus" },
                     { name: "Hill Sprints (Short)", description: "10-20 yards uphill, 5-8 degree incline" },
                     { name: "Resisted Starts", description: "First 10 yards with resistance, then release" },
                     // -- Sprint mechanics / max velocity --
-                    { name: "Wicket Runs", description: "Mini hurdles for stride length/frequency" },
+                    { name: "Wicket Runs", description: "Mini hurdles for stride length/frequency", youtube: 'https://iframe.videodelivery.net/59ffa5d08a994cda325552d59165f77e' },
                     { name: "Bounding", description: "Exaggerated running motion, distance per stride" },
                     { name: "Sprint Buildups", description: "Progressive acceleration to 90-95%" },
                     { name: "Stride Outs", description: "Controlled acceleration with form focus" },
@@ -102,15 +103,23 @@ export const generalMovements = {
                     { name: "Gassers", description: "4 x 110 yards (sideline to sideline x 4)" },
                     { name: "300-Yard Shuttles", description: "2 x 300 yards, speed endurance" },
                     { name: "120s (12 x 120 yards)", description: "Classic football conditioning drill" },
-                    { name: "Ladder Runs", description: "Ascending/descending distance intervals" }
+                    { name: "Ladder Runs", description: "Ascending/descending distance intervals" },
+                    { name: "Forward Skip with Arm Circles", description: "Forward skip with big arm circles — shoulder + hip warm-up", youtube: 'https://iframe.videodelivery.net/900d26941cb375a5fc61235e4eea6eb1' },
+                    { name: "Backward Skip with Arm Hugs", description: "Backward skip hugging arms across the chest", youtube: 'https://iframe.videodelivery.net/8b335814155cb7451554b7cff0233ce4' },
+                    { name: "Backward A March", description: "Backward A-march — posture, knee drive, pawing action", youtube: 'https://iframe.videodelivery.net/5091c55017a4e14a69a127041b4f8652' },
+                    { name: "Walking Quad Pull to RDL", description: "Walking quad stretch into a single-leg RDL reach", youtube: 'https://iframe.videodelivery.net/a2ea7faec153831d0619602ab217fa9f' },
+                    { name: "Lunge Walk with Reach Up and Back", description: "Walking lunge with an overhead reach and slight lean back", youtube: 'https://iframe.videodelivery.net/e6018d453eb6ef437ad1fcc1754fc0a8' },
+                    { name: "Shake Out Knee Hug", description: "Walking knee hug with a shake-out between reps", youtube: 'https://iframe.videodelivery.net/f9c85e833c73c7c7d866714879f3154e' },
+                    { name: "Shake Out Hamstring Kick", description: "Walking straight-leg kick with a shake-out", youtube: 'https://iframe.videodelivery.net/9bcd7acd3c7fa211e1b8c107cf7f9562' }
                 ]
             },
             // LATERAL — side-to-side shuffles, lateral cuts, lateral footwork
             lateral: {
                 label: "Lateral",
                 exercises: [
-                    { name: "Carioca", description: "Hip mobility, crossover pattern, lateral coordination" },
+                    { name: "Carioca", description: "Hip mobility, crossover pattern, lateral coordination", youtube: 'https://iframe.videodelivery.net/3cde8c4ca6bd1f1d62d765b3d0b16b00' },
                     { name: "Lateral Shuffle", description: "Side-to-side shuffling movement" },
+                    { name: "Lateral Shuffle with Jacks", description: "Lateral shuffle adding jumping jacks", youtube: 'https://iframe.videodelivery.net/4f3f499c052233465d4e75127dfe31fc' },
                     { name: "Pro Agility (5-10-5)", description: "NFL Combine shuttle drill" },
                     { name: "T-Drill", description: "Forward sprint, lateral shuffle, backpedal" },
                     // -- Cutting mechanics --
