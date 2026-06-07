@@ -3,6 +3,8 @@
 
 
 
+import { SPRINT_WARMUP } from './generalMovements';
+
 export const exerciseCategories = {
     // CHEST
     chest: {
@@ -1622,6 +1624,12 @@ export const exerciseCategories = {
     warm_up: {
         label: "Warm Up",
         subcategories: {
+            // Sprint / dynamic warm-up — shared SPRINT_WARMUP from
+            // generalMovements.js (same set as the Movement + Mobility blocks).
+            sprint_warmup: {
+                label: "Sprint Warmup",
+                exercises: SPRINT_WARMUP,
+            },
             general: {
                 label: "General Warm Up",
                 exercises: [

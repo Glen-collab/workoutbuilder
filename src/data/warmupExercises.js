@@ -1,5 +1,14 @@
-﻿// warmup-exercises.js
-// Dedicated warm-up exercise library with warm-up specific categories
+﻿// ⚠️ DEPRECATED / NOT IMPORTED — kept only for reference.
+//
+// The dynamic / sprint warm-up content now lives in generalMovements.js:
+//   • WARMUP_DRILLS  — individual drills (with Cloudflare videos)
+//   • WARMUP_PRESETS — the per-day flows (Linear / Lateral / Multi-Directional Day,
+//                      migrated out of this file)
+//   • SPRINT_WARMUP  — the combined set, surfaced as a "Sprint Warmup" category in
+//                      the Movement, Mobility, AND Warm Up blocks (one source of truth).
+// Nothing imports `warmupCategories` below; safe to delete this file.
+//
+// warmup-exercises.js — Dedicated warm-up exercise library (legacy)
 
 
 

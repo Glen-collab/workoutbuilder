@@ -1,5 +1,35 @@
 # Movement Drill Library
 
+> ## ⭐ Warm-up / sprint-drill VIDEOS — where they live (read this first)
+>
+> **All warm-up drill videos live in ONE place:** the `WARMUP_DRILLS` array at
+> the top of `src/data/generalMovements.js`. Each entry is:
+> ```js
+> { name: "A-Skip", description: "...", youtube: 'https://iframe.videodelivery.net/<CLOUDFLARE_UID>' }
+> ```
+>
+> **To add a new warm-up video:** upload to Cloudflare Stream, grab the UID, and
+> drop one `{ name, description, youtube }` line into `WARMUP_DRILLS`. That's it —
+> it instantly appears in **all three** places below, no other edits:
+> - **Movement block** → Movement Drills → Linear / Lateral / Multi (top of each)
+> - **Mobility block** → "Sprint Warmup" tab
+> - **Warm Up block** → "Sprint Warmup" category
+>
+> Two more exports in the same file:
+> - `WARMUP_PRESETS` — the per-day flows (Linear Day / Lateral Day / Multi Day).
+>   Add their videos here as they're filmed.
+> - `SPRINT_WARMUP` = `[...WARMUP_PRESETS, ...WARMUP_DRILLS]` — the combined set
+>   that the Mobility + Warm Up "Sprint Warmup" categories import. Don't edit this
+>   directly; edit `WARMUP_DRILLS` / `WARMUP_PRESETS`.
+>
+> **Direction-specific drills** (linear sprint work, lateral cuts, multi agility)
+> live in `movement_drills.subcategories.<dir>.exercises` — wire their videos
+> there the same way (`youtube:` field) when you upload them.
+>
+> _(`warmupExercises.js` is DEPRECATED and unused — its content was migrated here.)_
+
+---
+
 The **Movement** block in the Workout Builder pulls every drill from a single
 file:
 

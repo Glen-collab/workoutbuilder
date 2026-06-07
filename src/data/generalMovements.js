@@ -41,6 +41,20 @@ export const WARMUP_DRILLS = [
   { name: "Lateral Shuffle with Jacks", description: "Lateral shuffle adding jumping jacks", youtube: 'https://iframe.videodelivery.net/4f3f499c052233465d4e75127dfe31fc' },
 ];
 
+// Full dynamic warm-up sequences (Glen's per-day flows). Migrated from the
+// retired warmupExercises.js — videos get added as they're filmed.
+export const WARMUP_PRESETS = [
+  { name: "Dynamic Warmup - Linear Day", duration: "8-10 min", description: "Straight Arm Skips, Running Backward, Arm Circles w/ Skip Switch Halfway, Running Backward, Straight Leg Walk + Straight Leg Skip, Backward Track Skip (Up-Up-Out-Out), Left Leg Up Right Leg Around Skip, 10 Gate Swings", youtube: '' },
+  { name: "Dynamic Warmup - Lateral Day", duration: "8-10 min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: '' },
+  { name: "Dynamic Warmup - Multi-Directional Day", duration: "8-10 min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: '' },
+];
+
+// The "Sprint Warmup" set shown in the Movement / Mobility / Warm Up blocks —
+// per-day flow presets first, then the individual video drills. ONE source of
+// truth: to add a warm-up video, drop a { name, description, youtube } into
+// WARMUP_DRILLS above and it appears in all three blocks automatically.
+export const SPRINT_WARMUP = [...WARMUP_PRESETS, ...WARMUP_DRILLS];
+
 export const generalMovements = {
     // ===== MOVEMENT PRESETS — pre-built combos, Beginner -> Intermediate -> Advanced =====
     movement_presets: {
