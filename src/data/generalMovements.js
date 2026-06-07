@@ -44,6 +44,7 @@ export const WARMUP_DRILLS = [
 // Full dynamic warm-up sequences (Glen's per-day flows). Migrated from the
 // retired warmupExercises.js — videos get added as they're filmed.
 export const WARMUP_PRESETS = [
+  { name: "Linear Preset Vargas", duration: "~1 min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
   { name: "Dynamic Warmup - Linear Day", duration: "8-10 min", description: "Straight Arm Skips, Running Backward, Arm Circles w/ Skip Switch Halfway, Running Backward, Straight Leg Walk + Straight Leg Skip, Backward Track Skip (Up-Up-Out-Out), Left Leg Up Right Leg Around Skip, 10 Gate Swings", youtube: '' },
   { name: "Dynamic Warmup - Lateral Day", duration: "8-10 min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: '' },
   { name: "Dynamic Warmup - Multi-Directional Day", duration: "8-10 min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: '' },
