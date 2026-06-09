@@ -44,10 +44,10 @@ export const WARMUP_DRILLS = [
 // Full dynamic warm-up sequences (Glen's per-day flows). Migrated from the
 // retired warmupExercises.js — videos get added as they're filmed.
 export const WARMUP_PRESETS = [
-  { name: "Linear Preset Vargas", duration: "~1 min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
-  { name: "Dynamic Warmup - Linear Day", duration: "8-10 min", description: "Straight Arm Skips, Running Backward, Arm Circles w/ Skip Switch Halfway, Running Backward, Straight Leg Walk + Straight Leg Skip, Backward Track Skip (Up-Up-Out-Out), Left Leg Up Right Leg Around Skip, 10 Gate Swings", youtube: '' },
-  { name: "Dynamic Warmup - Lateral Day", duration: "8-10 min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: '' },
-  { name: "Dynamic Warmup - Multi-Directional Day", duration: "8-10 min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: '' },
+  { name: "Linear Preset Vargas", duration: "5", durationUnit: "min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
+  { name: "Dynamic Warmup - Linear Day", duration: "8", durationUnit: "min", description: "Straight Arm Skips, Running Backward, Arm Circles w/ Skip Switch Halfway, Running Backward, Straight Leg Walk + Straight Leg Skip, Backward Track Skip (Up-Up-Out-Out), Left Leg Up Right Leg Around Skip, 10 Gate Swings", youtube: '' },
+  { name: "Dynamic Warmup - Lateral Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: '' },
+  { name: "Dynamic Warmup - Multi-Directional Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: '' },
 ];
 
 // The "Sprint Warmup" set shown in the Movement / Mobility / Warm Up blocks —
@@ -64,36 +64,36 @@ export const generalMovements = {
             linear: {
                 label: "Linear",
                 exercises: [
-                    { name: "Linear Preset Vargas", duration: "~1 min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
-                    { name: "Beginner Linear Preset", duration: "6-8 min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, High Knee Cycle to Run" },
-                    { name: "Intermediate Linear Preset", duration: "8-10 min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, Straight Leg to High Knee Cycle, High Knee Cycle to Sprint, 40 Yard Build Ups" },
-                    { name: "Advanced Linear Preset", duration: "10-12 min", description: "A Skip, B Skip, Low Ankle Run, Stilt Run + Low Ankle, Stilt Run + Low Ankle Switch Every 3" },
-                    { name: "Linear Preset 1 - Speed Development", description: "Wall Drives, A-Skip, B-Skip, Flying 20s (4 rounds)", duration: "8-10 min" },
-                    { name: "Linear Preset 2 - Acceleration Focus", description: "Falling Starts, 3-Point Stance Starts, Sled Pulls (Light), Hill Sprints (5 rounds)", duration: "10-12 min" },
-                    { name: "Linear Preset 3 - Running Technique", description: "High Knees, Butt Kicks, Straight Leg Bounds, Ankling, Wicket Runs", duration: "8-10 min" },
-                    { name: "Linear Preset 4 - Speed Endurance", description: "Tempo Runs 75%, 100-Yard Repeats (6 rounds), 200-Yard Repeats (3 rounds)", duration: "12-15 min" }
+                    { name: "Linear Preset Vargas", duration: "5", durationUnit: "min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
+                    { name: "Beginner Linear Preset", duration: "6", durationUnit: "min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, High Knee Cycle to Run" },
+                    { name: "Intermediate Linear Preset", duration: "8", durationUnit: "min", description: "A Skip, Straight Leg Run, B Skip, High Knee Cycle, Straight Leg to High Knee Cycle, High Knee Cycle to Sprint, 40 Yard Build Ups" },
+                    { name: "Advanced Linear Preset", duration: "10", durationUnit: "min", description: "A Skip, B Skip, Low Ankle Run, Stilt Run + Low Ankle, Stilt Run + Low Ankle Switch Every 3" },
+                    { name: "Linear Preset 1 - Speed Development", description: "Wall Drives, A-Skip, B-Skip, Flying 20s (4 rounds)", duration: "8", durationUnit: "min" },
+                    { name: "Linear Preset 2 - Acceleration Focus", description: "Falling Starts, 3-Point Stance Starts, Sled Pulls (Light), Hill Sprints (5 rounds)", duration: "10", durationUnit: "min" },
+                    { name: "Linear Preset 3 - Running Technique", description: "High Knees, Butt Kicks, Straight Leg Bounds, Ankling, Wicket Runs", duration: "8", durationUnit: "min" },
+                    { name: "Linear Preset 4 - Speed Endurance", description: "Tempo Runs 75%, 100-Yard Repeats (6 rounds), 200-Yard Repeats (3 rounds)", duration: "12", durationUnit: "min" }
                 ]
             },
             lateral: {
                 label: "Lateral",
                 exercises: [
-                    { name: "Beginner Lateral Preset", duration: "6-8 min", description: "2 Hurdles Back and Forth, 3 Hurdles Down + Stick, 3 Hurdles Down and Back" },
-                    { name: "Intermediate Lateral Preset", duration: "8-10 min", description: "3 Hurdles Down + Stick, 3 Hurdles Down/Back + Sprint Out, 4 Hurdles 2-Back 3-Back 4-Back Ladder" },
-                    { name: "Advanced Lateral Preset", duration: "10-12 min", description: "3 Hurdles Down/Back + Sprint Out, 3 Hurdles Down/Back + Sprint Forward (Perpendicular), 3 Hurdles Down/Back + Reverse Pivot Sprint Back" },
-                    { name: "Lateral Preset 1 - COD Development", description: "Carioca, Lateral Shuffles, 90-Degree Cuts, Pro Agility (5 rounds)", duration: "8-10 min" },
-                    { name: "Lateral Preset 2 - Agility Focus", description: "T-Drill, Box Drill, Reactive Shuffle, Lateral Bounds (4 rounds)", duration: "10-12 min" },
-                    { name: "Lateral Preset 3 - Cutting Mechanics", description: "Crossover Cuts, Open-Hip Cuts, Plant and Drive, Jump Cuts (5 rounds)", duration: "8-10 min" }
+                    { name: "Beginner Lateral Preset", duration: "6", durationUnit: "min", description: "2 Hurdles Back and Forth, 3 Hurdles Down + Stick, 3 Hurdles Down and Back" },
+                    { name: "Intermediate Lateral Preset", duration: "8", durationUnit: "min", description: "3 Hurdles Down + Stick, 3 Hurdles Down/Back + Sprint Out, 4 Hurdles 2-Back 3-Back 4-Back Ladder" },
+                    { name: "Advanced Lateral Preset", duration: "10", durationUnit: "min", description: "3 Hurdles Down/Back + Sprint Out, 3 Hurdles Down/Back + Sprint Forward (Perpendicular), 3 Hurdles Down/Back + Reverse Pivot Sprint Back" },
+                    { name: "Lateral Preset 1 - COD Development", description: "Carioca, Lateral Shuffles, 90-Degree Cuts, Pro Agility (5 rounds)", duration: "8", durationUnit: "min" },
+                    { name: "Lateral Preset 2 - Agility Focus", description: "T-Drill, Box Drill, Reactive Shuffle, Lateral Bounds (4 rounds)", duration: "10", durationUnit: "min" },
+                    { name: "Lateral Preset 3 - Cutting Mechanics", description: "Crossover Cuts, Open-Hip Cuts, Plant and Drive, Jump Cuts (5 rounds)", duration: "8", durationUnit: "min" }
                 ]
             },
             multi: {
                 label: "Multi-Directional",
                 exercises: [
-                    { name: "Beginner Multi Preset", duration: "8-10 min", description: "Altitude Landings Double Leg, Altitude Landings Single Leg Lateral, 5 Yard Sprint to Stop in Lunge Position, 10 Yard Sprint to Lunge Position, 10 Yard Sprint to Double Leg Stop, 10 Yard Sprint to Double Leg Stop + Backpedal" },
-                    { name: "Intermediate Multi Preset", duration: "10-12 min", description: "5 Yard Sprint to Lunge Stop, 10 Yard Sprint to Lunge Stop and Get Out Using Arm Exchange, Sprint to Double Leg Stop and Get Out Using Arm Exchange" },
-                    { name: "Advanced Multi Preset", duration: "12-15 min", description: "Sprint to Get Out on Various Stops, W Drill to Cones with Correct 3 Step Drill, W Drill Through Hurdles + Lateral Back and Sprint Out, Coaches Lateral Shuffle and Sprint Side to Side Drills" },
-                    { name: "Multi-Directional Preset 1 - Complete Agility", description: "L-Drill, W-Drill, Zig-Zag Runs, 180-Degree Turns (4 rounds)", duration: "10-12 min" },
-                    { name: "Multi-Directional Preset 2 - Field Sport Movement", description: "Figure-8 Runs, Cone Weave Sprints, Box Drill, Reactive Shuffle (5 rounds)", duration: "12-15 min" },
-                    { name: "Multi-Directional Preset 3 - Court Sport Movement", description: "Pro Agility, T-Drill, Defensive Slides, Ladder Drills (4 rounds)", duration: "10-12 min" }
+                    { name: "Beginner Multi Preset", duration: "8", durationUnit: "min", description: "Altitude Landings Double Leg, Altitude Landings Single Leg Lateral, 5 Yard Sprint to Stop in Lunge Position, 10 Yard Sprint to Lunge Position, 10 Yard Sprint to Double Leg Stop, 10 Yard Sprint to Double Leg Stop + Backpedal" },
+                    { name: "Intermediate Multi Preset", duration: "10", durationUnit: "min", description: "5 Yard Sprint to Lunge Stop, 10 Yard Sprint to Lunge Stop and Get Out Using Arm Exchange, Sprint to Double Leg Stop and Get Out Using Arm Exchange" },
+                    { name: "Advanced Multi Preset", duration: "12", durationUnit: "min", description: "Sprint to Get Out on Various Stops, W Drill to Cones with Correct 3 Step Drill, W Drill Through Hurdles + Lateral Back and Sprint Out, Coaches Lateral Shuffle and Sprint Side to Side Drills" },
+                    { name: "Multi-Directional Preset 1 - Complete Agility", description: "L-Drill, W-Drill, Zig-Zag Runs, 180-Degree Turns (4 rounds)", duration: "10", durationUnit: "min" },
+                    { name: "Multi-Directional Preset 2 - Field Sport Movement", description: "Figure-8 Runs, Cone Weave Sprints, Box Drill, Reactive Shuffle (5 rounds)", duration: "12", durationUnit: "min" },
+                    { name: "Multi-Directional Preset 3 - Court Sport Movement", description: "Pro Agility, T-Drill, Defensive Slides, Ladder Drills (4 rounds)", duration: "10", durationUnit: "min" }
                 ]
             }
         }
