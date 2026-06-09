@@ -1628,7 +1628,10 @@ export const exerciseCategories = {
             // generalMovements.js (same set as the Movement + Mobility blocks).
             sprint_warmup: {
                 label: "Sprint Warmup",
-                exercises: SPRINT_WARMUP,
+                exercises: [
+                    ...SPRINT_WARMUP,
+                    { name: 'Standing Hip Circles', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fd63fb4b80307643fc23d692b4b655ca', geriatric_priority: true },
+                ],
             },
             general: {
                 label: "General Warm Up",
@@ -1651,18 +1654,11 @@ export const exerciseCategories = {
                     // --- No video ---
                 ]
             },
-            mobility: {
-                label: "Mobility",
-                exercises: [
-                    // --- CF Video exercises ---
-                    { name: 'Shoulder Stretch on Bench', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bdad4b4afbc39e1371a819ff631ca1e' },
-                    // --- No video ---
-                ]
-            },
             upper_body_mobility: {
                 label: "Upper Body Mobility",
                 exercises: [
                     // --- CF Video exercises ---
+                    { name: 'Shoulder Stretch on Bench', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bdad4b4afbc39e1371a819ff631ca1e' },
                     { name: 'Arm Circles', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/86ff973980168bfdbf5726ed9beaee19', geriatric_priority: true },
                     { name: 'Arm Across Chest Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9a84ab708858b1ae7abf479880fe34c6' },
                     { name: 'Arms Straight Shoulder/Chest Stretch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/287f290bb886c0c5c0920ac0c6bb1461' },
@@ -1698,6 +1694,9 @@ export const exerciseCategories = {
                 label: "Lower Body Mobility",
                 exercises: [
                     // --- CF Video exercises ---
+                    { name: 'Clam Shells', movement: ['Hip'], intent: ['Stability'], equipment: ['Bodyweight', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dc0ef241f0ad2d47fe2ce75824434bd2', geriatric_priority: true },
+                    { name: 'Glute Extensions', movement: ['Hip'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4107075912c71bd75fc5fa46b27e792f', geriatric_priority: true },
+                    { name: 'Shortfoot', movement: ['Foot'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e79d3876461cc3f6e1a9ca7afc70802d' },
                     { name: '90/90 Hip Switch', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dad63aa297acbb88c9918e299ba1d87f', geriatric_priority: true },
                     { name: 'Ankle Inversion Walks', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/eb9b976c7fdd269f80ea3a37600518b5' },
                     { name: 'Ankle Mobility Seated and Standing', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/355d453639aa4f5c317ca84430f3f441' },
@@ -1740,49 +1739,13 @@ export const exerciseCategories = {
                     { name: 'X Band Walks', movement: ['Hip'], intent: ['Activation'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bd243bbca5dc12042a276001f154e995' }
                 ]
             },
-            activation: {
-                label: "Activation",
-                exercises: [
-                    // --- CF Video exercises ---
-                    { name: 'Clam Shells', movement: ['Hip'], intent: ['Stability'], equipment: ['Bodyweight', 'Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dc0ef241f0ad2d47fe2ce75824434bd2', geriatric_priority: true },
-                    { name: 'Glute Extensions', movement: ['Hip'], intent: ['Activation'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4107075912c71bd75fc5fa46b27e792f', geriatric_priority: true },
-                    { name: 'Shortfoot', movement: ['Foot'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e79d3876461cc3f6e1a9ca7afc70802d' },
-                    // --- No video ---
-                ]
-            },
-            movement_prep: {
-                label: "Movement Prep",
-                exercises: [
-                    // --- CF Video exercises ---
-                    { name: 'Standing Hip Circles', movement: ['Mobility'], intent: ['Mobility'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/fd63fb4b80307643fc23d692b4b655ca', geriatric_priority: true },
-                    // --- No video ---
-                ]
-            },
-            cardio: {
-                label: "Cardio",
-                exercises: [
-                    { name: 'Jump Rope (Single Unders)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99f2c34db01830ea112caf2b8c5bcbe2' },
-                    { name: 'Jump Rope (Double Unders)', movement: ['Cardio', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/87446322ea33a456369df6008ca54e66' },
-                    { name: 'Jump Rope (High Knees)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2d9695af9fab0252c692ab575b072422' },
-                    { name: 'Jump Rope (Single Leg Hop)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0455070d06e075fdc7e84d87b7721208' },
-                ]
-            },
-            tire_drills: {
-                label: "Tire Drills",
-                exercises: [
-                    { name: 'Tire Double Taps', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a671409ac999b06f2bf5e2dead1eded0' },
-                    { name: 'Tire Jump Shuffle', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/181fe5bf9c56bb3fbe72594dd98a85fc' },
-                    { name: 'Tire Pushup (Feet on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0674ed7665948ccc7df37596f86307f6' },
-                    { name: 'Tire Pushup (Hands on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d4d6a961d8505d317ee5415fc889c823' },
-                    { name: 'Tire Switch Feet', movement: ['Agility'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/11495ec6de2603c624f22b6a0f0d5e65' },
-                    { name: 'Tire Switch Hop Flip', movement: ['Agility', 'Power'], intent: ['Activation', 'Power'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0fcc738b9d76bf8a2cc9fbf7814cdd9d' },
-                    { name: 'Tire Switch Hops', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a0807af16e6fe368e90586e6de60b02e' },
-                    { name: 'Tire Walk Ups', movement: ['Lower Body'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ad3dde8f03cd6a2802232745e4eff658' },
-                ]
-            },
             low_impact_agility: {
                 label: "Low Impact Agility",
                 exercises: [
+                    // Ladder presets (follow-along sequences)
+                    { name: 'Ladder Linear Preset', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: '' },
+                    { name: 'Ladder Lateral Preset', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: '' },
+                    { name: 'Ladder Multi Preset', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: '' },
                     // --- CF Video exercises ---
                     { name: 'Ladder Bunny Hops Forward Backward', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: 'https://iframe.videodelivery.net/988da34c41a9acba14ff3bad45aa64ff' },
                     { name: 'Ladder Carioca', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: 'https://iframe.videodelivery.net/3e12bb6e3f6614320a302ffea2233f19' },
@@ -1801,7 +1764,21 @@ export const exerciseCategories = {
                     { name: 'Ladder Single Leg Hop', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: 'https://iframe.videodelivery.net/771f4c8da18846f5de65d0bd8a7f65fa' },
                     { name: 'Ladder Single Leg Hop (Variation)', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a8201cacf5425e6d3f184cf018ed8079' },
                     { name: 'Ladder X-over Run', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Ladder'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b179fec0ace721b6b2fccccc70df4076' },
-                    { name: 'Lateral Hops', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdb58b0c6be8f5ada28b4d1362db2664' }
+                    { name: 'Lateral Hops', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bdb58b0c6be8f5ada28b4d1362db2664' },
+                    // Cardio (jump rope)
+                    { name: 'Jump Rope (Single Unders)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/99f2c34db01830ea112caf2b8c5bcbe2' },
+                    { name: 'Jump Rope (Double Unders)', movement: ['Cardio', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/87446322ea33a456369df6008ca54e66' },
+                    { name: 'Jump Rope (High Knees)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/2d9695af9fab0252c692ab575b072422' },
+                    { name: 'Jump Rope (Single Leg Hop)', movement: ['Cardio'], intent: ['Conditioning', 'Activation'], equipment: ['Jump Rope'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0455070d06e075fdc7e84d87b7721208' },
+                    // Tire drills
+                    { name: 'Tire Double Taps', movement: ['Agility'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a671409ac999b06f2bf5e2dead1eded0' },
+                    { name: 'Tire Jump Shuffle', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/181fe5bf9c56bb3fbe72594dd98a85fc' },
+                    { name: 'Tire Pushup (Feet on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0674ed7665948ccc7df37596f86307f6' },
+                    { name: 'Tire Pushup (Hands on Tire)', movement: ['Push'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d4d6a961d8505d317ee5415fc889c823' },
+                    { name: 'Tire Switch Feet', movement: ['Agility'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/11495ec6de2603c624f22b6a0f0d5e65' },
+                    { name: 'Tire Switch Hop Flip', movement: ['Agility', 'Power'], intent: ['Activation', 'Power'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0fcc738b9d76bf8a2cc9fbf7814cdd9d' },
+                    { name: 'Tire Switch Hops', movement: ['Agility', 'Power'], intent: ['Activation', 'Conditioning'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a0807af16e6fe368e90586e6de60b02e' },
+                    { name: 'Tire Walk Ups', movement: ['Lower Body'], intent: ['Activation'], equipment: ['Tire'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ad3dde8f03cd6a2802232745e4eff658' }
                 ]
             },
             myofascial: {
@@ -1871,7 +1848,6 @@ export const exerciseCategories = {
                     { name: 'Arm Across Chest Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/9a84ab708858b1ae7abf479880fe34c6' },
                     { name: 'Arms Straight Shoulder/Chest Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/287f290bb886c0c5c0920ac0c6bb1461' },
                     { name: 'Shoulder Stretch on Bench', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/0bdad4b4afbc39e1371a819ff631ca1e' },
-                    { name: 'Cross-Body Shoulder Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Overhead Triceps Stretch', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Child\'s Pose (Lat Stretch)', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Seated Spinal Twist', movement: ['Flexibility'], intent: ['Mobility', 'Recovery'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },

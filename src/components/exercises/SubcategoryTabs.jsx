@@ -75,14 +75,16 @@ export default function SubcategoryTabs({ muscleGroup, exerciseCategories, onSel
         </button>
         <h3 className="text-lg font-bold text-gray-700 m-0 capitalize">{displayLabel}</h3>
       </div>
-      <div className="flex flex-wrap gap-2.5">
+      {/* Uniform grid so every category button is the same size (2 cols on
+          mobile, 3 on wider screens). */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
         {subcategoryKeys.map((key) => {
           const sub = subcategoryData[key];
           const label = (sub && sub.label) ? sub.label : key.replace(/_/g, ' ');
           return (
             <button
               key={key}
-              className="py-3 px-5 bg-white border-2 border-gray-200 rounded-[10px] cursor-pointer text-sm font-semibold text-gray-600 shadow-sm transition-all duration-150 capitalize hover:border-[#667eea] hover:text-[#667eea] hover:shadow-md"
+              className="w-full py-3 px-3 bg-white border-2 border-gray-200 rounded-[10px] cursor-pointer text-sm font-semibold text-gray-600 shadow-sm transition-all duration-150 capitalize text-center flex items-center justify-center hover:border-[#667eea] hover:text-[#667eea] hover:shadow-md"
               onClick={() => onSelectSubcategory(key)}
             >
               {label}
