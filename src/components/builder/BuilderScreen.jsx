@@ -14,6 +14,7 @@ export default function BuilderScreen({
   overrideSaveStatus,
   onRevertOverride,
   onGoToDashboard,
+  onGoToApp,
   onExitOverrideMode,
   onSaveTravel,
   onProgressions,
@@ -126,15 +127,15 @@ export default function BuilderScreen({
                 Trainer Dashboard
               </button>
             )}
-            {/* Same-tab return to the coach platform (app.bestrongagain.com)
-                so Glen can get back to the app without hunting for the tab. */}
-            <a
-              href="https://app.bestrongagain.com"
-              className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-gray-200 text-gray-800 rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-300 transition-colors duration-200 flex items-center justify-center no-underline"
+            {/* Same-tab return to the coach platform (app.bestrongagain.com).
+                Routes through onGoToApp so unsaved changes get a confirm first. */}
+            <button
+              onClick={onGoToApp || (() => { window.location.href = 'https://app.bestrongagain.com'; })}
+              className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-gray-200 text-gray-800 border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-gray-300 transition-colors duration-200 flex items-center justify-center"
               title="Back to app.bestrongagain.com"
             >
               ← My App
-            </a>
+            </button>
           </div>
         </div>
       </div>

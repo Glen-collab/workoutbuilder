@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useWorkoutState from './hooks/useWorkoutState';
 import useProgramAPI from './hooks/useProgramAPI';
 import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
@@ -41,6 +41,43 @@ function AuthGate() {
 function BuilderApp({ builderUser, onLogout }) {
   const workoutState = useWorkoutState();
   const programAPI = useProgramAPI();
+
+  // ── Unsaved-changes guard ──
+  // Snapshot the program at the last save/load; if the live program differs,
+  // there are unsaved edits. Warns before leaving (My App button + tab close).
+  const savedSnapshotRef = useRef(null);
+  const bypassUnloadRef = useRef(false);
+  const snapshot = () => {
+    try {
+      const d = workoutState.getAllWorkoutsForSave();
+      return JSON.stringify({ allWorkouts: d.allWorkouts, mainMaxes: d.mainMaxes, daysPerWeek: d.daysPerWeek, totalWeeks: d.totalWeeks });
+    } catch { return null; }
+  };
+  const isDirty = () => savedSnapshotRef.current !== null && snapshot() !== savedSnapshotRef.current;
+
+  // Re-baseline whenever a program is loaded, saved, or cleared — every one of
+  // those changes loadedProgram's identity. setTimeout(0) lets the state/refs
+  // settle first so the snapshot reflects the just-loaded program.
+  useEffect(() => {
+    const t = setTimeout(() => { savedSnapshotRef.current = snapshot(); }, 0);
+    return () => clearTimeout(t);
+  }, [workoutState.loadedProgram]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Native browser warning on tab close / refresh / back when there are unsaved
+  // edits. Bypassed by the My App button (which runs its own confirm first).
+  useEffect(() => {
+    const handler = (e) => {
+      if (!bypassUnloadRef.current && isDirty()) { e.preventDefault(); e.returnValue = ''; }
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleGoToApp = () => {
+    if (isDirty() && !window.confirm('You have unsaved changes in this program. Leave and go back to the app anyway?')) return;
+    bypassUnloadRef.current = true; // don't double-prompt via beforeunload
+    window.location.href = 'https://app.bestrongagain.com';
+  };
 
   // Override mode (launched from trainer dashboard)
   const [overrideContext, setOverrideContext] = useState(null); // { accessCode, email }
@@ -484,6 +521,7 @@ function BuilderApp({ builderUser, onLogout }) {
           overrideSaveStatus={overrideSaveStatus}
           onRevertOverride={overrideContext ? handleRevertOverride : null}
           onGoToDashboard={handleGoToDashboard}
+          onGoToApp={handleGoToApp}
           onExitOverrideMode={overrideContext ? handleExitOverrideMode : null}
           onSaveTravel={overrideContext ? null : handleOpenTravelSave}
           onProgressions={handleGoToProgressions}
