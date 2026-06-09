@@ -169,6 +169,10 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const [maSubcategory, setMaSubcategory] = useState(null); // selected MA subcategory key
   const [tkdBelt, setTkdBelt] = useState(null); // selected belt for TKD Curriculum view
   const [curriculumPreviewKey, setCurriculumPreviewKey] = useState(null); // `${section}-${idx}` of previewed video
+  // Coach-authored custom / combo exercise: one name, or several joined by "+"
+  // on a single line (reads better on the board than stacked).
+  const [comboMode, setComboMode] = useState(false);
+  const [comboSegments, setComboSegments] = useState(['']);
 
   const isStrength = strengthTypes.includes(blockType);
   const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
@@ -194,6 +198,8 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     setMaSubcategory(null);
     setTkdBelt(null);
     setCurriculumPreviewKey(null);
+    setComboMode(false);
+    setComboSegments(['']);
     onClose();
   };
 
@@ -201,6 +207,71 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     onSelectExercise(exercise);
     handleClose();
   };
+
+  // ── Custom / combo exercise composer ──
+  // Every library exercise name, for the segment autocomplete (datalist).
+  const allExerciseNames = useMemo(() => {
+    const names = [];
+    Object.values(exerciseCategories).forEach((cat) => {
+      Object.values(cat.subcategories || {}).forEach((sub) => {
+        (sub.exercises || []).forEach((ex) => ex?.name && names.push(ex.name));
+      });
+    });
+    return [...new Set(names)].sort();
+  }, []);
+
+  const openCombo = () => { setComboMode(true); setComboSegments(['']); };
+  const updateSegment = (i, val) => setComboSegments((segs) => segs.map((s, idx) => (idx === i ? val : s)));
+  const addSegment = () => setComboSegments((segs) => [...segs, '']);
+  const removeSegment = (i) => setComboSegments((segs) => (segs.length > 1 ? segs.filter((_, idx) => idx !== i) : segs));
+  const comboPreview = comboSegments.map((s) => s.trim()).filter(Boolean).join(' + ');
+  const submitCombo = () => {
+    if (!comboPreview) return;
+    // A real, coach-named exercise (NOT isUserDefined) so it prescribes normally
+    // in the builder and carries its "+" name straight to the tracker / board.
+    handleSelect({ name: comboPreview, equipment: [], movement: [], intent: [], contraindications: [], youtube: '' });
+  };
+
+  const renderCombo = () => (
+    <div className="p-4">
+      <div className="text-[13px] text-gray-600 mb-3 leading-snug">
+        Type one exercise (e.g. <b>Ladder Preset Linear</b>), or add more — they join with
+        <b> “+”</b> on a single line for the board (e.g. <b>Medball Slam + Assault Bike</b>).
+      </div>
+      {comboSegments.map((seg, i) => (
+        <div key={i} className="flex items-center gap-2 mb-2">
+          {i > 0 && <span className="text-[#10b981] font-extrabold text-lg leading-none">+</span>}
+          <input
+            type="text"
+            list="combo-exercise-names"
+            value={seg}
+            onChange={(e) => updateSegment(i, e.target.value)}
+            placeholder={i === 0 ? 'e.g. Medball Slam' : 'add another…'}
+            autoFocus={i === comboSegments.length - 1}
+            className="flex-1 px-3 py-2.5 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-[#10b981] transition-colors"
+          />
+          {comboSegments.length > 1 && (
+            <button onClick={() => removeSegment(i)} title="Remove" className="text-gray-400 hover:text-red-500 text-xl px-1 bg-transparent border-none cursor-pointer leading-none">×</button>
+          )}
+        </div>
+      ))}
+      <datalist id="combo-exercise-names">
+        {allExerciseNames.map((n) => <option key={n} value={n} />)}
+      </datalist>
+      <button onClick={addSegment} className="text-[#10b981] font-bold text-sm mt-1 mb-3 cursor-pointer bg-transparent border-none">＋ Add exercise</button>
+      <div className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 mb-3">
+        <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-1">Preview (one line)</div>
+        <div className="text-[15px] font-extrabold text-gray-800 break-words">{comboPreview || '—'}</div>
+      </div>
+      <button
+        onClick={submitCombo}
+        disabled={!comboPreview}
+        className={`w-full py-3 rounded-lg font-bold text-sm border-none ${comboPreview ? 'bg-[#10b981] text-white cursor-pointer' : 'bg-gray-200 text-gray-400 cursor-default'}`}
+      >
+        Add to Workout
+      </button>
+    </div>
+  );
 
   // Determine which categories to use for non-strength blocks
   let nonStrengthCategories = null;
@@ -614,9 +685,17 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
               🏃 Choose Your Own Cardio
             </button>
           </div>
+          {/* Coach-authored custom / "+" combo — its own line. Names the exercise
+              in the BUILDER (vs the client-fill stubs above). */}
+          <button
+            onClick={() => (comboMode ? setComboMode(false) : openCombo())}
+            className={`w-full mt-2 py-2.5 px-2 text-[12.5px] font-bold rounded-lg border-2 transition-colors cursor-pointer ${comboMode ? 'bg-[#10b981] text-white border-[#10b981]' : 'border-[#10b981] text-[#047857] bg-white hover:bg-[#10b981] hover:text-white'}`}
+          >
+            {comboMode ? '← Back to exercise list' : '🔗 Build Combo / Custom Exercise'}
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto">
-          {renderContent()}
+          {comboMode ? renderCombo() : renderContent()}
         </div>
       </div>
     </div>
