@@ -39,6 +39,7 @@ export const WARMUP_DRILLS = [
   { name: "Shake Out Hamstring Kick", description: "Walking straight-leg kick with a shake-out", youtube: 'https://iframe.videodelivery.net/9bcd7acd3c7fa211e1b8c107cf7f9562' },
   { name: "Carioca", description: "Hip mobility, crossover pattern, lateral coordination", youtube: 'https://iframe.videodelivery.net/3cde8c4ca6bd1f1d62d765b3d0b16b00' },
   { name: "Lateral Shuffle with Jacks", description: "Lateral shuffle adding jumping jacks", youtube: 'https://iframe.videodelivery.net/4f3f499c052233465d4e75127dfe31fc' },
+  { name: "Single Leg Hop w/ Cycle", description: "Single-leg hop driving the free-leg cycle — linear rhythm + stiffness", youtube: 'https://iframe.videodelivery.net/2a64b5053a2e88ae8a03d7b5580ed5af' },
 ];
 
 // Full dynamic warm-up sequences (Glen's per-day flows). Migrated from the
@@ -46,8 +47,8 @@ export const WARMUP_DRILLS = [
 export const WARMUP_PRESETS = [
   { name: "Linear Preset Vargas", duration: "5", durationUnit: "min", description: "Full linear dynamic warm-up — follow along with the video.", youtube: 'https://iframe.videodelivery.net/d2b27fc9f5795fffceacab1406e62fb7' },
   { name: "Dynamic Warmup - Linear Day", duration: "8", durationUnit: "min", description: "Straight Arm Skips, Running Backward, Arm Circles w/ Skip Switch Halfway, Running Backward, Straight Leg Walk + Straight Leg Skip, Backward Track Skip (Up-Up-Out-Out), Left Leg Up Right Leg Around Skip, 10 Gate Swings", youtube: '' },
-  { name: "Dynamic Warmup - Lateral Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: '' },
-  { name: "Dynamic Warmup - Multi-Directional Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: '' },
+  { name: "Dynamic Warmup - Lateral Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip, Running Backward, Arm Circles Switch Halfway, Straight Leg Walk to Straight Leg Skip, Backward Hip Opener Skips, Lateral Cross Body Skips Down/Back, Carioca Down/Back, 10 Gate Swings", youtube: 'https://iframe.videodelivery.net/62b3a40376262ad8a76684ca408d48bf' },
+  { name: "Dynamic Warmup - Multi-Directional Day", duration: "8", durationUnit: "min", description: "Straight Arm Skip Switch Halfway, Running Backward, Arm Circles Switch Halfway, Straight Leg Skip Back, Low Ankle Run Down, High Knee Cycle Back, Side Shuffle Down/Back, Lunge w/ Twist Down, Backward C Skip", youtube: 'https://iframe.videodelivery.net/0a68457bdafb2dbfa8cd34e683f1d84a' },
 ];
 
 // The "Sprint Warmup" set shown in the Movement / Mobility / Warm Up blocks —
@@ -55,6 +56,58 @@ export const WARMUP_PRESETS = [
 // truth: to add a warm-up video, drop a { name, description, youtube } into
 // WARMUP_DRILLS above and it appears in all three blocks automatically.
 export const SPRINT_WARMUP = [...WARMUP_PRESETS, ...WARMUP_DRILLS];
+
+// Glen's filmed LATERAL drills (hurdle / wicket work). Front of the Lateral list.
+export const LATERAL_DRILLS = [
+  { name: "2 Back, 3 Back, 4 Back Wickets", description: "Progressive backward wicket ladder", youtube: 'https://iframe.videodelivery.net/761038c68b141d48d0046a53fd6a3f49' },
+  { name: "8 Hurdle Gauntlet", description: "Continuous 8-hurdle lateral sequence", youtube: 'https://iframe.videodelivery.net/54ab083b85b83f098ac9bcbed8f78d4b' },
+  { name: "Backward Track Skip (Up-Up-Out-Out)", description: "Backward track skip rhythm pattern", youtube: 'https://iframe.videodelivery.net/4b08d4e09a42bbecc6f96605b66b4906' },
+  { name: "Crossover Skip", description: "Lateral crossover skip — hip mobility + coordination", youtube: 'https://iframe.videodelivery.net/4eb685820570362ab439554e0cfbf27c' },
+  { name: "Gate Swings", description: "Open-the-gate hip mobility swing", youtube: 'https://iframe.videodelivery.net/c284afed4348858a5d4014de5e94db8b' },
+  { name: "Lateral Quick Feet (2 Hurdle)", description: "Fast feet through two hurdles", youtube: 'https://iframe.videodelivery.net/e299d5cd5c4334f076b7754c69698543' },
+  { name: "Lateral Shuffle Wicket w/ Pause", description: "Lateral shuffle through wickets with a hold", youtube: 'https://iframe.videodelivery.net/789f60a3d06fc64b08af2ffc212f2d99' },
+  { name: "Lateral to Backward Run (3 Wickets)", description: "Lateral entry into a backward run", youtube: 'https://iframe.videodelivery.net/1013fe25010a18e4e4f62ded59ea8d0f' },
+  { name: "Lateral to Forward Sprint (3 Wickets)", description: "Lateral entry into a forward sprint", youtube: 'https://iframe.videodelivery.net/07bc543a5ce193ecaaaa606cc1b53d65' },
+  { name: "Lateral Wicket Run (No Pause)", description: "Continuous lateral wicket run", youtube: 'https://iframe.videodelivery.net/1bbc624039060f8efb96383a149c352c' },
+  { name: "Lateral Wicket Skip + Pivot Backward Run", description: "Wicket skip into a pivot and backward run", youtube: 'https://iframe.videodelivery.net/42842529b53fdd74ab36374165247cb4' },
+  { name: "Lateral Wicket Skip + Sprint Forward", description: "Wicket skip into a forward sprint", youtube: 'https://iframe.videodelivery.net/ba7e246a4bf64c35de805ad59e25ef25' },
+  { name: "Lateral Wicket with Lateral Sprint", description: "Wicket work into a lateral sprint", youtube: 'https://iframe.videodelivery.net/d1ae31cf76c39bd88a9d4e50e902e2e6' },
+  { name: "Wicket Lateral Hurdle Skips (Down + Back)", description: "Lateral hurdle skips down and back", youtube: 'https://iframe.videodelivery.net/ceeeeadcb9027e355157516788f84a84' },
+  { name: "Wicket Lateral Skips w/ Pause", description: "Lateral wicket skips with a hold each rep", youtube: 'https://iframe.videodelivery.net/7ae38439284ef121ea19d1568d43403a' },
+];
+
+// Glen's filmed MULTI-DIRECTIONAL drills (reaction, stops, W/T-drills). Front of the Multi list.
+export const MULTI_DRILLS = [
+  { name: "5-10-5 Pro Agility", description: "NFL Combine short shuttle", youtube: 'https://iframe.videodelivery.net/fea55859029435fe247a1520a4dbdb9b' },
+  { name: "Ankling Warm-Up", description: "Low ankling prep for change of direction", youtube: 'https://iframe.videodelivery.net/5eb6a84d922b889216e23caf3ae9440c' },
+  { name: "Backward C-Skip", description: "Backward C-skip — hip opener + coordination", youtube: 'https://iframe.videodelivery.net/b974baa613587e22a414fc35f20285eb' },
+  { name: "Box Land + Jump + Crossover Sprint", description: "Box landing into jump and crossover sprint", youtube: 'https://iframe.videodelivery.net/351a15016c000746c74926a1dadcd1f2' },
+  { name: "Box Land to Jump and Sprint", description: "Box landing into a jump and sprint", youtube: 'https://iframe.videodelivery.net/a45853d467509ad9c15b23508e002f31' },
+  { name: "Box Land to Lateral Shuffle", description: "Box landing into a lateral shuffle", youtube: 'https://iframe.videodelivery.net/23bb53f009c194fc74347178cf46dc40' },
+  { name: "Double Leg Stop (Multi-Directional)", description: "Decelerate to a balanced double-leg stop", youtube: 'https://iframe.videodelivery.net/14efcb187e8e506e20c55b99de527a02' },
+  { name: "Forward and Lateral Partner Stops", description: "Partner-cued forward + lateral stops", youtube: 'https://iframe.videodelivery.net/b281d30d02cce38d0dba821bbf061eb7' },
+  { name: "High Knee Skips", description: "High knee skip — knee drive + rhythm", youtube: 'https://iframe.videodelivery.net/bd9acef459629514d6cbc966b1c6e917' },
+  { name: "Lunge Walk with Twist", description: "Walking lunge adding a trunk rotation", youtube: 'https://iframe.videodelivery.net/d84d83d0b4d76ad4f994b53313a1bff9' },
+  { name: "Multi-Directional to Lateral and Sprint", description: "Multi-direction change into lateral and sprint", youtube: 'https://iframe.videodelivery.net/58bb31146a29a8580bb474c52f901476' },
+  { name: "Multi-Directional Wicket for Speed", description: "Wicket pattern for multi-direction speed", youtube: 'https://iframe.videodelivery.net/0b67ff56c807c74faf957d95ce748b3f' },
+  { name: "Multi-Directional Wicket Zig-Zag", description: "Zig-zag wicket cutting pattern", youtube: 'https://iframe.videodelivery.net/7db0d6a635d923c7596d2b4f9a4b831e' },
+  { name: "Double Leg Stop + Coach's Reaction Sprint Back", description: "Stop, react to coach, sprint back", youtube: 'https://iframe.videodelivery.net/aff4ec7340b17d475f6d043168b3ef69' },
+  { name: "Double Leg Stop to Backpedal", description: "Double-leg stop into a backpedal", youtube: 'https://iframe.videodelivery.net/e167ab02f2bad6ef329163b0e1495309' },
+  { name: "Double Leg Stop to Sprint Back", description: "Double-leg stop into a sprint back", youtube: 'https://iframe.videodelivery.net/c6ae6a5a707b881711d5be086a6062dd' },
+  { name: "Learn to Stop + Single Leg Lunge", description: "Teaching the single-leg lunge stop", youtube: 'https://iframe.videodelivery.net/224ed97b21a52bb49cb28185e6d64931' },
+  { name: "Single Leg Land to Sprint Back", description: "Single-leg landing into a sprint back", youtube: 'https://iframe.videodelivery.net/8a846ac75d9f096cc6999b1b8dcce12c' },
+  { name: "Reaction Drill — Lateral / Fwd / Back + Sprint Out", description: "Multi-cue reaction into a sprint out", youtube: 'https://iframe.videodelivery.net/3a6d23566a94d257aebbb8824e179776' },
+  { name: "Reaction on Coach — Lateral Shuffle", description: "Coach-cued lateral shuffle reaction", youtube: 'https://iframe.videodelivery.net/9b07d0384ea85baffe2fbeb04c8dfa31' },
+  { name: "Reaction on Coach — Side-to-Side Sprint", description: "Coach-cued side-to-side sprint reaction", youtube: 'https://iframe.videodelivery.net/8d78e2d8bbd4cb7f2edae15706d802b4' },
+  { name: "Stilt Run Ankling (Other Foot)", description: "Stilt-run ankling, opposite-foot emphasis", youtube: 'https://iframe.videodelivery.net/f4f9e985aff45a2b150b562359c2248c' },
+  { name: "T-Drill Crossover to Sprint (Each Cone)", description: "T-drill crossover sprinting each cone", youtube: 'https://iframe.videodelivery.net/166bb33ca411d08e6e3af49749546992' },
+  { name: "T-Drill Shuffle to Sprint + L-Drill Finish", description: "T-drill shuffle into a sprint and L-drill", youtube: 'https://iframe.videodelivery.net/dc9857557ab1b6cb60bd24067de74851' },
+  { name: "Vertical Jump to Crossover Sprint", description: "Vertical jump landing into a crossover sprint", youtube: 'https://iframe.videodelivery.net/3560c47799390c8c52cc2099dd183fc3' },
+  { name: "Vertical Jump to Lateral Shuffle", description: "Vertical jump landing into a lateral shuffle", youtube: 'https://iframe.videodelivery.net/637b36226d933e722636043ba8b5dc34' },
+  { name: "W-Drill 360° Turns (Each Cone)", description: "W-drill adding a 360 at each cone", youtube: 'https://iframe.videodelivery.net/6c944149edfb80a1fe48da40456a8f31' },
+  { name: "W-Drill Forward/Backward", description: "W-drill with forward and backward legs", youtube: 'https://iframe.videodelivery.net/745bc761e662e5014535514f362b9458' },
+  { name: "W-Drill Lateral Shuffle", description: "W-drill performed with lateral shuffles", youtube: 'https://iframe.videodelivery.net/db1d5098368315f0e8780a70cafa21fc' },
+];
 
 export const generalMovements = {
     // ===== MOVEMENT PRESETS — pre-built combos, Beginner -> Intermediate -> Advanced =====
@@ -136,6 +189,7 @@ export const generalMovements = {
             lateral: {
                 label: "Lateral",
                 exercises: [
+                    ...LATERAL_DRILLS,
                     ...WARMUP_DRILLS,
                     { name: "Lateral Shuffle", description: "Side-to-side shuffling movement" },
                     { name: "Pro Agility (5-10-5)", description: "NFL Combine shuttle drill" },
@@ -162,6 +216,7 @@ export const generalMovements = {
             multi: {
                 label: "Multi-Directional",
                 exercises: [
+                    ...MULTI_DRILLS,
                     ...WARMUP_DRILLS,
                     { name: "L-Drill (3-Cone)", description: "NFL Combine cone drill" },
                     { name: "Box Drill (4-Corner)", description: "Square pattern with direction changes" },
@@ -185,6 +240,22 @@ export const generalMovements = {
 
     // PLYOMETRICS - Lower Body power
     plyometrics_lower: [
+        // Glen's filmed plyos first
+        { name: "Air Squat Push-Up Jump", description: "Air squat to push-up to jump combo", youtube: 'https://iframe.videodelivery.net/b027212d170102a956935a594175706e' },
+        { name: "Box Jump + Step Down", description: "Box jump with a controlled step-down", youtube: 'https://iframe.videodelivery.net/5180f8defbf87694f01d18eabcc3698a' },
+        { name: "Box Jump Step Down + Forward Hiking", description: "Box jump, step down, forward hike-out", youtube: 'https://iframe.videodelivery.net/612165497c5654f80b8763d276a84415' },
+        { name: "Burpee Box Jump", description: "Burpee into a box jump", youtube: 'https://iframe.videodelivery.net/248321194f9bd5dd0977c4723408e504' },
+        { name: "Burpee Box Jump Overs", description: "Burpee into a box jump-over", youtube: 'https://iframe.videodelivery.net/f0697525f9e8c4b0c0c2301d426f999e' },
+        { name: "Burpee + Lateral Hurdle Hop + Burpee", description: "Burpee, lateral hurdle hop, burpee combo", youtube: 'https://iframe.videodelivery.net/579d973446f2bdff9fc1aea1491de645' },
+        { name: "Frog Hops", description: "Deep squat frog hops for hip power", youtube: 'https://iframe.videodelivery.net/f32ea41e94435fb8605c2353e733d688' },
+        { name: "Hurdle Hops (Stick at End)", description: "Continuous hurdle hops, stick the last landing", youtube: 'https://iframe.videodelivery.net/07bfa1e56771361519a74741633b346e' },
+        { name: "Lateral Hurdle Hop (Single Hurdle)", description: "Side-to-side hop over a single hurdle", youtube: 'https://iframe.videodelivery.net/e0e1cd996ade86a3b493e079f14b63b4' },
+        { name: "Pogo Hops", description: "Stiff-ankle pogo hops", youtube: 'https://iframe.videodelivery.net/e6e311a8213de0ccdf542bd778832e8a' },
+        { name: "Single-Leg Box Jumps", description: "Unilateral box jump for power + stability", youtube: 'https://iframe.videodelivery.net/1e2b857b54a9561388b69cb35b9892c0' },
+        { name: "Split Jump Knee Drive (Same Leg)", description: "Split-stance jump driving the same knee", youtube: 'https://iframe.videodelivery.net/e11e17669ac4333360060932414b8939' },
+        { name: "Split Jumps", description: "Alternating split-stance jumps", youtube: 'https://iframe.videodelivery.net/cc7f648ed1099d8b283beea154e83b4f' },
+        { name: "Triple Extension Broad Jumps", description: "Broad jump emphasizing full triple extension", youtube: 'https://iframe.videodelivery.net/53b297e153d32e1d77d8ebbccb22c579' },
+        { name: "Wicket Single-Leg Cycle Hop", description: "Single-leg cycle hop through wickets", youtube: 'https://iframe.videodelivery.net/285b7aa0e8c2479026470ee8a79f3cf5' },
         { name: "Box Jumps", description: "24-36 inch box, explosive hip extension" },
         { name: "Depth Jumps", description: "Drop from box, immediate reactive jump" },
         { name: "Broad Jumps", description: "Horizontal power, triple extension" },

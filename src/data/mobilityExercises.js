@@ -28,6 +28,7 @@ export const mobilityCategories = {
             { name: 'Hurdle Mobility Single Leg Walk Over', duration: '5 each leg', description: 'Single leg repeats over each hurdle — balance + hip mobility', youtube: 'https://iframe.videodelivery.net/99ab365b24027a89d8b543017b938ea8' },
             { name: 'Hurdle Mobility (Full Circuit)', duration: '1 round', description: 'Full hurdle mobility sequence — walks, skips, single leg, laterals', youtube: 'https://iframe.videodelivery.net/93b0c07499d6b40e6e269f072223f473' },
             { name: 'Single Leg Hurdle Mobility (Forward/Backward)', duration: '5 each leg', description: 'One-leg forward/backward pass pattern over hurdles', youtube: 'https://iframe.videodelivery.net/a32e917e14f2f15a0137ff429e89cd61' },
+            { name: 'Hurdle Mobility', duration: '1 round', description: 'Full hurdle mobility flow — walks, skips, and pass-throughs', youtube: 'https://iframe.videodelivery.net/aae027bd0686916ad595c16619d53a7d' },
             { name: 'Pigeon Pose', duration: '60s each side', description: 'Deep hip external rotation stretch', youtube: '' },
             { name: 'Quadruped Pigeon Variation', duration: '60s each side', description: 'Hip opener in quadruped position', youtube: 'https://iframe.videodelivery.net/53b2f45cc8fbb998896fae386930b42a' },
             { name: 'Bench-Assisted Pigeon Stretch', duration: '60s each side', description: 'Pigeon pose with bench support', youtube: 'https://iframe.videodelivery.net/faadb1ccb6d786ceae76ff5fd1d2dfe5' },
