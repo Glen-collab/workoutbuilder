@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import useProgramAPI from '../../hooks/useProgramAPI';
 import { exerciseCategories } from '../../data/exerciseLibrary';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
@@ -158,7 +159,7 @@ function getAllStrengthExercises() {
   return results;
 }
 
-export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExercise }) {
+export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExercise, coachEmail }) {
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -173,6 +174,21 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   // on a single line (reads better on the board than stacked).
   const [comboMode, setComboMode] = useState(false);
   const [comboSegments, setComboSegments] = useState(['']);
+  const [saveToList, setSaveToList] = useState(true);
+  const [customExercises, setCustomExercises] = useState([]);
+  const { listCustomExercises, saveCustomExercise, deleteCustomExercise } = useProgramAPI();
+
+  // Load this coach's saved custom/combo exercises when the composer opens.
+  const refreshCustoms = () => {
+    if (!coachEmail) return;
+    listCustomExercises(coachEmail)
+      .then((r) => setCustomExercises(r?.exercises || []))
+      .catch(() => {});
+  };
+  useEffect(() => {
+    if (isOpen && comboMode) refreshCustoms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, comboMode, coachEmail]);
 
   const isStrength = strengthTypes.includes(blockType);
   const isWarmupCooldown = warmupCooldownTypes.includes(blockType);
@@ -225,15 +241,51 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
   const addSegment = () => setComboSegments((segs) => [...segs, '']);
   const removeSegment = (i) => setComboSegments((segs) => (segs.length > 1 ? segs.filter((_, idx) => idx !== i) : segs));
   const comboPreview = comboSegments.map((s) => s.trim()).filter(Boolean).join(' + ');
-  const submitCombo = () => {
+
+  // A real, coach-named exercise (NOT isUserDefined) so it prescribes normally
+  // in the builder and carries its "+" name straight to the tracker / board.
+  const exerciseFromCustom = (name, videoUid) => ({
+    name,
+    equipment: [], movement: [], intent: [], contraindications: [],
+    youtube: videoUid ? `https://iframe.videodelivery.net/${videoUid}` : '',
+  });
+
+  const submitCombo = async () => {
     if (!comboPreview) return;
-    // A real, coach-named exercise (NOT isUserDefined) so it prescribes normally
-    // in the builder and carries its "+" name straight to the tracker / board.
-    handleSelect({ name: comboPreview, equipment: [], movement: [], intent: [], contraindications: [], youtube: '' });
+    if (saveToList && coachEmail) {
+      try { await saveCustomExercise(coachEmail, comboPreview, ''); } catch { /* still add it */ }
+    }
+    handleSelect(exerciseFromCustom(comboPreview, ''));
+  };
+
+  const removeCustom = async (id) => {
+    if (!coachEmail) return;
+    try { await deleteCustomExercise(coachEmail, id); } catch { /* ignore */ }
+    setCustomExercises((list) => list.filter((e) => e.id !== id));
   };
 
   const renderCombo = () => (
     <div className="p-4">
+      {customExercises.length > 0 && (
+        <div className="mb-4">
+          <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-1.5">⭐ Your Custom Exercises</div>
+          <div className="flex flex-col gap-1.5">
+            {customExercises.map((ce) => (
+              <div key={ce.id} className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2">
+                <button
+                  onClick={() => handleSelect(exerciseFromCustom(ce.name, ce.video_uid))}
+                  className="flex-1 text-left text-sm font-semibold text-gray-800 bg-transparent border-none cursor-pointer truncate"
+                  title="Add to workout"
+                >
+                  {ce.name}{ce.video_uid ? ' 🎬' : ''}
+                </button>
+                <button onClick={() => removeCustom(ce.id)} title="Delete from my list"
+                  className="text-gray-300 hover:text-red-500 text-lg px-1 bg-transparent border-none cursor-pointer leading-none">×</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="text-[13px] text-gray-600 mb-3 leading-snug">
         Type one exercise (e.g. <b>Ladder Preset Linear</b>), or add more — they join with
         <b> “+”</b> on a single line for the board (e.g. <b>Medball Slam + Assault Bike</b>).
@@ -263,6 +315,12 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
         <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-1">Preview (one line)</div>
         <div className="text-[15px] font-extrabold text-gray-800 break-words">{comboPreview || '—'}</div>
       </div>
+      {coachEmail && (
+        <label className="flex items-center gap-2 mb-3 text-[13px] text-gray-600 cursor-pointer select-none">
+          <input type="checkbox" checked={saveToList} onChange={(e) => setSaveToList(e.target.checked)} className="w-4 h-4 accent-[#10b981]" />
+          Save to my Custom Exercises (reuse it in any program)
+        </label>
+      )}
       <button
         onClick={submitCombo}
         disabled={!comboPreview}

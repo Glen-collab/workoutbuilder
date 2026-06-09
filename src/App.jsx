@@ -556,6 +556,7 @@ function BuilderApp({ builderUser, onLogout }) {
         }}
         blockType={exerciseModalBlockType}
         onSelectExercise={handleSelectExercise}
+        coachEmail={builderUser?.email || overrideContext?.email || ''}
       />
 
       <SaveProgramModal

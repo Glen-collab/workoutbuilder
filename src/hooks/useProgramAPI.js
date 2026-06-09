@@ -231,6 +231,40 @@ export default function useProgramAPI() {
     [request]
   );
 
+  // ── Reusable custom / combo exercises (per coach, by email) ──
+  const listCustomExercises = useCallback(
+    (email) => {
+      if (isLocal()) return Promise.resolve({ exercises: JSON.parse(localStorage.getItem('gwb_custom_ex') || '[]') });
+      return request('list-custom-exercises.php', { email });
+    },
+    [request]
+  );
+
+  const saveCustomExercise = useCallback(
+    (email, name, videoUid) => {
+      if (isLocal()) {
+        const list = JSON.parse(localStorage.getItem('gwb_custom_ex') || '[]');
+        const row = { id: Date.now(), name, video_uid: videoUid || null, status: 'approved' };
+        localStorage.setItem('gwb_custom_ex', JSON.stringify([...list.filter((e) => e.name !== name), row]));
+        return Promise.resolve({ success: true, exercise: row });
+      }
+      return request('save-custom-exercise.php', { email, name, video_uid: videoUid || '' });
+    },
+    [request]
+  );
+
+  const deleteCustomExercise = useCallback(
+    (email, id) => {
+      if (isLocal()) {
+        const list = JSON.parse(localStorage.getItem('gwb_custom_ex') || '[]');
+        localStorage.setItem('gwb_custom_ex', JSON.stringify(list.filter((e) => e.id !== id)));
+        return Promise.resolve({ success: true });
+      }
+      return request('delete-custom-exercise.php', { email, id });
+    },
+    [request]
+  );
+
   return {
     saveProgram,
     updateProgram,
@@ -243,6 +277,9 @@ export default function useProgramAPI() {
     saveTravelWorkout,
     getTravelWorkouts,
     deleteTravelWorkout,
+    listCustomExercises,
+    saveCustomExercise,
+    deleteCustomExercise,
     loading,
     error,
   };
