@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import PercentageSetRow from './PercentageSetRow';
 import CuesPicker from './CuesPicker';
+import AddVideoButton from '../exercises/AddVideoButton';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
 import { calculateWeight, calculateExerciseTonnage, suggestBaseMax, baseMaxLabels, baseMaxColors } from '../../utils/percentageCalc';
 
@@ -217,7 +218,7 @@ export default function ExerciseRow({
       <div className="flex items-center justify-between mb-2.5 flex-wrap gap-2">
         <div className="flex items-center gap-2 flex-1">
           <span className="font-bold text-[15px] text-gray-900">{exercise.name || 'Unnamed Exercise'}</span>
-          {exercise.youtube && (
+          {exercise.youtube ? (
             <button
               onClick={() => setShowVideo(v => !v)}
               className="border-none rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold text-white transition-colors"
@@ -226,6 +227,8 @@ export default function ExerciseRow({
             >
               {showVideo ? '✖' : '📹'}
             </button>
+          ) : (
+            <AddVideoButton exercise={exercise} onUploaded={(url) => onUpdate({ youtube: url })} />
           )}
         </div>
         <div className="flex gap-1.5">
