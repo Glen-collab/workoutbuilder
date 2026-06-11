@@ -9,11 +9,13 @@
 
 import { useRef, useState } from 'react';
 import { useBuilderAuth } from '../auth/BuilderAuth';
+import { useCoachVideos } from '../CoachVideosContext';
 import { mediaApi, CF_IFRAME } from '../../utils/mediaApi';
 
 export default function AddVideoButton({ exercise, onUploaded }) {
   const auth = useBuilderAuth();
   const user = auth?.user;
+  const coachVideos = useCoachVideos();
   const inputRef = useRef(null);
   const [state, setState] = useState('idle'); // idle | uploading | error
   const [progress, setProgress] = useState(0);
@@ -61,8 +63,11 @@ export default function AddVideoButton({ exercise, onUploaded }) {
         cloudflare_uid: uid,
       });
 
-      // 4. Drop the video onto the exercise so it bakes into the saved program.
-      onUploaded(CF_IFRAME(uid));
+      // 4. Drop the video onto the exercise (bakes into the saved program) AND
+      //    into the coach's session library so re-adding it elsewhere keeps it.
+      const url = CF_IFRAME(uid);
+      coachVideos?.addVideo?.(exercise.name, url);
+      onUploaded(url);
       setState('idle');
       setProgress(0);
     } catch (err) {

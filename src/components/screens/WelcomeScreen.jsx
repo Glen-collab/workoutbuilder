@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts, builderUser, onLogout }) {
+export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManageTravelWorkouts, onManageVideos, builderUser, onLogout }) {
   // Wake up the backend while the user browses (cold-start mitigation)
   useEffect(() => {
     fetch('/api/load-program.php', { method: 'POST', body: '{}' }).catch(() => {});
@@ -41,6 +41,14 @@ export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManage
           >
             Travel Workouts
           </button>
+          {onManageVideos && (
+            <button
+              className="w-full bg-transparent text-[#047857] border-2 border-[#10b981] rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#10b981]/10"
+              onClick={onManageVideos}
+            >
+              🎬 Exercises &amp; Videos
+            </button>
+          )}
         </div>
         <a
           href="https://app.bestrongagain.com"

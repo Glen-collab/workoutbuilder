@@ -4,7 +4,9 @@ import useProgramAPI from './hooks/useProgramAPI';
 import { suggestBaseMax, isStrengthBlock } from './utils/percentageCalc';
 import { applyExerciseDefaults } from './data/exerciseDefaults';
 import { BuilderAuthProvider, useBuilderAuth, BuilderLoginScreen } from './components/auth/BuilderAuth';
+import { CoachVideosProvider, useCoachVideos } from './components/CoachVideosContext';
 import WelcomeScreen from './components/screens/WelcomeScreen';
+import ExerciseVideoLibrary from './components/exercises/ExerciseVideoLibrary';
 import BuilderScreen from './components/builder/BuilderScreen';
 import BlockTypeSelector from './components/builder/BlockTypeSelector';
 import CircuitTypeSelector from './components/builder/CircuitTypeSelector';
@@ -35,12 +37,17 @@ function AuthGate() {
   if (loading) return <div style={{ textAlign: 'center', padding: '60px', color: '#666' }}>Loading...</div>;
   if (!user && !isOverrideMode) return <BuilderLoginScreen onLogin={login} />;
 
-  return <BuilderApp builderUser={user} onLogout={logout} />;
+  return (
+    <CoachVideosProvider>
+      <BuilderApp builderUser={user} onLogout={logout} />
+    </CoachVideosProvider>
+  );
 }
 
 function BuilderApp({ builderUser, onLogout }) {
   const workoutState = useWorkoutState();
   const programAPI = useProgramAPI();
+  const coachVideos = useCoachVideos();
 
   // ── Unsaved-changes guard ──
   // Snapshot the program at the last save/load; if the live program differs,
@@ -100,6 +107,7 @@ function BuilderApp({ builderUser, onLogout }) {
   const [showPreMadePicker, setShowPreMadePicker] = useState(false);
   const [showTravelSaveModal, setShowTravelSaveModal] = useState(false);
   const [showManageTravelModal, setShowManageTravelModal] = useState(false);
+  const [showVideoLibrary, setShowVideoLibrary] = useState(false);
   const [insertPosition, setInsertPosition] = useState(null);
 
   // ── Detect override mode from URL params ──
@@ -213,18 +221,27 @@ function BuilderApp({ builderUser, onLogout }) {
   const handleSelectExercise = (exercise) => {
     if (!exerciseModalBlockId) return;
 
+    // Auto-attach the coach's own uploaded video for this exercise (by name) if
+    // it has none — so a video uploaded once follows the exercise into every
+    // program, not just the one it was first added to.
+    let baseExercise = exercise;
+    if (!exercise.youtube && !exercise.isUserDefined) {
+      const myVid = coachVideos.getVideo(exercise.name);
+      if (myVid) baseExercise = { ...exercise, youtube: myVid };
+    }
+
     let newExercise;
     if (isStrengthBlock(exerciseModalBlockType)) {
       newExercise = {
-        ...exercise,
-        baseMax: suggestBaseMax(exercise),
+        ...baseExercise,
+        baseMax: suggestBaseMax(baseExercise),
         setsCount: '3',
         reps: '10',
         weight: '',
         sets: [],
       };
     } else {
-      newExercise = applyExerciseDefaults({ ...exercise, sets: [] });
+      newExercise = applyExerciseDefaults({ ...baseExercise, sets: [] });
     }
 
     if (replaceExerciseIndex !== null) {
@@ -501,7 +518,7 @@ function BuilderApp({ builderUser, onLogout }) {
   return (
     <>
       {screen === 'welcome' && (
-        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} builderUser={builderUser} onLogout={onLogout} />
+        <WelcomeScreen onNewProgram={handleBuildNew} onManagePrograms={() => setShowManageModal(true)} onManageTravelWorkouts={() => setShowManageTravelModal(true)} onManageVideos={builderUser ? () => setShowVideoLibrary(true) : null} builderUser={builderUser} onLogout={onLogout} />
       )}
 
       {overrideLoading && (
@@ -634,6 +651,12 @@ function BuilderApp({ builderUser, onLogout }) {
         isOpen={showPreMadePicker}
         onClose={() => setShowPreMadePicker(false)}
         onSelectWorkout={handleSelectPreMade}
+      />
+
+      <ExerciseVideoLibrary
+        isOpen={showVideoLibrary}
+        onClose={() => setShowVideoLibrary(false)}
+        coachEmail={builderUser?.email || ''}
       />
     </>
   );

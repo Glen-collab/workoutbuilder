@@ -47,6 +47,10 @@ export const mediaApi = {
   waiverStatus: () => mediaRequest('/waiver/status'),
   waiverAccept: () => mediaRequest('/waiver/accept', { method: 'POST' }),
 
+  // This coach's whole uploaded video library (so the builder can re-attach a
+  // coach's video to an exercise by name, the same way the tracker does).
+  myUploads: () => mediaRequest('/my-uploads'),
+
   // Mint a one-time Cloudflare Direct Creator Upload URL. The CF token never
   // leaves EC2 — we only get back a URL the browser can PUT bytes to + the
   // future video uid.
