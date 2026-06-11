@@ -303,6 +303,7 @@ function BuilderApp({ builderUser, onLogout }) {
             id: programId,
             accessCode: accessCode,
             name: programInfo.programName,
+            nickname: programInfo.programNickname || '',
             ...data,
           });
           setShowSaveModal(false);
