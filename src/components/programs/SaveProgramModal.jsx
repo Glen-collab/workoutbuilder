@@ -70,26 +70,32 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
         )}
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Program Name *</label>
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Program Title *</label>
           <input
             className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="text"
             value={programName}
             onChange={(e) => setProgramName(e.target.value)}
-            placeholder="e.g. Summer Strength Phase 1"
+            placeholder="e.g. Youth   or   Ryan Nanna"
             required
           />
+          <span className="text-xs text-gray-500">
+            The program or client this belongs to. All phases with the SAME title group together — so use a unique title per client (a person's name) or program (e.g. “Youth”). Don’t put the month here.
+          </span>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Program Nickname</label>
+          <label className="text-[13px] font-semibold text-gray-400 uppercase tracking-wide">Phase / Month</label>
           <input
             className="px-3.5 py-3 text-[15px] rounded-lg border border-white/[0.12] bg-white/[0.06] text-gray-200 outline-none transition-colors focus:border-[#667eea]"
             type="text"
             value={programNickname}
             onChange={(e) => setProgramNickname(e.target.value)}
-            placeholder="Optional short name"
+            placeholder="e.g. June, July, Phase 1"
           />
+          <span className="text-xs text-gray-500">
+            Which phase of the title above this is. Shows under the title — e.g. Ryan Nanna → June, July, August.
+          </span>
         </div>
 
         <div className="flex flex-col gap-1.5">
