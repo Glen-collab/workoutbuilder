@@ -208,7 +208,16 @@ export default function useWorkoutState() {
       prev.map((b) => {
         if (b.id !== blockId) return b;
         const exercises = [...b.exercises];
-        exercises[exerciseIndex] = { ...exercises[exerciseIndex], ...updates };
+        const merged = { ...exercises[exerciseIndex], ...updates };
+        // Timed / loaded work (planks, carries) is tracked by TIME or DISTANCE,
+        // not reps. So the moment a duration or distance is set, clear the
+        // (usually default) reps so the saved exercise stays clean — keeps sets
+        // + weight, just drops the meaningless rep count.
+        const setNonEmpty = (k) => k in updates && updates[k] != null && String(updates[k]).trim() !== '';
+        if (setNonEmpty('duration') || setNonEmpty('distance')) {
+          merged.reps = '';
+        }
+        exercises[exerciseIndex] = merged;
         return { ...b, exercises };
       })
     );
