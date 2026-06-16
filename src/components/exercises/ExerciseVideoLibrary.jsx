@@ -32,6 +32,7 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
   const [newName, setNewName] = useState('');
   const [preview, setPreview] = useState(null);
   const [savingNew, setSavingNew] = useState(false);
+  const [feedback, setFeedback] = useState(null); // { type: 'ok'|'err', text }
 
   const loadCustoms = () => {
     if (!coachEmail) return;
@@ -65,11 +66,20 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     const name = newName.trim();
     if (!name || !coachEmail) return;
     setSavingNew(true);
-    try { await saveCustomExercise(coachEmail, name, ''); } catch { /* still let them add a video */ }
+    setFeedback(null);
+    try {
+      await saveCustomExercise(coachEmail, name, '');
+      setNewName('');
+      loadCustoms();
+      setSearch(name); // jump to it so they can upload a video right away
+      // Saving works name-only — no video required. Confirm it so it doesn't
+      // feel like nothing happened.
+      setFeedback({ type: 'ok', text: `✓ Saved “${name}” to your exercises — no video needed. You can add one below anytime, and it’s ready to use when you build a program.` });
+      setTimeout(() => setFeedback(null), 7000);
+    } catch {
+      setFeedback({ type: 'err', text: `Couldn’t save “${name}” — check your connection and try again.` });
+    }
     setSavingNew(false);
-    setNewName('');
-    loadCustoms();
-    setSearch(name); // jump to it so they can upload a video right away
   };
 
   const Row = ({ name }) => {
@@ -131,6 +141,13 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
               {savingNew ? '…' : '+ Add'}
             </button>
           </div>
+          {feedback && (
+            <div
+              className={`mt-2 px-3 py-2 rounded-lg text-[12.5px] font-semibold ${feedback.type === 'ok' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200'}`}
+            >
+              {feedback.text}
+            </div>
+          )}
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
