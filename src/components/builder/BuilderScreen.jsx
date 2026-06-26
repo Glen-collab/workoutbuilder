@@ -7,6 +7,7 @@ import SmartImportModal from './SmartImportModal';
 
 export default function BuilderScreen({
   workoutState,
+  loadedProgram,
   onBack,
   onSave,
   onManage,
@@ -90,9 +91,18 @@ export default function BuilderScreen({
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start">
           <div>
             <h2 className="text-[22px] font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-1">
-              Workout Builder
+              {loadedProgram?.name || 'Workout Builder'}
+              {loadedProgram?.nickname && (
+                <span className="text-gray-400 font-semibold"> &middot; {loadedProgram.nickname}</span>
+              )}
             </h2>
             <p className="text-[13px] text-gray-400 m-0">
+              {loadedProgram?.accessCode && (
+                <>
+                  <span className="font-bold text-[#a78bfa]">Code {loadedProgram.accessCode}</span>
+                  {' '}&middot;{' '}
+                </>
+              )}
               Week {currentWeek} &middot; Day {currentDay}
             </p>
           </div>

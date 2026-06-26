@@ -104,6 +104,9 @@ function BuilderApp({ builderUser, onLogout }) {
   const [replaceExerciseIndex, setReplaceExerciseIndex] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [savedAccessCode, setSavedAccessCode] = useState(null);
+  // Name + nickname shown alongside the code in the "Program Saved!" toast, so
+  // you know which program the number belongs to before typing it at the kiosk.
+  const [savedProgramLabel, setSavedProgramLabel] = useState(null);
   const [showManageModal, setShowManageModal] = useState(false);
   const [showPreMadePicker, setShowPreMadePicker] = useState(false);
   const [showTravelSaveModal, setShowTravelSaveModal] = useState(false);
@@ -292,6 +295,7 @@ function BuilderApp({ builderUser, onLogout }) {
         });
         setShowSaveModal(false);
         setSavedAccessCode(newCode);
+        setSavedProgramLabel({ name: programInfo.programName, nickname: programInfo.programNickname || '' });
       } else {
         // New program OR "Save as New" from an existing program
         delete payload.saveAsNew;
@@ -310,6 +314,7 @@ function BuilderApp({ builderUser, onLogout }) {
           });
           setShowSaveModal(false);
           setSavedAccessCode(accessCode);
+          setSavedProgramLabel({ name: programInfo.programName, nickname: programInfo.programNickname || '' });
         }
       }
     } catch (err) {
@@ -537,6 +542,7 @@ function BuilderApp({ builderUser, onLogout }) {
       {screen === 'builder' && (
         <BuilderScreen
           workoutState={builderWorkoutState}
+          loadedProgram={workoutState.loadedProgram}
           onBack={() => setScreen('welcome')}
           onSave={overrideContext ? handleSaveOverride : handleOpenSave}
           onManage={overrideContext ? null : handleOpenManage}
@@ -585,11 +591,19 @@ function BuilderApp({ builderUser, onLogout }) {
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] bg-white rounded-xl shadow-2xl border border-gray-200 px-6 py-4 max-w-sm w-full">
           <div className="text-center">
             <div className="text-[13px] font-semibold text-green-600 mb-1">Program Saved!</div>
+            {savedProgramLabel?.name && (
+              <div className="text-[16px] font-bold text-gray-900 mb-2">
+                {savedProgramLabel.name}
+                {savedProgramLabel.nickname && (
+                  <span className="text-gray-500 font-semibold"> &middot; {savedProgramLabel.nickname}</span>
+                )}
+              </div>
+            )}
             <div className="text-[11px] text-gray-400 uppercase font-semibold mb-2">Access Code</div>
             <div className="text-[22px] font-extrabold tracking-wider text-gray-900 bg-gray-100 rounded-lg py-2 px-4 select-all">{savedAccessCode}</div>
             <p className="text-[12px] text-gray-400 mt-2">Share this code with your client so they can access their program.</p>
             <button
-              onClick={() => setSavedAccessCode(null)}
+              onClick={() => { setSavedAccessCode(null); setSavedProgramLabel(null); }}
               className="mt-3 px-5 py-2 text-[13px] font-semibold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-lg cursor-pointer"
             >
               Got it
