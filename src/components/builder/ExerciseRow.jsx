@@ -4,6 +4,7 @@ import CuesPicker from './CuesPicker';
 import AddVideoButton from '../exercises/AddVideoButton';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
 import { calculateWeight, calculateExerciseTonnage, suggestBaseMax, baseMaxLabels, baseMaxColors } from '../../utils/percentageCalc';
+import { classifyMovement } from '../../data/movementClassification';
 
 const QUALIFIER_OPTIONS = [
   { value: '', label: '—' },
@@ -123,6 +124,99 @@ function FieldWithUnit({ label, value, unit, onChangeValue, onChangeUnit, placeh
   );
 }
 
+// Auto CNS rating pill — read-only, comes straight from the classification the
+// coach approved. Lets you SEE the neural cost the ⚡ CNS Load graph is summing.
+const CNS_TONE = {
+  1: { bg: '#dcfce7', text: '#15803d', label: 'Low' },
+  2: { bg: '#dcfce7', text: '#15803d', label: 'Low' },
+  3: { bg: '#fef3c7', text: '#b45309', label: 'Med' },
+  4: { bg: '#fee2e2', text: '#b91c1c', label: 'High' },
+  5: { bg: '#fee2e2', text: '#b91c1c', label: 'High' },
+};
+function CnsPill({ name }) {
+  const cls = name ? classifyMovement(name) : null;
+  if (!cls || !cls.cns) return null;
+  const tone = CNS_TONE[cls.cns] || CNS_TONE[3];
+  const title = `CNS ${cls.cns}/5 (${tone.label})${cls.zone ? ` · ${cls.zone}` : ''}${cls.driver ? ` · ${cls.driver}` : ''}`;
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded-full px-2 py-[2px] text-[11px] font-bold whitespace-nowrap"
+      style={{ background: tone.bg, color: tone.text }}
+      title={title}
+    >
+      ⚡ CNS {cls.cns}
+    </span>
+  );
+}
+
+// The 1-10 RPE reference — Glen's velocity↔RPE scale. Athlete-facing language so
+// it doubles as a teaching tool ("tired sprints teach slow").
+const RPE_SCALE = [
+  { r: '1–2', zone: 'Recovery', cue: 'Very easy — flush / shake-out. Could go all day.' },
+  { r: '3–4', zone: 'Tempo', cue: 'Conversational. Aerobic / extensive tempo (~60–70% PB).' },
+  { r: '5–6', zone: 'Intensive Tempo', cue: 'Working but controlled (~70–80% PB).' },
+  { r: '7–8', zone: 'Acceleration / Special', cue: 'Hard, crisp efforts (~80–90% PB). Full rest between.' },
+  { r: '9', zone: 'Speed Endurance', cue: 'Near max (~90–95% PB). Pace holds, form sharp.' },
+  { r: '10', zone: 'Max Velocity', cue: 'MAX EFFORT — full speed, full recovery (95–100% PB).' },
+];
+function TargetRpeField({ value, onChange }) {
+  const [showScale, setShowScale] = useState(false);
+  return (
+    <div className="flex flex-col gap-0.5">
+      <span className="text-[11px] text-gray-400 font-semibold uppercase flex items-center gap-1">
+        Target RPE
+        <button
+          type="button"
+          onClick={() => setShowScale(s => !s)}
+          className="w-[15px] h-[15px] rounded-full bg-gray-200 text-gray-600 text-[10px] leading-none font-bold cursor-pointer hover:bg-gray-300 flex items-center justify-center"
+          title="Show the 1–10 RPE scale"
+        >ⓘ</button>
+      </span>
+      <div className="relative">
+        <select
+          value={value || ''}
+          onChange={(e) => onChange(e.target.value)}
+          className="px-2 py-[7px] rounded-md border text-[13px] outline-none bg-white cursor-pointer"
+          style={{
+            width: '78px',
+            borderColor: value ? '#dc2626' : '#d1d5db',
+            background: value ? '#fef2f2' : '#fff',
+            color: value ? '#b91c1c' : '#9ca3af',
+            fontWeight: value ? 700 : 400,
+          }}
+        >
+          <option value="">—</option>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+            <option key={n} value={String(n)}>{n === 10 ? '10 — Max' : n}</option>
+          ))}
+        </select>
+        {showScale && (
+          <div className="absolute z-20 mt-1 left-0 w-[290px] bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-left">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[12px] font-bold text-gray-800">RPE → Velocity scale</span>
+              <button type="button" onClick={() => setShowScale(false)} className="text-gray-400 text-[14px] leading-none cursor-pointer hover:text-gray-700">✖</button>
+            </div>
+            <table className="w-full text-[11px]">
+              <tbody>
+                {RPE_SCALE.map((row) => (
+                  <tr key={row.r} className="border-b border-gray-100 last:border-0">
+                    <td className="py-1 pr-2 font-bold text-rose-600 align-top whitespace-nowrap">{row.r}</td>
+                    <td className="py-1 align-top">
+                      <div className="font-semibold text-gray-700">{row.zone}</div>
+                      <div className="text-gray-500 leading-snug">{row.cue}</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="text-[10px] text-gray-400 mt-2">Effort &amp; rest travel together — tired sprints teach slow.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function NotesWithCues({ value, onChange, onOpenCues }) {
   return (
     <div className="flex flex-col gap-0.5 w-full">
@@ -218,6 +312,7 @@ export default function ExerciseRow({
       <div className="flex items-center justify-between mb-2.5 flex-wrap gap-2">
         <div className="flex items-center gap-2 flex-1">
           <span className="font-bold text-[15px] text-gray-900">{exercise.name || 'Unnamed Exercise'}</span>
+          <CnsPill name={exercise.name} />
           {exercise.youtube ? (
             <button
               onClick={() => setShowVideo(v => !v)}
@@ -317,6 +412,7 @@ export default function ExerciseRow({
                 <FieldInput label="Calories" value={exercise.calories} onChange={(v) => onUpdate({ calories: v })} placeholder="20" width="64px" />
                 <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
+                <TargetRpeField value={exercise.targetRpe} onChange={(v) => onUpdate({ targetRpe: v })} />
               </div>
 
               {exercise.sets.map((set, idx) => (
@@ -395,6 +491,7 @@ export default function ExerciseRow({
                   units={DISTANCE_UNITS}
                 />
                 <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
+                <TargetRpeField value={exercise.targetRpe} onChange={(v) => onUpdate({ targetRpe: v })} />
                 <button
                   onClick={() => {
                     const suggested = suggestBaseMax(exercise);
@@ -448,6 +545,7 @@ export default function ExerciseRow({
             />
             <FieldInput label="Calories" value={exercise.calories} onChange={(v) => onUpdate({ calories: v })} placeholder="20" width="64px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="30s" width="64px" />
+            <TargetRpeField value={exercise.targetRpe} onChange={(v) => onUpdate({ targetRpe: v })} />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
         </>
@@ -513,6 +611,7 @@ export default function ExerciseRow({
             <FieldInput label="Weight" value={exercise.weight} onChange={(v) => onUpdate({ weight: v })} placeholder="lbs" width="72px" />
             <FieldInput label="Incline" value={exercise.incline} onChange={(v) => onUpdate({ incline: v })} placeholder="5%" width="56px" />
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
+            <TargetRpeField value={exercise.targetRpe} onChange={(v) => onUpdate({ targetRpe: v })} />
           </div>
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
         </>

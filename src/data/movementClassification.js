@@ -208,6 +208,26 @@ export const MOVEMENT_CLASSIFICATION = {
 // Folds the weight room into the same neural-load currency as jumps/sprints.
 export const LIFT_CNS = { compound: 5, auxiliary: 2 };
 
+// Normalized lookup so case / extra spaces still match.
+const _norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+const _NORM_INDEX = {};
+for (const [k, v] of Object.entries(MOVEMENT_CLASSIFICATION)) _NORM_INDEX[_norm(k)] = v;
+
 export function classifyMovement(name) {
-  return MOVEMENT_CLASSIFICATION[name] || null;
+  if (!name) return null;
+  if (MOVEMENT_CLASSIFICATION[name]) return MOVEMENT_CLASSIFICATION[name];
+  const n = _norm(name);
+  if (_NORM_INDEX[n]) return _NORM_INDEX[n];
+  // Combo exercises ("Box Jump + Step Down", "Bound into Sprint") — rate the
+  // combo by its most demanding component so it still counts toward CNS load.
+  if (/[+/&]| into | to /i.test(name)) {
+    const parts = name.split(/\s*(?:\+|\/|&|\binto\b|\bto\b)\s*/i).map(_norm).filter(Boolean);
+    let best = null;
+    for (const p of parts) {
+      const hit = _NORM_INDEX[p];
+      if (hit && hit.cns && (!best || hit.cns > best.cns)) best = hit;
+    }
+    if (best) return best;
+  }
+  return null;
 }
