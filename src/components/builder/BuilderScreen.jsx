@@ -26,6 +26,7 @@ export default function BuilderScreen({
     currentDay,
     totalWeeks,
     daysPerWeek,
+    hiddenDays,
     blocks,
     mainMaxes,
     setMainMaxes,
@@ -37,7 +38,7 @@ export default function BuilderScreen({
     copyDay,
     insertWeek,
     addWeeks,
-    setDaysPerWeek,
+    toggleDayHidden,
     addBlock,
     importBlocks,
     importMultiDay,
@@ -166,8 +167,8 @@ export default function BuilderScreen({
         onCopyDay={copyDay}
         onInsertWeek={insertWeek}
         onAddWeeks={addWeeks}
-        onAddDay={() => setDaysPerWeek(daysPerWeek + 1)}
-        onRemoveDay={daysPerWeek > 1 ? () => { if (confirm(`Remove Day ${daysPerWeek}? Any workouts on that day will be hidden.`)) setDaysPerWeek(daysPerWeek - 1); } : null}
+        hiddenDays={hiddenDays}
+        onToggleDayHidden={toggleDayHidden}
       />
 
       <BlockList

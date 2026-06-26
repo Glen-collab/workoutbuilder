@@ -58,7 +58,7 @@ function BuilderApp({ builderUser, onLogout }) {
   const snapshot = () => {
     try {
       const d = workoutState.getAllWorkoutsForSave();
-      return JSON.stringify({ allWorkouts: d.allWorkouts, mainMaxes: d.mainMaxes, daysPerWeek: d.daysPerWeek, totalWeeks: d.totalWeeks });
+      return JSON.stringify({ allWorkouts: d.allWorkouts, mainMaxes: d.mainMaxes, daysPerWeek: d.daysPerWeek, hiddenDays: d.hiddenDays, totalWeeks: d.totalWeeks });
     } catch { return null; }
   };
   const isDirty = () => savedSnapshotRef.current !== null && snapshot() !== savedSnapshotRef.current;
@@ -270,6 +270,7 @@ function BuilderApp({ builderUser, onLogout }) {
         allWorkouts: data.allWorkouts,
         mainMaxes: data.mainMaxes,
         daysPerWeek: data.daysPerWeek,
+        hiddenDays: data.hiddenDays,
         totalWeeks: data.totalWeeks,
       },
     };
@@ -479,6 +480,8 @@ function BuilderApp({ builderUser, onLogout }) {
     currentDay: workoutState.currentDay,
     totalWeeks: workoutState.totalWeeks,
     daysPerWeek: workoutState.daysPerWeek,
+    hiddenDays: workoutState.hiddenDays,
+    toggleDayHidden: workoutState.toggleDayHidden,
     blocks: workoutState.workoutBlocks,
     mainMaxes: workoutState.mainMaxes,
     setMainMaxes: workoutState.setMainMaxes,
@@ -552,7 +555,7 @@ function BuilderApp({ builderUser, onLogout }) {
 
       {screen === 'progressions' && (
         <ProgressionView
-          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          allWorkouts={workoutState.getVisibleWorkouts()}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}
           onBack={() => setScreen('builder')}
@@ -561,7 +564,7 @@ function BuilderApp({ builderUser, onLogout }) {
 
       {screen === 'volume' && (
         <VolumeView
-          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          allWorkouts={workoutState.getVisibleWorkouts()}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}
           onBack={() => setScreen('builder')}
@@ -570,7 +573,7 @@ function BuilderApp({ builderUser, onLogout }) {
 
       {screen === 'cnsload' && (
         <CnsLoadView
-          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          allWorkouts={workoutState.getVisibleWorkouts()}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}
           onBack={() => setScreen('builder')}

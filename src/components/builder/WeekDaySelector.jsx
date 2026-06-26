@@ -1,19 +1,21 @@
 import { useState } from 'react';
 
+const MAX_DAYS = 7;
+
 export default function WeekDaySelector({
   currentWeek,
   currentDay,
   totalWeeks,
   daysPerWeek,
+  hiddenDays = [],
   onSwitchDay,
   onSwitchWeek,
   onCopyWeek,
   onCopyAllWeeks,
   onCopyDay,
+  onToggleDayHidden,
   onInsertWeek,
   onAddWeeks,
-  onAddDay,
-  onRemoveDay,
 }) {
   const [copyMenuOpen, setCopyMenuOpen] = useState(false);
   const [copyDayMenuOpen, setCopyDayMenuOpen] = useState(false);
@@ -133,7 +135,7 @@ export default function WeekDaySelector({
             <div className="px-4 py-2 text-xs font-semibold text-gray-400 border-b border-gray-100">
               Copy Day {currentDay} to…
             </div>
-            {Array.from({ length: daysPerWeek }, (_, i) => i + 1)
+            {Array.from({ length: MAX_DAYS }, (_, i) => i + 1)
               .filter((d) => d !== currentDay)
               .map((d) => (
                 <button
@@ -141,7 +143,7 @@ export default function WeekDaySelector({
                   className="block w-full px-4 py-2.5 text-sm text-gray-700 bg-none border-none text-left cursor-pointer hover:bg-sky-50"
                   onClick={() => { setCopyDayMenuOpen(false); onCopyDay(d); }}
                 >
-                  Copy to Day {d}
+                  Copy to Day {d}{hiddenDays.includes(d) ? ' (hidden)' : ''}
                 </button>
               ))}
           </div>
@@ -161,35 +163,49 @@ export default function WeekDaySelector({
         ))}
       </select>
 
+      {/* Day pills — always MAX_DAYS slots. Tap the day to edit it; tap the eye to
+          hide/show it. Hidden days are grayed + struck through and are dropped from
+          the client tracker and the gym TV. */}
       <div className="flex gap-2 flex-wrap items-center">
-        {Array.from({ length: daysPerWeek }, (_, i) => (
-          <button
-            key={i + 1}
-            className={`px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer transition-all duration-150 ${
-              currentDay === i + 1
-                ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none'
-                : 'bg-white border-[1.5px] border-gray-300 text-gray-600 hover:border-purple-300'
-            }`}
-            onClick={() => onSwitchDay(i + 1)}
-          >
-            Day {i + 1}
-          </button>
-        ))}
-        {onAddDay && (
-          <button
-            className="px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer text-white border-none bg-gradient-to-br from-[#22c55e] to-[#16a34a] hover:opacity-90 transition-opacity"
-            onClick={onAddDay}
-            title="Add a day to the end"
-          >+ Add Day</button>
-        )}
-        {onRemoveDay && (
-          <button
-            className="px-4 py-2 text-[13px] font-semibold rounded-lg cursor-pointer text-white border-none bg-gradient-to-br from-[#ef4444] to-[#b91c1c] hover:opacity-90 transition-opacity"
-            onClick={onRemoveDay}
-            title="Remove the last day"
-          >&minus; Remove Day</button>
-        )}
+        {Array.from({ length: MAX_DAYS }, (_, i) => i + 1).map((day) => {
+          const selected = currentDay === day;
+          const hidden = hiddenDays.includes(day);
+          return (
+            <div
+              key={day}
+              className={`flex items-stretch rounded-lg overflow-hidden border-[1.5px] transition-all duration-150 ${
+                selected ? 'border-[#667eea]' : 'border-gray-300'
+              } ${hidden ? 'opacity-60' : ''}`}
+            >
+              <button
+                className={`pl-3 pr-2 py-2 text-[13px] font-semibold cursor-pointer transition-all duration-150 ${
+                  selected
+                    ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white'
+                    : 'bg-white text-gray-600 hover:text-purple-500'
+                } ${hidden ? 'line-through' : ''}`}
+                onClick={() => onSwitchDay(day)}
+                title={`Edit Day ${day}`}
+              >
+                Day {day}
+              </button>
+              {onToggleDayHidden && (
+                <button
+                  className={`px-2 py-2 text-[13px] cursor-pointer border-l ${
+                    selected ? 'border-white/30' : 'border-gray-200'
+                  } ${selected ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2]' : 'bg-white'} hover:opacity-80`}
+                  onClick={() => onToggleDayHidden(day)}
+                  title={hidden ? `Show Day ${day} to client + TV` : `Hide Day ${day} from client + TV`}
+                >
+                  {hidden ? '🙈' : '👁'}
+                </button>
+              )}
+            </div>
+          );
+        })}
       </div>
+      <p className="text-[11px] text-gray-400 mt-2 mb-0">
+        Tap a day to edit it · tap 👁 to hide a day from the client &amp; gym TV (grayed = hidden)
+      </p>
     </div>
   );
 }
