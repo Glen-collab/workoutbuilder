@@ -34,11 +34,26 @@ function createBlock(id, type = 'straight-set') {
   };
 }
 
+// Fixed number of day slots the builder always shows. Days beyond what a client
+// needs are hidden via `hiddenDays` rather than removed.
+export const MAX_DAYS = 7;
+const ALL_DAYS = Array.from({ length: MAX_DAYS }, (_, i) => i + 1);
+// A brand-new program shows this many active days; the rest start hidden (grayed),
+// so an untouched new program saves as a 3-day program and never leaks empty days
+// to a client. Coaches un-hide days as they build them out toward a full week.
+const DEFAULT_VISIBLE_DAYS = 3;
+const DEFAULT_HIDDEN_DAYS = ALL_DAYS.filter((d) => d > DEFAULT_VISIBLE_DAYS);
+
 export default function useWorkoutState() {
   const [allWorkouts, setAllWorkouts] = useState({});
   const [currentWeek, setCurrentWeek] = useState(1);
   const [currentDay, setCurrentDay] = useState(1);
-  const [daysPerWeek, setDaysPerWeekState] = useState(3);
+  // New day model: the builder always has MAX_DAYS day slots. `hiddenDays` is the
+  // global set of day numbers (1..MAX_DAYS) that are hidden from the client tracker
+  // and the gym TV. `daysPerWeek` is kept = MAX_DAYS internally; on save we write a
+  // legacy-compatible count so the current tracker keeps working (see getAllWorkoutsForSave).
+  const [daysPerWeek, setDaysPerWeekState] = useState(MAX_DAYS);
+  const [hiddenDays, setHiddenDaysState] = useState(DEFAULT_HIDDEN_DAYS);
   const [totalWeeks, setTotalWeeksState] = useState(4);
   const [workoutBlocks, setWorkoutBlocks] = useState([]);
   const [blockIdCounter, setBlockIdCounter] = useState(1);
@@ -54,6 +69,8 @@ export default function useWorkoutState() {
   currentDayRef.current = currentDay;
   const workoutBlocksRef = useRef(workoutBlocks);
   workoutBlocksRef.current = workoutBlocks;
+  const hiddenDaysRef = useRef(hiddenDays);
+  hiddenDaysRef.current = hiddenDays;
 
   const getWorkoutKey = useCallback((week, day) => {
     const w = week !== undefined ? week : currentWeekRef.current;
@@ -141,29 +158,29 @@ export default function useWorkoutState() {
       return { ...b, id, collapsed: false };
     });
 
+    // Track which day slots receive content so we can auto-unhide them.
+    const writtenDays = new Set();
     // Save the currently-open day so its edits aren't lost
     setAllWorkouts((prev) => {
       const updated = { ...prev, [`${currentWeek}-${currentDay}`]: [...workoutBlocksRef.current] };
       let week = startWeek;
       let day = startDay;
       let maxWeek = totalWeeks;
-      let maxDay = daysPerWeek;
       for (const d of days) {
         const stamped = stampDay(d.blocks || []);
         const key = `${week}-${day}`;
         const existing = updated[key] || [];
         updated[key] = mode === 'replace' ? stamped : [...existing, ...stamped];
         if (week > maxWeek) maxWeek = week;
-        if (day > maxDay) maxDay = day;
+        writtenDays.add(day);
         day += 1;
         if (day > daysPerWeek) {
           day = 1;
           week += 1;
         }
       }
-      // Bump totals if we wrote past the current program span
+      // Bump total weeks if we wrote past the current program span
       if (maxWeek > totalWeeks) setTotalWeeksState(maxWeek);
-      if (maxDay > daysPerWeek) setDaysPerWeekState(maxDay);
       // Surface the first imported day so the coach sees it immediately
       const firstKey = `${startWeek}-${startDay}`;
       setCurrentWeek(startWeek);
@@ -171,6 +188,8 @@ export default function useWorkoutState() {
       setWorkoutBlocks(updated[firstKey] || []);
       return updated;
     });
+    // Any day that got imported content should be visible.
+    if (writtenDays.size) setHiddenDaysState((prev) => prev.filter((d) => !writtenDays.has(d)));
     setBlockIdCounter(nextId);
   }, [blockIdCounter, currentWeek, currentDay, totalWeeks, daysPerWeek]);
 
@@ -345,6 +364,26 @@ export default function useWorkoutState() {
     }
   }, [saveCurrent, loadDay]);
 
+  // Toggle a day's visibility (hidden days are dropped from the client tracker + TV).
+  // The day's workout data is preserved either way — hiding just flags it. If the
+  // currently-open day is being hidden, jump to the first still-visible day.
+  const toggleDayHidden = useCallback((day) => {
+    const prev = hiddenDaysRef.current;
+    const willHide = !prev.includes(day);
+    // A program must keep at least one visible day — block hiding the last one.
+    if (willHide && ALL_DAYS.filter((d) => !prev.includes(d)).length <= 1) return;
+    const next = willHide
+      ? [...prev, day].sort((a, b) => a - b)
+      : prev.filter((d) => d !== day);
+    setHiddenDaysState(next);
+    if (willHide && currentDayRef.current === day) {
+      const firstVisible = ALL_DAYS.find((d) => !next.includes(d)) || 1;
+      saveCurrent();
+      setCurrentDay(firstVisible);
+      loadDay(currentWeekRef.current, firstVisible);
+    }
+  }, [saveCurrent, loadDay]);
+
   const setTotalWeeks = useCallback((n) => {
     setTotalWeeksState(n);
     if (currentWeekRef.current > n) {
@@ -409,7 +448,17 @@ export default function useWorkoutState() {
       nickname: program.nickname || '',
     });
     if (program.mainMaxes) setMainMaxes(program.mainMaxes);
-    if (program.daysPerWeek) setDaysPerWeekState(program.daysPerWeek);
+    // Day model is always MAX_DAYS slots internally. Resolve which days are hidden:
+    //  - new programs carry an explicit `hiddenDays` array
+    //  - legacy programs only have `daysPerWeek` (a count) → hide days past that count
+    setDaysPerWeekState(MAX_DAYS);
+    if (Array.isArray(program.hiddenDays)) {
+      setHiddenDaysState(program.hiddenDays.filter((d) => d >= 1 && d <= MAX_DAYS));
+    } else if (program.daysPerWeek) {
+      setHiddenDaysState(ALL_DAYS.filter((d) => d > program.daysPerWeek));
+    } else {
+      setHiddenDaysState([]);
+    }
     if (program.totalWeeks) setTotalWeeksState(program.totalWeeks);
 
     const workouts = program.allWorkouts || {};
@@ -448,7 +497,8 @@ export default function useWorkoutState() {
     setAllWorkouts({});
     setCurrentWeek(1);
     setCurrentDay(1);
-    setDaysPerWeekState(3);
+    setDaysPerWeekState(MAX_DAYS);
+    setHiddenDaysState(DEFAULT_HIDDEN_DAYS);
     setTotalWeeksState(4);
     setWorkoutBlocks([]);
     setBlockIdCounter(1);
@@ -459,20 +509,45 @@ export default function useWorkoutState() {
   const getAllWorkoutsForSave = useCallback(() => {
     const key = getWorkoutKey();
     const all = { ...allWorkoutsRef.current, [key]: [...workoutBlocksRef.current] };
+    // Legacy-compatible day count: the current tracker reads `daysPerWeek` and shows
+    // days 1..N. If the visible days are contiguous from day 1 (the common case —
+    // trailing days hidden for a 2/3/4-day client) we write that count so the existing
+    // tracker stays correct. If a middle day is hidden (non-contiguous), we fall back to
+    // MAX_DAYS; the updated tracker uses `hiddenDays` to render the right days.
+    const visible = ALL_DAYS.filter((d) => !hiddenDays.includes(d));
+    const contiguousFromOne = visible.every((d, i) => d === i + 1);
+    const legacyDaysPerWeek = contiguousFromOne && visible.length > 0 ? visible.length : MAX_DAYS;
     return {
       allWorkouts: all,
       mainMaxes,
-      daysPerWeek,
+      daysPerWeek: legacyDaysPerWeek,
+      hiddenDays,
       totalWeeks,
       loadedProgram,
     };
-  }, [getWorkoutKey, mainMaxes, daysPerWeek, totalWeeks, loadedProgram]);
+  }, [getWorkoutKey, mainMaxes, hiddenDays, totalWeeks, loadedProgram]);
+
+  // allWorkouts with hidden-day entries stripped — for analytics/graphs and any
+  // consumer that should reflect only what the client actually sees.
+  const getVisibleWorkouts = useCallback(() => {
+    const key = getWorkoutKey();
+    const all = { ...allWorkoutsRef.current, [key]: [...workoutBlocksRef.current] };
+    const hidden = hiddenDaysRef.current;
+    if (!hidden.length) return all;
+    const out = {};
+    for (const k of Object.keys(all)) {
+      const day = Number(k.split('-')[1]);
+      if (!hidden.includes(day)) out[k] = all[k];
+    }
+    return out;
+  }, [getWorkoutKey]);
 
   return {
     allWorkouts,
     currentWeek,
     currentDay,
     daysPerWeek,
+    hiddenDays,
     totalWeeks,
     workoutBlocks,
     blockIdCounter,
@@ -498,6 +573,8 @@ export default function useWorkoutState() {
     insertWeekAt,
     addWeeksToEnd,
     setDaysPerWeek,
+    toggleDayHidden,
+    getVisibleWorkouts,
     setTotalWeeks,
     setMainMaxes,
     loadProgram,
