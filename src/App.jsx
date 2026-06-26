@@ -18,6 +18,7 @@ import ManageTravelWorkouts from './components/programs/ManageTravelWorkouts';
 import PreMadeWorkoutPicker from './components/builder/PreMadeWorkoutPicker';
 import ProgressionView from './components/builder/ProgressionView';
 import VolumeView from './components/builder/VolumeView';
+import CnsLoadView from './components/builder/CnsLoadView';
 
 export default function App() {
   return (
@@ -383,6 +384,7 @@ function BuilderApp({ builderUser, onLogout }) {
 
   const handleGoToProgressions = () => setScreen('progressions');
   const handleGoToVolume       = () => setScreen('volume');
+  const handleGoToCnsLoad      = () => setScreen('cnsload');
 
   const handleGoToDashboard = () => {
     const isLocal = window.location.hostname === 'localhost';
@@ -544,6 +546,7 @@ function BuilderApp({ builderUser, onLogout }) {
           onSaveTravel={overrideContext ? null : handleOpenTravelSave}
           onProgressions={handleGoToProgressions}
           onVolume={handleGoToVolume}
+          onCnsLoad={handleGoToCnsLoad}
         />
       )}
 
@@ -558,6 +561,15 @@ function BuilderApp({ builderUser, onLogout }) {
 
       {screen === 'volume' && (
         <VolumeView
+          allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
+          totalWeeks={workoutState.totalWeeks}
+          daysPerWeek={workoutState.daysPerWeek}
+          onBack={() => setScreen('builder')}
+        />
+      )}
+
+      {screen === 'cnsload' && (
+        <CnsLoadView
           allWorkouts={workoutState.getAllWorkoutsForSave().allWorkouts}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}

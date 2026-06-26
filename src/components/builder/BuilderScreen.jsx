@@ -19,6 +19,7 @@ export default function BuilderScreen({
   onSaveTravel,
   onProgressions,
   onVolume,
+  onCnsLoad,
 }) {
   const {
     currentWeek,
@@ -117,6 +118,14 @@ export default function BuilderScreen({
                 className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-teal-700 text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:bg-teal-800 transition-colors duration-200"
               >
                 Volume
+              </button>
+            )}
+            {onCnsLoad && (
+              <button
+                onClick={onCnsLoad}
+                className="w-full px-3 py-2 text-[13px] font-semibold text-center bg-gradient-to-br from-[#dc2626] to-[#f59e0b] text-white border-none rounded-lg cursor-pointer whitespace-nowrap hover:opacity-90 transition-opacity duration-200"
+              >
+                ⚡ CNS Load
               </button>
             )}
             {onGoToDashboard && (
