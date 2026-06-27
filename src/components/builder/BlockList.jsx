@@ -17,6 +17,7 @@ export default function BlockList({
   onRemoveSet,
   onDuplicateSet,
   mainMaxes,
+  sprintPBs,
 }) {
   if (!blocks || blocks.length === 0) {
     return (
@@ -56,6 +57,7 @@ export default function BlockList({
           onRemoveSet={onRemoveSet}
           onDuplicateSet={onDuplicateSet}
           mainMaxes={mainMaxes}
+          sprintPBs={sprintPBs}
         />
       ))}
       <button

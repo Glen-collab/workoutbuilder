@@ -2,6 +2,7 @@ import { useState } from 'react';
 import WeekDaySelector from './WeekDaySelector';
 import BlockList from './BlockList';
 import PercentageMaxInputs from '../shared/PercentageMaxInputs';
+import SprintPbsPanel from '../shared/SprintPbsPanel';
 import DailySummary from './DailySummary';
 import SmartImportModal from './SmartImportModal';
 
@@ -31,6 +32,8 @@ export default function BuilderScreen({
     blocks,
     mainMaxes,
     setMainMaxes,
+    sprintPBs,
+    setSprintPBs,
     allWorkouts,
     switchDay,
     switchWeek,
@@ -161,8 +164,13 @@ export default function BuilderScreen({
       </div>
 
       {/* Editable Main Maxes */}
-      <div className="mb-4">
+      <div className="mb-3">
         <PercentageMaxInputs mainMaxes={mainMaxes} onUpdate={setMainMaxes} />
+      </div>
+
+      {/* Sprint PBs — coach-only velocity maxes for sprint target times */}
+      <div className="mb-4">
+        <SprintPbsPanel sprintPBs={sprintPBs} onUpdate={setSprintPBs} />
       </div>
 
       <WeekDaySelector
@@ -198,6 +206,7 @@ export default function BuilderScreen({
         onRemoveSet={removeSet}
         onDuplicateSet={duplicateSet}
         mainMaxes={mainMaxes}
+        sprintPBs={sprintPBs}
       />
 
       <DailySummary

@@ -48,6 +48,7 @@ export default function BlockCard({
   onRemoveSet,
   onDuplicateSet,
   mainMaxes,
+  sprintPBs,
 }) {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const color = blockColors[block.type] || '#95a5a6';
@@ -205,6 +206,7 @@ export default function BlockCard({
               onRemoveSet={(setId) => onRemoveSet(block.id, idx, setId)}
               onDuplicateSet={(set) => onDuplicateSet(block.id, idx, set)}
               mainMaxes={mainMaxes}
+              sprintPBs={sprintPBs}
             />
           ))}
 

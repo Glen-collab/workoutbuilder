@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { computeTargetTime } from '../utils/sprintTargets';
 
 const DEFAULT_MAIN_MAXES = {
   bench: 0,
@@ -58,6 +59,10 @@ export default function useWorkoutState() {
   const [workoutBlocks, setWorkoutBlocks] = useState([]);
   const [blockIdCounter, setBlockIdCounter] = useState(1);
   const [mainMaxes, setMainMaxes] = useState({ ...DEFAULT_MAIN_MAXES });
+  // Sprint PBs (per-distance best times) — the velocity analog of mainMaxes.
+  // Keyed by distance ("40yd","100m",…) → best time string. Bakes into the
+  // program so prescribed sprints can auto-fill their target time (PB ÷ %).
+  const [sprintPBs, setSprintPBs] = useState({});
   const [loadedProgram, setLoadedProgram] = useState(null);
 
   // Use refs to avoid stale closures in save/load helpers
@@ -448,6 +453,7 @@ export default function useWorkoutState() {
       nickname: program.nickname || '',
     });
     if (program.mainMaxes) setMainMaxes(program.mainMaxes);
+    setSprintPBs(program.sprintPBs && typeof program.sprintPBs === 'object' ? program.sprintPBs : {});
     // Day model is always MAX_DAYS slots internally. Resolve which days are hidden:
     //  - new programs carry an explicit `hiddenDays` array
     //  - legacy programs only have `daysPerWeek` (a count) → hide days past that count
@@ -503,6 +509,7 @@ export default function useWorkoutState() {
     setWorkoutBlocks([]);
     setBlockIdCounter(1);
     setMainMaxes({ ...DEFAULT_MAIN_MAXES });
+    setSprintPBs({});
     setLoadedProgram(null);
   }, []);
 
@@ -517,15 +524,30 @@ export default function useWorkoutState() {
     const visible = ALL_DAYS.filter((d) => !hiddenDays.includes(d));
     const contiguousFromOne = visible.every((d, i) => d === i + 1);
     const legacyDaysPerWeek = contiguousFromOne && visible.length > 0 ? visible.length : MAX_DAYS;
+    // Re-bake every sprint's target time from the CURRENT PBs so a re-test (PB
+    // edit) always flows to the tracker, even if the coach didn't re-touch each
+    // sprint exercise. The tracker reads ex.sprintTargetTime (no PB table needed).
+    const baked = {};
+    for (const k of Object.keys(all)) {
+      baked[k] = (all[k] || []).map((block) => ({
+        ...block,
+        exercises: (block.exercises || []).map((ex) =>
+          ex && ex.sprintDistance
+            ? { ...ex, sprintTargetTime: computeTargetTime(sprintPBs[ex.sprintDistance] || '', ex.targetPct) }
+            : ex
+        ),
+      }));
+    }
     return {
-      allWorkouts: all,
+      allWorkouts: baked,
       mainMaxes,
+      sprintPBs,
       daysPerWeek: legacyDaysPerWeek,
       hiddenDays,
       totalWeeks,
       loadedProgram,
     };
-  }, [getWorkoutKey, mainMaxes, hiddenDays, totalWeeks, loadedProgram]);
+  }, [getWorkoutKey, mainMaxes, sprintPBs, hiddenDays, totalWeeks, loadedProgram]);
 
   // allWorkouts with hidden-day entries stripped — for analytics/graphs and any
   // consumer that should reflect only what the client actually sees.
@@ -552,6 +574,8 @@ export default function useWorkoutState() {
     workoutBlocks,
     blockIdCounter,
     mainMaxes,
+    sprintPBs,
+    setSprintPBs,
     loadedProgram,
     switchDay,
     switchWeek,

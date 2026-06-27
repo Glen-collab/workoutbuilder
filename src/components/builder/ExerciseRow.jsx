@@ -5,6 +5,7 @@ import AddVideoButton from '../exercises/AddVideoButton';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
 import { calculateWeight, calculateExerciseTonnage, suggestBaseMax, baseMaxLabels, baseMaxColors } from '../../utils/percentageCalc';
 import { classifyMovement } from '../../data/movementClassification';
+import { SPRINT_DISTANCES, SPRINT_DISTANCE_BY_KEY, SPRINT_INTENSITIES, computeTargetTime } from '../../utils/sprintTargets';
 
 const QUALIFIER_OPTIONS = [
   { value: '', label: '—' },
@@ -217,6 +218,86 @@ function TargetRpeField({ value, onChange }) {
   );
 }
 
+// Distance key ("40yd","100m") → [value, unit] for the generic Distance field,
+// so picking a sprint distance also fills the Distance box (no double entry).
+function splitDistanceKey(key) {
+  const m = String(key || '').match(/^(\d+)(yd|m)$/);
+  return m ? [m[1], m[2]] : [null, null];
+}
+
+// Sprint %PB target — the velocity analog of "Enable %". Opt-in: hidden until the
+// coach picks a distance. Then a Target % drives an auto-filled target TIME from
+// the athlete's PB for that distance (target = PB ÷ %). Bakes sprintTargetTime
+// onto the exercise so the tracker shows it without needing the PB table.
+function SprintTargetField({ exercise, sprintPBs, onUpdate }) {
+  const dist = exercise.sprintDistance || '';
+  const pct = exercise.targetPct || '';
+  const pb = dist ? (sprintPBs?.[dist] || '') : '';
+  const target = computeTargetTime(pb, pct);
+
+  const pickDistance = (key) => {
+    if (!key) { onUpdate({ sprintDistance: '', sprintTargetTime: '' }); return; }
+    const [val, unit] = splitDistanceKey(key);
+    const nextPct = pct || '95'; // first pick → sensible default so a target shows
+    onUpdate({
+      sprintDistance: key,
+      targetPct: nextPct,
+      // Keep the generic Distance field in sync so it's not entered twice.
+      ...(val ? { distance: val, distanceUnit: unit } : {}),
+      sprintTargetTime: computeTargetTime(sprintPBs?.[key] || '', nextPct),
+    });
+  };
+  const pickPct = (v) => onUpdate({ targetPct: v, sprintTargetTime: computeTargetTime(pb, v) });
+
+  return (
+    <div className="mt-1 flex flex-wrap items-end gap-2 rounded-lg bg-[#dc2626]/[0.04] border border-[#dc2626]/20 px-2.5 py-2">
+      <span className="text-[11px] font-bold text-[#b91c1c] uppercase tracking-wide self-center">🏃 Sprint</span>
+      <div className="flex flex-col gap-0.5">
+        <span className="text-[10px] text-gray-400 font-semibold uppercase">Distance (PB)</span>
+        <select
+          value={dist}
+          onChange={(e) => pickDistance(e.target.value)}
+          className="px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none bg-white cursor-pointer min-w-[96px]"
+        >
+          <option value="">— none —</option>
+          {SPRINT_DISTANCES.map((d) => (
+            <option key={d.key} value={d.key}>{d.label}</option>
+          ))}
+        </select>
+      </div>
+      {dist && (
+        <>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[10px] text-gray-400 font-semibold uppercase">Target %</span>
+            <select
+              value={pct}
+              onChange={(e) => pickPct(e.target.value)}
+              className="px-2 py-[7px] rounded-md border border-gray-300 text-[13px] outline-none bg-white cursor-pointer"
+              style={{ width: '74px' }}
+            >
+              {SPRINT_INTENSITIES.map((n) => (
+                <option key={n} value={String(n)}>{n}%</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col gap-0.5 self-stretch justify-end pb-[1px]">
+            {target ? (
+              <div className="text-[13px] font-bold text-[#b91c1c] whitespace-nowrap">
+                🎯 {target}{target.includes(':') ? '' : 's'}
+                <span className="ml-1 text-[10px] font-medium text-gray-400">PB {pb} @ {SPRINT_DISTANCE_BY_KEY[dist]?.label}</span>
+              </div>
+            ) : (
+              <div className="text-[11px] text-gray-400 whitespace-nowrap">
+                No PB for {SPRINT_DISTANCE_BY_KEY[dist]?.label} — add it in <b>Sprint PBs</b>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function NotesWithCues({ value, onChange, onOpenCues }) {
   return (
     <div className="flex flex-col gap-0.5 w-full">
@@ -253,6 +334,7 @@ export default function ExerciseRow({
   onRemoveSet,
   onDuplicateSet,
   mainMaxes,
+  sprintPBs,
 }) {
   const [showCues, setShowCues] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
@@ -613,6 +695,7 @@ export default function ExerciseRow({
             <FieldInput label="Rest" value={exercise.rest} onChange={(v) => onUpdate({ rest: v })} placeholder="90s" width="64px" />
             <TargetRpeField value={exercise.targetRpe} onChange={(v) => onUpdate({ targetRpe: v })} />
           </div>
+          <SprintTargetField exercise={exercise} sprintPBs={sprintPBs} onUpdate={onUpdate} />
           <NotesWithCues value={exercise.notes} onChange={(v) => onUpdate({ notes: v })} onOpenCues={() => setShowCues(true)} />
         </>
       )}
