@@ -28,6 +28,28 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
     e.preventDefault();
     if (!programName.trim()) return;
     if (!codeValid) return;
+
+    // Guard the destructive overwrite path. Updating an existing program REPLACES
+    // its saved data in place (this is how a June phase can get clobbered by July).
+    if (isUpdate && !saveAsNew) {
+      const origPhase = loadedProgram.nickname ? ` – ${loadedProgram.nickname}` : '';
+      const typedNick = programNickname.trim();
+      const phaseChanged = typedNick && loadedProgram.nickname && typedNick !== loadedProgram.nickname;
+      let msg =
+        `This will OVERWRITE the saved program:\n\n` +
+        `   ${loadedProgram.name}${origPhase}  (code ${loadedProgram.accessCode})\n\n` +
+        `The saved version is replaced and can't be undone.`;
+      if (phaseChanged) {
+        msg +=
+          `\n\n⚠ You changed the phase to "${typedNick}", but this RENAMES the ` +
+          `"${loadedProgram.nickname}" record — it does NOT create a separate "${typedNick}" phase.`;
+      }
+      msg +=
+        `\n\nTo keep "${loadedProgram.nickname || loadedProgram.name}" and start a new phase, ` +
+        `click Cancel, then "Save as New Program".`;
+      if (!window.confirm(msg)) return;
+    }
+
     // A custom code only applies when creating a record (brand-new save or
     // "Save as New"). Updating an existing program keeps its own code.
     const creatingNew = !isUpdate || saveAsNew;
