@@ -3,6 +3,13 @@
 // (Contacts | Distance | Reps | Time — the native volume unit), type }.
 // Used by utils/cnsLoadCalc.js. Regenerate via the gen script if the library changes.
 export const MOVEMENT_CLASSIFICATION = {
+  // Blanket zone sprints — the coach picks the quality; %PB + CNS follow the zone.
+  "Acceleration Sprint": { cns: 5, zone: "Acceleration", driver: "Reps", type: "Sprint" },
+  "Max Velocity Sprint": { cns: 5, zone: "Max Velocity", driver: "Reps", type: "Sprint" },
+  "Speed Endurance Sprint": { cns: 4, zone: "Speed Endurance", driver: "Reps", type: "Sprint" },
+  "Special Endurance Sprint": { cns: 4, zone: "Special Endurance", driver: "Reps", type: "Sprint" },
+  "Tempo Run": { cns: 1, zone: "Tempo", driver: "Distance", type: "Run" },
+  "Recovery Sprint": { cns: 1, zone: "Recovery", driver: "Distance", type: "Run" },
   "Linear Preset Vargas": { cns: 0, zone: "", driver: "", type: "Preset" },
   "Beginner Linear Preset": { cns: 0, zone: "", driver: "", type: "Preset" },
   "Intermediate Linear Preset": { cns: 0, zone: "", driver: "", type: "Preset" },

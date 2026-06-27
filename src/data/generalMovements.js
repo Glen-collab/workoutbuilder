@@ -162,6 +162,14 @@ export const generalMovements = {
             linear: {
                 label: "Linear",
                 exercises: [
+                    // ── Blanket zone sprints (top of the list) ── pick the QUALITY,
+                    // then set your own sets / distance / rest + the %PB target.
+                    { name: "Acceleration Sprint", description: "Drive phase, 0–30m / 10–40yd — full recovery between reps" },
+                    { name: "Max Velocity Sprint", description: "Top-end speed — flying 30–60m at full speed, full recovery" },
+                    { name: "Speed Endurance Sprint", description: "Hold near-max under fatigue, 60–150m" },
+                    { name: "Special Endurance Sprint", description: "Race-pace stamina / lactate, 150–400m" },
+                    { name: "Tempo Run", description: "Extensive aerobic conditioning, 100–200m @ 65–75%" },
+                    { name: "Recovery Sprint", description: "Easy flush / shake-out between hard efforts" },
                     ...WARMUP_DRILLS,
                     { name: "High Knee Walk", description: "Slow, controlled knee drive with balance" },
                     { name: "Mountain Climbers (Speed)", description: "Ground contact speed, hip flexor power" },
