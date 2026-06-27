@@ -6,10 +6,10 @@ import { SPRINT_DISTANCES } from '../../utils/sprintTargets';
 // then auto-fill their target time (PB ÷ %). Collapsible + optional so it never
 // clutters the builder for coaches who don't program sprints.
 const ZONE_TONE = {
-  'Acceleration': { bg: '#fee2e2', fg: '#b91c1c' },
-  'Max Velocity': { bg: '#ffedd5', fg: '#c2410c' },
-  'Speed Endurance': { bg: '#fef9c3', fg: '#a16207' },
-  'Special Endurance': { bg: '#dbeafe', fg: '#1d4ed8' },
+  'Acceleration': { bg: '#fee2e2', fg: '#b91c1c', abbr: 'A' },
+  'Max Velocity': { bg: '#ffedd5', fg: '#c2410c', abbr: 'MV' },
+  'Speed Endurance': { bg: '#fef9c3', fg: '#a16207', abbr: 'SE' },
+  'Special Endurance': { bg: '#dbeafe', fg: '#1d4ed8', abbr: 'SpE' },
 };
 
 export default function SprintPbsPanel({ sprintPBs, onUpdate }) {
@@ -36,19 +36,19 @@ export default function SprintPbsPanel({ sprintPBs, onUpdate }) {
 
       {open && (
         <div className="px-3 py-3 border-t border-gray-100">
-          <p className="text-[11px] text-gray-400 mb-2.5">
-            Enter the athlete's <b>best time</b> per distance (e.g. <code>4.80</code>, or <code>1:02.5</code> for 400m).
+          <p className="text-[12px] text-gray-600 mb-2.5 leading-snug">
+            Enter the athlete's <b>best time</b> per distance (e.g. <code className="text-[#b91c1c] font-semibold">4.80</code>, or <code className="text-[#b91c1c] font-semibold">1:02.5</code> for 400m).
             Prescribed sprints auto-fill their target = PB ÷ intensity %. Re-test → just update the number here.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {SPRINT_DISTANCES.map((d) => {
-              const tone = ZONE_TONE[d.zone] || { bg: '#f3f4f6', fg: '#374151' };
+              const tone = ZONE_TONE[d.zone] || { bg: '#f3f4f6', fg: '#374151', abbr: '' };
               return (
                 <div key={d.key} className="flex flex-col gap-1">
                   <span className="flex items-center justify-between">
                     <span className="text-[12px] font-bold text-gray-700">{d.label}</span>
                     <span className="text-[9px] font-semibold rounded px-1 py-[1px]" style={{ background: tone.bg, color: tone.fg }} title={d.zone}>
-                      {d.zone.split(' ').map((w) => w[0]).join('')}
+                      {tone.abbr}
                     </span>
                   </span>
                   <input
@@ -68,7 +68,7 @@ export default function SprintPbsPanel({ sprintPBs, onUpdate }) {
               );
             })}
           </div>
-          <p className="text-[10px] text-gray-300 mt-2">A = Acceleration · MV = Max Velocity · SE = Speed Endurance · SE = Special Endurance</p>
+          <p className="text-[10px] text-gray-500 mt-2">A = Acceleration · MV = Max Velocity · SE = Speed Endurance · SpE = Special Endurance</p>
         </div>
       )}
     </div>

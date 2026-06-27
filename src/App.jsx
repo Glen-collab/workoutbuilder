@@ -58,7 +58,7 @@ function BuilderApp({ builderUser, onLogout }) {
   const snapshot = () => {
     try {
       const d = workoutState.getAllWorkoutsForSave();
-      return JSON.stringify({ allWorkouts: d.allWorkouts, mainMaxes: d.mainMaxes, daysPerWeek: d.daysPerWeek, hiddenDays: d.hiddenDays, totalWeeks: d.totalWeeks });
+      return JSON.stringify({ allWorkouts: d.allWorkouts, mainMaxes: d.mainMaxes, sprintPBs: d.sprintPBs, daysPerWeek: d.daysPerWeek, hiddenDays: d.hiddenDays, totalWeeks: d.totalWeeks });
     } catch { return null; }
   };
   const isDirty = () => savedSnapshotRef.current !== null && snapshot() !== savedSnapshotRef.current;
@@ -136,6 +136,7 @@ function BuilderApp({ builderUser, onLogout }) {
               name: prog.name || prog.programName || 'Client Program',
               allWorkouts: prog.programData?.allWorkouts || prog.allWorkouts || {},
               mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
+              sprintPBs: prog.programData?.sprintPBs || prog.sprintPBs,
               daysPerWeek: prog.programData?.daysPerWeek || prog.daysPerWeek || 3,
               totalWeeks: prog.programData?.totalWeeks || prog.totalWeeks || 4,
             });
@@ -272,6 +273,7 @@ function BuilderApp({ builderUser, onLogout }) {
       programData: {
         allWorkouts: data.allWorkouts,
         mainMaxes: data.mainMaxes,
+        sprintPBs: data.sprintPBs,
         daysPerWeek: data.daysPerWeek,
         hiddenDays: data.hiddenDays,
         totalWeeks: data.totalWeeks,
@@ -373,6 +375,7 @@ function BuilderApp({ builderUser, onLogout }) {
           name: prog.name || 'Client Program',
           allWorkouts,
           mainMaxes: prog.programData?.mainMaxes || prog.mainMaxes,
+          sprintPBs: prog.programData?.sprintPBs || prog.sprintPBs,
           daysPerWeek: prog.programData?.daysPerWeek || workoutState.daysPerWeek,
           totalWeeks: prog.programData?.totalWeeks || workoutState.totalWeeks,
         });
@@ -472,6 +475,7 @@ function BuilderApp({ builderUser, onLogout }) {
       nickname: program.nickname || '',
       allWorkouts: pd.allWorkouts || program.allWorkouts || {},
       mainMaxes: pd.mainMaxes || program.mainMaxes,
+      sprintPBs: pd.sprintPBs || program.sprintPBs,
       daysPerWeek: pd.daysPerWeek || program.daysPerWeek,
       totalWeeks: pd.totalWeeks || program.totalWeeks,
     });
@@ -490,6 +494,8 @@ function BuilderApp({ builderUser, onLogout }) {
     blocks: workoutState.workoutBlocks,
     mainMaxes: workoutState.mainMaxes,
     setMainMaxes: workoutState.setMainMaxes,
+    sprintPBs: workoutState.sprintPBs,
+    setSprintPBs: workoutState.setSprintPBs,
     allWorkouts: workoutState.allWorkouts,
     switchDay: workoutState.switchDay,
     switchWeek: workoutState.switchWeek,
