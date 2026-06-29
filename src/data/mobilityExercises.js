@@ -3,7 +3,7 @@
 
 
 
-import { SPRINT_WARMUP } from './generalMovements';
+import { SPRINT_WARMUP } from './generalMovements.js';
 
 export const mobilityCategories = {
     // Sprint / dynamic warm-up — single source of truth is generalMovements.js

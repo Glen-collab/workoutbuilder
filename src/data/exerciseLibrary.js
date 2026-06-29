@@ -3,7 +3,7 @@
 
 
 
-import { SPRINT_WARMUP } from './generalMovements';
+import { SPRINT_WARMUP } from './generalMovements.js';
 
 export const exerciseCategories = {
     // CHEST
@@ -1178,27 +1178,34 @@ export const exerciseCategories = {
                     { name: 'Clean and Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Snatch', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Clean Complex (Hang + Power + Front Squat)', movement: ['Olympic', 'Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Bear Complex', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Barbell Complex (RDL + Row + Hang Clean)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Clean Complex (Hang + Power + Front Squat)', movement: ['Olympic', 'Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/26a01037eef630b3a62de9bf5b69df61' },
+                    { name: 'Bear Complex', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca50bd9fe14ddfa71accda183041e5ba' },
+                    { name: 'Barbell Complex (RDL + Row + Hang Clean)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/96e8b6fb00f6ba413abd9e50597a488c' },
                     { name: 'Grace Complex (Clean + Push Jerk)', movement: ['Olympic'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'DT Complex', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Barbell Cluster (Clean + Thruster)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Barbell Ground to Overhead', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Barbell Complex (Deadlift + Hang Clean + Push Press)', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Complex (Deadlift + Hang Clean + Push Press)', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b88c3ca0466beae87f1956c5fbdc500e' },
                     { name: 'Barbell Devil Press', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
                     { name: 'Barbell Squat Clean Thruster', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Barbell Front Squat + Push Jerk', movement: ['Full Body'], intent: ['Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Barbell Overhead Walking Lunge', movement: ['Full Body'], intent: ['Stability'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Barbell Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Barbell Clean Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Power Clean + Front Squat', movement: ['Olympic'], intent: ['Strength'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b7e29f4e2f17c5d954552d6c37b3203e' },
+                    { name: 'Barbell Clean Pull + Hang Clean', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/a9143b55b78c248da5957f794e63aa94' },
                     { name: 'Barbell Snatch Pull + Power Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
                     { name: 'Barbell Clean + Overhead Squat', movement: ['Olympic'], intent: ['Mobility', 'Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Barbell Complex (Row + Clean + Push Press)', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Barbell Complex (Row + Clean + Push Press)', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/64acabe9423432724256464e6c511417' },
                     { name: 'Barbell Squat Clean + Split Jerk', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Barbell Complex (Deadlift + Shrug + Clean)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: '' },
+                    { name: 'Barbell Complex (Deadlift + Shrug + Clean)', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/b6142b36040e4712c4484a65de7fe4fc' },
                     { name: 'Barbell Ground to Shoulder', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: '' },
-                    { name: 'Barbell Complex (Front Squat + Push Press + Back Squat)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' }
+                    { name: 'Barbell Complex (Front Squat + Push Press + Back Squat)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/2ed2fd477233bcae976751d44380d8a1' },
+                    { name: 'Full Clean + Split Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/a30365049eb697168b376ab5b34365d9' },
+                    { name: 'Full Clean + Thruster', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/1b7c7a12e9e694bf71046450faa25920' },
+                    { name: 'Front Squat + Push Press', movement: ['Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/4b78b568e7d907fb452d07ad98055736' },
+                    { name: 'Power Clean + Push Press', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/016b0eae5da523617a81c98ca24e7d7f' },
+                    { name: 'Power Clean + Push Press + Overhead Squat', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/1fde0e7f4693665d6901e1405ad42b73' },
+                    { name: 'Power Clean + Thruster', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/69fd1b726dcc93246ad1b0ccefa594d9' },
+                    { name: 'Snatch Pull + Hang Snatch', movement: ['Olympic'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/dcb7d9d0a69054e06564ebce08c0a67c' }
                 ]
             },
             dumbbell: {
@@ -1250,19 +1257,19 @@ export const exerciseCategories = {
             functional: {
                 label: "Functional Complexes",
                 exercises: [
-                    { name: 'Burpees', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
-                    { name: 'Burpee Box Jump Overs', movement: ['Full Body'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
-                    { name: 'Wall Balls', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Kettlebell Swings', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: '' },
-                    { name: 'Burpee Pull-Ups', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Air Squat + Push-Up + Jump', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
+                    { name: 'Burpees', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/cafcbce167790fe07f334c255f1337f5' },
+                    { name: 'Burpee Box Jump Overs', movement: ['Full Body'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/15c495308cb7c703f494252c1aef3a15' },
+                    { name: 'Wall Balls', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Medicine Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/f834e0427e0741bbb109ed684735d15a' },
+                    { name: 'Kettlebell Swings', movement: ['Hinge', 'Power'], intent: ['Power', 'Conditioning'], equipment: ['Kettlebell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/1fdf5229f00ea470fe1d6cf01504e221' },
+                    { name: 'Burpee Pull-Ups', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/bea65926710135a0dede6dfe5466ae2d' },
+                    { name: 'Air Squat + Push-Up + Jump', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/b027212d170102a956935a594175706e' },
                     { name: 'Shuttle Sprint + Push-Ups', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Sandbag Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Sandbag'], contraindications: [], youtube: '' },
+                    { name: 'Sandbag Clean', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Sandbag'], contraindications: [], youtube: 'https://iframe.videodelivery.net/d02eed66ab1dfc9f26546eefc5e0caa9' },
                     { name: 'Sandbag Lunge Walks', movement: ['Single Leg'], intent: ['Conditioning'], equipment: ['Sandbag'], contraindications: [], youtube: 'https://iframe.videodelivery.net/be707467d456dfd35c8a238b5110bf27' },
                     { name: 'Sandbag Clean and Carry', movement: ['Full Body'], intent: ['Work Capacity'], equipment: ['Sandbag'], contraindications: [], youtube: '' },
                     { name: 'Bear Crawl + Sprint', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Wall Ball + Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Medicine Ball'], contraindications: [], youtube: '' },
-                    { name: 'Box Jump + Step Down', movement: ['Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
+                    { name: 'Wall Ball + Burpee', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Medicine Ball'], contraindications: [], youtube: 'https://iframe.videodelivery.net/e3e2b4fc80cc84b8aaac70edcd02070a' },
+                    { name: 'Box Jump + Step Down', movement: ['Power'], intent: ['Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/5180f8defbf87694f01d18eabcc3698a' },
                     { name: 'Farmer Carry + Box Step-Up', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Sled Push', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Sled'], contraindications: [], youtube: '' },
                     { name: 'Sled Push + Sprint', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Sled'], contraindications: [], youtube: '' },
@@ -1275,9 +1282,11 @@ export const exerciseCategories = {
                     { name: 'Tire Flip + Jump In', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Tire'], contraindications: [], youtube: '' },
                     { name: 'Stair Sprint Intervals', movement: ['Locomotion'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
                     { name: 'Farmer Carry Medley', movement: ['Carry'], intent: ['Work Capacity'], equipment: ['Implements'], contraindications: [], youtube: '' },
-                    { name: 'Burpee + Box Jump', movement: ['Full Body', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
+                    { name: 'Burpee + Box Jump', movement: ['Full Body', 'Power'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/248321194f9bd5dd0977c4723408e504' },
                     { name: 'Jog', movement: ['Locomotion'], intent: ['Conditioning'], equipment: ['Bodyweight'], contraindications: [], youtube: '' },
-                    { name: 'Slow Sprint/Fast Jog', movement: ['Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' }
+                    { name: 'Slow Sprint/Fast Jog', movement: ['Locomotion'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: '' },
+                    { name: 'Air Squat + Burpee + Vertical Jump', movement: ['Full Body'], intent: ['Conditioning', 'Power'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/f9c79de96e162c0f462265d0bb420f38' },
+                    { name: 'Box Jump Walk-Over + Step Down', movement: ['Power'], intent: ['Power', 'Conditioning'], equipment: ['Bodyweight'], contraindications: ['Reduced Impact'], youtube: 'https://iframe.videodelivery.net/9474ce140a3cdff8a6fb2f870a4b25fd' }
                 ]
             },
             corrective: {
