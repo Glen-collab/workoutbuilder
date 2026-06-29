@@ -1,7 +1,16 @@
 import { useState } from 'react';
 
+const hasVideo = (ex) => !!(ex && ex.youtube && String(ex.youtube).trim());
+
 export default function ExerciseList({ exercises, onSelect, onBack, title }) {
   const [previewIdx, setPreviewIdx] = useState(null);
+
+  // Exercises WITH a video float to the top of every list; ones without keep
+  // their original relative order (stable sort). Applies to every category,
+  // subcategory, and search result since they all render through here.
+  const sortedExercises = exercises
+    ? [...exercises].sort((a, b) => (hasVideo(b) ? 1 : 0) - (hasVideo(a) ? 1 : 0))
+    : exercises;
 
   if (!exercises || exercises.length === 0) {
     return (
@@ -31,7 +40,7 @@ export default function ExerciseList({ exercises, onSelect, onBack, title }) {
         <h3 className="text-lg font-bold text-gray-700 m-0">{title || 'Exercises'}</h3>
       </div>
       <div className="flex flex-col gap-2 max-h-[400px] overflow-y-auto">
-        {exercises.map((exercise, idx) => (
+        {sortedExercises.map((exercise, idx) => (
           <div key={exercise.name + idx}>
             <div
               className="flex items-center justify-between py-3.5 px-4 bg-white rounded-[10px] shadow-sm cursor-pointer text-left w-full transition-all duration-150 hover:bg-purple-50 hover:shadow-md"
