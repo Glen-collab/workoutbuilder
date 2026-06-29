@@ -1175,9 +1175,9 @@ export const exerciseCategories = {
             barbell: {
                 label: "Barbell Complexes",
                 exercises: [
-                    { name: 'Clean and Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Snatch', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
-                    { name: 'Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: '' },
+                    { name: 'Clean and Jerk', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Strength'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/3d4f08c7fa0071c8202823957966f08c' },
+                    { name: 'Snatch', movement: ['Olympic', 'Full Body'], intent: ['Power'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/cfb6e19659f0f1b5d20861f6cceee284' },
+                    { name: 'Thruster', movement: ['Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: ['No Overhead Loading'], youtube: 'https://iframe.videodelivery.net/b21b327f895328b09b1e8d50c2d518ac' },
                     { name: 'Clean Complex (Hang + Power + Front Squat)', movement: ['Olympic', 'Full Body'], intent: ['Strength', 'Power'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/26a01037eef630b3a62de9bf5b69df61' },
                     { name: 'Bear Complex', movement: ['Olympic', 'Full Body'], intent: ['Power', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/ca50bd9fe14ddfa71accda183041e5ba' },
                     { name: 'Barbell Complex (RDL + Row + Hang Clean)', movement: ['Full Body'], intent: ['Strength', 'Conditioning'], equipment: ['Barbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/96e8b6fb00f6ba413abd9e50597a488c' },
