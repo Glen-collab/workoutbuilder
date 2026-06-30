@@ -11,6 +11,18 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const DOT = { high: '🔴', low: '🟢', rest: '·' };
 
+// ACWR → zone (Gabbett): >1.5 spike, 1.3-1.5 elevated, 0.8-1.3 sweet spot,
+// <0.8 unloading. First couple weeks lack a chronic baseline → "building".
+function acwrZone(wk) {
+  if (!wk.total) return { label: 'rest', short: '—', bg: '#f3f4f6', fg: '#9ca3af' };
+  if (wk.acwrHistory < 2) return { label: 'building baseline', short: '·', bg: '#f3f4f6', fg: '#6b7280' };
+  const r = wk.acwr;
+  if (r >= 1.5) return { label: 'SPIKE — overreach / risk', short: '🔴', bg: '#fee2e2', fg: '#b91c1c' };
+  if (r >= 1.3) return { label: 'elevated', short: '🟠', bg: '#ffedd5', fg: '#c2410c' };
+  if (r >= 0.8) return { label: 'sweet spot', short: '🟢', bg: '#dcfce7', fg: '#15803d' };
+  return { label: 'unloading / supercompensation', short: '🔵', bg: '#dbeafe', fg: '#1d4ed8' };
+}
+
 export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxes, onBack }) {
   const [showExplainer, setShowExplainer] = useState(false);
 
@@ -91,6 +103,26 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxe
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+
+            {/* ACWR — acute:chronic load-management flag */}
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+              <div className="text-[13px] font-bold text-gray-700 mb-1">⚖️ ACWR — Acute : Chronic Workload</div>
+              <div className="text-[11px] text-gray-400 mb-3">This week's CNS ÷ the 4-week rolling average. 🟢 0.8–1.3 sweet spot · 🟠 1.3–1.5 elevated · 🔴 &gt;1.5 spike (overreach/risk) · 🔵 &lt;0.8 unloading. A 🔴 spike <b>followed by</b> 🔵 unloading = a planned peak → supercompensation.</div>
+              <div className="overflow-x-auto">
+                <div className="flex gap-2 min-w-min">
+                  {weeks.map((w) => {
+                    const z = acwrZone(w);
+                    return (
+                      <div key={w.week} className="flex flex-col items-center rounded-lg px-2.5 py-2 min-w-[58px]" style={{ background: z.bg }} title={`Wk ${w.week}: acute ${w.total.toLocaleString()} ÷ chronic ${(w.chronic || 0).toLocaleString()} — ${z.label}`}>
+                        <span className="text-[10px] font-semibold text-gray-500">Wk {w.week}</span>
+                        <span className="text-[15px] font-extrabold tabular-nums" style={{ color: z.fg }}>{w.total && w.acwrHistory >= 2 ? w.acwr.toFixed(2) : z.short}</span>
+                        <span className="text-[8px] font-semibold leading-tight text-center" style={{ color: z.fg }}>{z.short !== '—' && z.short !== '·' ? z.short : ''}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
