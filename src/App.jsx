@@ -588,6 +588,7 @@ function BuilderApp({ builderUser, onLogout }) {
           allWorkouts={workoutState.getVisibleWorkouts()}
           totalWeeks={workoutState.totalWeeks}
           daysPerWeek={workoutState.daysPerWeek}
+          maxes={workoutState.mainMaxes}
           onBack={() => setScreen('builder')}
         />
       )}

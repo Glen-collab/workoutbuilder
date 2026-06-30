@@ -11,12 +11,12 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const DOT = { high: '🔴', low: '🟢', rest: '·' };
 
-export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, onBack }) {
+export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxes, onBack }) {
   const [showExplainer, setShowExplainer] = useState(false);
 
   const { weeks, highThreshold } = useMemo(
-    () => cnsLoadForProgram(allWorkouts, totalWeeks, daysPerWeek),
-    [allWorkouts, totalWeeks, daysPerWeek],
+    () => cnsLoadForProgram(allWorkouts, totalWeeks, daysPerWeek, maxes),
+    [allWorkouts, totalWeeks, daysPerWeek, maxes],
   );
   const labels = weeks.map((w) => `Wk ${w.week}`);
   const hasData = weeks.some((w) => w.total > 0);
@@ -100,6 +100,7 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, onBa
                   <tr>
                     <th className="px-3 py-2 font-semibold">Week</th>
                     <th className="px-3 py-2 font-semibold text-right">CNS Load</th>
+                    <th className="px-3 py-2 font-semibold text-right">🏋️ Peak %</th>
                     <th className="px-3 py-2 font-semibold text-right">👟 Foot Contacts</th>
                     <th className="px-3 py-2 font-semibold text-right">🏃 Sprint Vol (yd)</th>
                     <th className="px-3 py-2 font-semibold text-right">Δ vs prior</th>
@@ -115,6 +116,7 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, onBa
                       <tr key={w.week} className="border-b border-gray-100">
                         <td className="px-3 py-2 font-semibold text-gray-800">Wk {w.week}</td>
                         <td className="px-3 py-2 text-right tabular-nums font-semibold text-rose-700">{w.total.toLocaleString()}</td>
+                        <td className={`px-3 py-2 text-right tabular-nums font-semibold ${w.peakPct >= 90 ? 'text-rose-600' : w.peakPct >= 80 ? 'text-amber-600' : 'text-gray-500'}`}>{w.peakPct ? `${w.peakPct}%` : '—'}</td>
                         <td className="px-3 py-2 text-right tabular-nums text-amber-700">{w.contacts ? w.contacts.toLocaleString() : '—'}</td>
                         <td className="px-3 py-2 text-right tabular-nums text-sky-700">{w.distance ? w.distance.toLocaleString() : '—'}</td>
                         <td className={`px-3 py-2 text-right tabular-nums font-semibold ${tone}`}>{delta == null ? '—' : `${arrow} ${Math.abs(delta)}%`}</td>
@@ -128,14 +130,14 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, onBa
             <details open={showExplainer} onToggle={(e) => setShowExplainer(e.target.open)} className="bg-gray-50 rounded-xl border border-gray-200 p-3">
               <summary className="cursor-pointer text-[13px] font-semibold text-gray-700">How is CNS load calculated?</summary>
               <div className="mt-2 text-[12px] text-gray-600 leading-relaxed space-y-1">
-                <p>Every effort costs the nervous system in proportion to its <b>CNS rating (1–5)</b>. Jumps, sprints, and lifting all use the same currency:</p>
+                <p>Jumps, sprints, and heavy lifting all cost the nervous system — scored on one currency so they sum into a daily wave:</p>
                 <ul className="ml-5 list-disc">
                   <li><b>Plyos</b> → CNS × foot contacts (depth jumps = 5, box jumps = 3, pogos = 1)</li>
                   <li><b>Sprints</b> → CNS × efforts (max-V/accel = 5, speed-end = 4)</li>
                   <li><b>Tempo</b> → CNS × (yards ÷ 100) — volume, low neural cost</li>
-                  <li><b>Lifting</b> → compound = 5, accessory = 2, × work reps</li>
+                  <li><b>Heavy lifting</b> → <b>intensity-driven (INOL)</b> = reps ÷ (100 − %1RM), summed across working sets, for the big lifts only (squat / bench / deadlift / clean / snatch families). A single @ 95% costs far more than 5 @ 70%. Accessories & complexes don't count.</li>
                 </ul>
-                <p className="text-gray-400">v1 weights — tunable once real weeks are logged. Δ &gt;15% week-to-week is flagged (load spike).</p>
+                <p className="text-gray-400"><b>Peak %</b> = the heaviest single intensity that week (the max-effort signal). v1 weights tunable once real weeks are logged. Δ &gt;15% week-to-week is flagged (load spike).</p>
               </div>
             </details>
           </>
