@@ -21,15 +21,16 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxe
   const labels = weeks.map((w) => `Wk ${w.week}`);
   const hasData = weeks.some((w) => w.total > 0);
 
-  // Modality lines so the coach sees the lift / jump / sprint mix per week.
-  const sumMod = (w, m) => Math.round(w.days.reduce((s, d) => s + (d.byModality?.[m] || 0), 0));
+  // Two intensity-comparable lines: the bar (lifting) and the track (sprints +
+  // jumps + drills), now on one scale so a max-sprint day and a max-lift day read
+  // alike. Total = the combined neural wave.
+  const sumMod = (w, ...mods) => Math.round(w.days.reduce((s, d) => s + mods.reduce((a, m) => a + (d.byModality?.[m] || 0), 0), 0));
   const chartData = {
     labels,
     datasets: [
       { label: 'Total CNS Load', data: weeks.map((w) => w.total), borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.10)', borderWidth: 3, pointRadius: 5, pointHoverRadius: 7, tension: 0.35, fill: true },
-      { label: 'Lifting', data: weeks.map((w) => sumMod(w, 'lift')), borderColor: '#7c3aed', borderWidth: 2, pointRadius: 3, tension: 0.35, fill: false },
-      { label: 'Jumps', data: weeks.map((w) => sumMod(w, 'jump')), borderColor: '#f59e0b', borderWidth: 2, pointRadius: 3, tension: 0.35, fill: false },
-      { label: 'Sprints', data: weeks.map((w) => sumMod(w, 'sprint')), borderColor: '#0ea5e9', borderWidth: 2, pointRadius: 3, tension: 0.35, fill: false },
+      { label: '🏋️ Lifting', data: weeks.map((w) => sumMod(w, 'lift')), borderColor: '#7c3aed', borderWidth: 2.5, pointRadius: 3, tension: 0.35, fill: false },
+      { label: '🏃 Sprints / Jumps', data: weeks.map((w) => sumMod(w, 'sprint', 'jump', 'drill', 'movement')), borderColor: '#0ea5e9', borderWidth: 2.5, pointRadius: 3, tension: 0.35, fill: false },
     ],
   };
   const chartOptions = {
@@ -130,14 +131,13 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxe
             <details open={showExplainer} onToggle={(e) => setShowExplainer(e.target.open)} className="bg-gray-50 rounded-xl border border-gray-200 p-3">
               <summary className="cursor-pointer text-[13px] font-semibold text-gray-700">How is CNS load calculated?</summary>
               <div className="mt-2 text-[12px] text-gray-600 leading-relaxed space-y-1">
-                <p>Jumps, sprints, and heavy lifting all cost the nervous system — scored on one currency so they sum into a daily wave:</p>
+                <p>Sprinting and heavy lifting cost the nervous system the same way — by <b>intensity</b>, not volume. Both score on one currency (<b>INOL</b> = efforts ÷ (100 − intensity%)), so the two lines are directly comparable:</p>
                 <ul className="ml-5 list-disc">
-                  <li><b>Plyos</b> → CNS × foot contacts (depth jumps = 5, box jumps = 3, pogos = 1)</li>
-                  <li><b>Sprints</b> → CNS × efforts (max-V/accel = 5, speed-end = 4)</li>
-                  <li><b>Tempo</b> → CNS × (yards ÷ 100) — volume, low neural cost</li>
-                  <li><b>Heavy lifting</b> → <b>intensity-driven (INOL)</b> = reps ÷ (100 − %1RM), summed across working sets, for the big lifts only (squat / bench / deadlift / clean / snatch families). Only reps <b>≥ 80%</b> count — lighter volume work (e.g. 10×10 @ 65%) is fatiguing but isn't a CNS stressor. A single @ 95% costs far more than 5 @ 70%. Accessories & complexes don't count.</li>
+                  <li><b>Heavy lifting</b> → intensity = <b>%1RM</b>, for the big lifts only (squat / bench / deadlift / clean / snatch families). Accessories & complexes don't count.</li>
+                  <li><b>Sprints / jumps</b> → intensity = the coach's <b>%PB</b>, or the velocity zone (max-V/accel ≈ 95, speed-end ≈ 88).</li>
+                  <li><b>Only efforts ≥ 80% intensity count.</b> Volume lifting (10×10 @ 65%), lateral agility, tempo & recovery all fall below the line → <b>0 CNS</b>. A single @ 95% costs far more than 5 @ 70%.</li>
                 </ul>
-                <p className="text-gray-400"><b>Peak %</b> = the heaviest single intensity that week (the max-effort signal). v1 weights tunable once real weeks are logged. Δ &gt;15% week-to-week is flagged (load spike).</p>
+                <p className="text-gray-400"><b>Peak %</b> = the highest single intensity that week (the max-effort signal). v1 weights tunable once real weeks are logged. Δ &gt;15% week-to-week is flagged (load spike).</p>
               </div>
             </details>
           </>
