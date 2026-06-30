@@ -135,7 +135,7 @@ export default function CnsLoadView({ allWorkouts, totalWeeks, daysPerWeek, maxe
                   <li><b>Plyos</b> → CNS × foot contacts (depth jumps = 5, box jumps = 3, pogos = 1)</li>
                   <li><b>Sprints</b> → CNS × efforts (max-V/accel = 5, speed-end = 4)</li>
                   <li><b>Tempo</b> → CNS × (yards ÷ 100) — volume, low neural cost</li>
-                  <li><b>Heavy lifting</b> → <b>intensity-driven (INOL)</b> = reps ÷ (100 − %1RM), summed across working sets, for the big lifts only (squat / bench / deadlift / clean / snatch families). A single @ 95% costs far more than 5 @ 70%. Accessories & complexes don't count.</li>
+                  <li><b>Heavy lifting</b> → <b>intensity-driven (INOL)</b> = reps ÷ (100 − %1RM), summed across working sets, for the big lifts only (squat / bench / deadlift / clean / snatch families). Only reps <b>≥ 80%</b> count — lighter volume work (e.g. 10×10 @ 65%) is fatiguing but isn't a CNS stressor. A single @ 95% costs far more than 5 @ 70%. Accessories & complexes don't count.</li>
                 </ul>
                 <p className="text-gray-400"><b>Peak %</b> = the heaviest single intensity that week (the max-effort signal). v1 weights tunable once real weeks are logged. Δ &gt;15% week-to-week is flagged (load spike).</p>
               </div>
