@@ -1244,7 +1244,6 @@ export const exerciseCategories = {
                     { name: 'Dumbbell Overhead Walking Lunge', movement: ['Full Body'], intent: ['Stability'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Farmer Carry into Thruster', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Power Clean + Push Jerk', movement: ['Full Body'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
-                    { name: 'Dumbbell Cluster', movement: ['Full Body'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: '' },
                     { name: 'Dumbbell Lunge Matrix', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/aecf80affba61778a8151c7a52ead6df' },
                     { name: 'Dumbbell Step-Up to Press', movement: ['Full Body'], intent: ['Conditioning'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/8ae135fef6cfcbe184c170fa0466ac89' },
                     { name: 'Dumbbell Squat Clean + Push Press', movement: ['Full Body'], intent: ['Power'], equipment: ['Dumbbell'], contraindications: [], youtube: 'https://iframe.videodelivery.net/826177f9971f9ab13c92bc47e629db8a' },
