@@ -90,8 +90,10 @@ const warmupCooldownTypes = ['warmup', 'cooldown'];
 
 const VIRTUAL_CATEGORIES = { functional: 'functional', corrective: 'corrective' };
 const REDIRECT_MAP = { olympic_lifting: 'oly_complexes', first_responder: 'tactical' };
-const UPPER_PARTS = ['chest', 'back', 'shoulders', 'biceps', 'triceps'];
-const LOWER_PARTS = ['legs', 'core'];
+// Core's `functional` subcategory (anti-rotation / trunk-bracing work) is routed
+// to Functional → Upper Body per Glen's taxonomy; legs feeds Lower Body.
+const UPPER_PARTS = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'core'];
+const LOWER_PARTS = ['legs'];
 
 function getExercisesForSelection(muscleGroup, subcategory) {
   // Virtual categories (functional/corrective → upper_body/lower_body)
