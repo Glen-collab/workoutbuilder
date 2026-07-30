@@ -2,10 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
-# Proxy API calls to WordPress backend (avoids CORS entirely)
+# Proxy API calls to the Flask backend on EC2 (avoids CORS entirely).
+# This used to point at the retired WordPress host
+# (bestrongagain.com/workout-programs/api/general/), which 403s — every real
+# call in src/ hardcodes the absolute app.bestrongagain.com URL, so the stale
+# proxy went unnoticed. Straight pass-through preserves the real path structure.
 [[redirects]]
   from = "/api/*"
-  to = "https://bestrongagain.com/workout-programs/api/general/:splat"
+  to = "https://app.bestrongagain.com/api/:splat"
   status = 200
   force = true
 
