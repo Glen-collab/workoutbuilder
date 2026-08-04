@@ -52,6 +52,29 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  // Custom rows by normalized name, so a row can tell whether it's one of the
+  // coach's own exercises (and therefore re-filable) in O(1).
+  const customByName = useMemo(() => {
+    const m = {};
+    customs.forEach((c) => { if (c?.name) m[c.name.trim().toLowerCase()] = c; });
+    return m;
+  }, [customs]);
+
+  // The default view: everything the coach owns — their custom exercises AND
+  // any library exercise they've filmed — as ONE deduped, alphabetical list.
+  // These two sets overlap (a custom exercise with a video is in both), which
+  // is what made entries appear twice.
+  const mine = useMemo(() => {
+    const byNorm = new Map();
+    [...customs.map((c) => c?.name), ...list.map((v) => v?.name)]
+      .filter(Boolean)
+      .forEach((n) => {
+        const k = n.trim().toLowerCase();
+        if (!byNorm.has(k)) byNorm.set(k, n);
+      });
+    return [...byNorm.values()].sort((a, b) => a.localeCompare(b));
+  }, [customs, list]);
+
   // Every library exercise name + the coach's custom names, deduped.
   const allNames = useMemo(() => {
     const out = [];
@@ -102,44 +125,14 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     }
   };
 
-  // One of the coach's own exercises, with its shelf in the picker showing and
-  // editable in place. Re-saving the same name updates placement rather than
-  // duplicating, so "move" is just a save.
-  const CustomRow = ({ ce }) => {
-    const subs = placements.find((p) => p.key === ce.category)?.subs || [];
-    const vid = getVideo(ce.name);
-    return (
-      <div className="bg-white border border-gray-200 rounded-lg px-3 py-2.5 mb-1.5">
-        <div className="flex items-center gap-2">
-          <span className="flex-1 text-sm font-semibold text-gray-800 break-words">
-            {ce.name} {vid && <span className="text-green-600">🎬</span>}
-          </span>
-          <AddVideoButton exercise={{ name: ce.name }} onUploaded={reload} />
-        </div>
-        <div className="flex gap-2 mt-2">
-          <select
-            value={ce.category || ''}
-            onChange={(e) => refile(ce, e.target.value, '')}
-            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none"
-          >
-            <option value="">Not filed (search only)</option>
-            {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
-          </select>
-          <select
-            value={ce.subcategory || ''}
-            onChange={(e) => refile(ce, ce.category || '', e.target.value)}
-            disabled={!subs.length}
-            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none disabled:opacity-40"
-          >
-            <option value="">{subs.length ? 'Sub-group…' : '—'}</option>
-            {subs.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
-          </select>
-        </div>
-      </div>
-    );
-  };
-
+  // ONE row type for everything. Custom exercises and uploaded videos used to
+  // render as two separate lists, so anything that was both — a custom exercise
+  // WITH a video, which is the normal end state — appeared twice with different
+  // controls on each copy (placement dropdowns on one, the orange preview button
+  // on the other). Same exercise, one row, every control it can have.
   const Row = ({ name }) => {
+    const ce = customByName[name.trim().toLowerCase()];
+    const subs = placements.find((p) => p.key === ce?.category)?.subs || [];
     const vid = getVideo(name);
     const open = preview === name;
     return (
@@ -148,19 +141,39 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
           <span className="flex-1 text-sm font-semibold text-gray-800 break-words">
             {name} {vid && <span className="text-green-600">🎬</span>}
           </span>
-          {vid ? (
-            <>
-              <button onClick={() => setPreview(open ? null : name)}
-                className="text-[12px] font-semibold rounded-md px-2 py-1 cursor-pointer border-none text-white"
-                style={{ background: open ? 'linear-gradient(135deg,#1565c0,#42a5f5)' : 'linear-gradient(135deg,#f5851f,#f6a623)' }}>
-                {open ? '✖' : '📹'}
-              </button>
-              <AddVideoButton exercise={{ name }} onUploaded={reload} />
-            </>
-          ) : (
-            <AddVideoButton exercise={{ name }} onUploaded={reload} />
+          {vid && (
+            <button onClick={() => setPreview(open ? null : name)}
+              title={open ? 'Hide video' : 'Preview video'}
+              className="text-[12px] font-semibold rounded-md px-2 py-1 cursor-pointer border-none text-white"
+              style={{ background: open ? 'linear-gradient(135deg,#1565c0,#42a5f5)' : 'linear-gradient(135deg,#f5851f,#f6a623)' }}>
+              {open ? '✖' : '📹'}
+            </button>
           )}
+          <AddVideoButton exercise={{ name }} onUploaded={reload} />
         </div>
+        {/* Placement only makes sense for the coach's OWN exercises. A library
+            exercise they filmed already has its home in the library. */}
+        {ce && (
+          <div className="flex gap-2 mt-2">
+            <select
+              value={ce.category || ''}
+              onChange={(e) => refile(ce, e.target.value, '')}
+              className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none"
+            >
+              <option value="">Not filed (search only)</option>
+              {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+            </select>
+            <select
+              value={ce.subcategory || ''}
+              onChange={(e) => refile(ce, ce.category || '', e.target.value)}
+              disabled={!subs.length}
+              className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none disabled:opacity-40"
+            >
+              <option value="">{subs.length ? 'Sub-group…' : '—'}</option>
+              {subs.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
+            </select>
+          </div>
+        )}
         {open && vid && (
           <div className="mt-2 rounded-lg overflow-hidden bg-black" style={{ position: 'relative', paddingTop: '56.25%' }}>
             <iframe src={`${vid}?preload=metadata`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen
@@ -237,19 +250,15 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
             </>
           ) : (
             <>
-              {customs.length > 0 && (
-                <>
-                  <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-2">
-                    ⭐ Your custom exercises ({customs.length})
-                  </div>
-                  <div className="mb-4">
-                    {customs.map((ce) => <CustomRow key={ce.id} ce={ce} />)}
-                  </div>
-                </>
+              <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-2">
+                ⭐ Your exercises &amp; videos ({mine.length})
+              </div>
+              {mine.length === 0 && (
+                <div className="text-sm text-gray-400 italic mb-2">
+                  Nothing yet. Add a custom exercise above, or search any exercise to give it a video.
+                </div>
               )}
-              <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-2">🎬 Your videos ({list.length})</div>
-              {list.length === 0 && <div className="text-sm text-gray-400 italic mb-2">No videos yet. Search an exercise above and tap “+ Add Video”.</div>}
-              {list.map((v) => <Row key={v.name} name={v.name} />)}
+              {mine.map((n) => <Row key={n} name={n} />)}
             </>
           )}
         </div>
