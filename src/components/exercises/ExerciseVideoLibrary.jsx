@@ -271,6 +271,15 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
               {subsForCat.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
             </select>
           </div>
+          {/* The shelf stays selected between adds on purpose — thinking up six
+              leg exercises in a row shouldn't mean re-picking Legs six times.
+              Said out loud so it can't misfile the next one by surprise. */}
+          {placeCat && (
+            <div className="mt-1.5 text-[11px] text-emerald-700 font-semibold">
+              ↑ Next add goes to the top of {prettyKey(placeCat)}
+              {placeSub ? ` → ${prettyKey(placeSub)}` : ''} — stays set until you change it
+            </div>
+          )}
           {feedback && (
             <div
               className={`mt-2 px-3 py-2 rounded-lg text-[12.5px] font-semibold ${feedback.type === 'ok' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200'}`}
