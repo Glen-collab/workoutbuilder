@@ -9,6 +9,7 @@ import MuscleGroupGrid from './MuscleGroupGrid';
 import SubcategoryTabs from './SubcategoryTabs';
 import ExerciseList from './ExerciseList';
 import MovementCategoryList from './MovementCategoryList';
+import { customsAsExercises, withCustomsPinned, customToExercise } from '../../utils/customExercises';
 
 // Martial arts category grid items
 const maGroups = [
@@ -188,7 +189,10 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       .catch(() => {});
   };
   useEffect(() => {
-    if (isOpen && comboMode) refreshCustoms();
+    // Load on OPEN, not just in combo mode. Loading them only inside the combo
+    // screen is why a saved custom never turned up in the global search — the
+    // list simply wasn't in memory when the search ran.
+    if (isOpen) refreshCustoms();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, comboMode, coachEmail]);
 
@@ -246,11 +250,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
 
   // A real, coach-named exercise (NOT isUserDefined) so it prescribes normally
   // in the builder and carries its "+" name straight to the tracker / board.
-  const exerciseFromCustom = (name, videoUid) => ({
-    name,
-    equipment: [], movement: [], intent: [], contraindications: [],
-    youtube: videoUid ? `https://iframe.videodelivery.net/${videoUid}` : '',
-  });
+  const exerciseFromCustom = (name, videoUid) => customToExercise({ name, video_uid: videoUid });
 
   const submitCombo = async () => {
     if (!comboPreview) return;
@@ -375,6 +375,11 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       pool.push(...getAllExercisesFromCategories(martialArtsCategories));
     }
 
+    // The coach's own saved exercises go in FIRST, so after dedup they win over
+    // a same-named library entry (their version may carry their own video) and
+    // they sort to the top of the results.
+    pool = [...customsAsExercises(customExercises), ...pool];
+
     // Deduplicate by name
     const seen = new Set();
     pool = pool.filter((ex) => {
@@ -384,7 +389,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     });
 
     return pool.filter((ex) => ex.name.toLowerCase().includes(term));
-  }, [searchTerm, blockType]);
+  }, [searchTerm, blockType, customExercises]);
 
   if (!isOpen) return null;
 
@@ -414,7 +419,12 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       }
       const wuCat = exerciseCategories[warmupCooldownKey];
       const sub = wuCat?.subcategories?.[selectedSubcategory];
-      const exercises = Array.isArray(sub) ? sub : (sub?.exercises || []);
+      const exercises = withCustomsPinned(
+        Array.isArray(sub) ? sub : (sub?.exercises || []),
+        customExercises,
+        warmupCooldownKey,
+        selectedSubcategory,
+      );
       const title = sub?.label || selectedSubcategory.replace(/_/g, ' ');
       return (
         <ExerciseList
@@ -684,7 +694,13 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       );
     }
 
-    const exercises = getExercisesForSelection(selectedMuscleGroup, selectedSubcategory);
+    // The coach's own exercises filed into this spot sit at the top of the list.
+    const exercises = withCustomsPinned(
+      getExercisesForSelection(selectedMuscleGroup, selectedSubcategory),
+      customExercises,
+      selectedMuscleGroup,
+      selectedSubcategory,
+    );
 
     return (
       <ExerciseList

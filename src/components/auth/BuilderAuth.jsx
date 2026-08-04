@@ -5,6 +5,22 @@ const STORAGE_KEY = 'bsa_builder_auth';
 
 const AuthContext = createContext(null);
 
+// Tokens are signed for 30 days and were being trusted forever out of
+// localStorage. Once expired the app still looked logged in — the builder saves
+// programs and custom exercises through email-keyed endpoints that need no auth,
+// so those kept working — but every JWT-gated call (all of /api/media/*) came
+// back 401. The visible symptom was "+ Add Video does nothing", with no hint
+// that the fix was to sign in again. Check the exp claim up front instead.
+export function isTokenExpired(token) {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (!payload?.exp) return false; // no exp claim → let the server decide
+    return payload.exp * 1000 <= Date.now();
+  } catch {
+    return true; // unparseable = unusable
+  }
+}
+
 export function useBuilderAuth() {
   return useContext(AuthContext);
 }
@@ -32,9 +48,29 @@ export function BuilderAuthProvider({ children }) {
         }
       }
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setUser(JSON.parse(saved));
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.token && isTokenExpired(parsed.token)) {
+          // Stale session — drop it so the login screen shows instead of a
+          // half-working app whose uploads silently 401.
+          localStorage.removeItem(STORAGE_KEY);
+        } else {
+          setUser(parsed);
+        }
+      }
     } catch {}
     setLoading(false);
+  }, []);
+
+  // Any JWT-gated call that comes back 401 means the session died mid-use.
+  // mediaApi fires this; clearing here bounces the coach to the login screen.
+  useEffect(() => {
+    const onExpired = () => {
+      localStorage.removeItem(STORAGE_KEY);
+      setUser(null);
+    };
+    window.addEventListener('bsa-session-expired', onExpired);
+    return () => window.removeEventListener('bsa-session-expired', onExpired);
   }, []);
 
   const login = async (email, password) => {

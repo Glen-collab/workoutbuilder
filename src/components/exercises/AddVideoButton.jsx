@@ -127,7 +127,12 @@ export default function AddVideoButton({ exercise, onUploaded }) {
         </button>
       )}
       {state === 'error' && (
-        <span className="text-[11px] text-red-600" title={error}>⚠ {error}</span>
+        // Was an 11px inline span that truncated the actual reason into the
+        // title attribute — invisible on a phone. Upload failures are rare and
+        // worth reading, so give them room and let them wrap.
+        <span className="block w-full text-[12px] text-red-700 bg-red-50 border border-red-200 rounded-md px-2 py-1 mt-1 leading-snug">
+          ⚠ {error}
+        </span>
       )}
       <input
         ref={inputRef}

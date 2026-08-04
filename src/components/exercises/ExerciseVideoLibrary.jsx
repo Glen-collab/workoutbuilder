@@ -11,6 +11,7 @@ import { exerciseCategories } from '../../data/exerciseLibrary';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
 import { martialArtsCategories } from '../../data/martialArtsLibrary';
+import { placementOptions, prettyKey } from '../../utils/customExercises';
 
 function namesFromCategories(cats, out) {
   if (!cats) return;
@@ -33,6 +34,11 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
   const [preview, setPreview] = useState(null);
   const [savingNew, setSavingNew] = useState(false);
   const [feedback, setFeedback] = useState(null); // { type: 'ok'|'err', text }
+  // Where a newly added exercise gets filed in the builder's picker.
+  const [placeCat, setPlaceCat] = useState('');
+  const [placeSub, setPlaceSub] = useState('');
+  const placements = useMemo(() => placementOptions(), []);
+  const subsForCat = placements.find((p) => p.key === placeCat)?.subs || [];
 
   const loadCustoms = () => {
     if (!coachEmail) return;
@@ -68,18 +74,69 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     setSavingNew(true);
     setFeedback(null);
     try {
-      await saveCustomExercise(coachEmail, name, '');
+      await saveCustomExercise(coachEmail, name, '', placeCat, placeSub);
       setNewName('');
       loadCustoms();
       setSearch(name); // jump to it so they can upload a video right away
       // Saving works name-only — no video required. Confirm it so it doesn't
       // feel like nothing happened.
-      setFeedback({ type: 'ok', text: `✓ Saved “${name}” to your exercises — no video needed. You can add one below anytime, and it’s ready to use when you build a program.` });
-      setTimeout(() => setFeedback(null), 7000);
+      const where = placeCat
+        ? ` It'll sit at the top of ${prettyKey(placeCat)}${placeSub ? ` → ${prettyKey(placeSub)}` : ''} in the picker.`
+        : ' Find it by searching in the picker (pick a spot above to file it in a category too).';
+      setFeedback({ type: 'ok', text: `✓ Saved “${name}” to your exercises — no video needed.${where}` });
+      setTimeout(() => setFeedback(null), 8000);
     } catch {
       setFeedback({ type: 'err', text: `Couldn’t save “${name}” — check your connection and try again.` });
     }
     setSavingNew(false);
+  };
+
+  // Re-file an existing custom into a different spot (re-saving the same name
+  // updates its placement rather than creating a duplicate).
+  const refile = async (ce, cat, sub) => {
+    try {
+      await saveCustomExercise(coachEmail, ce.name, ce.video_uid || '', cat, sub);
+      loadCustoms();
+    } catch {
+      setFeedback({ type: 'err', text: `Couldn’t move “${ce.name}”. Try again.` });
+    }
+  };
+
+  // One of the coach's own exercises, with its shelf in the picker showing and
+  // editable in place. Re-saving the same name updates placement rather than
+  // duplicating, so "move" is just a save.
+  const CustomRow = ({ ce }) => {
+    const subs = placements.find((p) => p.key === ce.category)?.subs || [];
+    const vid = getVideo(ce.name);
+    return (
+      <div className="bg-white border border-gray-200 rounded-lg px-3 py-2.5 mb-1.5">
+        <div className="flex items-center gap-2">
+          <span className="flex-1 text-sm font-semibold text-gray-800 break-words">
+            {ce.name} {vid && <span className="text-green-600">🎬</span>}
+          </span>
+          <AddVideoButton exercise={{ name: ce.name }} onUploaded={reload} />
+        </div>
+        <div className="flex gap-2 mt-2">
+          <select
+            value={ce.category || ''}
+            onChange={(e) => refile(ce, e.target.value, '')}
+            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none"
+          >
+            <option value="">Not filed (search only)</option>
+            {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+          </select>
+          <select
+            value={ce.subcategory || ''}
+            onChange={(e) => refile(ce, ce.category || '', e.target.value)}
+            disabled={!subs.length}
+            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none disabled:opacity-40"
+          >
+            <option value="">{subs.length ? 'Sub-group…' : '—'}</option>
+            {subs.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
+          </select>
+        </div>
+      </div>
+    );
   };
 
   const Row = ({ name }) => {
@@ -141,6 +198,27 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
               {savingNew ? '…' : '+ Add'}
             </button>
           </div>
+          {/* Where it lands in the picker. Optional — search finds it either
+              way — but filing it means you can reach for it where you'd expect. */}
+          <div className="flex gap-2 mt-2">
+            <select
+              value={placeCat}
+              onChange={(e) => { setPlaceCat(e.target.value); setPlaceSub(''); }}
+              className="flex-1 px-2 py-2 border-2 border-gray-200 rounded-lg text-[12.5px] outline-none bg-white text-gray-700 focus:border-[#667eea]"
+            >
+              <option value="">File under… (optional)</option>
+              {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+            </select>
+            <select
+              value={placeSub}
+              onChange={(e) => setPlaceSub(e.target.value)}
+              disabled={!subsForCat.length}
+              className="flex-1 px-2 py-2 border-2 border-gray-200 rounded-lg text-[12.5px] outline-none bg-white text-gray-700 focus:border-[#667eea] disabled:opacity-40"
+            >
+              <option value="">{subsForCat.length ? 'Sub-group…' : '—'}</option>
+              {subsForCat.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
+            </select>
+          </div>
           {feedback && (
             <div
               className={`mt-2 px-3 py-2 rounded-lg text-[12.5px] font-semibold ${feedback.type === 'ok' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200'}`}
@@ -159,6 +237,16 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
             </>
           ) : (
             <>
+              {customs.length > 0 && (
+                <>
+                  <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-2">
+                    ⭐ Your custom exercises ({customs.length})
+                  </div>
+                  <div className="mb-4">
+                    {customs.map((ce) => <CustomRow key={ce.id} ce={ce} />)}
+                  </div>
+                </>
+              )}
               <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mb-2">🎬 Your videos ({list.length})</div>
               {list.length === 0 && <div className="text-sm text-gray-400 italic mb-2">No videos yet. Search an exercise above and tap “+ Add Video”.</div>}
               {list.map((v) => <Row key={v.name} name={v.name} />)}

@@ -240,15 +240,23 @@ export default function useProgramAPI() {
     [request]
   );
 
+  // category/subcategory place the exercise in the builder's picker (e.g.
+  // legs / dumbbell). Omit them and it still shows in search + the custom shelf.
   const saveCustomExercise = useCallback(
-    (email, name, videoUid) => {
+    (email, name, videoUid, category, subcategory) => {
       if (isLocal()) {
         const list = JSON.parse(localStorage.getItem('gwb_custom_ex') || '[]');
-        const row = { id: Date.now(), name, video_uid: videoUid || null, status: 'approved' };
+        const row = {
+          id: Date.now(), name, video_uid: videoUid || null, status: 'approved',
+          category: category || null, subcategory: subcategory || null,
+        };
         localStorage.setItem('gwb_custom_ex', JSON.stringify([...list.filter((e) => e.name !== name), row]));
         return Promise.resolve({ success: true, exercise: row });
       }
-      return request('save-custom-exercise.php', { email, name, video_uid: videoUid || '' });
+      return request('save-custom-exercise.php', {
+        email, name, video_uid: videoUid || '',
+        category: category || '', subcategory: subcategory || '',
+      });
     },
     [request]
   );

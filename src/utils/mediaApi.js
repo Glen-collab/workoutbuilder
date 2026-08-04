@@ -35,6 +35,16 @@ async function mediaRequest(endpoint, { method = 'GET', body } = {}) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
+    // 401 = the stored JWT is expired or bogus. Tell the app so it can drop the
+    // dead session and show the login screen — otherwise the builder keeps
+    // looking signed in while every upload fails with a message nobody reads.
+    if (res.status === 401) {
+      try { window.dispatchEvent(new CustomEvent('bsa-session-expired')); } catch { /* SSR/no-DOM */ }
+      const expired = new Error('Your login expired. Sign in again to upload videos.');
+      expired.status = 401;
+      expired.code = 'session_expired';
+      throw expired;
+    }
     const err = new Error(data.error || data.message || `Request failed (${res.status})`);
     err.code = data.code;
     err.status = res.status;
