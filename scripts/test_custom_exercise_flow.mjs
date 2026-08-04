@@ -18,6 +18,7 @@ import { mobilityCategories } from '../src/data/mobilityExercises.js';
 import { martialArtsCategories } from '../src/data/martialArtsLibrary.js';
 import {
   placementOptions, customsAsExercises, withCustomsPinned, customToExercise,
+  attachCoachVideos, sortForPicker,
 } from '../src/utils/customExercises.js';
 import {
   getExercisesForSelection, resolveStrengthPin, GM_PREFIX, MOB_PREFIX,
@@ -297,6 +298,39 @@ if (libName) {
   check('a coach upload overrides the bundled video on a library exercise',
     withUpload.youtube === 'https://iframe.videodelivery.net/coachfilm');
 }
+
+// ── 6c. The coach's uploaded video must reach the picker ────────────────────
+// The video for a custom exercise lives in trainer_media (keyed by name), not
+// on the custom_exercises row — so the object built from that row has an empty
+// youtube. Without resolution the picker shows no 📹 AND the video-first sort
+// drops it below the library entries it was pinned above.
+section('6c. VIDEO REACHES THE PICKER (the "Dip Shrugs + Dips" case)');
+const coachLib = { 'dip shrugs + dips': 'https://iframe.videodelivery.net/dipvid' };
+const fakeGetVideo = (n) => coachLib[(n || '').toLowerCase()] || null;
+
+const rowNoVid = { name: 'Dip Shrugs + Dips', youtube: '', isCustom: true };
+const [attached] = attachCoachVideos([rowNoVid], fakeGetVideo);
+check('coach upload is attached to a custom exercise with no video',
+  attached.youtube === 'https://iframe.videodelivery.net/dipvid');
+check('an exercise with a bundled video keeps it',
+  attachCoachVideos([{ name: 'X', youtube: 'bundled' }], fakeGetVideo)[0].youtube === 'bundled');
+check('an exercise with no video anywhere stays empty',
+  attachCoachVideos([{ name: 'Nothing Here', youtube: '' }], fakeGetVideo)[0].youtube === '');
+check('missing getVideo is survivable', attachCoachVideos([rowNoVid], null)[0] === rowNoVid);
+
+// Ordering: the coach's pick beats the video heuristic.
+const shelf = sortForPicker(attachCoachVideos([
+  { name: 'Library Filmed', youtube: 'v' },
+  { name: 'Library Plain', youtube: '' },
+  { name: 'Dip Shrugs + Dips', youtube: '', isCustom: true },
+  { name: 'My Unfilmed Idea', youtube: '', isCustom: true },
+], fakeGetVideo));
+check('coach\'s filmed exercise is FIRST, above filmed library ones',
+  shelf[0].name === 'Dip Shrugs + Dips', shelf.map((e) => e.name).join(' | '));
+check('coach\'s UNfilmed exercise still beats library (pin is not defeated)',
+  shelf[1].name === 'My Unfilmed Idea');
+check('filmed library entry outranks unfilmed library entry',
+  shelf[2].name === 'Library Filmed' && shelf[3].name === 'Library Plain');
 
 // ── 7. Cleanup ───────────────────────────────────────────────────────────────
 if (!OFFLINE) {

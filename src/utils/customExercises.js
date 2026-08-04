@@ -128,6 +128,42 @@ export function customsForPlacement(customs, category, subcategory) {
     .map(customToExercise);
 }
 
+// Resolve each exercise's demo video against the coach's own uploads
+// (trainer_media, keyed by name) when the exercise doesn't carry one already.
+//
+// A coach's custom exercise stores its video in trainer_media, NOT in the
+// custom_exercises row — so the object built from that row has an empty
+// `youtube` and the picker showed it with no 📹 button. Worse, every list sorts
+// exercises-with-video to the top, so a freshly filmed custom exercise sank
+// BELOW the library entries it was supposed to be pinned above.
+//
+// Only fills an empty slot: a bundled library video still wins in the picker,
+// matching what App.handleSelectExercise does when the exercise is added.
+export function attachCoachVideos(exercises, getVideo) {
+  if (!getVideo || !Array.isArray(exercises)) return exercises;
+  return exercises.map((ex) => {
+    if (!ex || ex.youtube) return ex;
+    const mine = getVideo(ex.name);
+    return mine ? { ...ex, youtube: mine } : ex;
+  });
+}
+
+// Display order for any picker list.
+//
+// Two rules were quietly fighting each other: withCustomsPinned() puts a coach's
+// own exercises at the top of the shelf they filed them to, and then the list
+// re-sorted everything video-first — dropping an unfilmed custom below every
+// library entry, which is exactly where the coach isn't looking for it.
+//
+// Deliberate resolution: the coach's own choice outranks the video heuristic.
+// Their exercises first (filmed ones ahead of unfilmed), then library exercises
+// (filmed ahead of unfilmed). Stable within each band, so library order holds.
+export function sortForPicker(exercises) {
+  if (!Array.isArray(exercises)) return exercises;
+  const rank = (ex) => (ex?.isCustom ? 2 : 0) + (ex?.youtube && String(ex.youtube).trim() ? 1 : 0);
+  return [...exercises].sort((a, b) => rank(b) - rank(a));
+}
+
 // Pin this spot's customs to the top of a library list, without duplicating a
 // name the library already has. `category` accepts one key or several — the
 // picker's "Functional"/"Corrective" tiles are virtual and aggregate the same

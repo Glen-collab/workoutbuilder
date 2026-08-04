@@ -1,16 +1,21 @@
 import { useState } from 'react';
-
-const hasVideo = (ex) => !!(ex && ex.youtube && String(ex.youtube).trim());
+import { useCoachVideos } from '../CoachVideosContext';
+import { attachCoachVideos, sortForPicker } from '../../utils/customExercises';
 
 export default function ExerciseList({ exercises, onSelect, onBack, title }) {
   const [previewIdx, setPreviewIdx] = useState(null);
+  const { getVideo } = useCoachVideos();
 
-  // Exercises WITH a video float to the top of every list; ones without keep
-  // their original relative order (stable sort). Applies to every category,
-  // subcategory, and search result since they all render through here.
-  const sortedExercises = exercises
-    ? [...exercises].sort((a, b) => (hasVideo(b) ? 1 : 0) - (hasVideo(a) ? 1 : 0))
-    : exercises;
+  // Resolve the coach's own uploads FIRST. A custom exercise keeps its video in
+  // trainer_media rather than on its row, so without this it renders with no 📹
+  // button — and then the video-first sort below drops it beneath the library
+  // entries it was pinned above. Doing it here fixes every list at once: search,
+  // browse, warm-up/cool-down, movement, conditioning and mobility all render
+  // through this component.
+  const resolved = attachCoachVideos(exercises, getVideo);
+
+  // Coach's own exercises first, then filmed ones — see sortForPicker.
+  const sortedExercises = sortForPicker(resolved);
 
   if (!exercises || exercises.length === 0) {
     return (
