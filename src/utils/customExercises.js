@@ -25,17 +25,25 @@ export function prettyKey(key) {
   return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+// Library categories with no way to reach them in the picker — filing an
+// exercise here would drop it somewhere the coach can never browse to, so they
+// are not offered. `senior_fitness` exists in exerciseLibrary.js but has no
+// MuscleGroupGrid tile and no other route in.
+const UNREACHABLE = new Set(['senior_fitness']);
+
 // [{ key, label, subs: [{ key, label }] }] for the placement dropdowns, built
 // from the real library so it can never drift from what the picker shows.
 export function placementOptions() {
-  return Object.entries(exerciseCategories).map(([key, cat]) => ({
-    key,
-    label: cat?.label || prettyKey(key),
-    subs: Object.entries(cat?.subcategories || {}).map(([sk, sub]) => ({
-      key: sk,
-      label: sub?.label || prettyKey(sk),
-    })),
-  }));
+  return Object.entries(exerciseCategories)
+    .filter(([key]) => !UNREACHABLE.has(key))
+    .map(([key, cat]) => ({
+      key,
+      label: cat?.label || prettyKey(key),
+      subs: Object.entries(cat?.subcategories || {}).map(([sk, sub]) => ({
+        key: sk,
+        label: sub?.label || prettyKey(sk),
+      })),
+    }));
 }
 
 // A custom row → the exercise object shape the builder prescribes with.
@@ -66,9 +74,13 @@ export function customsForPlacement(customs, category, subcategory) {
 }
 
 // Pin this spot's customs to the top of a library list, without duplicating a
-// name the library already has.
+// name the library already has. `category` accepts one key or several — the
+// picker's "Functional"/"Corrective" tiles are virtual and aggregate the same
+// subcategory across many body parts, so that view pins the customs from all
+// of them at once.
 export function withCustomsPinned(exercises, customs, category, subcategory) {
-  const mine = customsForPlacement(customs, category, subcategory);
+  const cats = Array.isArray(category) ? category : [category];
+  const mine = cats.flatMap((c) => customsForPlacement(customs, c, subcategory));
   if (!mine.length) return exercises;
   const taken = new Set(mine.map((e) => e.name.toLowerCase()));
   return [...mine, ...(exercises || []).filter((e) => !taken.has((e?.name || '').toLowerCase()))];

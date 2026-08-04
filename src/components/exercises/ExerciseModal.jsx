@@ -695,11 +695,23 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     }
 
     // The coach's own exercises filed into this spot sit at the top of the list.
+    //
+    // Placement is stored against the LIBRARY key, but this grid browses by its
+    // own keys, and the two are not 1:1 — "Olympic" is really oly_complexes,
+    // "Tactical" is really tactical, and Functional/Corrective are virtual tiles
+    // that gather one subcategory from many body parts. Resolve the same way
+    // getExercisesForSelection does or the pin silently never matches.
+    const pinCats = VIRTUAL_CATEGORIES[selectedMuscleGroup]
+      ? (selectedSubcategory === 'upper_body' ? UPPER_PARTS : LOWER_PARTS)
+      : [REDIRECT_MAP[selectedMuscleGroup] || selectedMuscleGroup];
+    const pinSub = VIRTUAL_CATEGORIES[selectedMuscleGroup]
+      ? VIRTUAL_CATEGORIES[selectedMuscleGroup]
+      : selectedSubcategory;
     const exercises = withCustomsPinned(
       getExercisesForSelection(selectedMuscleGroup, selectedSubcategory),
       customExercises,
-      selectedMuscleGroup,
-      selectedSubcategory,
+      pinCats,
+      pinSub,
     );
 
     return (
