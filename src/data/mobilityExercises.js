@@ -66,7 +66,7 @@ export const mobilityCategories = {
             { name: 'Ankle Mobility Preset 3 - Dynamic Ankle Prep', duration: '4-5 min', description: 'Ankle Circles, Toe Touch Progression, A-Skip, Ankle Dorsiflexion Wall', youtube: '' },
 
             // Individual exercises
-            { name: 'Ankle Circles', duration: '10 each direction', description: 'Ankle mobility', youtube: 'https://iframe.videodelivery.net/691b46c16dc1027f41adebf9b2bd7c93' },
+            { name: 'Ankle Circles', duration: '10 each direction', description: 'Ankle mobility', youtube: 'https://iframe.videodelivery.net/c051e56cfdf53fb9aaa01475e46b676e' },
             { name: 'Ankle Dorsiflexion (Wall)', duration: '10 reps each', description: 'Ankle mobility for squatting', youtube: '' },
             { name: 'Calf Stretch (Straight Leg)', duration: '30s each side', description: 'Gastrocnemius stretch', youtube: 'https://iframe.videodelivery.net/964c92c33177508cd4c309a87428ec1d' },
             { name: 'Calf Stretch (Bent Knee)', duration: '30s each side', description: 'Soleus stretch', youtube: '' },
