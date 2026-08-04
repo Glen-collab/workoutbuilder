@@ -38,20 +38,28 @@ export default function WelcomeScreen({ onNewProgram, onManagePrograms, onManage
           >
             Manage Programs
           </button>
+          {/* Capture, not media management. The whole reason this lives on the
+              welcome screen is that an exercise you just thought of has to get
+              written down NOW — going Build New Program → add straight set →
+              add custom exercise is four steps too many to survive the idea.
+              Sits with the other primary actions and says what it does. */}
+          {onManageVideos && (
+            <button
+              className="w-full bg-transparent text-[#047857] border-2 border-[#10b981] rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#10b981]/10"
+              onClick={onManageVideos}
+            >
+              ➕ Add an Exercise
+              <span className="block text-[12px] font-medium text-gray-400 mt-0.5">
+                jot it down, film it, file it
+              </span>
+            </button>
+          )}
           <button
             className="w-full bg-gradient-to-br from-orange-500 to-orange-600 text-white border-none rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-90"
             onClick={onManageTravelWorkouts}
           >
             Travel Workouts
           </button>
-          {onManageVideos && (
-            <button
-              className="w-full bg-transparent text-[#047857] border-2 border-[#10b981] rounded-xl py-3 px-7 text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#10b981]/10"
-              onClick={onManageVideos}
-            >
-              🎬 Exercises &amp; Videos
-            </button>
-          )}
         </div>
         <a
           href="https://app.bestrongagain.com"

@@ -3,7 +3,7 @@
 // WITHOUT building a program. Uploads land in the coach's video library
 // (trainer_media) and immediately attach to that exercise everywhere.
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import useProgramAPI from '../../hooks/useProgramAPI';
 import { useCoachVideos } from '../CoachVideosContext';
 import AddVideoButton from './AddVideoButton';
@@ -37,6 +37,10 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
   // Where a newly added exercise gets filed in the builder's picker.
   const [placeCat, setPlaceCat] = useState('');
   const [placeSub, setPlaceSub] = useState('');
+  // Names added in THIS sitting, newest first — pinned to the top of the list so
+  // a just-captured idea never gets lost among 37 alphabetical entries.
+  const [recent, setRecent] = useState([]);
+  const nameRef = useRef(null);
   const placements = useMemo(() => placementOptions(), []);
   const subsForCat = placements.find((p) => p.key === placeCat)?.subs || [];
 
@@ -48,7 +52,11 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     if (!isOpen) return;
     reload();
     loadCustoms();
-    setSearch(''); setNewName(''); setPreview(null);
+    setSearch(''); setNewName(''); setPreview(null); setRecent([]);
+    // Land the cursor in the name box. Opening this screen almost always means
+    // "I just thought of something" — one tap from the welcome screen straight
+    // to typing, rather than a tap to open then another to aim.
+    setTimeout(() => nameRef.current?.focus(), 60);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
@@ -72,8 +80,13 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
         const k = n.trim().toLowerCase();
         if (!byNorm.has(k)) byNorm.set(k, n);
       });
-    return [...byNorm.values()].sort((a, b) => a.localeCompare(b));
-  }, [customs, list]);
+    const all = [...byNorm.values()].sort((a, b) => a.localeCompare(b));
+    // Just-added ones ride at the top, in the order they were captured, so the
+    // thing you're still holding in your head is the thing under your thumb.
+    const recentSet = new Set(recent.map((n) => n.toLowerCase()));
+    const justAdded = recent.filter((n) => byNorm.has(n.trim().toLowerCase()));
+    return [...justAdded, ...all.filter((n) => !recentSet.has(n.toLowerCase()))];
+  }, [customs, list, recent]);
 
   // Every library exercise name + the coach's custom names, deduped.
   const allNames = useMemo(() => {
@@ -100,13 +113,20 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
       await saveCustomExercise(coachEmail, name, '', placeCat, placeSub);
       setNewName('');
       loadCustoms();
-      setSearch(name); // jump to it so they can upload a video right away
+      // Keep it at the top of the list (see `mine`) instead of hijacking the
+      // search box. Search-jumping showed the new row but left a full search
+      // field behind, so rattling off three ideas in a row meant clearing it
+      // every time. Now: type, Enter, type the next one — the ones you just
+      // added stay pinned above everything with their video + filing controls.
+      setRecent((r) => [name, ...r.filter((n) => n.toLowerCase() !== name.toLowerCase())]);
+      setSearch('');
+      nameRef.current?.focus();
       // Saving works name-only — no video required. Confirm it so it doesn't
       // feel like nothing happened.
       const where = placeCat
         ? ` It'll sit at the top of ${prettyKey(placeCat)}${placeSub ? ` → ${prettyKey(placeSub)}` : ''} in the picker.`
         : ' Find it by searching in the picker (pick a spot above to file it in a category too).';
-      setFeedback({ type: 'ok', text: `✓ Saved “${name}” to your exercises — no video needed.${where}` });
+      setFeedback({ type: 'ok', text: `✓ Saved “${name}” — no video needed.${where}` });
       setTimeout(() => setFeedback(null), 8000);
     } catch {
       setFeedback({ type: 'err', text: `Couldn’t save “${name}” — check your connection and try again.` });
@@ -218,8 +238,9 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
           />
           <div className="flex gap-2 mt-2.5">
             <input
+              ref={nameRef}
               className="flex-1 px-3 py-2 border-2 border-gray-200 rounded-lg text-[13px] outline-none focus:border-[#10b981] transition-colors"
-              type="text" placeholder="New custom exercise name…"
+              type="text" placeholder="New exercise name…"
               value={newName} onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') addCustom(); }}
             />
