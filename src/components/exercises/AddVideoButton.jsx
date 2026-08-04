@@ -130,7 +130,7 @@ export default function AddVideoButton({ exercise, onUploaded, hasVideo = false 
           }`}
           title={hasVideo ? 'Upload a new video to replace this one' : 'Upload your own demo video for this exercise'}
         >
-          {hasVideo ? '↻ Replace' : '+ Add Video'}
+          {hasVideo ? '↻ Replace video' : '+ Add Video'}
         </button>
       )}
       {state === 'error' && (
