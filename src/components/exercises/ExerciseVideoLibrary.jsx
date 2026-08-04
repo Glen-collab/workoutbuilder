@@ -114,14 +114,18 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     setSavingNew(false);
   };
 
-  // Re-file an existing custom into a different spot (re-saving the same name
-  // updates its placement rather than creating a duplicate).
-  const refile = async (ce, cat, sub) => {
+  // File (or re-file) ANY exercise onto a shelf — the coach's own inventions and
+  // bundled library exercises alike. Filing a library exercise writes the same
+  // kind of row; it acts as a pointer, and customToExercise resolves it back to
+  // the real library object so nothing is lost. Re-saving a name updates its
+  // placement rather than duplicating, so "move" is just a save.
+  const refile = async (name, videoUid, cat, sub) => {
+    if (!coachEmail) return;
     try {
-      await saveCustomExercise(coachEmail, ce.name, ce.video_uid || '', cat, sub);
+      await saveCustomExercise(coachEmail, name, videoUid || '', cat, sub);
       loadCustoms();
     } catch {
-      setFeedback({ type: 'err', text: `Couldn’t move “${ce.name}”. Try again.` });
+      setFeedback({ type: 'err', text: `Couldn’t move “${name}”. Try again.` });
     }
   };
 
@@ -132,9 +136,16 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
   // on the other). Same exercise, one row, every control it can have.
   const Row = ({ name }) => {
     const ce = customByName[name.trim().toLowerCase()];
-    const subs = placements.find((p) => p.key === ce?.category)?.subs || [];
+    const cat = ce?.category || '';
+    const sub = ce?.subcategory || '';
+    const catOpt = placements.find((p) => p.key === cat);
+    const subs = catOpt?.subs || [];
     const vid = getVideo(name);
     const open = preview === name;
+    const filed = !!cat;
+    const shelf = filed
+      ? `${catOpt?.label || prettyKey(cat)}${sub ? ` → ${subs.find((s) => s.key === sub)?.label || prettyKey(sub)}` : ''}`
+      : null;
     return (
       <div className="bg-white border border-gray-200 rounded-lg px-3 py-2.5 mb-1.5">
         <div className="flex items-center gap-2">
@@ -149,31 +160,38 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
               {open ? '✖' : '📹'}
             </button>
           )}
-          <AddVideoButton exercise={{ name }} onUploaded={reload} />
+          <AddVideoButton exercise={{ name }} onUploaded={reload} hasVideo={!!vid} />
         </div>
-        {/* Placement only makes sense for the coach's OWN exercises. A library
-            exercise they filmed already has its home in the library. */}
-        {ce && (
-          <div className="flex gap-2 mt-2">
-            <select
-              value={ce.category || ''}
-              onChange={(e) => refile(ce, e.target.value, '')}
-              className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none"
-            >
-              <option value="">Not filed (search only)</option>
-              {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
-            </select>
-            <select
-              value={ce.subcategory || ''}
-              onChange={(e) => refile(ce, ce.category || '', e.target.value)}
-              disabled={!subs.length}
-              className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none disabled:opacity-40"
-            >
-              <option value="">{subs.length ? 'Sub-group…' : '—'}</option>
-              {subs.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
-            </select>
-          </div>
-        )}
+
+        {/* The check: is this actually reachable in the builder, and where? With
+            a list that only grows, "did I file this one?" has to be answerable
+            at a glance instead of by opening every dropdown. */}
+        <div className={`mt-1.5 text-[11.5px] font-semibold ${filed ? 'text-emerald-700' : 'text-amber-700'}`}>
+          {filed ? `✓ In the builder — ${shelf}` : '○ Search only — pick a spot to put it in the builder'}
+        </div>
+
+        {/* Every row can be filed, library exercises included. A bundled
+            movement preset a coach films and also wants in their Warm Up list
+            has nowhere to go otherwise. */}
+        <div className="flex gap-2 mt-1.5">
+          <select
+            value={cat}
+            onChange={(e) => refile(name, ce?.video_uid, e.target.value, '')}
+            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none"
+          >
+            <option value="">Not filed (search only)</option>
+            {placements.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+          </select>
+          <select
+            value={sub}
+            onChange={(e) => refile(name, ce?.video_uid, cat, e.target.value)}
+            disabled={!subs.length}
+            className="flex-1 px-2 py-1.5 border border-gray-200 rounded-md text-[11.5px] bg-white text-gray-600 outline-none disabled:opacity-40"
+          >
+            <option value="">{subs.length ? 'Sub-group…' : '—'}</option>
+            {subs.map((sb) => <option key={sb.key} value={sb.key}>{sb.label}</option>)}
+          </select>
+        </div>
         {open && vid && (
           <div className="mt-2 rounded-lg overflow-hidden bg-black" style={{ position: 'relative', paddingTop: '56.25%' }}>
             <iframe src={`${vid}?preload=metadata`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen

@@ -264,6 +264,40 @@ const seen2 = new Set();
 const deduped = pool.filter((e) => !seen2.has(e.name) && seen2.add(e.name));
 check(`coach's own version of "${dupName}" wins dedup`, deduped[0]?.youtube === 'https://iframe.videodelivery.net/coachvid');
 
+// ── 6b. Cross-filing a LIBRARY exercise onto another shelf ───────────────────
+// e.g. "Beginner Linear Preset" (a bundled movement preset the coach filmed)
+// that they also want sitting in their Warm Up list. The placement row must NOT
+// flatten it into a bare object — that would strip its equipment, movement
+// pattern and bundled video.
+section('6b. CROSS-FILING — putting a LIBRARY exercise on a second shelf');
+const libName = generalMovements.movement_presets?.subcategories?.linear?.exercises?.[0]?.name;
+check('found a real library exercise to cross-file', !!libName, String(libName));
+if (libName) {
+  // Faithfulness means "every field the library object had, unchanged" — NOT a
+  // fixed shape. generalMovements entries carry no equipment/movement arrays at
+  // all, and inventing them here would differ from what the picker passes today.
+  const libRefRaw = generalMovements.movement_presets.subcategories.linear.exercises[0];
+  const libOriginal = customToExercise(libName);
+  const preserved = Object.keys(libRefRaw).every((k) =>
+    JSON.stringify(libOriginal[k]) === JSON.stringify(libRefRaw[k]));
+  check('resolving a library name preserves every original field (not a blank shell)',
+    preserved, `keys: ${Object.keys(libRefRaw).join(', ')}`);
+
+  const placement = [{ id: -50, name: libName, video_uid: null, category: 'warm_up', subcategory: 'general' }];
+  const warm = withCustomsPinned(
+    exerciseCategories.warm_up.subcategories.general.exercises || [], placement, 'warm_up', 'general');
+  check(`"${libName}" now appears in Warm Up → General`, warm.some((e) => e.name === libName));
+  const pinned = warm.find((e) => e.name === libName);
+  const libRef = generalMovements.movement_presets.subcategories.linear.exercises[0];
+  check('...carrying its original video, not an empty one', (pinned?.youtube || '') === (libRef.youtube || ''));
+  check('...and still in its ORIGINAL home too (cross-filed, not moved)',
+    (generalMovements.movement_presets.subcategories.linear.exercises || []).some((e) => e.name === libName));
+
+  const withUpload = customToExercise({ name: libName, video_uid: 'coachfilm' });
+  check('a coach upload overrides the bundled video on a library exercise',
+    withUpload.youtube === 'https://iframe.videodelivery.net/coachfilm');
+}
+
 // ── 7. Cleanup ───────────────────────────────────────────────────────────────
 if (!OFFLINE) {
   section('7. CLEANUP');

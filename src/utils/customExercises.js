@@ -18,6 +18,7 @@
 import { exerciseCategories } from '../data/exerciseLibrary';
 import { generalMovements } from '../data/generalMovements';
 import { mobilityCategories } from '../data/mobilityExercises';
+import { martialArtsCategories } from '../data/martialArtsLibrary';
 import {
   GM_PREFIX, MOB_PREFIX,
   reachableStrengthKeys, reachableMovementKeys, reachableMobilityKeys,
@@ -63,12 +64,49 @@ export function placementOptions() {
   ];
 }
 
-// A custom row → the exercise object shape the builder prescribes with.
+// Every exercise in every bundled library, indexed by lowercase name. Built
+// once, lazily, so importing this module stays cheap.
+let _libIndex = null;
+function libraryIndex() {
+  if (_libIndex) return _libIndex;
+  _libIndex = new Map();
+  const walk = (cats) => Object.values(cats || {}).forEach((cat) => {
+    (Array.isArray(cat) ? cat : cat?.exercises || []).forEach((ex) => {
+      if (ex?.name && !_libIndex.has(ex.name.toLowerCase())) _libIndex.set(ex.name.toLowerCase(), ex);
+    });
+    if (cat?.subcategories) Object.values(cat.subcategories).forEach((sub) => {
+      (Array.isArray(sub) ? sub : sub?.exercises || []).forEach((ex) => {
+        if (ex?.name && !_libIndex.has(ex.name.toLowerCase())) _libIndex.set(ex.name.toLowerCase(), ex);
+      });
+    });
+  });
+  walk(exerciseCategories); walk(mobilityCategories);
+  walk(generalMovements); walk(martialArtsCategories);
+  return _libIndex;
+}
+
+export function libraryExerciseByName(name) {
+  return libraryIndex().get((name || '').trim().toLowerCase()) || null;
+}
+
+// A saved row → the exercise object the builder prescribes with.
+//
+// A row is not always a brand-new exercise. Filing an EXISTING library exercise
+// onto another shelf (a movement preset a coach also wants in Warm Up) stores
+// the same kind of row, and rebuilding that as a bare object would strip its
+// equipment, movement pattern, schemes and bundled video. So resolve against the
+// library first and only invent an object when the name is genuinely new.
+//
 // Deliberately NOT isUserDefined: it behaves like any library exercise and
 // carries its name straight through to the tracker and the gym board.
 export function customToExercise(ce) {
   const name = typeof ce === 'string' ? ce : ce?.name;
   const uid = typeof ce === 'string' ? '' : ce?.video_uid;
+  const lib = libraryExerciseByName(name);
+  if (lib) {
+    // The coach's own upload wins over the bundled demo when they filmed one.
+    return { ...lib, ...(uid ? { youtube: CF_IFRAME(uid) } : {}), isCustom: true };
+  }
   return {
     name,
     equipment: [], movement: [], intent: [], contraindications: [],

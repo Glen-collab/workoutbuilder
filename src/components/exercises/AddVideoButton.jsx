@@ -12,7 +12,7 @@ import { useBuilderAuth } from '../auth/BuilderAuth';
 import { useCoachVideos } from '../CoachVideosContext';
 import { mediaApi, CF_IFRAME } from '../../utils/mediaApi';
 
-export default function AddVideoButton({ exercise, onUploaded }) {
+export default function AddVideoButton({ exercise, onUploaded, hasVideo = false }) {
   const auth = useBuilderAuth();
   const user = auth?.user;
   const coachVideos = useCoachVideos();
@@ -118,12 +118,19 @@ export default function AddVideoButton({ exercise, onUploaded }) {
           Uploading {progress}%…
         </span>
       ) : (
+        // Once a video exists this button REPLACES it rather than adding a
+        // second one — saying "+ Add Video" on a row that already shows 🎬 read
+        // as "this didn't take".
         <button
           onClick={() => inputRef.current?.click()}
-          className="border border-dashed border-[#667eea] text-[#667eea] bg-[#667eea]/5 rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold hover:bg-[#667eea]/15 transition-colors"
-          title="Upload your own demo video for this exercise"
+          className={`rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold transition-colors ${
+            hasVideo
+              ? 'border border-gray-200 text-gray-500 bg-gray-50 hover:bg-gray-100'
+              : 'border border-dashed border-[#667eea] text-[#667eea] bg-[#667eea]/5 hover:bg-[#667eea]/15'
+          }`}
+          title={hasVideo ? 'Upload a new video to replace this one' : 'Upload your own demo video for this exercise'}
         >
-          + Add Video
+          {hasVideo ? '↻ Replace' : '+ Add Video'}
         </button>
       )}
       {state === 'error' && (
