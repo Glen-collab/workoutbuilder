@@ -16,6 +16,12 @@
 // custom shelf, it just doesn't claim a spot in the tree.
 
 import { exerciseCategories } from '../data/exerciseLibrary';
+import { generalMovements } from '../data/generalMovements';
+import { mobilityCategories } from '../data/mobilityExercises';
+import {
+  GM_PREFIX, MOB_PREFIX,
+  reachableStrengthKeys, reachableMovementKeys, reachableMobilityKeys,
+} from './exerciseTaxonomy';
 
 const CF_IFRAME = (uid) => `https://iframe.videodelivery.net/${uid}`;
 
@@ -25,25 +31,36 @@ export function prettyKey(key) {
   return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-// Library categories with no way to reach them in the picker — filing an
-// exercise here would drop it somewhere the coach can never browse to, so they
-// are not offered. `senior_fitness` exists in exerciseLibrary.js but has no
-// MuscleGroupGrid tile and no other route in.
-const UNREACHABLE = new Set(['senior_fitness']);
+function optionsFrom(cats, keys, prefix, tag) {
+  return keys
+    .filter((k) => cats?.[k])
+    .map((k) => {
+      const cat = cats[k];
+      return {
+        key: `${prefix}${k}`,
+        label: `${tag}${cat?.label || prettyKey(k)}`,
+        subs: Object.entries(cat?.subcategories || {}).map(([sk, sub]) => ({
+          key: sk,
+          label: sub?.label || prettyKey(sk),
+        })),
+      };
+    });
+}
 
 // [{ key, label, subs: [{ key, label }] }] for the placement dropdowns, built
-// from the real library so it can never drift from what the picker shows.
+// from the real libraries so it can never drift from what the picker shows.
+//
+// Covers all three browsable libraries, not just strength: a coach filming a
+// movement drill or a hip-mobility piece needs to file it where they'd reach
+// for it, and those blocks browse their own libraries. Keys are namespaced by
+// library (see exerciseTaxonomy) because the names collide — strength has a
+// warm_up/sprint_warmup subcategory and mobility has a top-level sprint_warmup.
 export function placementOptions() {
-  return Object.entries(exerciseCategories)
-    .filter(([key]) => !UNREACHABLE.has(key))
-    .map(([key, cat]) => ({
-      key,
-      label: cat?.label || prettyKey(key),
-      subs: Object.entries(cat?.subcategories || {}).map(([sk, sub]) => ({
-        key: sk,
-        label: sub?.label || prettyKey(sk),
-      })),
-    }));
+  return [
+    ...optionsFrom(exerciseCategories, reachableStrengthKeys(), '', ''),
+    ...optionsFrom(generalMovements, reachableMovementKeys(), GM_PREFIX, '🏃 '),
+    ...optionsFrom(mobilityCategories, reachableMobilityKeys(), MOB_PREFIX, '🧘 '),
+  ];
 }
 
 // A custom row → the exercise object shape the builder prescribes with.

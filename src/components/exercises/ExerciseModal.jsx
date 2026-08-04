@@ -10,6 +10,7 @@ import SubcategoryTabs from './SubcategoryTabs';
 import ExerciseList from './ExerciseList';
 import MovementCategoryList from './MovementCategoryList';
 import { customsAsExercises, withCustomsPinned, customToExercise } from '../../utils/customExercises';
+import { getExercisesForSelection, resolveStrengthPin, GM_PREFIX, MOB_PREFIX } from '../../utils/exerciseTaxonomy';
 
 // Martial arts category grid items
 const maGroups = [
@@ -89,39 +90,9 @@ function getTkdCurriculumForBelt(beltKey) {
 const strengthTypes = ['straight-set', 'superset', 'triset', 'circuit'];
 const warmupCooldownTypes = ['warmup', 'cooldown'];
 
-const VIRTUAL_CATEGORIES = { functional: 'functional', corrective: 'corrective' };
-const REDIRECT_MAP = { olympic_lifting: 'oly_complexes', first_responder: 'tactical' };
-// Core's `functional` subcategory (anti-rotation / trunk-bracing work) is routed
-// to Functional → Upper Body per Glen's taxonomy; legs feeds Lower Body.
-const UPPER_PARTS = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'core'];
-const LOWER_PARTS = ['legs'];
-
-function getExercisesForSelection(muscleGroup, subcategory) {
-  // Virtual categories (functional/corrective → upper_body/lower_body)
-  if (VIRTUAL_CATEGORIES[muscleGroup]) {
-    const subKey = VIRTUAL_CATEGORIES[muscleGroup];
-    const parts = subcategory === 'upper_body' ? UPPER_PARTS : LOWER_PARTS;
-    const results = [];
-    for (const part of parts) {
-      const cat = exerciseCategories[part];
-      const sub = cat?.subcategories?.[subKey];
-      if (sub) {
-        const exs = Array.isArray(sub) ? sub : sub.exercises || [];
-        results.push(...exs);
-      }
-    }
-    return results;
-  }
-
-  // Redirected categories (olympic_lifting → oly_complexes, first_responder → tactical)
-  const resolvedKey = REDIRECT_MAP[muscleGroup] || muscleGroup;
-  const mg = exerciseCategories[resolvedKey];
-  if (mg?.subcategories?.[subcategory]) {
-    const sub = mg.subcategories[subcategory];
-    return Array.isArray(sub) ? sub : sub.exercises || [];
-  }
-  return [];
-}
+// Taxonomy (grid-key → library-key mapping, virtual tiles, library prefixes)
+// lives in utils/exerciseTaxonomy.js so browse and custom-exercise pinning can
+// never resolve keys differently — see the note in that file.
 
 function getAllExercisesFromCategories(cats) {
   const results = [];
@@ -587,6 +558,9 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       if (selectedCategory && nonStrengthCategories && nonStrengthCategories[selectedCategory]) {
         const cat = nonStrengthCategories[selectedCategory];
         const catTitle = (cat && cat.label) ? cat.label : selectedCategory.replace(/_/g, ' ');
+        // Mobility blocks browse mobilityCategories; movement/conditioning
+        // browse generalMovements. Placements are namespaced per library.
+        const nsKey = (blockType === 'mobility' ? MOB_PREFIX : GM_PREFIX) + selectedCategory;
 
         // Nested category (e.g. Movement Drills -> Linear / Lateral / Multi).
         if (cat && cat.subcategories) {
@@ -596,7 +570,7 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
             const subTitle = `${catTitle} — ${sub.label || movementSub.replace(/_/g, ' ')}`;
             return (
               <ExerciseList
-                exercises={sub.exercises || []}
+                exercises={withCustomsPinned(sub.exercises || [], customExercises, nsKey, movementSub)}
                 onSelect={handleSelect}
                 onBack={() => setMovementSub(null)}
                 title={subTitle}
@@ -627,7 +601,12 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
         }
 
         // Flat category: straight to the exercise list.
-        const exercises = Array.isArray(cat) ? cat : (cat.exercises || []);
+        const exercises = withCustomsPinned(
+          Array.isArray(cat) ? cat : (cat.exercises || []),
+          customExercises,
+          nsKey,
+          null,
+        );
         return (
           <ExerciseList
             exercises={exercises}
@@ -662,7 +641,12 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
       }
       if (selectedCategory && condCats[selectedCategory]) {
         const cat = condCats[selectedCategory];
-        const exercises = Array.isArray(cat) ? cat : (cat.exercises || []);
+        const exercises = withCustomsPinned(
+          Array.isArray(cat) ? cat : (cat.exercises || []),
+          customExercises,
+          GM_PREFIX + selectedCategory,
+          null,
+        );
         const title = cat?.label || selectedCategory.replace(/_/g, ' ');
         return (
           <ExerciseList
@@ -701,17 +685,12 @@ export default function ExerciseModal({ isOpen, onClose, blockType, onSelectExer
     // "Tactical" is really tactical, and Functional/Corrective are virtual tiles
     // that gather one subcategory from many body parts. Resolve the same way
     // getExercisesForSelection does or the pin silently never matches.
-    const pinCats = VIRTUAL_CATEGORIES[selectedMuscleGroup]
-      ? (selectedSubcategory === 'upper_body' ? UPPER_PARTS : LOWER_PARTS)
-      : [REDIRECT_MAP[selectedMuscleGroup] || selectedMuscleGroup];
-    const pinSub = VIRTUAL_CATEGORIES[selectedMuscleGroup]
-      ? VIRTUAL_CATEGORIES[selectedMuscleGroup]
-      : selectedSubcategory;
+    const pin = resolveStrengthPin(selectedMuscleGroup, selectedSubcategory);
     const exercises = withCustomsPinned(
       getExercisesForSelection(selectedMuscleGroup, selectedSubcategory),
       customExercises,
-      pinCats,
-      pinSub,
+      pin.cats,
+      pin.sub,
     );
 
     return (
