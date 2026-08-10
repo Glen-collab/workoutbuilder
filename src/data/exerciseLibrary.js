@@ -1178,7 +1178,7 @@ export const exerciseCategories = {
                 exercises: [
                     { name: 'GHR Side Crunch Hold', movement: ['Core'], intent: ['Stability'], equipment: ['Bench'], contraindications: [], youtube: 'https://iframe.videodelivery.net/dd3805fe926050455c9cfe2f23e31836' },
                     { name: 'Half Kneeling Plate Chop', movement: ['Core'], intent: ['Stability'], equipment: ['Plate'], contraindications: [], youtube: 'https://iframe.videodelivery.net/4331c6b61d6407545f2cf075262b5eab' },
-                    { name: 'Plank Toe Touch opposite hand to foot', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7af594ef784596c80c4bdbf5387374b7' },
+                    { name: 'Plank Toe Touch opposite hand to foot', movement: ['Core'], intent: ['Stability'], equipment: ['Bodyweight'], contraindications: [], youtube: 'https://iframe.videodelivery.net/7c795182c39f9e92dd70a60164c83816' },
                     { name: 'Band Pallof Press Circles', movement: ['Core'], intent: ['Stability'], equipment: ['Band'], contraindications: [], youtube: 'https://iframe.videodelivery.net/55ceb8e7a4131d8a7ef9c448bf63b3ce' }
                 ]
             }
