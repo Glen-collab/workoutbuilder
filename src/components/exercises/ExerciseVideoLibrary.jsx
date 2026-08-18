@@ -11,7 +11,7 @@ import { exerciseCategories } from '../../data/exerciseLibrary';
 import { mobilityCategories } from '../../data/mobilityExercises';
 import { generalMovements } from '../../data/generalMovements';
 import { martialArtsCategories } from '../../data/martialArtsLibrary';
-import { placementOptions, prettyKey } from '../../utils/customExercises';
+import { placementOptions, prettyKey, libraryExerciseByName } from '../../utils/customExercises';
 
 function namesFromCategories(cats, out) {
   if (!cats) return;
@@ -160,7 +160,16 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
     const sub = ce?.subcategory || '';
     const catOpt = placements.find((p) => p.key === cat);
     const subs = catOpt?.subs || [];
-    const vid = getVideo(name);
+    // Coach upload first, then the bundled library — the same order the tracker
+    // and the builder rows use.
+    //
+    // This only ever checked getVideo(), i.e. THIS coach's uploads, so every
+    // library exercise showed "+ Add Video" whether or not a bundled clip
+    // existed. Searching "reverse l" listed 17 exercises as having no video
+    // when 15 of them were already filmed — an invitation to reshoot work that
+    // was already done.
+    const vid = getVideo(name) || libraryExerciseByName(name)?.youtube || '';
+    const isCoachUpload = !!getVideo(name);
     const open = preview === name;
     const filed = !!cat;
     const shelf = filed
@@ -170,7 +179,13 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
       <div className="bg-white border border-gray-200 rounded-lg px-3 py-2.5 mb-1.5">
         <div className="flex items-center gap-2">
           <span className="flex-1 text-sm font-semibold text-gray-800 break-words">
-            {name} {vid && <span className="text-green-600">🎬</span>}
+            {name}{' '}
+            {vid && (
+              <span
+                className={isCoachUpload ? 'text-green-600' : 'text-gray-400'}
+                title={isCoachUpload ? 'Your upload' : 'Already in the exercise library'}
+              >🎬</span>
+            )}
           </span>
           {vid && (
             <button onClick={() => setPreview(open ? null : name)}
@@ -180,7 +195,7 @@ export default function ExerciseVideoLibrary({ isOpen, onClose, coachEmail }) {
               {open ? '✖' : '📹'}
             </button>
           )}
-          <AddVideoButton exercise={{ name }} onUploaded={reload} hasVideo={!!vid} />
+          <AddVideoButton exercise={{ name }} onUploaded={reload} hasVideo={isCoachUpload} />
         </div>
 
         {/* The check: is this actually reachable in the builder, and where? With
