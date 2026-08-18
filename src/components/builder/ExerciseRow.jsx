@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import PercentageSetRow from './PercentageSetRow';
 import CuesPicker from './CuesPicker';
 import AddVideoButton from '../exercises/AddVideoButton';
+import { useCoachVideos } from '../CoachVideosContext';
+import { libraryExerciseByName } from '../../utils/customExercises';
 import { schemePresets, applyScheme } from '../../utils/schemePresets';
 import { calculateWeight, calculateExerciseTonnage, suggestBaseMax, baseMaxLabels, baseMaxColors } from '../../utils/percentageCalc';
 import { classifyMovement } from '../../data/movementClassification';
@@ -336,6 +338,22 @@ export default function ExerciseRow({
   mainMaxes,
   sprintPBs,
 }) {
+  // What video this row should actually show, resolved the same way the
+  // TRACKER resolves it — so the coach sees exactly what the client sees.
+  //
+  // The row used to render exercise.youtube alone, i.e. only what was baked in
+  // when the program was saved. Upload a demo today and this still showed
+  // "+ Add Video" on an exercise the client can already watch, which reads as
+  // the upload having failed. Order matches the tracker: the coach's own
+  // upload wins, then whatever was baked in, then the bundled library for
+  // exercises added before their clip existed.
+  const { getVideo } = useCoachVideos();
+  const resolvedVideo =
+    getVideo?.(exercise?.name) ||
+    (exercise?.youtube || '').trim() ||
+    libraryExerciseByName(exercise?.name)?.youtube ||
+    '';
+
   const [showCues, setShowCues] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
@@ -395,7 +413,7 @@ export default function ExerciseRow({
         <div className="flex items-center gap-2 flex-1">
           <span className="font-bold text-[15px] text-gray-900">{exercise.name || 'Unnamed Exercise'}</span>
           <CnsPill name={exercise.name} />
-          {exercise.youtube ? (
+          {resolvedVideo ? (
             <button
               onClick={() => setShowVideo(v => !v)}
               className="border-none rounded-md px-2 py-1 text-[12px] cursor-pointer font-semibold text-white transition-colors"
@@ -415,10 +433,10 @@ export default function ExerciseRow({
       </div>
 
       {/* Inline Cloudflare Stream video player */}
-      {showVideo && exercise.youtube && (
+      {showVideo && resolvedVideo && (
         <div className="mb-2.5 rounded-lg overflow-hidden bg-black" style={{ position: 'relative', paddingTop: '56.25%' }}>
           <iframe
-            src={`${exercise.youtube}?preload=metadata`}
+            src={`${resolvedVideo}?preload=metadata`}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
             allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
