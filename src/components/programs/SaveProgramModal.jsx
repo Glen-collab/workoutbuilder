@@ -68,7 +68,18 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="480px">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      {/* Enter must NEVER reach the overwrite path.
+          onSubmit was handleSubmit with no second argument, so saveAsNew
+          defaulted to false — meaning Enter in any field (right after typing a
+          new phase name, say) submitted as an UPDATE and replaced the saved
+          program. The confirm() guard didn't help: Enter also confirms a
+          browser confirm(), so two keystrokes destroyed a program. That cost a
+          coach a September and an October block written over three sittings.
+          Enter now only submits when CREATING — never when it would overwrite. */}
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={(e) => { e.preventDefault(); if (!isUpdate) handleSubmit(e); }}
+      >
         {isUpdate && (
           <div className="p-3 rounded-lg bg-[#667eea]/15 border border-[#667eea]/30 text-sm text-[#a0b4f8]">
             <div>
@@ -165,11 +176,12 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
         <div className="flex flex-col gap-2 mt-2">
           <div className="flex gap-3">
             <button
-              type="submit"
-              className={`flex-1 py-3.5 px-6 text-[15px] font-bold bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() || !codeValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
+              type="button"
+              onClick={(e) => handleSubmit(e)}
+              className={`flex-1 py-3.5 px-6 text-[15px] font-bold ${isUpdate ? 'bg-gradient-to-br from-[#b45309] to-[#92400e]' : 'bg-gradient-to-br from-[#667eea] to-[#764ba2]'} text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() || !codeValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
               disabled={loading || !programName.trim() || !codeValid}
             >
-              {loading ? 'Saving...' : isUpdate ? 'Update Program' : 'Save Program'}
+              {loading ? 'Saving...' : isUpdate ? 'Overwrite this phase' : 'Save Program'}
             </button>
             <button type="button" className="py-3.5 px-6 text-[15px] font-semibold bg-transparent text-gray-500 border border-white/[0.12] rounded-[10px] cursor-pointer hover:bg-white/[0.06] transition" onClick={onClose}>
               Cancel
@@ -182,7 +194,7 @@ export default function SaveProgramModal({ isOpen, onClose, onSave, loadedProgra
               className={`w-full py-3 px-6 text-[14px] font-semibold bg-gradient-to-br from-[#f59e0b] to-[#ef4444] text-white border-none rounded-[10px] transition-opacity ${loading || !programName.trim() || !codeValid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}`}
               disabled={loading || !programName.trim() || !codeValid}
             >
-              {loading ? 'Saving...' : 'Save as New Program'}
+              {loading ? 'Saving...' : '＋ Save as a NEW program (keeps this one)'}
             </button>
           )}
         </div>
